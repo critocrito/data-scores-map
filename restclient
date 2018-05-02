@@ -1,0 +1,7 @@
+# -*- restclient -*-
+
+# Get the root path
+GET http://localhost:4000/
+
+# See all root methods
+OPTIONS http://localhost:4000/

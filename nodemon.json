@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "signal": "SIGHUP",
+  "delay": "2500",
+  "watch": ["src/server.js", "src/routes/*", "src/lib/*"],
+  "ignore": ["*.test.js", "fixtures/*", "src/components/*"]
+}
