@@ -97,7 +97,7 @@ const appEnv = getClientEnvironment(servedUrl);
 
 module.exports = {
   bail: true,
-  entry: ["./src/index.jsx"],
+  entry: ["./src/client.js"],
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx"],
@@ -107,6 +107,7 @@ module.exports = {
     chunkFilename: "static/js/[name].[chunkhash:8].chunk.js",
   },
   module: {
+    noParse: [/dtrace-provider/, /source-map-support/],
     rules: [
       {
         oneOf: [
@@ -147,6 +148,10 @@ module.exports = {
         options: {
           name: "static/media/[name].[hash:8].[ext]",
         },
+      },
+      {
+        test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+        loader: "file-loader?name=[name].[ext]",
       },
     ],
   },
