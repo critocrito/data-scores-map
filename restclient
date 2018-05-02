@@ -1,7 +1,13 @@
 # -*- restclient -*-
 
-# Get the root path
+# Get the root path.
 GET http://localhost:4000/
 
-# See all root methods
+# See all root methods.
 OPTIONS http://localhost:4000/
+
+# List all cities with units.
+GET http://localhost:4000/cities
+
+# Show the details of Aberdeen (Aberdeenshire)
+GET http://localhost:4000/cities/Aberdeenshire/Aberdeen

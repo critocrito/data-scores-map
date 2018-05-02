@@ -30,6 +30,15 @@ app.use(
   }),
 );
 
+// Wrap all results in an envelope.
+app.use(async (ctx, next) => {
+  await next();
+  ctx.body = Object.assign(
+    {data: ctx.body},
+    Array.isArray(ctx.body) ? {length: ctx.body.length} : {},
+  );
+});
+
 // Configure our node app for development.
 if (dev) {
   app.use(koaLogger.requestIdContext());
