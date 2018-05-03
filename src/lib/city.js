@@ -21,8 +21,17 @@ export const list = async () => {
       [],
     )
     .map(u => {
-      const {city, county, lat, lng, units} = u;
-      return {city, county, lat, lng, units};
+      const {city, county, units} = u;
+      const lat = parseFloat(u.lat, 10);
+      const lng = parseFloat(u.lng, 10);
+      return {
+        city,
+        county,
+        lat,
+        lng,
+        units,
+        position: [lat, lng],
+      };
     });
 };
 
