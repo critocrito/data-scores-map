@@ -33,7 +33,7 @@
     "build":
       "npm run lint && flow && npm run lint-css && npm run test && npm run compile",
     "start":
-      "cross-env NODE_ENV=developemnt webpack-dev-server --mode development --open -r babel-register",
+      "cross-env NODE_ENV=development webpack-dev-server --mode development --open -r babel-register",
     "dev":
       "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js | bunyan -o short",
     "prerelease": "npm run build",
@@ -100,7 +100,6 @@
     "lint-staged": "^7.0.4",
     "mini-css-extract-plugin": "^0.4.0",
     "nyc": "^11.7.1",
-    "postcss-assets": "^5.0.0",
     "postcss-import": "^11.1.0",
     "postcss-load-plugins": "^2.3.0",
     "postcss-loader": "^2.1.4",

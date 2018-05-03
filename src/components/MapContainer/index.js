@@ -1,7 +1,7 @@
 // @flow
 import * as React from "react";
 // $FlowFixMe
-import {Map, TileLayer, Marker, Popup} from "react-leaflet";
+import {Map, ZoomControl, TileLayer, Marker, Popup} from "react-leaflet";
 import "./index.css";
 
 type State = {
@@ -12,19 +12,24 @@ type State = {
 
 class MapContainer extends React.Component<{}, State> {
   state = {
-    lat: 51.505,
-    lng: -0.09,
-    zoom: 13,
+    lat: 54.00366,
+    lng: -2.547855,
+    zoom: 6,
   };
 
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
       <article>
-        <Map id="map" center={position} zoom={this.state.zoom}>
+        <Map
+          id="map"
+          center={position}
+          zoom={this.state.zoom}
+          zoomControl={false}
+        >
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
           />
           <Marker position={position}>
             <Popup>
@@ -33,6 +38,7 @@ class MapContainer extends React.Component<{}, State> {
               </span>
             </Popup>
           </Marker>
+          <ZoomControl position="bottomright" />
         </Map>
       </article>
     );

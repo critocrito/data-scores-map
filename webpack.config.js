@@ -1,4 +1,5 @@
 import fs from "fs";
+import {join} from "path";
 import url from "url";
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
@@ -106,13 +107,18 @@ module.exports = {
     filename: "static/js/[name].[hash:8].js",
     chunkFilename: "static/js/[name].[chunkhash:8].chunk.js",
   },
+  devServer: {
+    contentBase: join(__dirname, "dist"),
+    compress: true,
+    port: 9000,
+  },
   module: {
     noParse: [/dtrace-provider/, /source-map-support/],
     rules: [
       {
         oneOf: [
           {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            test: /\.bmp$|\.gif$|\.jpe?g$|\.png$|\.svg$/,
             loader: "url-loader",
             options: {
               limit: 10000,
@@ -142,26 +148,23 @@ module.exports = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader?url=false", // Append url=false to load images from leaflet
+          "css-loader?url=false", // Append url=false to make leaflet render correctly.
           "postcss-loader",
         ],
       },
       {
-        loader: "file-loader",
-        exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.css$/],
-        options: {
-          name: "static/media/[name].[hash:8].[ext]",
-        },
-      },
-      {
-        test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
         loader: "file-loader?name=[name].[ext]",
+        test: /\.json$|\.ico$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
       },
     ],
   },
   plugins: [
     new CopyPlugin({
-      dirs: [{from: "./public", to: "./dist"}],
+      dirs: [
+        {from: "./public", to: "./dist"},
+        // This was the only way to make the leaflet marker icons load.
+        {from: "./public/images", to: "./dist/static/css/images"},
+      ],
       options: {},
     }),
     new HtmlWebPackPlugin({
