@@ -30,6 +30,7 @@ export const list = async () => {
 
         return memo.concat(
           Object.assign({}, location, {
+            id: `${location.city}(${location.county})`,
             keywords: location.keywords,
             unitsByKeywords: unitKeywords.reduce((kw, k) => {
               if (k in kw) {
@@ -43,10 +44,11 @@ export const list = async () => {
       }, memo);
     }, [])
     .map(u => {
-      const {city, county, keywords, unitsByKeywords, unitsCount} = u;
+      const {id, city, county, keywords, unitsByKeywords, unitsCount} = u;
       const lat = parseFloat(u.lat, 10);
       const lng = parseFloat(u.lng, 10);
       return {
+        id,
         city,
         county,
         lat,
