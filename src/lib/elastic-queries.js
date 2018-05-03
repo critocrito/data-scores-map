@@ -8,7 +8,7 @@ export const listCitiesQuery = () => ({
     },
   },
   _source: {
-    includes: ["$sc_id_hash", "$sc_locations"],
+    includes: ["$sc_id_hash", "$sc_locations", "$sc_keywords"],
     excludes: ["href_text"],
   },
 });

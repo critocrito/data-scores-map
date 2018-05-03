@@ -10,7 +10,10 @@ type City = {
   lng: number,
   city: string,
   county: string,
+  position: [number, number],
+  unitsCount: number,
   units: Array<string>,
+  unitsByKeywords: {[keyword: string]: Array<string>},
 };
 
 type State = {
@@ -50,7 +53,7 @@ class MapContainer extends React.Component<{}, State> {
     const markers = this.state.cities.map(c => {
       const key = `${c.city}(${c.county})`;
       const icon = L.divIcon({
-        html: `<span class='marker-content'>${c.units.length}</span>`,
+        html: `<span class='marker-content'>${c.unitsCount}</span>`,
         className: `marker marker-${key}`,
         iconSize: L.point(20, 20),
         popupAnchor: L.point(0, 0),
@@ -61,7 +64,7 @@ class MapContainer extends React.Component<{}, State> {
             <span>
               {c.city} ({c.county})
               <br />
-              {c.units.length} units
+              {c.unitsCount} units
             </span>
           </Popup>
         </Marker>

@@ -4,24 +4,46 @@ export const list = async () => {
   const data = await allCities();
 
   return data
-    .reduce(
-      (memo, u) =>
-        u._sc_locations.reduce((acc, location) => {
-          const existing = acc.find(
-            e => e._sc_id_hash === location._sc_id_hash,
-          );
-          if (existing) {
-            existing.units.push(u._sc_id_hash);
-            return acc;
-          }
-          return memo.concat(
-            Object.assign({}, location, {units: [u._sc_id_hash]}),
-          );
-        }, memo),
-      [],
-    )
+    .reduce((memo, u) => {
+      const unitKeywords = u._sc_keywords;
+
+      return u._sc_locations.reduce((acc, location) => {
+        const existing = acc.find(e => e._sc_id_hash === location._sc_id_hash);
+        if (existing) {
+          existing.unitsCount += 1;
+          Object.assign(existing, {
+            keywords: Array.from(
+              unitKeywords.reduce(
+                (kw, k) => kw.add(k),
+                new Set(existing.keywords),
+              ),
+            ),
+            unitsByKeywords: unitKeywords.reduce((kw, k) => {
+              if (k in kw) {
+                return Object.assign(kw, {[k]: kw[k].concat(u._sc_id_hash)});
+              }
+              return Object.assign(kw, {[k]: [u._sc_id_hash]});
+            }, existing.unitsByKeywords),
+          });
+          return acc;
+        }
+
+        return memo.concat(
+          Object.assign({}, location, {
+            keywords: location.keywords,
+            unitsByKeywords: unitKeywords.reduce((kw, k) => {
+              if (k in kw) {
+                return Object.assign(kw, {[k]: kw[k].concat(u._sc_id_hash)});
+              }
+              return Object.assign(kw, {[k]: [u._sc_id_hash]});
+            }, {}),
+            unitsCount: 1,
+          }),
+        );
+      }, memo);
+    }, [])
     .map(u => {
-      const {city, county, units} = u;
+      const {city, county, keywords, unitsByKeywords, unitsCount} = u;
       const lat = parseFloat(u.lat, 10);
       const lng = parseFloat(u.lng, 10);
       return {
@@ -29,7 +51,9 @@ export const list = async () => {
         county,
         lat,
         lng,
-        units,
+        keywords,
+        unitsByKeywords,
+        unitsCount,
         position: [lat, lng],
       };
     });
