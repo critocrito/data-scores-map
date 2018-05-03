@@ -2,6 +2,7 @@ import http from "http";
 import Koa from "koa";
 import koaLogger from "koa-bunyan-logger";
 import koaRespond from "koa-respond";
+import koaCors from "@koa/cors";
 import dotenv from "dotenv";
 
 import log from "./lib/logging";
@@ -29,6 +30,7 @@ app.use(
     },
   }),
 );
+app.use(koaCors());
 
 // Wrap all results in an envelope.
 app.use(async (ctx, next) => {
