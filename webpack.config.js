@@ -140,7 +140,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader?url=false", // Append url=false to load images from leaflet
+          "postcss-loader",
+        ],
       },
       {
         loader: "file-loader",

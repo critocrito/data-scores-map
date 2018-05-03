@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import SidePanel from "../SidePanel";
-import Map from "../Map";
+import MapContainer from "../MapContainer";
 import DataView from "../DataView";
 import Counter from "../Counter";
 
@@ -12,7 +12,7 @@ const app = () => (
         <SidePanel />
       </div>
       <div className="w-two-thirds">
-        <Map />
+        <MapContainer />
       </div>
     </article>
     <article>
