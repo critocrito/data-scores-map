@@ -5,5 +5,5 @@
     "prettier --parser json --write",
     "git add"
   ],
-  "*.css": ["stylelint -i", "prettier --parser css --write", "git add"]
+  "*.css": ["stylelint", "prettier --parser css --write", "git add"]
 }
