@@ -1,4 +1,9 @@
 {
   "*.js": ["eslint --fix", "git add"],
-  "*.json": ["jsonlint -i", "git add"]
+  "*.json": ["prettier --parser json --write", "git add"],
+  ".{babel,lintstaged,stylelint,nyc}rc": [
+    "prettier --parser json --write",
+    "git add"
+  ],
+  "*.css": ["stylelint -i", "prettier --parser css --write", "git add"]
 }

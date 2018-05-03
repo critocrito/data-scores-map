@@ -12,23 +12,33 @@
     "storiesDir": "stories"
   },
   "scripts": {
-    "commitmsg": "! git rev-parse --abbrev-ref HEAD | grep -q master || validate-commit-msg",
-    "precommit": "! git rev-parse --abbrev-ref HEAD | grep -q master || (lint-staged && npm run test)",
+    "commitmsg":
+      "! git rev-parse --abbrev-ref HEAD | grep -q master || validate-commit-msg",
+    "precommit":
+      "! git rev-parse --abbrev-ref HEAD | grep -q master || (lint-staged && npm run test)",
     "prepublishOnly": "npm run build",
     "test": "cross-env NODE_ENV=test ava",
     "test:watch": "npm run test -- -w",
     "coverage": "cross-env NODE_ENV=test nyc npm test",
     "flow-coverage": "flow-coverage-report --config ./.flowcoverage",
-    "lint": "eslint $npm_package_config_configFiles $npm_package_config_storiesDir $npm_package_config_testDir $npm_package_config_srcDir",
+    "lint":
+      "eslint $npm_package_config_configFiles $npm_package_config_storiesDir $npm_package_config_testDir $npm_package_config_srcDir",
+    "lint-css": "stylelint src/**/*.css",
     "fix": "npm run lint -- --fix",
+    "fix-css": "npm run lint-css -- --fix",
     "precompile": "npm run clean",
-    "compile": "cross-env NODE_ENV=production webpack --mode production -r babel-register",
+    "compile":
+      "cross-env NODE_ENV=production webpack --mode production -r babel-register",
     "clean": "rimraf $npm_package_config_distDir",
-    "build": "npm run lint -s && flow && npm run test -s && npm run compile -s",
-    "start": "cross-env NODE_ENV=developemnt webpack-dev-server --mode development --open -r babel-register",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js | bunyan -o short",
+    "build":
+      "npm run lint && flow && npm run lint-css && npm run test && npm run compile",
+    "start":
+      "cross-env NODE_ENV=developemnt webpack-dev-server --mode development --open -r babel-register",
+    "dev":
+      "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js | bunyan -o short",
     "prerelease": "npm run build",
-    "release": "standard-version -i CHANGELOG.md -m \"chore(release): Bumped to version %s.\" --sign",
+    "release":
+      "standard-version -i CHANGELOG.md -m \"chore(release): Bumped to version %s.\" --sign",
     "release-candidate": "npm run release -- --prerelease \"rc\"",
     "security-scan": "retire -p",
     "storybook": "start-storybook -p 6006",
@@ -96,6 +106,8 @@
     "rimraf": "^2.6.2",
     "sinon": "^4.5.0",
     "standard-version": "^4.3.0",
+    "stylelint": "^9.2.0",
+    "stylelint-config-standard": "^18.2.0",
     "validate-commit-message": "^3.0.1",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.14",
@@ -117,12 +129,8 @@
     "react-router-dom": "^4.2.2"
   },
   "ava": {
-    "sources": [
-      "src/**/*.js"
-    ],
+    "sources": ["src/**/*.js"],
     "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
+    "require": ["babel-register"]
   }
 }

@@ -31,9 +31,7 @@
         ],
         "react"
       ],
-      "plugins": [
-        "istanbul"
-      ]
+      "plugins": ["istanbul"]
     }
   }
 }
