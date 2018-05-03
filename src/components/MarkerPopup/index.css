@@ -1,0 +1,43 @@
+.leaflet-popup {
+  border-radius: 3px;
+  padding: 0;
+  margin: 0;
+}
+
+.leaflet-popup-content {
+  width: auto !important;
+}
+
+a.leaflet-popup-close-button {
+  font: 22px/24px Tahoma, Verdana, sans-serif;
+  width: 26px;
+  height: 26px;
+}
+
+.marker-popup {
+  display: block;
+  min-width: 550px;
+}
+
+.marker-popup::after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+.marker-popup-title {
+  white-space: nowrap;
+}
+
+.marker-popup .marker-popup-title {
+  background: #f6f6f6;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  padding: 5px 10px;
+  width: 100%;
+  font-size: 18px;
+}

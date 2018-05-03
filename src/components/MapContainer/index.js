@@ -60,6 +60,7 @@ class MapContainer extends React.Component<{}, State> {
         county={c.county}
         unitsCount={c.unitsCount}
         position={c.position}
+        unitsByKeywords={c.unitsByKeywords}
       />
     ));
 
