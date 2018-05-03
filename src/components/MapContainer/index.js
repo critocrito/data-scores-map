@@ -1,11 +1,13 @@
 // @flow
 import * as React from "react";
 // $FlowFixMe
-import {Map, ZoomControl, TileLayer, Marker, Popup} from "react-leaflet";
-import L from "leaflet";
+import {Map, ZoomControl, TileLayer} from "react-leaflet";
+
 import "./index.css";
+import MapMarker from "../MapMarker";
 
 type City = {
+  id: string,
   lat: number,
   lng: number,
   city: string,
@@ -50,26 +52,16 @@ class MapContainer extends React.Component<{}, State> {
 
   render() {
     const position = [this.state.lat, this.state.lng];
-    const markers = this.state.cities.map(c => {
-      const key = `${c.city}(${c.county})`;
-      const icon = L.divIcon({
-        html: `<span class='marker-content'>${c.unitsCount}</span>`,
-        className: `marker marker-${key}`,
-        iconSize: L.point(20, 20),
-        popupAnchor: L.point(0, 0),
-      });
-      return (
-        <Marker key={key} position={c.position} icon={icon}>
-          <Popup>
-            <span>
-              {c.city} ({c.county})
-              <br />
-              {c.unitsCount} units
-            </span>
-          </Popup>
-        </Marker>
-      );
-    });
+    const markers = this.state.cities.map(c => (
+      <MapMarker
+        key={c.id}
+        id={c.id}
+        city={c.city}
+        county={c.county}
+        unitsCount={c.unitsCount}
+        position={c.position}
+      />
+    ));
 
     return (
       <article>
