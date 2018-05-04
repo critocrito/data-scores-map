@@ -2,7 +2,6 @@ import React from "react";
 import "./index.css";
 import DataNav from "../DataNav";
 import DataView from "../DataView";
-import Counter from "../Counter";
 
 const app = () => (
   <div className="App">
@@ -10,7 +9,6 @@ const app = () => (
     <article>
       <DataView />
     </article>
-    <Counter />
   </div>
 );
 
