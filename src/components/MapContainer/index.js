@@ -16,9 +16,23 @@ type Props = {
 };
 
 const MapContainer = ({position, zoom, cities, count, selected}: Props) => {
-  const markers = cities.map(c => (
-    <MapMarker key={c.id} entity={c} selected={selected} />
-  ));
+  const markers = cities.map(city => {
+    const {unitsByKeywords} = city;
+    const countByKeywords = Object.keys(unitsByKeywords)
+      .filter(key => selected.length === 0 || selected.includes(key))
+      .reduce(
+        (memo, key) =>
+          Object.assign(memo, {[key]: unitsByKeywords[key].length}),
+        {},
+      );
+    return (
+      <MapMarker
+        key={city.id}
+        entity={city}
+        countByKeywords={countByKeywords}
+      />
+    );
+  });
 
   return (
     <article>

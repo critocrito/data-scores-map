@@ -12,26 +12,25 @@ import type {City} from "../../lib/types";
 
 type Props = {
   entity: City,
-  selected: Array<string>,
+  countByKeywords: {[keyword: string]: number},
 };
 
-const MapMarker = ({entity, selected}: Props) => {
-  const {id, count, unitsByKeywords, position} = entity;
+const MapMarker = ({entity, countByKeywords}: Props) => {
+  const {id, count, position} = entity;
   const icon = L.divIcon({
     html: `<span class='marker-content'>${count}</span>`,
     className: `marker marker-${id}`,
     iconSize: L.point(20, 20),
     popupAnchor: L.point(0, 0),
   });
-  const chartData = Object.keys(unitsByKeywords)
+  const chartData = Object.keys(countByKeywords)
     .sort((a, b) => a.localeCompare(b))
     .reduce(
       (memo, key, i) => {
-        if (selected.length > 0 && !selected.includes(key)) return memo;
         const [color, hoverColor] = colors(i);
         const [entry] = memo.datasets;
         const labels = Array.from(new Set(memo.labels).add(key));
-        const data = entry.data.concat(unitsByKeywords[key].length);
+        const data = entry.data.concat(countByKeywords[key]);
         const backgroundColor = entry.backgroundColor.concat(color);
         const hoverBackgroundColor = entry.hoverBackgroundColor.concat(
           hoverColor,
