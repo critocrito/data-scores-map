@@ -26,8 +26,8 @@ const MapMarker = ({entity, countByKeywords}: Props) => {
   const chartData = Object.keys(countByKeywords)
     .sort((a, b) => a.localeCompare(b))
     .reduce(
-      (memo, key, i) => {
-        const [color, hoverColor] = colors(i);
+      (memo, key) => {
+        const [color, hoverColor] = colors(key);
         const [entry] = memo.datasets;
         const labels = Array.from(new Set(memo.labels).add(key));
         const data = entry.data.concat(countByKeywords[key]);

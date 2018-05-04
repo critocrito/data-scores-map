@@ -14,13 +14,10 @@ const randomRgbas = (luminosity = "dark") => {
 };
 
 export default (() => {
-  const cache = [];
+  const cache = {};
 
-  return (index = 0) => {
-    if (index >= cache.length)
-      Array.from({length: index - cache.length + 1}).forEach(() =>
-        cache.push(randomRgbas()),
-      );
-    return cache[index];
+  return name => {
+    if (!(name in cache)) cache[name] = randomRgbas();
+    return cache[name];
   };
 })();
