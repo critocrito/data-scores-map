@@ -12,14 +12,22 @@ type Props = {
   zoom: number,
   count: number,
   cities: Array<City>,
-  selected: Array<string>,
+  selectedKeywords: Array<string>,
 };
 
-const MapContainer = ({position, zoom, cities, count, selected}: Props) => {
+const MapContainer = ({
+  position,
+  zoom,
+  cities,
+  count,
+  selectedKeywords,
+}: Props) => {
   const markers = cities.map(city => {
     const {unitsByKeywords} = city;
     const countByKeywords = Object.keys(unitsByKeywords)
-      .filter(key => selected.length === 0 || selected.includes(key))
+      .filter(
+        key => selectedKeywords.length === 0 || selectedKeywords.includes(key),
+      )
       .reduce(
         (memo, key) =>
           Object.assign(memo, {[key]: unitsByKeywords[key].length}),
@@ -52,7 +60,7 @@ const MapContainer = ({position, zoom, cities, count, selected}: Props) => {
 // FIXME: See https://github.com/yannickcr/eslint-plugin-react/issues/1593
 MapContainer.defaultProps = {
   // eslint-disable-next-line react/default-props-match-prop-types
-  selected: [],
+  selectedKeywords: [],
   // eslint-disable-next-line react/default-props-match-prop-types
   position: [54.00366, -2.547855],
   // eslint-disable-next-line react/default-props-match-prop-types

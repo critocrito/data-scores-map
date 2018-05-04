@@ -10,8 +10,8 @@ import type {City} from "../../lib/types";
 
 type Props = {
   citiesAll: Array<City>,
-  selectHandler: string => void,
-  isSelected: string => boolean,
+  selectKeywordHandler: string => void,
+  isSelectedKeyword: string => boolean,
 };
 
 const [color, colorAlt] = ["rgba(0, 108, 183, 0.7)", "rgba(0, 108, 183, 0.4)"];
@@ -46,11 +46,11 @@ const chartOptions = {
 class SidePanel extends React.Component<Props> {
   static defaultProps = {
     citiesAll: [],
-    selectHandler: () => null,
-    isSelected: () => false,
+    selectKeywordHandler: () => null,
+    isSelectedKeyword: () => false,
   };
 
-  render() {
+  keywordsList() {
     const keywordStats = this.props.citiesAll.reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
@@ -71,7 +71,7 @@ class SidePanel extends React.Component<Props> {
       },
       {},
     );
-    const keywords = Object.keys(keywordStats)
+    return Object.keys(keywordStats)
       .sort((a, b) => a.localeCompare(b))
       .map(k => {
         const {unitsCount, citiesCount} = keywordStats[k];
@@ -90,9 +90,9 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.isSelected(k),
+          "sp-row--active": this.props.isSelectedKeyword(k),
         });
-        const clickHandler = () => this.props.selectHandler(k);
+        const clickHandler = () => this.props.selectKeywordHandler(k);
 
         return (
           <li key={k} className={classNames}>
@@ -111,7 +111,9 @@ class SidePanel extends React.Component<Props> {
           </li>
         );
       });
-
+  }
+  render() {
+    const children = this.keywordsList();
     return (
       <article className="sp pa0 ma0">
         <section className="sp-header flex pa0 ma0">
@@ -123,7 +125,7 @@ class SidePanel extends React.Component<Props> {
           </div>
         </section>
         <section className="flex pa0 ma0 w-100">
-          <ul className="list pa0 ma0 w-100">{keywords}</ul>
+          <ul className="list pa0 ma0 w-100">{children}</ul>
         </section>
       </article>
     );

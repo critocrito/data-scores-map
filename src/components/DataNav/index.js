@@ -10,7 +10,7 @@ type State = {
   cities: Array<City>,
   citiesAll: Array<City>,
   citiesCount: number,
-  selected: Array<string>,
+  selectedKeywords: Array<string>,
 };
 
 class DataNav extends React.Component<{}, State> {
@@ -18,7 +18,7 @@ class DataNav extends React.Component<{}, State> {
     citiesCount: 0,
     cities: [],
     citiesAll: [],
-    selected: [],
+    selectedKeywords: [],
   };
 
   async componentDidMount() {
@@ -38,15 +38,15 @@ class DataNav extends React.Component<{}, State> {
     });
   }
 
-  isSelected(keyword: string): boolean {
-    return this.state.selected.includes(keyword);
+  isSelectedKeyword(keyword: string): boolean {
+    return this.state.selectedKeywords.includes(keyword);
   }
 
-  toggleSelected(keyword: string) {
-    const {selected, citiesAll} = this.state;
-    const newSelected = this.isSelected(keyword)
-      ? selected.filter(k => k !== keyword)
-      : selected.concat(keyword);
+  toggleSelectedKeyword(keyword: string) {
+    const {selectedKeywords, citiesAll} = this.state;
+    const newSelected = this.isSelectedKeyword(keyword)
+      ? selectedKeywords.filter(k => k !== keyword)
+      : selectedKeywords.concat(keyword);
     const cities =
       newSelected.length > 0
         ? citiesAll.filter(city =>
@@ -57,20 +57,20 @@ class DataNav extends React.Component<{}, State> {
           )
         : citiesAll;
     this.setState({
-      selected: newSelected,
+      selectedKeywords: newSelected,
       citiesCount: cities.length,
       cities,
     });
   }
 
   render() {
-    const {citiesCount, cities, citiesAll, selected} = this.state;
+    const {citiesCount, cities, citiesAll, selectedKeywords} = this.state;
     return (
       <article className="flex">
         <div className="sp-wrapper w-third">
           <SidePanel
-            isSelected={k => this.isSelected(k)}
-            selectHandler={k => this.toggleSelected(k)}
+            isSelectedKeyword={k => this.isSelectedKeyword(k)}
+            selectKeywordHandler={k => this.toggleSelectedKeyword(k)}
             cities={cities}
             citiesAll={citiesAll}
           />
@@ -79,7 +79,7 @@ class DataNav extends React.Component<{}, State> {
           <MapContainer
             count={citiesCount}
             cities={cities}
-            selected={selected}
+            selectedKeywords={selectedKeywords}
           />
         </div>
       </article>
