@@ -16,6 +16,7 @@ type Props = {
   selectKeywordHandler: string => void,
   selectCityHandler: string => void,
   toggleList: void => void,
+  resetList: void => void,
 };
 
 const [color, colorAlt] = ["rgba(0, 108, 183, 0.7)", "rgba(0, 108, 183, 0.4)"];
@@ -175,24 +176,29 @@ class SidePanel extends React.Component<Props> {
   }
 
   render() {
-    const {activeList, toggleList} = this.props;
-    const clickHandler = () => toggleList();
+    const {activeList, toggleList, resetList} = this.props;
+    const toggleHandler = () => toggleList();
+    const resetHandler = () => resetList();
     const children =
       activeList === "keywords" ? this.keywordsList() : this.citiesList();
     const keywordsToggle =
       activeList === "keywords" ? (
-        <button>Keywords</button>
+        <button onClick={resetHandler} onKeyPress={resetHandler}>
+          Reset Keywords
+        </button>
       ) : (
-        <button onClick={clickHandler} onKeyPress={clickHandler}>
-          Keywords
+        <button onClick={toggleHandler} onKeyPress={toggleHandler}>
+          Select Keywords
         </button>
       );
     const citiesToggle =
       activeList === "cities" ? (
-        <button>Cities</button>
+        <button onClick={resetHandler} onKeyPress={resetHandler}>
+          Reset Cities
+        </button>
       ) : (
-        <button onClick={clickHandler} onKeyPress={clickHandler}>
-          Cities
+        <button onClick={toggleHandler} onKeyPress={toggleHandler}>
+          Select Cities
         </button>
       );
 

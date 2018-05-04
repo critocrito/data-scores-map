@@ -98,6 +98,15 @@ class DataNav extends React.Component<{}, State> {
     });
   }
 
+  resetList() {
+    const {citiesAll} = this.state;
+    this.setState({
+      cities: citiesAll,
+      selectedKeywords: [],
+      selectedCities: [],
+    });
+  }
+
   render() {
     const {citiesCount, cities, citiesAll, list, selectedKeywords} = this.state;
     return (
@@ -109,6 +118,7 @@ class DataNav extends React.Component<{}, State> {
             isSelectedCity={c => this.isSelectedCity(c)}
             selectCityHandler={c => this.toggleSelectedCity(c)}
             toggleList={() => this.toggleList()}
+            resetList={() => this.resetList()}
             activeList={list}
             cities={cities}
             citiesAll={citiesAll}
