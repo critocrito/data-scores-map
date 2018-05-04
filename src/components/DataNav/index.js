@@ -36,7 +36,7 @@ class DataNav extends React.Component<{}, State> {
     return (
       <article className="flex">
         <div className="w-third">
-          <SidePanel />
+          <SidePanel cities={cities} />
         </div>
         <div className="w-two-thirds">
           <MapContainer count={citiesCount} cities={cities} />

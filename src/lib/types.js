@@ -10,5 +10,6 @@ export type City = {
   position: Position,
   count: number,
   unitIds: UnitIds,
+  keywords: Array<string>,
   unitsByKeywords: {[keyword: string]: UnitIds},
 };
