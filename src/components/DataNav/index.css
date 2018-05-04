@@ -1,0 +1,50 @@
+.sp-wrapper {
+  position: relative;
+  height: 70vh;
+  overflow: auto;
+  box-sizing: border-box;
+  min-height: 70vh;
+}
+
+.sp {
+  overflow: auto;
+  height: 70vh;
+  min-height: 10vh;
+}
+
+.sp-header {
+  overflow: auto;
+  height: 5vh;
+  min-height: 5vh;
+}
+
+.sp-row {
+  overflow: auto;
+  height: 5vh;
+  max-height: 5vh;
+}
+
+.sp-row button {
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+}
+
+.sp-row button:hover {
+  text-decoration: none;
+}
+
+.sp-row--active {
+  background-color: #ddd;
+}
+
+.sp-row-bar {
+  height: 5vh;
+  background-color: #006cb7;
+  position: relative;
+}
+
+.sp-chart {
+  height: 4vh;
+  overflow: auto;
+}

@@ -1,0 +1,6 @@
+.sidepanel {
+  height: 70vh;
+  max-height: 70vh;
+  display: table-row;
+  overflow: auto;
+}

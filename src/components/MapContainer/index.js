@@ -12,10 +12,13 @@ type Props = {
   zoom: number,
   count: number,
   cities: Array<City>,
+  selected: Array<string>,
 };
 
-const MapContainer = ({position, zoom, cities, count}: Props) => {
-  const markers = cities.map(c => <MapMarker key={c.id} entity={c} />);
+const MapContainer = ({position, zoom, cities, count, selected}: Props) => {
+  const markers = cities.map(c => (
+    <MapMarker key={c.id} entity={c} selected={selected} />
+  ));
 
   return (
     <article>
@@ -34,6 +37,8 @@ const MapContainer = ({position, zoom, cities, count}: Props) => {
 
 // FIXME: See https://github.com/yannickcr/eslint-plugin-react/issues/1593
 MapContainer.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
+  selected: [],
   // eslint-disable-next-line react/default-props-match-prop-types
   position: [54.00366, -2.547855],
   // eslint-disable-next-line react/default-props-match-prop-types
