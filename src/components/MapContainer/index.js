@@ -57,7 +57,6 @@ const MapContainer = ({
   );
 };
 
-// FIXME: See https://github.com/yannickcr/eslint-plugin-react/issues/1593
 MapContainer.defaultProps = {
   // eslint-disable-next-line react/default-props-match-prop-types
   selectedKeywords: [],

@@ -6,40 +6,32 @@ import SidePanel from "../SidePanel";
 import MapContainer from "../MapContainer";
 import type {City} from "../../lib/types";
 
+type Props = {
+  citiesAll: Array<City>,
+};
+
 type State = {
   cities: Array<City>,
-  citiesAll: Array<City>,
   citiesCount: number,
   selectedKeywords: Array<string>,
   selectedCities: Array<string>,
   list: string,
 };
 
-class DataNav extends React.Component<{}, State> {
-  state = {
-    citiesCount: 0,
-    cities: [],
+class DataNav extends React.Component<Props, State> {
+  static defaultProps = {
     citiesAll: [],
-    selectedKeywords: [],
-    selectedCities: [],
-    list: "keywords",
   };
 
-  async componentDidMount() {
-    const result = await fetch("http://localhost:4000/cities").then(resp =>
-      resp.json(),
-    );
-    const cities = result.data.map(c =>
-      Object.assign(c, {
-        position: [c.lat, c.lng],
-      }),
-    );
-    // eslint-disable-next-line react/no-did-mount-set-state
-    this.setState({
-      citiesAll: cities,
-      citiesCount: cities.length,
-      cities,
-    });
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      cities: props.citiesAll,
+      citiesCount: props.citiesAll.length,
+      selectedKeywords: [],
+      selectedCities: [],
+      list: "keywords",
+    };
   }
 
   isSelectedCity(id: string): boolean {
@@ -51,7 +43,8 @@ class DataNav extends React.Component<{}, State> {
   }
 
   toggleSelectedCity(id: string) {
-    const {selectedCities, citiesAll} = this.state;
+    const {citiesAll} = this.props;
+    const {selectedCities} = this.state;
     const selected = this.isSelectedCity(id)
       ? selectedCities.filter(i => i !== id)
       : selectedCities.concat(id);
@@ -67,7 +60,8 @@ class DataNav extends React.Component<{}, State> {
   }
 
   toggleSelectedKeyword(keyword: string) {
-    const {selectedKeywords, citiesAll} = this.state;
+    const {citiesAll} = this.props;
+    const {selectedKeywords} = this.state;
     const selected = this.isSelectedKeyword(keyword)
       ? selectedKeywords.filter(k => k !== keyword)
       : selectedKeywords.concat(keyword);
@@ -88,7 +82,8 @@ class DataNav extends React.Component<{}, State> {
   }
 
   toggleList() {
-    const {list, citiesAll} = this.state;
+    const {citiesAll} = this.props;
+    const {list} = this.state;
     const newList = list === "keywords" ? "cities" : "keywords";
     this.setState({
       cities: citiesAll,
@@ -99,7 +94,7 @@ class DataNav extends React.Component<{}, State> {
   }
 
   resetList() {
-    const {citiesAll} = this.state;
+    const {citiesAll} = this.props;
     this.setState({
       cities: citiesAll,
       selectedKeywords: [],
@@ -108,7 +103,8 @@ class DataNav extends React.Component<{}, State> {
   }
 
   render() {
-    const {citiesCount, cities, citiesAll, list, selectedKeywords} = this.state;
+    const {citiesAll} = this.props;
+    const {citiesCount, cities, list, selectedKeywords} = this.state;
     return (
       <article className="flex">
         <div className="sp-wrapper w-third">

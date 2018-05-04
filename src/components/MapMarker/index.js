@@ -58,7 +58,6 @@ const MapMarker = ({entity, countByKeywords}: Props) => {
   );
 };
 
-// FIXME: See https://github.com/yannickcr/eslint-plugin-react/issues/1593
 MapMarker.defaultProps = {
   // eslint-disable-next-line react/default-props-match-prop-types
   selected: [],
