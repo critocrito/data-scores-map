@@ -8,26 +8,16 @@ import L from "leaflet";
 import "./index.css";
 import MarkerPopup from "../MarkerPopup";
 import {randomRgbas} from "../../lib/colors";
+import type {City} from "../../lib/types";
 
 type Props = {
-  id: string,
-  city: string,
-  county: string,
-  unitsCount: number,
-  position: [number, number],
-  unitsByKeywords: {[keyword: string]: Array<string>},
+  entity: City,
 };
 
-export default ({
-  id,
-  unitsCount,
-  position,
-  city,
-  county,
-  unitsByKeywords,
-}: Props) => {
+export default ({entity}: Props) => {
+  const {id, count, unitsByKeywords, position} = entity;
   const icon = L.divIcon({
-    html: `<span class='marker-content'>${unitsCount}</span>`,
+    html: `<span class='marker-content'>${count}</span>`,
     className: `marker marker-${id}`,
     iconSize: L.point(20, 20),
     popupAnchor: L.point(0, 0),
@@ -60,13 +50,7 @@ export default ({
   );
   return (
     <Marker position={position} icon={icon}>
-      <MarkerPopup
-        city={city}
-        county={county}
-        unitsCount={unitsCount}
-        position={position}
-        chartData={chartData}
-      />
+      <MarkerPopup entity={entity} chartData={chartData} />
     </Marker>
   );
 };

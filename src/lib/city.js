@@ -10,7 +10,7 @@ export const list = async () => {
       return u._sc_locations.reduce((acc, location) => {
         const existing = acc.find(e => e._sc_id_hash === location._sc_id_hash);
         if (existing) {
-          existing.unitsCount += 1;
+          existing.count += 1;
           Object.assign(existing, {
             keywords: Array.from(
               unitKeywords.reduce(
@@ -38,24 +38,24 @@ export const list = async () => {
               }
               return Object.assign(kw, {[k]: [u._sc_id_hash]});
             }, {}),
-            unitsCount: 1,
+            count: 1,
           }),
         );
       }, memo);
     }, [])
     .map(u => {
-      const {id, city, county, keywords, unitsByKeywords, unitsCount} = u;
-      const lat = parseFloat(u.lat, 10);
-      const lng = parseFloat(u.lng, 10);
+      const {id, city, county, keywords, unitsByKeywords, count} = u;
+      const lat = parseFloat(u.lat);
+      const lng = parseFloat(u.lng);
       return {
         id,
-        city,
         county,
         lat,
         lng,
         keywords,
         unitsByKeywords,
-        unitsCount,
+        count,
+        name: city,
         position: [lat, lng],
       };
     });

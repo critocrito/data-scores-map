@@ -5,84 +5,39 @@ import {Map, ZoomControl, TileLayer} from "react-leaflet";
 
 import "./index.css";
 import MapMarker from "../MapMarker";
+import type {City, Position} from "../../lib/types";
 
-type City = {
-  id: string,
-  lat: number,
-  lng: number,
-  city: string,
-  county: string,
-  position: [number, number],
-  unitsCount: number,
-  units: Array<string>,
-  unitsByKeywords: {[keyword: string]: Array<string>},
-};
-
-type State = {
-  lat: number,
-  lng: number,
+type Props = {
+  position: Position,
   zoom: number,
-  citiesCount: number,
+  count: number,
   cities: Array<City>,
 };
 
-class MapContainer extends React.Component<{}, State> {
-  state = {
-    lat: 54.00366,
-    lng: -2.547855,
-    zoom: 6,
-    citiesCount: 0,
-    cities: [],
-  };
+const MapContainer = ({position, zoom, cities, count}: Props) => {
+  const markers = cities.map(c => <MapMarker key={c.id} entity={c} />);
 
-  async componentDidMount() {
-    const result = await fetch("http://localhost:4000/cities").then(resp =>
-      resp.json(),
-    );
-    // eslint-disable-next-line react/no-did-mount-set-state
-    this.setState({
-      cities: result.data.map(c =>
-        Object.assign(c, {
-          position: [c.lat, c.lng],
-        }),
-      ),
-      citiesCount: result.length,
-    });
-  }
+  return (
+    <article>
+      <Map id="map" center={position} zoom={zoom} zoomControl={false}>
+        <TileLayer
+          attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+        />
+        <div>{markers}</div>
+        <ZoomControl position="bottomright" />
+      </Map>
+      <p>{count} Cities</p>
+    </article>
+  );
+};
 
-  render() {
-    const position = [this.state.lat, this.state.lng];
-    const markers = this.state.cities.map(c => (
-      <MapMarker
-        key={c.id}
-        id={c.id}
-        city={c.city}
-        county={c.county}
-        unitsCount={c.unitsCount}
-        position={c.position}
-        unitsByKeywords={c.unitsByKeywords}
-      />
-    ));
-
-    return (
-      <article>
-        <Map
-          id="map"
-          center={position}
-          zoom={this.state.zoom}
-          zoomControl={false}
-        >
-          <TileLayer
-            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-          />
-          <div>{markers}</div>
-          <ZoomControl position="bottomright" />
-        </Map>
-        <p>{this.state.citiesCount} Cities</p>
-      </article>
-    );
-  }
-}
+// FIXME: See https://github.com/yannickcr/eslint-plugin-react/issues/1593
+MapContainer.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
+  position: [54.00366, -2.547855],
+  // eslint-disable-next-line react/default-props-match-prop-types
+  zoom: 6,
+};
 
 export default MapContainer;

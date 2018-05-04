@@ -5,12 +5,10 @@ import {Popup} from "react-leaflet";
 // $FlowFixMe
 import {Doughnut} from "react-chartjs-2";
 import "./index.css";
+import type {City} from "../../lib/types";
 
 type Props = {
-  city: string,
-  county: string,
-  unitsCount: number,
-  position: [number, number],
+  entity: City,
   chartData: {
     labels: Array<string>,
     datasets: Array<{
@@ -21,29 +19,25 @@ type Props = {
   },
 };
 
-const MarkerPopup = ({
-  city,
-  county,
-  unitsCount,
-  position,
-  chartData,
-}: Props) => {
+const MarkerPopup = ({entity, chartData}: Props) => {
   const chartOptions = {
     legend: {
       position: "right",
     },
   };
 
+  const {name, county, position, count} = entity;
+
   return (
     <Popup className="marker-popup" position={position}>
       <div>
         <header className="marker-popup-title">
-          {city} ({county})
+          {name} ({county})
         </header>
         <main className="flex">
           <section className="w-25 pa2 mr2">
             <span>Units:</span>
-            <span>{unitsCount}</span>
+            <span>{count}</span>
           </section>
           <section className="w-75 h-5 pa2 mr2">
             <Doughnut
