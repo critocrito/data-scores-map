@@ -1,6 +1,8 @@
+// @flow
 import {allCities, oneCity} from "./elastic";
+import type {City, Unit} from "./types";
 
-export const list = async () => {
+export const list = async (): Promise<Array<City>> => {
   const data = await allCities();
 
   return data
@@ -30,7 +32,7 @@ export const list = async () => {
 
         return memo.concat(
           Object.assign({}, location, {
-            id: `${location.city}(${location.county})`,
+            id: `${location.city} (${location.county})`,
             keywords: location.keywords,
             unitsByKeywords: unitKeywords.reduce((kw, k) => {
               if (k in kw) {
@@ -61,28 +63,31 @@ export const list = async () => {
     });
 };
 
-export const show = async (city, county) => {
-  const data = await oneCity(city, county);
-  if (data.length === 0) return {};
-  const {lat, lng} = data[0]._sc_locations.find(
-    e => e.city === city && e.county === county,
-  );
-  const units = data.map(u => {
-    const unit = {
-      id: u._sc_id_hash,
-      keywords: u._sc_keywords,
-      description: u.description,
-      href: u.href,
-      title: u.title,
-      search_category: u.search_category,
-    };
-    return {
-      keywords: u._sc_locations.find(
-        e => e.city === city && e.county === county,
-      ).keywords,
-      ...unit,
-    };
-  });
+export const show = async (
+  name: string,
+  county: string,
+): Promise<City | null> => {
+  const data: Array<Unit> = await oneCity(name, county);
+  if (data.length === 0) return null;
 
-  return {city, county, lat, lng, units};
+  const location = data[0]._sc_locations.find(
+    e => e.city === name && e.county === county,
+  );
+
+  if (!location) return null;
+
+  const {lat, lng, keywords, unitsByKeywords} = location;
+  const id = `${name} (${county})`;
+
+  return {
+    id,
+    name,
+    county,
+    lat,
+    lng,
+    keywords,
+    unitsByKeywords,
+    count: data.length,
+    position: [lat, lng],
+  };
 };
