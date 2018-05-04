@@ -4,10 +4,10 @@ import * as React from "react";
 import {Marker} from "react-leaflet";
 import L from "leaflet";
 // $FlowFixMe
-import randomcolor from "randomcolor";
 
 import "./index.css";
 import MarkerPopup from "../MarkerPopup";
+import {randomRgbas} from "../../lib/colors";
 
 type Props = {
   id: string,
@@ -34,12 +34,14 @@ export default ({
   });
   const chartData = Object.keys(unitsByKeywords).reduce(
     (memo, key) => {
-      const color = randomcolor({luminosity: "dark"});
+      const [color, hoverColor] = randomRgbas();
       const [entry] = memo.datasets;
       const labels = Array.from(new Set(memo.labels).add(key));
       const data = entry.data.concat(unitsByKeywords[key].length);
       const backgroundColor = entry.backgroundColor.concat(color);
-      const hoverBackgroundColor = entry.hoverBackgroundColor.concat(color);
+      const hoverBackgroundColor = entry.hoverBackgroundColor.concat(
+        hoverColor,
+      );
       return {
         labels,
         datasets: [{data, backgroundColor, hoverBackgroundColor}],

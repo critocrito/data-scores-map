@@ -20,13 +20,7 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
-  "plugins": [
-    "import",
-    "prettier",
-    "flowtype",
-    "react",
-    "jsx-a11y"
-  ],
+  "plugins": ["import", "prettier", "flowtype", "react", "jsx-a11y"],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true
@@ -61,6 +55,7 @@
         "bracketSpacing": false
       }
     ],
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
