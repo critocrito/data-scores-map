@@ -9,5 +9,19 @@ OPTIONS http://localhost:4000/
 # List all cities with units.
 GET http://localhost:4000/cities
 
-# Show the details of Aberdeen (Aberdeenshire)
+# Show the details of Aberdeen (Aberdeenshire).
 GET http://localhost:4000/cities/Aberdeenshire/Aberdeen
+
+# List all units.
+POST http://localhost:4000/units
+
+# List all units by ids.
+POST http://localhost:4000/units
+Content-Type: application/json
+
+{
+  "ids": [
+    "8067a46536a4b376c217b96fb2915b435d0ae97557a5957e3dc305fed4c19893",
+    "711c3fbd648e21040dca0d91d6190ec06ddb01498a766bdbd6b777d71d04e8bc"
+  ]
+}

@@ -4,6 +4,7 @@ import Koa from "koa";
 import koaLogger from "koa-bunyan-logger";
 import koaRespond from "koa-respond";
 import koaCors from "@koa/cors";
+import koaBodyparser from "koa-bodyparser";
 import dotenv from "dotenv";
 
 import log from "./lib/logging";
@@ -19,7 +20,6 @@ let gracefullyClosing = false;
 
 const app = new Koa();
 
-//
 app.use(koaLogger());
 app.use(
   koaRespond({
@@ -32,6 +32,14 @@ app.use(
   }),
 );
 app.use(koaCors());
+app.use(
+  koaBodyparser({
+    onerror: (err, ctx) => {
+      log.error("Body parser error", {err});
+      ctx.throw(422, "body parse error");
+    },
+  }),
+);
 
 // Wrap all results in an envelope.
 app.use(async (ctx, next) => {

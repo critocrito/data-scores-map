@@ -37,3 +37,13 @@ export const showCityQuery = (city: string, county: string): ElasticQuery => ({
     excludes: ["href_text"],
   },
 });
+
+export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
+  const qs = ids.length === 0 ? {match_all: {}} : {ids: {values: ids}};
+  return {
+    query: qs,
+    _source: {
+      excludes: ["href_text"],
+    },
+  };
+};
