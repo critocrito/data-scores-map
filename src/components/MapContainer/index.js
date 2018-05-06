@@ -9,18 +9,11 @@ import type {City, Position} from "../../lib/types";
 type Props = {
   position: Position,
   zoom: number,
-  count: number,
   cities: Array<City>,
   selectedKeywords: Array<string>,
 };
 
-const MapContainer = ({
-  position,
-  zoom,
-  cities,
-  count,
-  selectedKeywords,
-}: Props) => {
+const MapContainer = ({position, zoom, cities, selectedKeywords}: Props) => {
   const markers = cities.map(city => {
     const {unitsByKeywords} = city;
     const countByKeywords = Object.keys(unitsByKeywords)
@@ -51,7 +44,6 @@ const MapContainer = ({
         <div>{markers}</div>
         <ZoomControl position="bottomright" />
       </Map>
-      <p>{count} Cities</p>
     </article>
   );
 };

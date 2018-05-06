@@ -1,20 +1,18 @@
 // @flow
-import React from "react";
+import * as React from "react";
+
 import "./index.css";
 import DataNav from "../DataNav";
-import DataView from "../DataView";
-import type {City} from "../../lib/types";
+import type {Document, City} from "../../lib/types";
 
 type Props = {
   cities: Array<City>,
+  documents: Array<Document>,
 };
 
-const App = ({cities}: Props) => (
+const App = ({documents, cities}: Props) => (
   <div className="App">
-    <DataNav citiesAll={cities} />
-    <article>
-      <DataView />
-    </article>
+    <DataNav documentsAll={documents} citiesAll={cities} />
   </div>
 );
 
@@ -22,6 +20,8 @@ const App = ({cities}: Props) => (
 App.defaultProps = {
   // eslint-disable-next-line react/default-props-match-prop-types
   cities: [],
+  // eslint-disable-next-line react/default-props-match-prop-types
+  documents: [],
 };
 
 export default App;

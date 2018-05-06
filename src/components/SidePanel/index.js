@@ -11,8 +11,8 @@ type Props = {
   activeList: string,
   isSelectedKeyword: string => boolean,
   isSelectedCity: string => boolean,
-  selectKeywordHandler: string => void,
-  selectCityHandler: string => void,
+  selectKeywordHandler: string => Promise<void>,
+  selectCityHandler: string => Promise<void>,
   toggleList: void => void,
   resetList: void => void,
 };
@@ -49,7 +49,7 @@ const chartOptions = {
 const rowItem = (
   key: string,
   classNames: string,
-  clickHandler: () => void,
+  clickHandler: () => Promise<void>,
   chartData: {[string]: any},
   content: React.Node,
 ) => (
