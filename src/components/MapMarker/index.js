@@ -56,9 +56,4 @@ const MapMarker = ({entity, countByKeywords}: Props) => {
   );
 };
 
-MapMarker.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
-  selected: [],
-};
-
 export default MapMarker;

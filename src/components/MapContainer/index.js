@@ -1,24 +1,29 @@
 // @flow
 import * as React from "react";
+// $FlowFixMe
+import {toJS} from "mobx";
+import {observer} from "mobx-react";
 import {Map, ZoomControl, TileLayer} from "react-leaflet";
 
 import "./index.css";
 import MapMarker from "../MapMarker";
-import type {City, Position} from "../../lib/types";
+import type Store from "../../lib/store";
+import type {Position} from "../../lib/types";
 
 type Props = {
   position: Position,
   zoom: number,
-  cities: Array<City>,
-  selectedKeywords: Array<string>,
+  store: Store,
 };
 
-const MapContainer = ({position, zoom, cities, selectedKeywords}: Props) => {
-  const markers = cities.map(city => {
+const MapContainer = observer(({store, position, zoom}: Props) => {
+  const markers = toJS(store).cities.map(city => {
     const {unitsByKeywords} = city;
     const countByKeywords = Object.keys(unitsByKeywords)
       .filter(
-        key => selectedKeywords.length === 0 || selectedKeywords.includes(key),
+        key =>
+          store.selectedKeywords.length === 0 ||
+          store.selectedKeywords.includes(key),
       )
       .reduce(
         (memo, key) =>
@@ -46,11 +51,9 @@ const MapContainer = ({position, zoom, cities, selectedKeywords}: Props) => {
       </Map>
     </article>
   );
-};
+});
 
 MapContainer.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
-  selectedKeywords: [],
   // eslint-disable-next-line react/default-props-match-prop-types
   position: [54.00366, -2.547855],
   // eslint-disable-next-line react/default-props-match-prop-types

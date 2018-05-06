@@ -1,17 +1,17 @@
 // @flow
 import * as React from "react";
+import {observer} from "mobx-react";
 // $FlowFixMe
 import ReactTable from "react-table";
 // $FlowFixMe
 import "react-table/react-table.css";
-
-import type {Document} from "../../lib/types";
+import type Store from "../../lib/store";
 
 type Props = {
-  documents: Array<Document>,
+  store: Store,
 };
 
-const DataView = ({documents}: Props) => {
+const DataView = observer(({store}: Props) => {
   const columns = [
     {Header: "Title", accessor: "title"},
     {Header: "Description", accessor: "description"},
@@ -27,7 +27,7 @@ const DataView = ({documents}: Props) => {
   return (
     <div>
       <ReactTable
-        data={documents}
+        data={store.documents}
         columns={columns}
         filterable
         defaultFilterMethod={(filter, row) => {
@@ -37,10 +37,5 @@ const DataView = ({documents}: Props) => {
       />
     </div>
   );
-};
-
-DataView.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
-  documents: [],
-};
+});
 export default DataView;

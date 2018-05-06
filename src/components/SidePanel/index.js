@@ -1,18 +1,18 @@
 // @flow
 import * as React from "react";
+// $FlowFixMe
+import {toJS} from "mobx";
+import {observer} from "mobx-react";
+// $FlowFixMe
 import {HorizontalBar} from "react-chartjs-2";
 import classnames from "classnames";
 
 import "./index.css";
-import type {City} from "../../lib/types";
+import type Store from "../../lib/store";
 
 type Props = {
-  citiesAll: Array<City>,
+  store: Store,
   activeList: string,
-  isSelectedKeyword: string => boolean,
-  isSelectedCity: string => boolean,
-  selectKeywordHandler: string => Promise<void>,
-  selectCityHandler: string => Promise<void>,
   toggleList: void => void,
   resetList: void => void,
 };
@@ -49,7 +49,7 @@ const chartOptions = {
 const rowItem = (
   key: string,
   classNames: string,
-  clickHandler: () => Promise<void>,
+  clickHandler: () => void,
   chartData: {[string]: any},
   content: React.Node,
 ) => (
@@ -69,13 +69,10 @@ const rowItem = (
   </li>
 );
 
+@observer
 class SidePanel extends React.Component<Props> {
-  static defaultProps = {
-    citiesAll: [],
-  };
-
   keywordsList() {
-    const keywordStats = this.props.citiesAll.reduce(
+    const keywordStats = toJS(this.props.store).citiesAll.reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
@@ -114,16 +111,16 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.isSelectedKeyword(k),
+          "sp-row--active": this.props.store.isSelectedKeyword(k),
         });
-        const clickHandler = () => this.props.selectKeywordHandler(k);
+        const clickHandler = () => this.props.store.toggleKeyword(k);
         const content = <div className="b tty">{k}</div>;
         return rowItem(k, classNames, clickHandler, chartData, content);
       });
   }
 
   citiesList() {
-    const cityStats = this.props.citiesAll.reduce((memo, city) => {
+    const cityStats = toJS(this.props.store).citiesAll.reduce((memo, city) => {
       const unitsCount = Object.keys(city.unitsByKeywords).reduce(
         (acc, key) => acc + city.unitsByKeywords[key].length,
         0,
@@ -159,9 +156,9 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.isSelectedCity(id),
+          "sp-row--active": this.props.store.isSelectedCity(id),
         });
-        const clickHandler = () => this.props.selectCityHandler(id);
+        const clickHandler = () => this.props.store.toggleCity(id);
         const content = (
           <div>
             <span className="b ttu">{city.name}</span>
