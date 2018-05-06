@@ -5,6 +5,7 @@ import "./index.css";
 import SidePanel from "../SidePanel";
 import MapContainer from "../MapContainer";
 import DataView from "../DataView";
+import {fetchDocuments} from "../../lib/requests";
 import type {City, Document} from "../../lib/types";
 
 type Props = {
@@ -20,31 +21,6 @@ type State = {
   selectedCities: Array<string>,
   documents: Array<Document>,
   list: string,
-};
-
-const fetchUnits = async cities => {
-  const body =
-    cities.length === 0
-      ? {}
-      : {
-          ids: Array.from(
-            cities.reduce((memo, city) => {
-              Object.keys(city.unitsByKeywords).forEach(keyword =>
-                city.unitsByKeywords[keyword].forEach(id => memo.add(id)),
-              );
-              return memo;
-            }, new Set()),
-          ),
-        };
-
-  const data = await fetch("http://localhost:4000/units", {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: new Headers({
-      "Content-Type": "application/json",
-    }),
-  }).then(resp => resp.json());
-  return data.data;
 };
 
 class DataNav extends React.Component<Props, State> {
@@ -84,7 +60,15 @@ class DataNav extends React.Component<Props, State> {
       selected.length > 0
         ? citiesAll.filter(city => selected.includes(city.id))
         : citiesAll;
-    const documents = await fetchUnits(cities);
+    const unitIds = Array.from(
+      cities.reduce((memo, city) => {
+        Object.keys(city.unitsByKeywords).forEach(k =>
+          city.unitsByKeywords[k].forEach(i => memo.add(i)),
+        );
+        return memo;
+      }, new Set()),
+    );
+    const {data: documents} = await fetchDocuments(unitIds);
     this.setState({
       selectedCities: selected,
       citiesCount: selected.length,
@@ -109,7 +93,15 @@ class DataNav extends React.Component<Props, State> {
             }, false),
           )
         : citiesAll;
-    const documents = await fetchUnits(cities);
+    const unitIds = Array.from(
+      cities.reduce((memo, city) => {
+        Object.keys(city.unitsByKeywords).forEach(k =>
+          city.unitsByKeywords[k].forEach(i => memo.add(i)),
+        );
+        return memo;
+      }, new Set()),
+    );
+    const {data: documents} = await fetchDocuments(unitIds);
     this.setState({
       selectedKeywords: selected,
       citiesCount: cities.length,
