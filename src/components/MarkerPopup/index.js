@@ -1,8 +1,6 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
 import {Popup} from "react-leaflet";
-// $FlowFixMe
 import {Doughnut} from "react-chartjs-2";
 import "./index.css";
 import type {City} from "../../lib/types";

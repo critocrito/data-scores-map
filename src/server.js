@@ -1,3 +1,4 @@
+// @flow
 import http from "http";
 import Koa from "koa";
 import koaLogger from "koa-bunyan-logger";
@@ -35,16 +36,16 @@ app.use(koaCors());
 // Wrap all results in an envelope.
 app.use(async (ctx, next) => {
   await next();
-  ctx.body = Object.assign(
-    {data: ctx.body},
-    Array.isArray(ctx.body) ? {length: ctx.body.length} : {},
-  );
+  const dataLength = Array.isArray(ctx.body) ? ctx.body.length : 0;
+  const newBody = {data: ctx.body, length: dataLength};
+  ctx.body = newBody;
 });
 
 // Configure our node app for development.
 if (dev) {
   app.use(koaLogger.requestIdContext());
-  app.use(koaLogger.requestLogger());
+  // FIXME: The flow library definition requires an options object.
+  app.use(koaLogger.requestLogger({}));
 }
 
 // Refuse new connections when shutting down the server.

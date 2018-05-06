@@ -1,3 +1,4 @@
+// @flow
 import Router from "koa-router";
 import {list, show} from "../lib/city";
 

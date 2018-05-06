@@ -1,4 +1,10 @@
-export const listCitiesQuery = () => ({
+// @flow
+export type ElasticQuery = {
+  query: {},
+  _source: {},
+};
+
+export const listCitiesQuery = (): ElasticQuery => ({
   query: {
     nested: {
       path: "$sc_locations",
@@ -13,7 +19,7 @@ export const listCitiesQuery = () => ({
   },
 });
 
-export const showCityQuery = (city, county) => ({
+export const showCityQuery = (city: string, county: string): ElasticQuery => ({
   query: {
     nested: {
       path: "$sc_locations",

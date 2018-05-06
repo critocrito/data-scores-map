@@ -12,6 +12,10 @@ type Location = {
   unitsByKeywords: {[string]: UnitIds},
 };
 
+type UnitLocation = Location & {
+  _sc_id_hash: string,
+};
+
 export type City = {
   id: string,
   name: string,
@@ -33,5 +37,18 @@ export type Document = {
 
 export type Unit = Document & {
   _sc_id_hash: string,
-  _sc_locations: Array<Location>,
+  _sc_locations: Array<UnitLocation>,
+  _sc_keywords: Array<string>,
+};
+
+type CommonHttpResp = {
+  length: number,
+};
+
+export type HttpCityResp = {data: Array<City>} & CommonHttpResp;
+export type HttpDocResp = {data: Array<Document>} & CommonHttpResp;
+export type HttpResp = HttpCityResp | HttpDocResp;
+
+export type HttpError = {
+  message: string,
 };

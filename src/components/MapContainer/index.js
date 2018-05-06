@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
 import {Map, ZoomControl, TileLayer} from "react-leaflet";
 
 import "./index.css";

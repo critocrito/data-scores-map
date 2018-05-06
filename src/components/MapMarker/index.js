@@ -1,9 +1,7 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
 import {Marker} from "react-leaflet";
-import L from "leaflet";
-// $FlowFixMe
+import * as L from "leaflet";
 
 import "./index.css";
 import MarkerPopup from "../MarkerPopup";

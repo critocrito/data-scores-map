@@ -1,20 +1,22 @@
+// @flow
 import React from "react";
 import ReactDOM from "react-dom";
 import "./client.css";
-import "../public/favicon.ico";
 import App from "./components/App";
 import log from "./lib/logging";
+import type {HttpCityResp} from "./lib/types";
+
+const fetchCities = (): Promise<HttpCityResp> =>
+  fetch("http://localhost:4000/cities").then(resp => resp.json());
 
 const initialize = async () => {
-  const result = await fetch("http://localhost:4000/cities").then(resp =>
-    resp.json(),
-  );
-  const cities = result.data.map(c =>
-    Object.assign(c, {
-      position: [c.lat, c.lng],
-    }),
-  );
-  ReactDOM.render(<App cities={cities} />, document.getElementById("root"));
+  const result = await fetchCities();
+  const cities = result.data;
+  const elem = document.getElementById("root");
+  if (!elem) {
+    throw new Error("No HTML element to mount React.");
+  }
+  ReactDOM.render(<App cities={cities} />, elem);
 };
 
 initialize();

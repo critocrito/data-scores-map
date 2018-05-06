@@ -1,8 +1,6 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
 import {HorizontalBar} from "react-chartjs-2";
-// $FlowFixMe
 import classnames from "classnames";
 
 import "./index.css";

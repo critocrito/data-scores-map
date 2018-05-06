@@ -11,8 +11,8 @@ package-lock.json
 yarn.lock
 node_modules
 *.log*
-flow-typed
 flow-coverage
+flow-typed/npm
 dist
 .npmrc
 .eslintcache
