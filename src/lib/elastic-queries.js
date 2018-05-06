@@ -41,7 +41,16 @@ export const showCityQuery = (city: string, county: string): ElasticQuery => ({
 export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
   const qs = ids.length === 0 ? {match_all: {}} : {ids: {values: ids}};
   return {
-    query: qs,
+    query: {
+      nested: {
+        path: "$sc_locations",
+        query: {
+          bool: {
+            must: [{exists: {field: "$sc_locations"}}, qs],
+          },
+        },
+      },
+    },
     _source: {
       excludes: ["href_text"],
     },
