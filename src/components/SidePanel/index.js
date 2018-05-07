@@ -158,9 +158,14 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": store.isSelectedCouncil(id),
+          "sp-row--active": store.isCitiesEntity()
+            ? store.isSelectedCity(id)
+            : store.isSelectedCouncil(id),
         });
-        const clickHandler = () => store.toggleCouncil(id);
+        const clickHandler = () =>
+          store.isCitiesEntity()
+            ? store.toggleCity(id)
+            : store.toggleCouncil(id);
         const content =
           entity.type === "city" ? (
             <div>
