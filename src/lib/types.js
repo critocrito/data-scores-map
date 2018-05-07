@@ -20,24 +20,26 @@ type CouncilLocation = BaseLocation & {
   council: string,
 };
 
-export type City = {
+export type City = {|
   id: string,
+  type: "city",
   name: string,
   county: string,
   position: Position,
   count: number,
   keywords: Array<string>,
   unitsByKeywords: {[keyword: string]: UnitIds},
-};
+|};
 
-export type Council = {
+export type Council = {|
   id: string,
+  type: "council",
   name: string,
   position: Position,
   count: number,
   keywords: Array<string>,
   unitsByKeywords: {[keyword: string]: UnitIds},
-};
+|};
 
 export type Document = {
   id: string,

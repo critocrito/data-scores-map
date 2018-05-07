@@ -12,8 +12,7 @@ export default class Store {
   documentsAll = [];
   councilsAll = [];
   @observable entity: "cities" | "councils" = "cities";
-  @observable cities: Array<City> = [];
-  @observable councils: Array<Council> = [];
+  @observable entities: City[] | Council[];
   @observable documents: Array<Document> = [];
   @observable keywords: Array<string> = [];
   @observable selectedCities: Array<string> = [];
@@ -21,15 +20,15 @@ export default class Store {
   @observable selectedKeywords: Array<string> = [];
 
   constructor(
-    citiesAll: Array<City> = [],
+    citiesAll: Array<City>,
+    // $FlowFixMe
     councilsAll: Array<Council>,
-    documentsAll: Array<Document> = [],
+    documentsAll: Array<Document>,
   ) {
     this.citiesAll = citiesAll;
     this.councilsAll = councilsAll;
+    this.entities = citiesAll;
     this.documentsAll = documentsAll;
-    this.cities = citiesAll;
-    this.councils = councilsAll;
     this.documents = documentsAll;
   }
 
@@ -54,24 +53,13 @@ export default class Store {
   }
 
   @computed
-  get citiesCount() {
-    return this.cities.length;
-  }
-
-  @computed
-  get councilsCount() {
-    return this.councils.length;
-  }
-
-  @computed
-  get documentsCount() {
+  get documentsCount(): number {
     return this.documents.length;
   }
 
   @computed
-  get entities() {
-    if (this.entity === "cities") return this.cities;
-    return this.councils;
+  get entitiesCount(): number {
+    return this.entities.length;
   }
 
   @computed
@@ -85,15 +73,15 @@ export default class Store {
     this.selectedKeywords = this.isSelectedKeyword(keyword)
       ? this.selectedKeywords.filter(k => k !== keyword)
       : this.selectedKeywords.concat(keyword);
-    this.cities =
+    this.entities =
       this.selectedKeywords.length > 0
-        ? this.citiesAll.filter(city =>
-            city.keywords.reduce((memo, key) => {
+        ? this.entitiesAll.filter(entity =>
+            entity.keywords.reduce((memo, key) => {
               if (memo) return memo;
               return this.selectedKeywords.includes(key);
             }, false),
           )
-        : this.citiesAll;
+        : this.entitiesAll;
     this.fetchDocuments();
   }
 
@@ -102,7 +90,7 @@ export default class Store {
     this.selectedCities = this.isSelectedCity(id)
       ? this.selectedCities.filter(i => i !== id)
       : this.selectedCities.concat(id);
-    this.cities =
+    this.entities =
       this.selectedCities.length > 0
         ? this.citiesAll.filter(city => this.selectedCities.includes(city.id))
         : this.citiesAll;
@@ -121,7 +109,7 @@ export default class Store {
     this.selectedCouncils = this.isSelectedCouncil(id)
       ? this.selectedCouncils.filter(i => i !== id)
       : this.selectedCouncils.concat(id);
-    this.councils =
+    this.entities =
       this.selectedCouncils.length > 0
         ? this.councilsAll.filter(city =>
             this.selectedCouncils.includes(city.id),
@@ -135,9 +123,8 @@ export default class Store {
     this.selectedCities = [];
     this.selectedCouncils = [];
     this.selectedKeywords = [];
-    this.cities = this.citiesAll;
-    this.councils = this.councilsAll;
     this.documents = this.documentsAll;
+    this.entities = this.isCitiesEntity() ? this.citiesAll : this.councilsAll;
     this.fetchDocuments();
   }
 

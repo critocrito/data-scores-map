@@ -44,15 +44,6 @@ class DataNav extends React.Component<Props, State> {
   render() {
     const {store} = this.props;
     const {list} = this.state;
-    const stats = store.isCitiesEntity() ? (
-      <span>
-        <b>Cities:</b> {store.citiesCount}
-      </span>
-    ) : (
-      <span>
-        <b>Councils:</b> {store.councilsCount}
-      </span>
-    );
 
     return (
       <section>
@@ -68,14 +59,18 @@ class DataNav extends React.Component<Props, State> {
             />
           </div>
           <div className="w-two-thirds">
-            <MapContainer store={this.props.store} />
+            <MapContainer store={store} />
           </div>
         </article>
         <article>
-          {stats} <b>Documents:</b> {this.props.store.documentsCount}
+          <span>
+            <b>{store.isCitiesEntity() ? "Cities" : "Councils"}:</b>{" "}
+            {store.entitiesCount}
+          </span>{" "}
+          <b>Documents:</b> {store.documentsCount}
         </article>
         <article>
-          <DataView store={this.props.store} />
+          <DataView store={store} />
         </article>
       </section>
     );

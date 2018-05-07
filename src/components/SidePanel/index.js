@@ -77,14 +77,14 @@ class SidePanel extends React.Component<Props> {
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
-          const citiesCount = key in memo ? memo[key].citiesCount : 0;
+          const entitiesCount = key in memo ? memo[key].entitiesCount : 0;
           const newUnitsCount =
             key in unitsByKeywords ? unitsByKeywords[key].length : 0;
 
           Object.assign(memo, {
             [key]: {
               unitsCount: unitsCount + newUnitsCount,
-              citiesCount: citiesCount + 1,
+              entitiesCount: entitiesCount + 1,
             },
           });
         });
@@ -96,7 +96,7 @@ class SidePanel extends React.Component<Props> {
     return Object.keys(keywordStats)
       .sort((a, b) => a.localeCompare(b))
       .map(k => {
-        const {unitsCount, citiesCount} = keywordStats[k];
+        const {unitsCount, entitiesCount} = keywordStats[k];
 
         const chartData = {
           labels: ["units", "cities"],
@@ -105,7 +105,7 @@ class SidePanel extends React.Component<Props> {
               backgroundColor: [color, colorAlt],
               borderWidth: 0,
               hoverBackgroundColor: [color, colorAlt],
-              data: [unitsCount, citiesCount],
+              data: [unitsCount, entitiesCount],
             },
           ],
         };
@@ -120,85 +120,29 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
-  citiesList() {
-    const cityStats = toJS(this.props.store.entitiesAll).reduce(
-      (memo, city) => {
-        const unitsCount = Object.keys(city.unitsByKeywords).reduce(
-          (acc, key) => acc + city.unitsByKeywords[key].length,
-          0,
-        );
+  entitiesList() {
+    const {store} = this.props;
+    const entityStats = toJS(store.entitiesAll).reduce((memo, entity) => {
+      const unitsCount = Object.keys(entity.unitsByKeywords).reduce(
+        (acc, key) => acc + entity.unitsByKeywords[key].length,
+        0,
+      );
 
-        Object.assign(memo, {
-          [city.id]: {
-            city,
-            unitsCount,
-            keywordsCount: city.keywords.length,
-          },
-        });
-
-        return memo;
-      },
-      {},
-    );
-
-    return Object.keys(cityStats)
-      .sort((a, b) => a.localeCompare(b))
-      .map(id => {
-        const {city, unitsCount, keywordsCount} = cityStats[id];
-
-        const chartData = {
-          labels: ["units", "keywords"],
-          datasets: [
-            {
-              backgroundColor: [color, colorAlt],
-              borderWidth: 0,
-              hoverBackgroundColor: [color, colorAlt],
-              data: [unitsCount, keywordsCount],
-            },
-          ],
-        };
-        const classNames = classnames({
-          "sp-row": true,
-          "w-100": true,
-          "sp-row--active": this.props.store.isSelectedCity(id),
-        });
-        const clickHandler = () => this.props.store.toggleCity(id);
-        const content = (
-          <div>
-            <span className="b ttu">{city.name}</span>
-            <br />
-            <span className="f7 i">{city.county}</span>
-          </div>
-        );
-        return rowItem(id, classNames, clickHandler, chartData, content);
+      Object.assign(memo, {
+        [entity.id]: {
+          entity,
+          unitsCount,
+          keywordsCount: entity.keywords.length,
+        },
       });
-  }
 
-  councilsList() {
-    const councilStats = toJS(this.props.store.entitiesAll).reduce(
-      (memo, council) => {
-        const unitsCount = Object.keys(council.unitsByKeywords).reduce(
-          (acc, key) => acc + council.unitsByKeywords[key].length,
-          0,
-        );
+      return memo;
+    }, {});
 
-        Object.assign(memo, {
-          [council.id]: {
-            council,
-            unitsCount,
-            keywordsCount: council.keywords.length,
-          },
-        });
-
-        return memo;
-      },
-      {},
-    );
-
-    return Object.keys(councilStats)
+    return Object.keys(entityStats)
       .sort((a, b) => a.localeCompare(b))
       .map(id => {
-        const {council, unitsCount, keywordsCount} = councilStats[id];
+        const {entity, unitsCount, keywordsCount} = entityStats[id];
 
         const chartData = {
           labels: ["units", "keywords"],
@@ -214,14 +158,21 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.store.isSelectedCouncil(id),
+          "sp-row--active": store.isSelectedCouncil(id),
         });
-        const clickHandler = () => this.props.store.toggleCouncil(id);
-        const content = (
-          <div>
-            <span className="b ttu">{council.name}</span>
-          </div>
-        );
+        const clickHandler = () => store.toggleCouncil(id);
+        const content =
+          entity.type === "city" ? (
+            <div>
+              <span className="b ttu">{entity.name}</span>
+              <br />
+              <span className="f7 i">{entity.county}</span>
+            </div>
+          ) : (
+            <div>
+              <span className="b ttu">{entity.name}</span>
+            </div>
+          );
         return rowItem(id, classNames, clickHandler, chartData, content);
       });
   }
@@ -231,9 +182,7 @@ class SidePanel extends React.Component<Props> {
     const toggleListHandler = () => toggleList();
     const toggleEntityHandler = () => toggleEntity();
     const resetHandler = () => resetList();
-    const entities = store.isCitiesEntity()
-      ? this.citiesList()
-      : this.councilsList();
+    const entities = this.entitiesList();
     const children = activeList === "keywords" ? this.keywordsList() : entities;
     const keywordsToggle =
       activeList === "keywords" ? (

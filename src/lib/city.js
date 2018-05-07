@@ -55,6 +55,7 @@ export const list = async (): Promise<Array<City>> => {
         keywords,
         unitsByKeywords,
         count,
+        type: "city",
         name: city,
         position: [lat, lng],
       };
@@ -83,6 +84,7 @@ export const show = async (
     county,
     keywords,
     unitsByKeywords,
+    type: "city",
     count: data.length,
     position: [lat, lng],
   };
