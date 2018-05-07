@@ -184,39 +184,29 @@ class SidePanel extends React.Component<Props> {
     const resetHandler = () => resetList();
     const entities = this.entitiesList();
     const children = activeList === "keywords" ? this.keywordsList() : entities;
-    const keywordsToggle =
-      activeList === "keywords" ? (
-        <button onClick={resetHandler} onKeyPress={resetHandler}>
-          Reset Keywords
-        </button>
-      ) : (
-        <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
-          Select Keywords
-        </button>
-      );
-    const entitiesToggle =
-      activeList === "entities" ? (
-        <button onClick={resetHandler} onKeyPress={resetHandler}>
-          Reset {store.isCitiesEntity() ? "Cities" : "Councils"}
-        </button>
-      ) : (
-        <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
-          Select {store.isCitiesEntity() ? "Cities" : "Councils"}
-        </button>
-      );
-
-    const entityToggle = (
-      <button onClick={toggleEntityHandler} onKeyPress={toggleEntityHandler}>
-        Map {store.isCitiesEntity() ? "Councils" : "Cities"}
-      </button>
-    );
 
     return (
       <article className="sp pa0 ma0">
         <section className="sp-header flex pa0 ma0">
-          <div className="w-33">{keywordsToggle}</div>
-          <div className="w-33">{entitiesToggle}</div>
-          <div className="w-33">{entityToggle}</div>
+          <div className="w-50 tl">
+            <button onClick={resetHandler} onKeyPress={resetHandler}>
+              Reset Selection
+            </button>{" "}
+            <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
+              View by{" "}
+              {activeList === "entities"
+                ? "Keywords"
+                : `${store.isCitiesEntity() ? "Cities" : "Councils"}`}
+            </button>
+          </div>
+          <div className="w-50 tr">
+            <button
+              onClick={toggleEntityHandler}
+              onKeyPress={toggleEntityHandler}
+            >
+              Map {store.isCitiesEntity() ? "Councils" : "Cities"}
+            </button>
+          </div>
         </section>
         <section className="flex pa0 ma0 w-100">
           <ul className="list pa0 ma0 w-100">{children}</ul>
