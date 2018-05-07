@@ -14,6 +14,7 @@ type Props = {
   store: Store,
   activeList: string,
   toggleList: void => void,
+  toggleEntity: void => void,
   resetList: void => void,
 };
 
@@ -72,7 +73,7 @@ const rowItem = (
 @observer
 class SidePanel extends React.Component<Props> {
   keywordsList() {
-    const keywordStats = toJS(this.props.store).citiesAll.reduce(
+    const keywordStats = toJS(this.props.store.entitiesAll).reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
@@ -120,22 +121,25 @@ class SidePanel extends React.Component<Props> {
   }
 
   citiesList() {
-    const cityStats = toJS(this.props.store).citiesAll.reduce((memo, city) => {
-      const unitsCount = Object.keys(city.unitsByKeywords).reduce(
-        (acc, key) => acc + city.unitsByKeywords[key].length,
-        0,
-      );
+    const cityStats = toJS(this.props.store.entitiesAll).reduce(
+      (memo, city) => {
+        const unitsCount = Object.keys(city.unitsByKeywords).reduce(
+          (acc, key) => acc + city.unitsByKeywords[key].length,
+          0,
+        );
 
-      Object.assign(memo, {
-        [city.id]: {
-          city,
-          unitsCount,
-          keywordsCount: city.keywords.length,
-        },
-      });
+        Object.assign(memo, {
+          [city.id]: {
+            city,
+            unitsCount,
+            keywordsCount: city.keywords.length,
+          },
+        });
 
-      return memo;
-    }, {});
+        return memo;
+      },
+      {},
+    );
 
     return Object.keys(cityStats)
       .sort((a, b) => a.localeCompare(b))
@@ -170,38 +174,100 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
+  councilsList() {
+    const councilStats = toJS(this.props.store.entitiesAll).reduce(
+      (memo, council) => {
+        const unitsCount = Object.keys(council.unitsByKeywords).reduce(
+          (acc, key) => acc + council.unitsByKeywords[key].length,
+          0,
+        );
+
+        Object.assign(memo, {
+          [council.id]: {
+            council,
+            unitsCount,
+            keywordsCount: council.keywords.length,
+          },
+        });
+
+        return memo;
+      },
+      {},
+    );
+
+    return Object.keys(councilStats)
+      .sort((a, b) => a.localeCompare(b))
+      .map(id => {
+        const {council, unitsCount, keywordsCount} = councilStats[id];
+
+        const chartData = {
+          labels: ["units", "keywords"],
+          datasets: [
+            {
+              backgroundColor: [color, colorAlt],
+              borderWidth: 0,
+              hoverBackgroundColor: [color, colorAlt],
+              data: [unitsCount, keywordsCount],
+            },
+          ],
+        };
+        const classNames = classnames({
+          "sp-row": true,
+          "w-100": true,
+          "sp-row--active": this.props.store.isSelectedCouncil(id),
+        });
+        const clickHandler = () => this.props.store.toggleCouncil(id);
+        const content = (
+          <div>
+            <span className="b ttu">{council.name}</span>
+          </div>
+        );
+        return rowItem(id, classNames, clickHandler, chartData, content);
+      });
+  }
+
   render() {
-    const {activeList, toggleList, resetList} = this.props;
-    const toggleHandler = () => toggleList();
+    const {store, activeList, toggleList, toggleEntity, resetList} = this.props;
+    const toggleListHandler = () => toggleList();
+    const toggleEntityHandler = () => toggleEntity();
     const resetHandler = () => resetList();
-    const children =
-      activeList === "keywords" ? this.keywordsList() : this.citiesList();
+    const entities = store.isCitiesEntity()
+      ? this.citiesList()
+      : this.councilsList();
+    const children = activeList === "keywords" ? this.keywordsList() : entities;
     const keywordsToggle =
       activeList === "keywords" ? (
         <button onClick={resetHandler} onKeyPress={resetHandler}>
           Reset Keywords
         </button>
       ) : (
-        <button onClick={toggleHandler} onKeyPress={toggleHandler}>
+        <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
           Select Keywords
         </button>
       );
-    const citiesToggle =
-      activeList === "cities" ? (
+    const entitiesToggle =
+      activeList === "entities" ? (
         <button onClick={resetHandler} onKeyPress={resetHandler}>
-          Reset Cities
+          Reset {store.isCitiesEntity() ? "Cities" : "Councils"}
         </button>
       ) : (
-        <button onClick={toggleHandler} onKeyPress={toggleHandler}>
-          Select Cities
+        <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
+          Select {store.isCitiesEntity() ? "Cities" : "Councils"}
         </button>
       );
+
+    const entityToggle = (
+      <button onClick={toggleEntityHandler} onKeyPress={toggleEntityHandler}>
+        Map {store.isCitiesEntity() ? "Councils" : "Cities"}
+      </button>
+    );
 
     return (
       <article className="sp pa0 ma0">
         <section className="sp-header flex pa0 ma0">
-          <div className="w-50">{keywordsToggle}</div>
-          <div className="w-50">{citiesToggle}</div>
+          <div className="w-33">{keywordsToggle}</div>
+          <div className="w-33">{entitiesToggle}</div>
+          <div className="w-33">{entityToggle}</div>
         </section>
         <section className="flex pa0 ma0 w-100">
           <ul className="list pa0 ma0 w-100">{children}</ul>

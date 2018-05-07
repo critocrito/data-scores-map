@@ -56,3 +56,18 @@ export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
     },
   };
 };
+
+export const listCouncilsQuery = (): ElasticQuery => ({
+  query: {
+    nested: {
+      path: "$sc_council_areas",
+      query: {
+        exists: {field: "$sc_council_areas"},
+      },
+    },
+  },
+  _source: {
+    includes: ["$sc_id_hash", "$sc_council_areas", "$sc_keywords"],
+    excludes: ["href_text"],
+  },
+});

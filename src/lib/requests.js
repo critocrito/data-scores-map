@@ -1,6 +1,6 @@
 // @flow
 import dotenv from "dotenv";
-import type {HttpDocResp, HttpCityResp} from "./types";
+import type {HttpDocResp, HttpCityResp, HttpCouncilResp} from "./types";
 
 dotenv.config();
 
@@ -24,3 +24,6 @@ export const fetchDocuments = (ids?: Array<string>): Promise<HttpDocResp> => {
     }),
   }).then(resp => resp.json());
 };
+
+export const fetchCouncils = (): Promise<HttpCouncilResp> =>
+  fetch(`${baseUrl}/councils`).then(resp => resp.json());

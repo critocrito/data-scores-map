@@ -1,15 +1,15 @@
 // @flow
-import {allCities, oneCity} from "./elastic";
-import type {City} from "./types";
+import {allCouncils} from "./elastic";
+import type {Council} from "./types";
 
-export const list = async (): Promise<Array<City>> => {
-  const data = await allCities();
+export const list = async (): Promise<Array<Council>> => {
+  const data = await allCouncils();
 
   return data
     .reduce((memo, u) => {
       const unitKeywords = u._sc_keywords;
 
-      return u._sc_locations.reduce((acc, location) => {
+      return u._sc_council_areas.reduce((acc, location) => {
         const existing = acc.find(e => e._sc_id_hash === location._sc_id_hash);
         if (existing) {
           existing.count += 1;
@@ -32,7 +32,7 @@ export const list = async (): Promise<Array<City>> => {
 
         return memo.concat(
           Object.assign({}, location, {
-            id: location._sc_id_hash,
+            id: location.council,
             keywords: location.keywords,
             unitsByKeywords: unitKeywords.reduce((kw, k) => {
               if (k in kw) {
@@ -46,44 +46,16 @@ export const list = async (): Promise<Array<City>> => {
       }, memo);
     }, [])
     .map(u => {
-      const {id, city, county, keywords, unitsByKeywords, count} = u;
+      const {id, council, keywords, unitsByKeywords, count} = u;
       const lat = parseFloat(u.lat);
       const lng = parseFloat(u.lng);
       return {
         id,
-        county,
         keywords,
         unitsByKeywords,
         count,
-        name: city,
+        name: council,
         position: [lat, lng],
       };
     });
-};
-
-export const show = async (
-  name: string,
-  county: string,
-): Promise<City | null> => {
-  const data = await oneCity(name, county);
-  if (data.length === 0) return null;
-
-  const location = data[0]._sc_locations.find(
-    e => e.city === name && e.county === county,
-  );
-
-  if (!location) return null;
-
-  // eslint-disable-next-line camel-case
-  const {lat, lng, keywords, unitsByKeywords} = location;
-
-  return {
-    id: location._sc_id_hash,
-    name,
-    county,
-    keywords,
-    unitsByKeywords,
-    count: data.length,
-    position: [lat, lng],
-  };
 };

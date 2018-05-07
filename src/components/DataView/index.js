@@ -21,7 +21,7 @@ const DataView = observer(({store}: Props) => {
       Cell: e => <a href={e.value}> {e.value} </a>,
       accessor: "href",
     },
-    {Header: "Search Category", accessor: "search_category"},
+    {Header: "Search Category", accessor: "searchCategory"},
   ];
 
   return (

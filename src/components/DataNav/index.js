@@ -28,8 +28,13 @@ class DataNav extends React.Component<Props, State> {
   toggleList() {
     this.props.store.reset();
     this.setState({
-      list: this.state.list === "keywords" ? "cities" : "keywords",
+      list: this.state.list === "keywords" ? "entities" : "keywords",
     });
+  }
+
+  toggleEntity() {
+    this.props.store.toggleEntity();
+    this.props.store.reset();
   }
 
   resetList() {
@@ -37,7 +42,17 @@ class DataNav extends React.Component<Props, State> {
   }
 
   render() {
+    const {store} = this.props;
     const {list} = this.state;
+    const stats = store.isCitiesEntity() ? (
+      <span>
+        <b>Cities:</b> {store.citiesCount}
+      </span>
+    ) : (
+      <span>
+        <b>Councils:</b> {store.councilsCount}
+      </span>
+    );
 
     return (
       <section>
@@ -46,6 +61,7 @@ class DataNav extends React.Component<Props, State> {
             <SidePanel
               store={this.props.store}
               toggleList={() => this.toggleList()}
+              toggleEntity={() => this.toggleEntity()}
               resetList={() => this.resetList()}
               activeList={list}
             />
@@ -55,8 +71,7 @@ class DataNav extends React.Component<Props, State> {
           </div>
         </article>
         <article>
-          Cities: {this.props.store.citiesCount}, Documents:{" "}
-          {this.props.store.documentsCount}
+          {stats} <b>Documents:</b> {this.props.store.documentsCount}
         </article>
         <article>
           <DataView store={this.props.store} />

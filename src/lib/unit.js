@@ -11,7 +11,11 @@ export const list = async (
     id: u._sc_id_hash,
     title: u.title,
     description: u.description,
-    search_category: u.search_category,
+    searchCategory: u.search_category,
     href: u.href,
+    hrefText: u.href_text,
+    keywords: u._sc_keywords || [],
+    locations: u._sc_locations || [],
+    councilAreas: u._sc_council_areas || [],
   }));
 };
