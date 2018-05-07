@@ -56,10 +56,11 @@ class DataNav extends React.Component<Props, State> {
 
     return (
       <section>
+        <h1>Map of {store.entity === "cities" ? "Cities" : "Councils"}</h1>
         <article className="flex">
           <div className="sp-wrapper w-third">
             <SidePanel
-              store={this.props.store}
+              store={store}
               toggleList={() => this.toggleList()}
               toggleEntity={() => this.toggleEntity()}
               resetList={() => this.resetList()}
