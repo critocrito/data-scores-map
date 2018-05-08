@@ -7,8 +7,8 @@ import council from "./council";
 
 const router = new Router();
 
-router.use("", city.routes());
-router.use("", unit.routes());
-router.use("", council.routes());
+router.use("/api", city.routes());
+router.use("/api", unit.routes());
+router.use("/api", council.routes());
 
 export default router;

@@ -1,15 +1,7 @@
 // @flow
-import dotenv from "dotenv";
 import type {HttpDocResp, HttpCityResp, HttpCouncilResp} from "./types";
 
-dotenv.config();
-
-const {DS_BASE_URL: baseUrl} = Object.assign(
-  {
-    DS_BASE_URL: "http://localhost:4000",
-  },
-  process.env,
-);
+const baseUrl: string = "http://localhost:4000/api";
 
 export const fetchCities = (): Promise<HttpCityResp> =>
   fetch(`${baseUrl}/cities`).then(resp => resp.json());
