@@ -1,7 +1,8 @@
 // @flow
 import type {HttpDocResp, HttpCityResp, HttpCouncilResp} from "./types";
 
-const baseUrl: string = process.env.REACT_APP_API;
+const baseUrl: string =
+  process.env.REACT_APP_API || "http://localhost/api:4000";
 
 export const fetchCities = (): Promise<HttpCityResp> =>
   fetch(`${baseUrl}/cities`).then(resp => resp.json());

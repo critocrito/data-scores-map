@@ -1,7 +1,5 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
-import {toJS} from "mobx";
 import {observer} from "mobx-react";
 // $FlowFixMe
 import {HorizontalBar} from "react-chartjs-2";
@@ -9,6 +7,7 @@ import classnames from "classnames";
 
 import "./index.css";
 import type Store from "../../lib/store";
+import type {City, Council} from "../../lib/types";
 
 type Props = {
   store: Store,
@@ -72,8 +71,9 @@ const rowItem = (
 
 @observer
 class SidePanel extends React.Component<Props> {
-  keywordsList() {
-    const keywordStats = toJS(this.props.store.entitiesAll).reduce(
+  // $FlowFixMe
+  keywordsList(entitiesAll: City[] | Council[]) {
+    const keywordStats = entitiesAll.reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
@@ -120,9 +120,9 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
-  entitiesList() {
-    const {store} = this.props;
-    const entityStats = toJS(store.entitiesAll).reduce((memo, entity) => {
+  // $FlowFixMe
+  entitiesList(entitiesAll: City[] | Council[]) {
+    const entityStats = entitiesAll.reduce((memo, entity) => {
       const unitsCount = Object.keys(entity.unitsByKeywords).reduce(
         (acc, key) => acc + entity.unitsByKeywords[key].length,
         0,
@@ -158,14 +158,14 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": store.isCitiesEntity()
-            ? store.isSelectedCity(id)
-            : store.isSelectedCouncil(id),
+          "sp-row--active": this.props.store.isCitiesEntity()
+            ? this.props.store.isSelectedCity(id)
+            : this.props.store.isSelectedCouncil(id),
         });
         const clickHandler = () =>
-          store.isCitiesEntity()
-            ? store.toggleCity(id)
-            : store.toggleCouncil(id);
+          this.props.store.isCitiesEntity()
+            ? this.props.store.toggleCity(id)
+            : this.props.store.toggleCouncil(id);
         const content =
           entity.type === "city" ? (
             <div>
@@ -184,11 +184,17 @@ class SidePanel extends React.Component<Props> {
 
   render() {
     const {store, activeList, toggleList, toggleEntity, resetList} = this.props;
+
     const toggleListHandler = () => toggleList();
     const toggleEntityHandler = () => toggleEntity();
     const resetHandler = () => resetList();
-    const entities = this.entitiesList();
-    const children = activeList === "keywords" ? this.keywordsList() : entities;
+
+    const entitiesAll =
+      store.entity === "cities" ? store.citiesAll : store.councilsAll;
+    const children =
+      activeList === "keywords"
+        ? this.keywordsList(entitiesAll)
+        : this.entitiesList(entitiesAll);
 
     return (
       <article className="sp pa0 ma0">

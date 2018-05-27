@@ -19,17 +19,10 @@ export default class Store {
   @observable selectedCouncils: Array<string> = [];
   @observable selectedKeywords: Array<string> = [];
 
-  constructor(
-    citiesAll: Array<City>,
+  constructor() {
     // $FlowFixMe
-    councilsAll: Array<Council>,
-    documentsAll: Array<Document>,
-  ) {
-    this.citiesAll = citiesAll;
-    this.councilsAll = councilsAll;
-    this.entities = citiesAll;
-    this.documentsAll = documentsAll;
-    this.documents = documentsAll;
+    this.entities = this.citiesAll;
+    this.documents = this.documentsAll;
   }
 
   isCitiesEntity() {
@@ -64,8 +57,20 @@ export default class Store {
 
   @computed
   get entitiesAll() {
-    if (this.entity === "cities") return this.citiesAll;
-    return this.councilsAll;
+    return this.entity === "cities" ? this.citiesAll : this.councilsAll;
+  }
+
+  @action
+  setCities(cities: City[]) {
+    this.citiesAll = cities;
+    this.reset();
+  }
+
+  @action
+  // $FlowFixMe
+  setCouncils(councils: Council[]) {
+    this.councilsAll = councils;
+    this.reset();
   }
 
   @action

@@ -5,21 +5,19 @@ import ReactDOM from "react-dom";
 import "./client.css";
 import App from "./components/App";
 import log from "./lib/logging";
-import {fetchCities, fetchCouncils, fetchDocuments} from "./lib/requests";
+import {fetchCities, fetchCouncils} from "./lib/requests";
 import Store from "./lib/store";
 
 const initialize = async () => {
-  const [
-    {data: cities},
-    {data: councils},
-    {data: documents},
-  ] = await Promise.all([fetchCities(), fetchCouncils(), fetchDocuments()]);
+  const store = new Store();
   const elem = document.getElementById("root");
   if (!elem) {
     throw new Error("No HTML element to mount React.");
   }
-  const store = new Store(cities, councils, documents);
   ReactDOM.render(<App store={store} />, elem);
+
+  await fetchCities().then(({data}) => store.setCities(data));
+  await fetchCouncils().then(({data}) => store.setCouncils(data));
 };
 
 initialize();
