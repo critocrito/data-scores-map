@@ -182,6 +182,11 @@ module.exports = {
       fileName: "asset-manifest.json",
     }),
   ],
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
+    leaflet: "L",
+  },
   node: {
     dgram: "empty",
     fs: "empty",
