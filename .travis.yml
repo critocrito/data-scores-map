@@ -10,6 +10,8 @@ cache:
 before_install:
   - openssl aes-256-cbc -K $encrypted_6982a0fd417b_key -iv $encrypted_6982a0fd417b_iv -in data-scores.enc -out data-scores -d
   - chmod 400 data-scores
+  - chmod +x ./.scripts/build.sh
+  - chmod +x ./.scripts/deploy.sh
 script:
   - "./.scripts/build.sh"
 after_success:
