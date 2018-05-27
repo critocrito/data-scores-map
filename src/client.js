@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 
 import "./client.css";
 import App from "./components/App";
-import log from "./lib/logging";
 import {fetchCities, fetchCouncils} from "./lib/requests";
 import Store from "./lib/store";
 
@@ -21,5 +20,3 @@ const initialize = async () => {
 };
 
 initialize();
-
-log.info("Client started.");

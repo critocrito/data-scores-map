@@ -187,11 +187,5 @@ module.exports = {
     "react-dom": "ReactDOM",
     leaflet: "L",
   },
-  node: {
-    dgram: "empty",
-    fs: "empty",
-    net: "empty",
-    tls: "empty",
-    child_process: "empty",
-  },
+  node: false,
 };
