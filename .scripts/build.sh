@@ -3,4 +3,4 @@ set -e
 
 echo "Building site"
 node_modules/.bin/flow-typed install
-npm run compile
+npm run build
