@@ -1,9 +1,11 @@
 {
-  "*.js": ["eslint --fix", "git add"],
+  "src/**/*.js": ["eslint --fix", "git add"],
+  "src/**/*.css": ["stylelint", "prettier --parser css --write", "git add"],
   "*.json": ["prettier --parser json --write", "git add"],
-  ".{babel,lintstaged,stylelint,nyc}rc": [
-    "prettier --parser json --write",
-    "git add"
-  ],
-  "*.css": ["stylelint", "prettier --parser css --write", "git add"]
+  "webpack.config.js": ["eslint --fix", "git add"],
+  "postcss.config.js": ["eslint --fix", "git add"],
+  ".babelrc": ["prettier --parser json --write", "git add"],
+  ".lintstagedrc": ["prettier --parser json --write", "git add"],
+  ".stylelintrc": ["prettier --parser json --write", "git add"],
+  ".nycrc": ["prettier --parser json --write", "git add"]
 }
