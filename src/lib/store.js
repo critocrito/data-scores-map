@@ -1,5 +1,4 @@
 // @flow
-// $FlowFixMe
 import {configure, observable, computed, action, flow} from "mobx";
 import {fetchDocuments} from "./requests";
 

@@ -1,7 +1,6 @@
 // @flow
 import * as React from "react";
 import {observer} from "mobx-react";
-// $FlowFixMe
 import {HorizontalBar} from "react-chartjs-2";
 import classnames from "classnames";
 

@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-// $FlowFixMe
 import {toJS} from "mobx";
 import {observer} from "mobx-react";
 import {Map, ZoomControl, TileLayer} from "react-leaflet";

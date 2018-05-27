@@ -1,8 +1,10 @@
 [ignore]
 .*/dist/.*
 .*/test/.*
-.*/node_modules/.*
 
 [options]
 esproposal.decorators=ignore
 esproposal.export_star_as=enable
+
+[lints]
+all=warn

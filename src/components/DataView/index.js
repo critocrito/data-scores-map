@@ -1,9 +1,7 @@
 // @flow
 import * as React from "react";
 import {observer} from "mobx-react";
-// $FlowFixMe
 import ReactTable from "react-table";
-// $FlowFixMe
 import "react-table/react-table.css";
 import type Store from "../../lib/store";
 
