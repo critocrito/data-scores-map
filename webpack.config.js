@@ -186,6 +186,7 @@ module.exports = {
     react: "React",
     "react-dom": "ReactDOM",
     leaflet: "L",
+    "chart.js": "Chart",
   },
   node: false,
 };
