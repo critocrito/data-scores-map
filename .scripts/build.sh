@@ -2,5 +2,5 @@
 set -e
 
 echo "Building site"
-npm run lint
+node_modules/.bin/flow-typed install
 npm run compile
