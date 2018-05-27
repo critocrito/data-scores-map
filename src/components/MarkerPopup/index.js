@@ -3,10 +3,10 @@ import * as React from "react";
 import {Popup} from "react-leaflet";
 import {Doughnut} from "react-chartjs-2";
 import "./index.css";
-import type {City} from "../../lib/types";
+import type {Place} from "../../lib/types";
 
 type Props = {
-  entity: City,
+  entity: Place,
   chartData: {
     labels: Array<string>,
     datasets: Array<{

@@ -20,26 +20,18 @@ type CouncilLocation = BaseLocation & {
   council: string,
 };
 
-export type City = {|
+export type Place = {
   id: string,
-  type: "city",
+  type: "city" | "council",
   name: string,
-  county: string,
+  // FIXME: Only cities have a county, but assigning either council or city to
+  //        an entity fails on the county attribute.
+  county?: string,
   position: Position,
   count: number,
   keywords: Array<string>,
   unitsByKeywords: {[keyword: string]: UnitIds},
-|};
-
-export type Council = {|
-  id: string,
-  type: "council",
-  name: string,
-  position: Position,
-  count: number,
-  keywords: Array<string>,
-  unitsByKeywords: {[keyword: string]: UnitIds},
-|};
+};
 
 export type Document = {
   id: string,
@@ -69,9 +61,9 @@ type CommonHttpResp = {
   length: number,
 };
 
-export type HttpCityResp = {data: Array<City>} & CommonHttpResp;
+export type HttpCityResp = {data: Array<Place>} & CommonHttpResp;
 export type HttpDocResp = {data: Array<Document>} & CommonHttpResp;
-export type HttpCouncilResp = {data: Array<Council>} & CommonHttpResp;
+export type HttpCouncilResp = {data: Array<Place>} & CommonHttpResp;
 export type HttpResp = HttpCityResp | HttpDocResp | HttpCouncilResp;
 
 export type HttpError = {

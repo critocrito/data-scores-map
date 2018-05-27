@@ -1,8 +1,8 @@
 // @flow
 import {allCities, oneCity} from "./elastic";
-import type {City} from "./types";
+import type {Place} from "./types";
 
-export const list = async (): Promise<Array<City>> => {
+export const list = async (): Promise<Array<Place>> => {
   const data = await allCities();
 
   return data
@@ -65,7 +65,7 @@ export const list = async (): Promise<Array<City>> => {
 export const show = async (
   name: string,
   county: string,
-): Promise<City | null> => {
+): Promise<Place | null> => {
   const data = await oneCity(name, county);
   if (data.length === 0) return null;
 

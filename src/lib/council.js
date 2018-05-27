@@ -1,8 +1,8 @@
 // @flow
 import {allCouncils} from "./elastic";
-import type {Council} from "./types";
+import type {Place} from "./types";
 
-export const list = async (): Promise<Array<Council>> => {
+export const list = async (): Promise<Array<Place>> => {
   const data = await allCouncils();
 
   return data

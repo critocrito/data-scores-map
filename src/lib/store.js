@@ -3,7 +3,7 @@
 import {configure, observable, computed, action, flow} from "mobx";
 import {fetchDocuments} from "./requests";
 
-import type {City, Council, Document} from "./types";
+import type {Place, Document} from "./types";
 
 configure({enforceActions: true});
 
@@ -12,7 +12,7 @@ export default class Store {
   documentsAll = [];
   councilsAll = [];
   @observable entity: "cities" | "councils" = "cities";
-  @observable entities: City[] | Council[];
+  @observable entities: Place[];
   @observable documents: Array<Document> = [];
   @observable keywords: Array<string> = [];
   @observable selectedCities: Array<string> = [];
@@ -20,7 +20,6 @@ export default class Store {
   @observable selectedKeywords: Array<string> = [];
 
   constructor() {
-    // $FlowFixMe
     this.entities = this.citiesAll;
     this.documents = this.documentsAll;
   }
@@ -61,14 +60,13 @@ export default class Store {
   }
 
   @action
-  setCities(cities: City[]) {
+  setCities(cities: Place[]) {
     this.citiesAll = cities;
     this.reset();
   }
 
   @action
-  // $FlowFixMe
-  setCouncils(councils: Council[]) {
+  setCouncils(councils: Place[]) {
     this.councilsAll = councils;
     this.reset();
   }

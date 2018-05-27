@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 import "./index.css";
 import type Store from "../../lib/store";
-import type {City, Council} from "../../lib/types";
+import type {Place} from "../../lib/types";
 
 type Props = {
   store: Store,
@@ -71,8 +71,7 @@ const rowItem = (
 
 @observer
 class SidePanel extends React.Component<Props> {
-  // $FlowFixMe
-  keywordsList(entitiesAll: City[] | Council[]) {
+  keywordsList(entitiesAll: Place[]) {
     const keywordStats = entitiesAll.reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
@@ -120,8 +119,7 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
-  // $FlowFixMe
-  entitiesList(entitiesAll: City[] | Council[]) {
+  entitiesList(entitiesAll: Place[]) {
     const entityStats = entitiesAll.reduce((memo, entity) => {
       const unitsCount = Object.keys(entity.unitsByKeywords).reduce(
         (acc, key) => acc + entity.unitsByKeywords[key].length,

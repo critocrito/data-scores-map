@@ -6,10 +6,10 @@ import * as L from "leaflet";
 import "./index.css";
 import MarkerPopup from "../MarkerPopup";
 import colors from "../../lib/colors";
-import type {City} from "../../lib/types";
+import type {Place} from "../../lib/types";
 
 type Props = {
-  entity: City,
+  entity: Place,
   countByKeywords: {[keyword: string]: number},
 };
 
