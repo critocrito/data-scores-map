@@ -12,7 +12,7 @@ export default class Store {
   documentsAll = [];
   councilsAll = [];
   @observable entity: "cities" | "councils" = "cities";
-  @observable entities: Place[];
+  @observable entities: Place[] = [];
   @observable documents: Array<Document> = [];
   @observable keywords: Array<string> = [];
   @observable selectedCities: Array<string> = [];
