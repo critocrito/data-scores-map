@@ -2,8 +2,8 @@
 import * as React from "react";
 
 import "./index.css";
-import type Store from "../../lib/store";
 import DataNav from "../DataNav";
+import type Store from "../../lib/store";
 
 type Props = {
   store: Store,
