@@ -98,7 +98,7 @@ const appEnv = getClientEnvironment(servedUrl);
 
 module.exports = {
   bail: true,
-  entry: ["./src/client.js"],
+  entry: ["babel-regenerator-runtime", "./src/client.js"],
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx"],

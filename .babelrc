@@ -4,7 +4,8 @@
       "env",
       {
         "targets": {
-          "browsers": ["last 2 Firefox versions"]
+          "node": "8",
+          "browsers": "> 0.2%"
         }
       }
     ],
@@ -26,11 +27,11 @@
           "env",
           {
             "targets": {
-              "node": "current"
+              "node": "current",
+              "browsers": "last 2 versions"
             }
           }
-        ],
-        "react"
+        ]
       ],
       "plugins": ["istanbul"]
     }

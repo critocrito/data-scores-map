@@ -1,6 +1,7 @@
-const autoprefixer = require("autoprefixer");
-const atImport = require("postcss-import");
-
 module.exports = {
-  plugins: [atImport, autoprefixer],
+  plugins: {
+    "postcss-import": {},
+    autoprefixer: {},
+    "postcss-preset-env": {browsers: "> 0.2%"},
+  },
 };
