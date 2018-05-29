@@ -1,25 +1,25 @@
 # -*- restclient -*-
 
 # Get the root path.
-GET http://localhost:4000/
+GET http://localhost:4000/api
 
 # See all root methods.
-OPTIONS http://localhost:4000/
+OPTIONS http://localhost:4000/api/
 
 # List all cities with units.
-GET http://localhost:4000/cities
+GET http://localhost:4000/api/cities
 
 # List all councils with units.
-GET http://localhost:4000/councils
+GET http://localhost:4000/api/councils
 
 # Show the details of Aberdeen (Aberdeenshire).
-GET http://localhost:4000/cities/Aberdeenshire/Aberdeen
+GET http://localhost:4000/api/cities/Aberdeenshire/Aberdeen
 
 # List all units.
-POST http://localhost:4000/units
+POST http://localhost:4000/api/units
 
 # List all units by ids.
-POST http://localhost:4000/units
+POST http://localhost:4000/api/units
 Content-Type: application/json
 
 {
