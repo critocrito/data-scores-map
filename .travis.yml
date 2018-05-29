@@ -12,6 +12,8 @@ before_install:
   - chmod 400 data-scores
   - chmod +x ./.scripts/build.sh
   - chmod +x ./.scripts/deploy.sh
+install:
+  - npm install
 script:
   - "./.scripts/build.sh"
 after_success:
