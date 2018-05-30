@@ -1,6 +1,7 @@
 [ignore]
 .*/dist/.*
 .*/test/.*
+.*../sugarcube/packages/plugin-elasticsearch/.*
 
 [options]
 esproposal.decorators=ignore

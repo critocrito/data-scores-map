@@ -9,6 +9,7 @@ import {
   listCitiesQuery,
   listCouncilsQuery,
   showCityQuery,
+  searchUnitsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
 import log from "./logging";
@@ -75,4 +76,13 @@ export const allUnits = (ids: Array<string> = []): Promise<Array<Unit>> =>
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
     yield query(elasticIndex, listUnitsQuery(ids), 1500);
+  });
+
+export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
+  makeQueries(function*({
+    query,
+  }: {
+    query: (string, ElasticQuery, number) => Array<Unit>,
+  }) {
+    yield query(elasticIndex, searchUnitsQuery(term), size);
   });

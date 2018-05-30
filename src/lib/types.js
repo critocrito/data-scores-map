@@ -43,6 +43,8 @@ export type Document = {
   keywords: Array<string>,
   locations: Array<CityLocation>,
   councilAreas: Array<CouncilLocation>,
+  highlights?: {[string]: Array<string>},
+  score?: number,
 };
 
 export type Unit = {
@@ -50,6 +52,8 @@ export type Unit = {
   _sc_keywords: Array<string>,
   _sc_locations: Array<CityLocation>,
   _sc_council_areas: Array<CouncilLocation>,
+  _sc_elastic_highlights: {[string]: Array<string>},
+  _sc_elastic_score: number,
   title: string,
   description: string,
   search_category: string,

@@ -28,3 +28,6 @@ Content-Type: application/json
     "711c3fbd648e21040dca0d91d6190ec06ddb01498a766bdbd6b777d71d04e8bc"
   ]
 }
+
+# Search for units
+GET http://localhost:4000/api/search?q=computer&limit=5

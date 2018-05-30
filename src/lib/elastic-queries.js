@@ -4,6 +4,17 @@ export type ElasticQuery = {
   _source: {},
 };
 
+const unitIncludes = [
+  "$sc_id_hash",
+  "title",
+  "description",
+  "href",
+  "search_category",
+  "$sc_keywords",
+  "$sc_locations",
+  "$sc_council_areas",
+];
+
 export const listCitiesQuery = (): ElasticQuery => ({
   query: {
     nested: {
@@ -52,7 +63,7 @@ export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
       },
     },
     _source: {
-      excludes: ["href_text"],
+      includes: unitIncludes,
     },
   };
 };
@@ -69,5 +80,33 @@ export const listCouncilsQuery = (): ElasticQuery => ({
   _source: {
     includes: ["$sc_id_hash", "$sc_council_areas", "$sc_keywords"],
     excludes: ["href_text"],
+  },
+});
+
+export const searchUnitsQuery = (term: string): ElasticQuery => ({
+  query: {
+    multi_match: {
+      query: term,
+      fields: [
+        "title^3",
+        "description^2",
+        "href_text^2",
+        "$sc_keywords^2",
+        "search_category",
+      ],
+    },
+  },
+  highlight: {
+    number_of_fragments: 3,
+    fragment_size: 150,
+    order: "score",
+    fields: {
+      href_text: {},
+      title: {number_of_fragments: 0},
+      description: {number_of_fragments: 0},
+    },
+  },
+  _source: {
+    includes: unitIncludes,
   },
 });
