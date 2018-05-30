@@ -40,7 +40,13 @@ const MapContainer = observer(({store, position, zoom}: Props) => {
 
   return (
     <article>
-      <Map id="map" center={position} zoom={zoom} zoomControl={false}>
+      <Map
+        id="map"
+        center={position}
+        zoom={zoom}
+        minZoom={zoom}
+        zoomControl={false}
+      >
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
@@ -54,7 +60,7 @@ const MapContainer = observer(({store, position, zoom}: Props) => {
 
 MapContainer.defaultProps = {
   // eslint-disable-next-line react/default-props-match-prop-types
-  position: [54.00366, -2.547855],
+  position: [54.559322587438636, -4.262695312500001],
   // eslint-disable-next-line react/default-props-match-prop-types
   zoom: 6,
 };
