@@ -30,7 +30,10 @@ const {
 );
 
 const makeQueries = async (gen): Promise<Array<Unit>> => {
-  const [data, history] = await Elastic.Do(gen, elasticHost, elasticPort);
+  const [data, history] = await Elastic.Do(gen, {
+    host: elasticHost,
+    port: elasticPort,
+  });
   history.forEach(([k, meta]) => log.info(`${k}: ${JSON.stringify(meta)}.`));
   return data;
 };
