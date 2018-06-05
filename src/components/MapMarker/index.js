@@ -6,15 +6,15 @@ import * as L from "leaflet";
 import "./index.css";
 import MarkerPopup from "../MarkerPopup";
 import colors from "../../lib/colors";
-import type {Place} from "../../lib/types";
+import type {Council} from "../../lib/types";
 
 type Props = {
-  entity: Place,
+  council: Council,
   countByKeywords: {[keyword: string]: number},
 };
 
-const MapMarker = ({entity, countByKeywords}: Props) => {
-  const {id, count, position} = entity;
+const MapMarker = ({council, countByKeywords}: Props) => {
+  const {id, count, position} = council;
   const icon = L.divIcon({
     html: `<span class='marker-content'>${count}</span>`,
     className: `marker marker-${id}`,
@@ -51,7 +51,7 @@ const MapMarker = ({entity, countByKeywords}: Props) => {
     );
   return (
     <Marker position={position} icon={icon}>
-      <MarkerPopup entity={entity} chartData={chartData} />
+      <MarkerPopup council={council} chartData={chartData} />
     </Marker>
   );
 };

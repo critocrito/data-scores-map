@@ -6,9 +6,7 @@ import dotenv from "dotenv";
 import type {Unit} from "./types";
 import {
   listUnitsQuery,
-  listCitiesQuery,
   listCouncilsQuery,
-  showCityQuery,
   searchUnitsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
@@ -37,26 +35,6 @@ const makeQueries = async (gen): Promise<Array<Unit>> => {
   history.forEach(([k, meta]) => log.info(`${k}: ${JSON.stringify(meta)}.`));
   return data;
 };
-
-export const allCities = (): Promise<Array<Unit>> =>
-  makeQueries(function*({
-    query,
-  }: {
-    query: (string, ElasticQuery, number) => Array<Unit>,
-  }) {
-    // FIXME: Remove hardcoded limit and replace with scrolling.
-    yield query(elasticIndex, listCitiesQuery(), 100);
-  });
-
-export const oneCity = (city: string, county: string): Promise<Array<Unit>> =>
-  makeQueries(function*({
-    query,
-  }: {
-    query: (string, ElasticQuery, number) => Array<Unit>,
-  }) {
-    // FIXME: Remove hardcoded limit and replace with scrolling.
-    yield query(elasticIndex, showCityQuery(city, county), 1000);
-  });
 
 export const allCouncils = (): Promise<Array<Unit>> =>
   makeQueries(function*({

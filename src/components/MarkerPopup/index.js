@@ -3,10 +3,10 @@ import * as React from "react";
 import {Popup} from "react-leaflet";
 import {Doughnut} from "react-chartjs-2";
 import "./index.css";
-import type {Place} from "../../lib/types";
+import type {Council} from "../../lib/types";
 
 type Props = {
-  entity: Place,
+  council: Council,
   chartData: {
     labels: Array<string>,
     datasets: Array<{
@@ -17,21 +17,19 @@ type Props = {
   },
 };
 
-const MarkerPopup = ({entity, chartData}: Props) => {
+const MarkerPopup = ({council, chartData}: Props) => {
   const chartOptions = {
     legend: {
       position: "right",
     },
   };
 
-  const {name, county, position, count} = entity;
+  const {name, position, count} = council;
 
   return (
     <Popup className="marker-popup" position={position}>
       <div>
-        <header className="marker-popup-title">
-          {name} ({county})
-        </header>
+        <header className="marker-popup-title">{name}</header>
         <main className="flex">
           <section className="w-25 pa2 mr2">
             <span>Units:</span>

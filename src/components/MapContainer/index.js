@@ -16,8 +16,8 @@ type Props = {
 };
 
 const MapContainer = observer(({store, position, zoom}: Props) => {
-  const markers = toJS(store.entities).map(entity => {
-    const {unitsByKeywords} = entity;
+  const markers = toJS(store.activeCouncils).map(council => {
+    const {unitsByKeywords} = council;
     const countByKeywords = Object.keys(unitsByKeywords)
       .filter(
         key =>
@@ -31,8 +31,8 @@ const MapContainer = observer(({store, position, zoom}: Props) => {
       );
     return (
       <MapMarker
-        key={entity.id}
-        entity={entity}
+        key={council.id}
+        council={toJS(council)}
         countByKeywords={countByKeywords}
       />
     );

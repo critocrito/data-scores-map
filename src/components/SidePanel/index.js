@@ -6,14 +6,10 @@ import classnames from "classnames";
 
 import "./index.css";
 import type Store from "../../lib/store";
-import type {Place} from "../../lib/types";
+import type {Council} from "../../lib/types";
 
 type Props = {
   store: Store,
-  activeList: string,
-  toggleList: void => void,
-  toggleEntity: void => void,
-  resetList: void => void,
 };
 
 const [color, colorAlt] = ["rgba(0, 108, 183, 0.7)", "rgba(0, 108, 183, 0.4)"];
@@ -70,19 +66,21 @@ const rowItem = (
 
 @observer
 class SidePanel extends React.Component<Props> {
-  keywordsList(entitiesAll: Place[]) {
-    const keywordStats = entitiesAll.reduce(
+  keywordsList(councils: Council[]) {
+    const {store} = this.props;
+
+    const keywordStats = councils.reduce(
       (memo, {keywords, unitsByKeywords}) => {
         keywords.forEach(key => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
-          const entitiesCount = key in memo ? memo[key].entitiesCount : 0;
+          const councilsCount = key in memo ? memo[key].councilsCount : 0;
           const newUnitsCount =
             key in unitsByKeywords ? unitsByKeywords[key].length : 0;
 
           Object.assign(memo, {
             [key]: {
               unitsCount: unitsCount + newUnitsCount,
-              entitiesCount: entitiesCount + 1,
+              councilsCount: councilsCount + 1,
             },
           });
         });
@@ -94,52 +92,53 @@ class SidePanel extends React.Component<Props> {
     return Object.keys(keywordStats)
       .sort((a, b) => a.localeCompare(b))
       .map(k => {
-        const {unitsCount, entitiesCount} = keywordStats[k];
+        const {unitsCount, councilsCount} = keywordStats[k];
 
         const chartData = {
-          labels: ["units", "cities"],
+          labels: ["units", "councils"],
           datasets: [
             {
               backgroundColor: [color, colorAlt],
               borderWidth: 0,
               hoverBackgroundColor: [color, colorAlt],
-              data: [unitsCount, entitiesCount],
+              data: [unitsCount, councilsCount],
             },
           ],
         };
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.store.isSelectedKeyword(k),
+          "sp-row--active": store.isSelectedKeyword(k),
         });
-        const clickHandler = () => this.props.store.toggleKeyword(k);
+        const clickHandler = () => store.toggleKeyword(k);
         const content = <div className="b tty">{k}</div>;
         return rowItem(k, classNames, clickHandler, chartData, content);
       });
   }
 
-  entitiesList(entitiesAll: Place[]) {
-    const entityStats = entitiesAll.reduce((memo, entity) => {
-      const unitsCount = Object.keys(entity.unitsByKeywords).reduce(
-        (acc, key) => acc + entity.unitsByKeywords[key].length,
+  councilsList(councils: Council[]) {
+    const {store} = this.props;
+    const councilStats = councils.reduce((memo, council) => {
+      const unitsCount = Object.keys(council.unitsByKeywords).reduce(
+        (acc, key) => acc + council.unitsByKeywords[key].length,
         0,
       );
 
       Object.assign(memo, {
-        [entity.id]: {
-          entity,
+        [council.id]: {
+          council,
           unitsCount,
-          keywordsCount: entity.keywords.length,
+          keywordsCount: council.keywords.length,
         },
       });
 
       return memo;
     }, {});
 
-    return Object.keys(entityStats)
+    return Object.keys(councilStats)
       .sort((a, b) => a.localeCompare(b))
       .map(id => {
-        const {entity, unitsCount, keywordsCount} = entityStats[id];
+        const {council, unitsCount, keywordsCount} = councilStats[id];
 
         const chartData = {
           labels: ["units", "keywords"],
@@ -155,66 +154,41 @@ class SidePanel extends React.Component<Props> {
         const classNames = classnames({
           "sp-row": true,
           "w-100": true,
-          "sp-row--active": this.props.store.isCitiesEntity()
-            ? this.props.store.isSelectedCity(id)
-            : this.props.store.isSelectedCouncil(id),
+          "sp-row--active": store.isSelectedCouncil(id),
         });
-        const clickHandler = () =>
-          this.props.store.isCitiesEntity()
-            ? this.props.store.toggleCity(id)
-            : this.props.store.toggleCouncil(id);
-        const content =
-          entity.type === "city" ? (
-            <div>
-              <span className="b ttu">{entity.name}</span>
-              <br />
-              <span className="f7 i">{entity.county}</span>
-            </div>
-          ) : (
-            <div>
-              <span className="b ttu">{entity.name}</span>
-            </div>
-          );
+        const clickHandler = () => store.toggleCouncil(id);
+        const content = (
+          <div>
+            <span className="b ttu">{council.name}</span>
+          </div>
+        );
         return rowItem(id, classNames, clickHandler, chartData, content);
       });
   }
 
   render() {
-    const {store, activeList, toggleList, toggleEntity, resetList} = this.props;
+    const {store} = this.props;
 
-    const toggleListHandler = () => toggleList();
-    const toggleEntityHandler = () => toggleEntity();
-    const resetHandler = () => resetList();
-
-    const entitiesAll =
-      store.entity === "cities" ? store.citiesAll : store.councilsAll;
     const children =
-      activeList === "keywords"
-        ? this.keywordsList(entitiesAll)
-        : this.entitiesList(entitiesAll);
+      store.activeView === "keywords"
+        ? this.keywordsList(store.councils)
+        : this.councilsList(store.councils);
 
     return (
       <article className="sp pa0 ma0">
         <section className="sp-header flex pa0 ma0">
-          <div className="w-50 tl">
-            <button onClick={resetHandler} onKeyPress={resetHandler}>
-              Reset Selection
-            </button>{" "}
-            <button onClick={toggleListHandler} onKeyPress={toggleListHandler}>
-              View by{" "}
-              {activeList === "entities"
-                ? "Keywords"
-                : `${store.isCitiesEntity() ? "Cities" : "Councils"}`}
-            </button>
-          </div>
-          <div className="w-50 tr">
-            <button
-              onClick={toggleEntityHandler}
-              onKeyPress={toggleEntityHandler}
-            >
-              Map {store.isCitiesEntity() ? "Councils" : "Cities"}
-            </button>
-          </div>
+          <button
+            onClick={() => store.reset()}
+            onKeyPress={() => store.reset()}
+          >
+            Reset Selection
+          </button>
+          <button
+            onClick={() => store.toggleView()}
+            onKeyPress={() => store.toggleView()}
+          >
+            View by {store.activeView === "councils" ? "Keywords" : "Councils"}
+          </button>
         </section>
         <section className="flex pa0 ma0 w-100">
           <ul className="list pa0 ma0 w-100">{children}</ul>

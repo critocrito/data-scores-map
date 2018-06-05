@@ -3,30 +3,18 @@ export type Position = [number, number];
 
 export type UnitIds = Array<string>;
 
-type BaseLocation = {
+type Location = {
   _sc_id_hash: string,
+  council: string,
   lat: number,
   lng: number,
   keywords: Array<string>,
   unitsByKeywords: {[string]: UnitIds},
 };
 
-type CityLocation = BaseLocation & {
-  city: string,
-  county: string,
-};
-
-type CouncilLocation = BaseLocation & {
-  council: string,
-};
-
-export type Place = {
+export type Council = {
   id: string,
-  type: "city" | "council",
   name: string,
-  // FIXME: Only cities have a county, but assigning either council or city to
-  //        an entity fails on the county attribute.
-  county?: string,
   position: Position,
   count: number,
   keywords: Array<string>,
@@ -41,8 +29,7 @@ export type Document = {
   hrefText?: string,
   searchCategory: string,
   keywords: Array<string>,
-  locations: Array<CityLocation>,
-  councilAreas: Array<CouncilLocation>,
+  councilAreas: Array<Location>,
   highlights?: {[string]: Array<string>},
   score?: number,
 };
@@ -50,8 +37,7 @@ export type Document = {
 export type Unit = {
   _sc_id_hash: string,
   _sc_keywords: Array<string>,
-  _sc_locations: Array<CityLocation>,
-  _sc_council_areas: Array<CouncilLocation>,
+  _sc_council_areas: Array<Location>,
   _sc_elastic_highlights: {[string]: Array<string>},
   _sc_elastic_score: number,
   title: string,
@@ -65,10 +51,9 @@ type CommonHttpResp = {
   length: number,
 };
 
-export type HttpCityResp = {data: Array<Place>} & CommonHttpResp;
 export type HttpDocResp = {data: Array<Document>} & CommonHttpResp;
-export type HttpCouncilResp = {data: Array<Place>} & CommonHttpResp;
-export type HttpResp = HttpCityResp | HttpDocResp | HttpCouncilResp;
+export type HttpCouncilResp = {data: Array<Council>} & CommonHttpResp;
+export type HttpResp = HttpDocResp | HttpCouncilResp;
 
 export type HttpError = {
   message: string,

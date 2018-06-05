@@ -2,38 +2,16 @@
 import {configure, observable, computed, action, flow} from "mobx";
 import {fetchDocuments} from "./requests";
 
-import type {Place, Document} from "./types";
+import type {Council, Document} from "./types";
 
 configure({enforceActions: true});
 
 export default class Store {
-  citiesAll = [];
-  documentsAll = [];
-  councilsAll = [];
-  @observable entity: "cities" | "councils" = "cities";
-  @observable entities: Place[] = [];
+  @observable activeView: "keywords" | "councils" = "keywords";
+  @observable councils: Council[] = [];
   @observable documents: Array<Document> = [];
-  @observable keywords: Array<string> = [];
-  @observable selectedCities: Array<string> = [];
   @observable selectedCouncils: Array<string> = [];
   @observable selectedKeywords: Array<string> = [];
-
-  constructor() {
-    this.entities = this.citiesAll;
-    this.documents = this.documentsAll;
-  }
-
-  isCitiesEntity() {
-    return this.entity === "cities";
-  }
-
-  isCouncilsEntity() {
-    return this.entity === "councils";
-  }
-
-  isSelectedCity(id: string) {
-    return this.selectedCities.includes(id);
-  }
 
   isSelectedCouncil(id: string) {
     return this.selectedCouncils.includes(id);
@@ -44,29 +22,60 @@ export default class Store {
   }
 
   @computed
+  get keywords() {
+    return Array.from(
+      this.councils.reduce((memo, council) => {
+        council.keywords.forEach(k => memo.add(k));
+        return memo;
+      }, new Set()),
+    );
+  }
+
+  @computed
+  get councilsForSelectedKeywords() {
+    return this.selectedKeywords.length > 0
+      ? this.councils.filter(council =>
+          council.keywords.reduce((memo, key) => {
+            if (memo) return memo;
+            return this.isSelectedKeyword(key);
+          }, false),
+        )
+      : this.councils;
+  }
+
+  @computed
+  get councilsForSelectedCouncils() {
+    return this.selectedCouncils.length > 0
+      ? this.councils.filter(({id}) => this.isSelectedCouncil(id))
+      : this.councils;
+  }
+
+  @computed
+  get activeCouncils() {
+    return this.activeView === "keywords"
+      ? this.councilsForSelectedKeywords
+      : this.councilsForSelectedCouncils;
+  }
+
+  @computed
   get documentsCount(): number {
     return this.documents.length;
   }
 
   @computed
-  get entitiesCount(): number {
-    return this.entities.length;
-  }
-
-  @computed
-  get entitiesAll() {
-    return this.entity === "cities" ? this.citiesAll : this.councilsAll;
+  get councilsCount(): number {
+    return this.activeCouncils.length;
   }
 
   @action
-  setCities(cities: Place[]) {
-    this.citiesAll = cities;
+  setCouncils(councils: Council[]) {
+    this.councils = councils;
     this.reset();
   }
 
   @action
-  setCouncils(councils: Place[]) {
-    this.councilsAll = councils;
+  toggleView() {
+    this.activeView = this.activeView === "keywords" ? "councils" : "keywords";
     this.reset();
   }
 
@@ -75,34 +84,6 @@ export default class Store {
     this.selectedKeywords = this.isSelectedKeyword(keyword)
       ? this.selectedKeywords.filter(k => k !== keyword)
       : this.selectedKeywords.concat(keyword);
-    this.entities =
-      this.selectedKeywords.length > 0
-        ? this.entitiesAll.filter(entity =>
-            entity.keywords.reduce((memo, key) => {
-              if (memo) return memo;
-              return this.selectedKeywords.includes(key);
-            }, false),
-          )
-        : this.entitiesAll;
-    this.fetchDocuments();
-  }
-
-  @action
-  toggleCity(id: string) {
-    this.selectedCities = this.isSelectedCity(id)
-      ? this.selectedCities.filter(i => i !== id)
-      : this.selectedCities.concat(id);
-    this.entities =
-      this.selectedCities.length > 0
-        ? this.citiesAll.filter(city => this.selectedCities.includes(city.id))
-        : this.citiesAll;
-    this.fetchDocuments();
-  }
-
-  @action
-  toggleEntity() {
-    this.entity = this.entity === "cities" ? "councils" : "cities";
-    this.reset();
     this.fetchDocuments();
   }
 
@@ -111,31 +92,22 @@ export default class Store {
     this.selectedCouncils = this.isSelectedCouncil(id)
       ? this.selectedCouncils.filter(i => i !== id)
       : this.selectedCouncils.concat(id);
-    this.entities =
-      this.selectedCouncils.length > 0
-        ? this.councilsAll.filter(city =>
-            this.selectedCouncils.includes(city.id),
-          )
-        : this.councilsAll;
     this.fetchDocuments();
   }
 
   @action
   reset() {
-    this.selectedCities = [];
     this.selectedCouncils = [];
     this.selectedKeywords = [];
-    this.documents = this.documentsAll;
-    this.entities = this.isCitiesEntity() ? this.citiesAll : this.councilsAll;
     this.fetchDocuments();
   }
 
   // eslint-disable-next-line func-names
   fetchDocuments = flow(function*() {
     const unitIds = Array.from(
-      this.entities.reduce((memo, entity) => {
-        Object.keys(entity.unitsByKeywords).forEach(k =>
-          entity.unitsByKeywords[k].forEach(i => memo.add(i)),
+      this.activeCouncils.reduce((memo, council) => {
+        Object.keys(council.unitsByKeywords).forEach(k =>
+          council.unitsByKeywords[k].forEach(i => memo.add(i)),
         );
         return memo;
       }, new Set()),

@@ -19,7 +19,6 @@ export const search = async (
       hrefText: unit.href_text,
       score: unit._sc_elastic_score,
       keywords: unit._sc_keywords || [],
-      locations: unit._sc_locations || [],
       councilAreas: unit._sc_council_areas || [],
       // Tighten the highlighted snippet and remove excessive whitespace.
       highlights: Object.keys(highlights).reduce(

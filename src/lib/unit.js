@@ -15,7 +15,6 @@ export const list = async (
     href: u.href,
     hrefText: u.href_text,
     keywords: u._sc_keywords || [],
-    locations: u._sc_locations || [],
     councilAreas: u._sc_council_areas || [],
   }));
 };

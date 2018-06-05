@@ -12,69 +12,29 @@ type Props = {
   store: Store,
 };
 
-type State = {
-  list: string,
-};
-
-@observer
-class DataNav extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      list: "keywords",
-    };
-  }
-
-  toggleList() {
-    this.props.store.reset();
-    this.setState({
-      list: this.state.list === "keywords" ? "entities" : "keywords",
-    });
-  }
-
-  toggleEntity() {
-    this.props.store.toggleEntity();
-    this.props.store.reset();
-  }
-
-  resetList() {
-    this.props.store.reset();
-  }
-
-  render() {
-    const {store} = this.props;
-    const {list} = this.state;
-
-    return (
-      <section>
-        <h1>Map of {store.entity === "cities" ? "Cities" : "Councils"}</h1>
-        <article className="flex">
-          <div className="sp-wrapper w-third">
-            <SidePanel
-              store={store}
-              toggleList={() => this.toggleList()}
-              toggleEntity={() => this.toggleEntity()}
-              resetList={() => this.resetList()}
-              activeList={list}
-            />
-          </div>
-          <div className="w-two-thirds">
-            <MapContainer store={store} />
-          </div>
-        </article>
-        <article>
-          <span>
-            <b>{store.isCitiesEntity() ? "Cities" : "Councils"}:</b>{" "}
-            {store.entitiesCount}
-          </span>{" "}
-          <b>Documents:</b> {store.documentsCount}
-        </article>
-        <article>
-          <DataView store={store} />
-        </article>
-      </section>
-    );
-  }
-}
+const DataNav = observer(({store}: Props) => (
+  <section>
+    <h1>Map of Councils</h1>
+    <article className="flex">
+      <div className="sp-wrapper w-third">
+        <SidePanel store={store} />
+      </div>
+      <div className="w-two-thirds">
+        <MapContainer store={store} />
+      </div>
+    </article>
+    <article>
+      <span>
+        <b>Councils:</b> {store.councilsCount}
+      </span>{" "}
+      <span>
+        <b>Documents:</b> {store.documentsCount}
+      </span>
+    </article>
+    <article>
+      <DataView store={store} />
+    </article>
+  </section>
+));
 
 export default DataNav;
