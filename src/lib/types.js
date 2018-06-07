@@ -53,7 +53,8 @@ type CommonHttpResp = {
 
 export type HttpDocResp = {data: Array<Document>} & CommonHttpResp;
 export type HttpCouncilResp = {data: Array<Council>} & CommonHttpResp;
-export type HttpResp = HttpDocResp | HttpCouncilResp;
+export type HttpSearchResp = {data: Array<Document>} & CommonHttpResp;
+export type HttpResp = HttpDocResp | HttpCouncilResp | HttpSearchResp;
 
 export type HttpError = {
   message: string,

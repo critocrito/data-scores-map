@@ -1,0 +1,27 @@
+.search-result {
+  position: absolute;
+  z-index: 1000;
+  display: block;
+  right: 0 !important;
+  left: inherit !important;
+  border-radius: 4px;
+  margin: 6px 0 0;
+  padding: 0;
+  text-align: left;
+  height: auto;
+  background: white;
+  border: none;
+  max-width: 600px;
+  min-width: 500px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dataset {
+  position: relative;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  display: box;
+}
