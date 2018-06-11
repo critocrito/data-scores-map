@@ -65,6 +65,21 @@ export const allUnits = (ids: Array<string> = []): Promise<Array<Unit>> =>
     });
   });
 
+export const showDocument = (id: string): Promise<Array<Unit>> =>
+  makeQueries(function*({
+    query,
+  }: {
+    query: (string, ElasticQuery, number) => Array<Unit>,
+  }) {
+    const units = yield query(elasticIndex, listUnitsQuery([id]), 1);
+    return units.map(u => {
+      if (/^PDF/.test(u.title)) {
+        return Object.assign(u, {title: u.title.replace(/^PDF/, "").trim()});
+      }
+      return u;
+    });
+  });
+
 export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
   makeQueries(function*({
     query,

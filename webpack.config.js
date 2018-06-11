@@ -111,6 +111,7 @@ module.exports = {
     contentBase: join(__dirname, "dist"),
     compress: true,
     port: 9000,
+    historyApiFallback: true,
   },
   module: {
     noParse: [/dtrace-provider/, /source-map-support/],

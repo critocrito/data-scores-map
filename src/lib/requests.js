@@ -15,6 +15,9 @@ export const fetchDocuments = (ids?: Array<string>): Promise<HttpDocResp> => {
   }).then(resp => resp.json());
 };
 
+export const fetchDocument = (id: string): Promise<HttpDocResp> =>
+  fetch(`${baseUrl}/documents/${id}`).then(resp => resp.json());
+
 export const fetchCouncils = (): Promise<HttpCouncilResp> =>
   fetch(`${baseUrl}/councils`).then(resp => resp.json());
 

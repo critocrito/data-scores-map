@@ -31,3 +31,6 @@ Content-Type: application/json
 
 # Search for units
 GET http://localhost:4000/api/search?q=computer&limit=5
+
+# Show document details
+GET http://localhost:4000/api/documents/bf9d309bede8d44850cd4498c892cb59a28da20f5b3c6d11585caad9851a2858
