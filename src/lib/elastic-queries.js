@@ -33,6 +33,17 @@ export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
   };
 };
 
+export const showDocumentQuery = (id: string): ElasticQuery => ({
+  query: {
+    match: {
+      $sc_id_hash: id,
+    },
+  },
+  _source: {
+    includes: unitIncludes,
+  },
+});
+
 export const listCouncilsQuery = (): ElasticQuery => ({
   query: {
     nested: {

@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import type {Unit} from "./types";
 import {
   listUnitsQuery,
+  showDocumentQuery,
   listCouncilsQuery,
   searchUnitsQuery,
 } from "./elastic-queries";
@@ -71,7 +72,7 @@ export const showDocument = (id: string): Promise<Array<Unit>> =>
   }: {
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
-    const units = yield query(elasticIndex, listUnitsQuery([id]), 1);
+    const units = yield query(elasticIndex, showDocumentQuery(id), 1);
     return units.map(u => {
       if (/^PDF/.test(u.title)) {
         return Object.assign(u, {title: u.title.replace(/^PDF/, "").trim()});
