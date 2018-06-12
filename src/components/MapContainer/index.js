@@ -6,6 +6,7 @@ import {Map, ZoomControl, TileLayer} from "react-leaflet";
 
 import "./index.css";
 import MapMarker from "../MapMarker";
+import {DocumentContext} from "../../lib/contexts";
 import type Store from "../../lib/store";
 import type {Position} from "../../lib/types";
 
@@ -30,11 +31,16 @@ const MapContainer = observer(({store, position, zoom}: Props) => {
         {},
       );
     return (
-      <MapMarker
-        key={council.id}
-        council={toJS(council)}
-        countByKeywords={countByKeywords}
-      />
+      <DocumentContext.Consumer key={council.id}>
+        {({store: documentStore}) => (
+          <MapMarker
+            key={council.id}
+            council={toJS(council)}
+            countByKeywords={countByKeywords}
+            documentStore={documentStore}
+          />
+        )}
+      </DocumentContext.Consumer>
     );
   });
 

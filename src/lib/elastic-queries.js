@@ -19,10 +19,10 @@ export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
   return {
     query: {
       nested: {
-        path: "$sc_locations",
+        path: "$sc_council_areas",
         query: {
           bool: {
-            must: [{exists: {field: "$sc_locations"}}, qs],
+            must: [{exists: {field: "$sc_council_areas"}}, qs],
           },
         },
       },

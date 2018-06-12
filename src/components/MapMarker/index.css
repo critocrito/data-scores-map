@@ -12,6 +12,10 @@
     background-color 1ms, color 1ms;
 }
 
+.marker-active {
+  background-color: rgba(255, 290, 0, 0.7);
+}
+
 .marker-content {
   display: table-cell;
   vertical-align: middle;

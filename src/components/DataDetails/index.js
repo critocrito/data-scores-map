@@ -40,7 +40,19 @@ class DataDetails extends React.Component<Props> {
             <dt className="b">Search Category</dt>
             <dd>{store.document.searchCategory}</dd>
             <dt className="b">Keywords</dt>
-            <dd>{store.document.keywords.join(", ")}</dd>
+            <dd>
+              <ul className="list ma0 pa0">
+                {(store.document.keywords || []).map(k => <li key={k}>{k}</li>)}
+              </ul>
+            </dd>
+            <dt className="b">Council Areas</dt>
+            <dd>
+              <ul className="list ma0 pa0">
+                {(store.document ? store.document.councilAreas : []).map(c => (
+                  <li key={c.council}>{c.council}</li>
+                ))}
+              </ul>
+            </dd>
           </dl>
         </div>
       </div>

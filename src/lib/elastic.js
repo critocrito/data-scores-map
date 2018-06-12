@@ -44,7 +44,7 @@ export const allCouncils = (): Promise<Array<Unit>> =>
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
     // FIXME: Remove hardcoded limit and replace with scrolling.
-    yield query(elasticIndex, listCouncilsQuery(), 100);
+    yield query(elasticIndex, listCouncilsQuery(), 1000);
   }).then(data =>
     data.map(unit =>
       Object.assign({}, {_sc_locations: [], _sc_council_areas: []}, unit),
