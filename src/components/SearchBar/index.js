@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react";
-import {fromEvent, fromPromise, merge} from "most";
+import {fromEvent, fromPromise, merge, switchLatest} from "most";
 
 import "./index.css";
 import SearchResults from "../SearchResults";
@@ -25,11 +25,9 @@ class SearchBar extends React.Component<Props> {
       .multicast();
     const results = searchText
       .filter(term => term.length > 1)
-      .debounce(500)
       .map(search)
       .map(fromPromise)
-      // $FlowFixMe
-      .switchLatest()
+      .thru(switchLatest)
       .filter(({data}) => data.length > 0)
       .map(({data}) => data);
     const emptyResults = searchText
@@ -43,16 +41,18 @@ class SearchBar extends React.Component<Props> {
   render() {
     const {store} = this.props;
     return (
-      <form>
+      <form role="search">
         <span className="search_bar">
           <input
+            name="q"
             // eslint-disable-next-line no-return-assign
             ref={element => (this.inputElement = element)}
-            type="text"
+            type="search"
             className="search_bar"
             placeholder={`Work in ${this.props.name}`}
             autoComplete="off"
             spellCheck="false"
+            aria-label="Search for observations."
           />
         </span>
         <SearchResults store={store} />
