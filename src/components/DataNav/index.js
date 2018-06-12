@@ -41,9 +41,10 @@ const DataNav = withRouter(
           path="/:docId"
           render={props => (
             <DocumentContext.Consumer>
-              {({store: documentStore}) => (
-                <DataDetails store={documentStore} {...props} />
-              )}
+              {({store: documentStore}) => {
+                documentStore.fetchDocument(props.match.params.docId);
+                return <DataDetails store={documentStore} />;
+              }}
             </DocumentContext.Consumer>
           )}
         />
