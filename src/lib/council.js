@@ -13,16 +13,16 @@ const unitByKeywords = (keywords, id, seed) =>
 export const list = async (): Promise<Array<Council>> => {
   const units = await allCouncils();
 
-  return units.reduce(
-    (memo, unit) =>
-      memo.concat(
-        unit._sc_council_areas.map(council => {
+  return [
+    ...units
+      .reduce((memo, unit) => {
+        const councils = unit._sc_council_areas.map(council => {
           const id = council._sc_id_hash;
           const name = council.council;
           const lat = parseFloat(council.lat);
           const lng = parseFloat(council.lng);
           const position = [lat, lng];
-          const existing = memo.find(({id: existingId}) => existingId === id);
+          const existing = memo.get(id);
           const count = existing ? existing.count + 1 : 1;
           const keywords = existing
             ? Array.from(
@@ -38,8 +38,10 @@ export const list = async (): Promise<Array<Council>> => {
             existing ? existing.unitsByKeywords : {},
           );
           return {id, position, name, count, keywords, unitsByKeywords};
-        }),
-      ),
-    [],
-  );
+        });
+        councils.forEach(council => memo.set(council.id, council));
+        return memo;
+      }, new Map())
+      .values(),
+  ];
 };
