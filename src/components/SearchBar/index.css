@@ -1,15 +1,10 @@
 span.search_bar {
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgb(236, 236, 236);
-  border-radius: 2px;
   position: relative;
   display: inline-block;
 }
 
 input.search_bar {
   color: rgb(236, 236, 236);
-  padding: 5px 5px 5px 29px;
-  border: 0;
   background: transparent;
   background-image: url(./search.svg);
   background-size: 16px 16px;
@@ -17,4 +12,9 @@ input.search_bar {
   background-position-y: center;
   background-position-x: 5px;
   appearance: none;
+}
+
+input.search_bar:focus {
+  background-color: #555;
+  outline: 0;
 }

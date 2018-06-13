@@ -58,6 +58,13 @@ export default class Store {
   }
 
   @computed
+  get hasSelected() {
+    return this.activeView === "keywords"
+      ? this.selectedKeywords > 0
+      : this.selectedCouncils > 0;
+  }
+
+  @computed
   get documentsCount(): number {
     return this.documents.length;
   }

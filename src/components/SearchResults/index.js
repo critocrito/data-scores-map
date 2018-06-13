@@ -16,7 +16,7 @@ class SearchResults extends React.Component<Props> {
   render() {
     const {store} = this.props;
     return (
-      <span className="search-result">
+      <span className="search-result pr3 mt4 absolute mw6 br3">
         <div className="dataset">
           <span>
             {store.results.map(r => (

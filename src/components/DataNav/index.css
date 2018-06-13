@@ -20,8 +20,8 @@
 
 .sp-row {
   overflow: auto;
-  height: 5vh;
-  max-height: 5vh;
+  height: 6vh;
+  max-height: 6vh;
 }
 
 .sp-row button {

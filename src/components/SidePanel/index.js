@@ -55,7 +55,7 @@ const rowItem = (
       onKeyPress={clickHandler}
     >
       <div className="flex pa1 items-center">
-        <div className="w-50 tl">{content}</div>
+        <div className="w-50 tl f6">{content}</div>
         <div className="sp-chart w-40">
           <HorizontalBar data={chartData} options={chartOptions} />
         </div>
@@ -174,21 +174,38 @@ class SidePanel extends React.Component<Props> {
         ? this.keywordsList(store.councils)
         : this.councilsList(store.councils);
 
+    const className = "ttu dib link pa3 black bg-white bn";
+    const activeClassName = `${className} b--blue b bb bw2`;
     return (
-      <article className="sp pa0 ma0">
-        <section className="sp-header flex pa0 ma0">
+      <article className="bg-white ma0 br2">
+        <section className="f6 bb bw1 b--black-10 flex">
           <button
-            onClick={() => store.reset()}
-            onKeyPress={() => store.reset()}
-          >
-            Reset Selection
-          </button>
-          <button
+            className={
+              store.activeView === "councils" ? className : activeClassName
+            }
             onClick={() => store.toggleView()}
             onKeyPress={() => store.toggleView()}
           >
-            View by {store.activeView === "councils" ? "Keywords" : "Councils"}
+            Categories
           </button>
+          <button
+            className={
+              store.activeView === "councils" ? activeClassName : className
+            }
+            onClick={() => store.toggleView()}
+            onKeyPress={() => store.toggleView()}
+          >
+            Councils
+          </button>
+          <span className="flex">
+            <button
+              className="ttu dib link light-blue pa3 bg-white bn"
+              onClick={() => store.reset()}
+              onKeyPress={() => store.reset()}
+            >
+              Reset
+            </button>
+          </span>
         </section>
         <section className="flex pa0 ma0 w-100">
           <ul className="list pa0 ma0 w-100">{children}</ul>

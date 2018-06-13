@@ -8,7 +8,6 @@ import {search} from "../../lib/requests";
 import SearchStore from "../../stores/search";
 
 type Props = {
-  name: string,
   store: SearchStore,
 };
 
@@ -42,14 +41,14 @@ class SearchBar extends React.Component<Props> {
     const {store} = this.props;
     return (
       <form role="search">
-        <span className="search_bar">
+        <span>
           <input
             name="q"
             // eslint-disable-next-line no-return-assign
             ref={element => (this.inputElement = element)}
             type="search"
-            className="search_bar"
-            placeholder={`Work in ${this.props.name}`}
+            className="search_bar input-reset br4-l ba b--white-20 pl4"
+            placeholder="Search Documents"
             autoComplete="off"
             spellCheck="false"
             aria-label="Search for observations."

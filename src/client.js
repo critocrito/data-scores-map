@@ -1,10 +1,18 @@
 // @flow
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 import "./client.css";
-import App from "./components/App";
+
+import DataNav from "./components/DataNav";
+import SearchBar from "./components/SearchBar";
+import CaseStudies from "./components/CaseStudies";
 import {fetchCouncils} from "./lib/requests";
 import Store from "./lib/store";
 import {SearchContext, DocumentContext} from "./lib/contexts";
@@ -21,7 +29,43 @@ const initialize = async () => {
     <Router>
       <SearchContext.Provider value={{store: new SearchStore()}}>
         <DocumentContext.Provider value={{store: new DocumentStore()}}>
-          <App store={store} />
+          <header className="pa3 w-100 flex justify-between items-end white bg-dark-gray">
+            <h1 className="fl ma0 v-btm">Data Scores in the UK</h1>
+            <nav className="f6 fw6 ttu tracked">
+              <NavLink
+                className="link dim white dib mr3"
+                to="/"
+                title="Map of Councils"
+              >
+                Map
+              </NavLink>
+              <NavLink
+                className="link dim white dib mr3"
+                to="/case-studies"
+                title="About"
+              >
+                Case Studies
+              </NavLink>
+            </nav>
+            <SearchContext.Consumer>
+              {({store: searchStore}) => <SearchBar store={searchStore} />}
+            </SearchContext.Consumer>
+          </header>
+          <div className="pa3">
+            <Switch>
+              <Route exact path="/" render={() => <DataNav store={store} />} />
+              <Route
+                exact
+                path="/case-studies"
+                render={() => <CaseStudies />}
+              />
+              <Route
+                exact
+                path="/:docId"
+                render={() => <DataNav store={store} />}
+              />
+            </Switch>
+          </div>
         </DocumentContext.Provider>
       </SearchContext.Provider>
     </Router>,
