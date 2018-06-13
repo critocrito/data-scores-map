@@ -37,8 +37,8 @@ const DataDetails = observer(({store}: Props) => {
           <dt className="b">Council Areas</dt>
           <dd>
             <ul className="list ma0 pa0">
-              {(store.document ? store.document.councilAreas : []).map(c => (
-                <li key={c.council}>{c.council}</li>
+              {(store.document ? store.document.councils : []).map(c => (
+                <li key={c.name}>{c.name}</li>
               ))}
             </ul>
           </dd>

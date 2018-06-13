@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import type {Unit} from "./types";
 import {
   listUnitsQuery,
-  showDocumentQuery,
+  showUnitQuery,
   listCouncilsQuery,
   searchUnitsQuery,
 } from "./elastic-queries";
@@ -28,6 +28,22 @@ const {
   process.env,
 );
 
+const cleanUnits = (units: Array<Unit>): Array<Unit> =>
+  units.map(unit => {
+    const title = unit.title ? unit.title.replace(/^PDF/, "").trim() : "";
+    return Object.assign(
+      {},
+      {
+        _sc_keywords: [],
+        _sc_council_areas: [],
+        _sc_elastic_highlights: {},
+        _sc_elastic_score: 0,
+      },
+      unit,
+      {title},
+    );
+  });
+
 const makeQueries = async (gen): Promise<Array<Unit>> => {
   const [data, history] = await Elastic.Do(gen, {
     host: elasticHost,
@@ -45,11 +61,7 @@ export const allCouncils = (): Promise<Array<Unit>> =>
   }) {
     // FIXME: Remove hardcoded limit and replace with scrolling.
     yield query(elasticIndex, listCouncilsQuery(), 1000);
-  }).then(data =>
-    data.map(unit =>
-      Object.assign({}, {_sc_locations: [], _sc_council_areas: []}, unit),
-    ),
-  );
+  }).then(cleanUnits);
 
 export const allUnits = (ids: Array<string> = []): Promise<Array<Unit>> =>
   makeQueries(function*({
@@ -57,29 +69,17 @@ export const allUnits = (ids: Array<string> = []): Promise<Array<Unit>> =>
   }: {
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
-    const units = yield query(elasticIndex, listUnitsQuery(ids), 1500);
-    return units.map(u => {
-      if (/^PDF/.test(u.title)) {
-        return Object.assign(u, {title: u.title.replace(/^PDF/, "").trim()});
-      }
-      return u;
-    });
-  });
+    yield query(elasticIndex, listUnitsQuery(ids), 1500);
+  }).then(cleanUnits);
 
-export const showDocument = (id: string): Promise<Array<Unit>> =>
+export const showUnit = (id: string): Promise<Array<Unit>> =>
   makeQueries(function*({
     query,
   }: {
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
-    const units = yield query(elasticIndex, showDocumentQuery(id), 1);
-    return units.map(u => {
-      if (/^PDF/.test(u.title)) {
-        return Object.assign(u, {title: u.title.replace(/^PDF/, "").trim()});
-      }
-      return u;
-    });
-  });
+    yield query(elasticIndex, showUnitQuery(id), 1);
+  }).then(cleanUnits);
 
 export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
   makeQueries(function*({
@@ -87,11 +87,5 @@ export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
   }: {
     query: (string, ElasticQuery, number) => Array<Unit>,
   }) {
-    const units = yield query(elasticIndex, searchUnitsQuery(term), size);
-    return units.map(u => {
-      if (/^PDF/.test(u.title)) {
-        return Object.assign(u, {title: u.title.replace(/^PDF/, "").trim()});
-      }
-      return u;
-    });
-  });
+    yield query(elasticIndex, searchUnitsQuery(term), size);
+  }).then(cleanUnits);

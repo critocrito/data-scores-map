@@ -1,11 +1,12 @@
 // @flow
 import {allCouncils} from "./elastic";
+import {unitToDocument} from "./documents";
 import type {Council} from "./types";
 
 const unitByKeywords = (keywords, id, seed) =>
   keywords.reduce((kw, k) => {
     if (k in kw) {
-      return Object.assign(kw, {[k]: kw[k].concat(id)});
+      return Object.assign(kw, {[k]: Array.from(new Set(kw[k]).add(id))});
     }
     return Object.assign(kw, {[k]: [id]});
   }, seed);
@@ -16,13 +17,9 @@ export const list = async (): Promise<Array<Council>> => {
   return [
     ...units
       .reduce((memo, unit) => {
-        const councils = unit._sc_council_areas.map(council => {
-          const id = council._sc_id_hash;
-          const name = council.council;
-          const lat = parseFloat(council.lat);
-          const lng = parseFloat(council.lng);
-          const position = [lat, lng];
-          const existing = memo.get(id);
+        const document = unitToDocument(unit);
+        const councils = document.councils.map(council => {
+          const existing = memo.get(council.id);
           const count = existing ? existing.count + 1 : 1;
           const keywords = existing
             ? Array.from(
@@ -33,11 +30,15 @@ export const list = async (): Promise<Array<Council>> => {
               )
             : council.keywords;
           const unitsByKeywords = unitByKeywords(
-            unit._sc_keywords,
-            unit._sc_id_hash,
+            council.keywords,
+            document.id,
             existing ? existing.unitsByKeywords : {},
           );
-          return {id, position, name, count, keywords, unitsByKeywords};
+          return Object.assign({}, council, {
+            count,
+            keywords,
+            unitsByKeywords,
+          });
         });
         councils.forEach(council => memo.set(council.id, council));
         return memo;

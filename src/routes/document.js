@@ -1,14 +1,14 @@
 // @flow
 import Router from "koa-router";
-import {list, show} from "../lib/unit";
+import {list, show} from "../lib/documents";
 
 const router = new Router()
-  .post("units", "/units", async ctx => {
+  .post("list documents", "/documents", async ctx => {
     const ids = ctx.request.body.ids || [];
     const result = await list(ids);
     return ctx.ok(result);
   })
-  .get("document details", "/documents/:docId", async ctx => {
+  .get("show document", "/documents/:docId", async ctx => {
     const {docId} = ctx.params;
     const result = await show(docId);
     return ctx.ok([result]);

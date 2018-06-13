@@ -33,7 +33,7 @@ export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
   };
 };
 
-export const showDocumentQuery = (id: string): ElasticQuery => ({
+export const showUnitQuery = (id: string): ElasticQuery => ({
   query: {
     match: {
       $sc_id_hash: id,

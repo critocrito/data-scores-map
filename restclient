@@ -15,11 +15,11 @@ GET http://localhost:4000/api/councils
 # Show the details of Aberdeen (Aberdeenshire).
 GET http://localhost:4000/api/cities/Aberdeenshire/Aberdeen
 
-# List all units.
-POST http://localhost:4000/api/units
+# List all documents.
+POST http://localhost:4000/api/documents
 
-# List all units by ids.
-POST http://localhost:4000/api/units
+# List all documents by ids.
+POST http://localhost:4000/api/documents
 Content-Type: application/json
 
 {

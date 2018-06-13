@@ -19,8 +19,8 @@ class SearchResults extends React.Component<Props> {
       <span className="search-result">
         <div className="dataset">
           <span>
-            {(store.results || []).map(r => (
-              <SearchResultsItem key={r.id} {...r} />
+            {store.results.map(r => (
+              <SearchResultsItem key={r.id} {...r} store={store} />
             ))}
           </span>
         </div>

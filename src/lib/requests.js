@@ -6,7 +6,7 @@ const baseUrl: string =
 
 export const fetchDocuments = (ids?: Array<string>): Promise<HttpDocResp> => {
   const body = ids ? {ids} : {};
-  return fetch(`${baseUrl}/units`, {
+  return fetch(`${baseUrl}/documents`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: new Headers({

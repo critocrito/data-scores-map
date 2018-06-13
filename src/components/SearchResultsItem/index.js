@@ -4,6 +4,7 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 
 import "./index.css";
+import type SearchStore from "../../stores/search";
 
 type Props = {
   id: string,
@@ -13,10 +14,11 @@ type Props = {
     title?: string[],
     description?: string[],
   },
+  store: SearchStore,
 };
 
 const SearchResultsItem = (props: Props) => {
-  const {id, title, highlights} = props;
+  const {id, title, highlights, store} = props;
   const row = type => (h, i) => (
     <div key={i} className="flex">
       <div className="w-20 pa1">{type}</div>
@@ -38,7 +40,11 @@ const SearchResultsItem = (props: Props) => {
 
   return (
     <div className="pa0 ma0 block pointer">
-      <Link className="link black .bodoni" to={{pathname: `/${id}`}}>
+      <Link
+        className="link black .bodoni"
+        to={{pathname: `/${id}`}}
+        onClick={() => store.setResults([])}
+      >
         <div className="f6 fw7 lh-copy white bg-dark-gray ttu tracked ma0 pa1">
           {title}
         </div>

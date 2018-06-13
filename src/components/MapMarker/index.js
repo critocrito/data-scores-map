@@ -20,9 +20,9 @@ const MapMarker = observer(
   ({council, countByKeywords, documentStore: store}: Props) => {
     const {id, count, position} = council;
     const className = store.document
-      ? store.document.councilAreas.reduce(
-          (memo, {council: c}) =>
-            id === c ? memo.concat("marker-active") : memo,
+      ? store.document.councils.reduce(
+          (memo, {id: councilId}) =>
+            id === councilId ? memo.concat("marker-active") : memo,
           ["marker"],
         )
       : ["marker"];
