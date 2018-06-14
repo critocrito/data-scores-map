@@ -1,10 +1,20 @@
 // @flow
 import * as React from "react";
+import {observer} from "mobx-react";
+import {fromEvent, fromPromise, merge, switchLatest} from "most";
+import marked from "marked";
 
 import "./index.css";
 import SearchWidget from "../SearchWidget";
+import {search} from "../../lib/requests";
+import type SearchStore from "../../stores/search";
 
-type Props = {};
+// $FlowFixMe
+import text from "../../../markdown/kent.md";
+
+type Props = {
+  searchStore: SearchStore,
+};
 
 type State = {
   highlightedText: string,
@@ -12,6 +22,7 @@ type State = {
   left: number,
 };
 
+@observer
 class CaseStudies extends React.Component<Props, State> {
   state = {
     highlightedText: "",
@@ -20,11 +31,31 @@ class CaseStudies extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    document.addEventListener("selectionchange", this.onSelectionChange);
+    const {searchStore} = this.props;
+    // document.addEventListener("selectionchange", this.onSelectionChange);
+    const searchText = fromEvent("selectionchange", document)
+      .map(() => {
+        const selection = document.getSelection();
+        if (!selection || selection.isCollapsed) return "";
+        return selection.toString();
+      })
+      .skipRepeats()
+      .multicast();
+    const results = searchText
+      .filter(term => term.length > 1)
+      .map(search)
+      .map(fromPromise)
+      .thru(switchLatest)
+      .filter(({data}) => data.length > 0)
+      .map(({data}) => data);
+    const emptyResults = searchText
+      .filter(term => term.length <= 1)
+      .constant([]);
+    merge(emptyResults, results).observe(data => searchStore.setResults(data));
   }
 
   componentWillUnmount() {
-    document.removeEventListener("selectionchange", this.onSelectionChange);
+    // document.removeEventListener("selectionchange", this.onSelectionChange);
   }
 
   onSelectionChange = () => {
@@ -60,6 +91,7 @@ class CaseStudies extends React.Component<Props, State> {
   };
 
   render() {
+    const {searchStore} = this.props;
     const {highlightedText, top, left} = this.state;
     const widgetStyle =
       highlightedText === ""
@@ -67,22 +99,19 @@ class CaseStudies extends React.Component<Props, State> {
             display: "none",
           }
         : {top, left, display: "block", position: "absolute"};
+    const searchCount = searchStore.results.length;
 
     return (
-      <div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+      <div className="flex pa3 ma3">
+        <div
+          className="w-70"
+          dangerouslySetInnerHTML={{__html: marked(text)}}
+        />
         <div id="cal1">&nbsp;</div>
         <div id="cal2">&nbsp;</div>
         <SearchWidget
           searchTerm={highlightedText}
+          searchCount={searchCount}
           style={widgetStyle}
           onClick={this.onClick}
         >

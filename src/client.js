@@ -51,19 +51,21 @@ const initialize = async () => {
               {({store: searchStore}) => <SearchBar store={searchStore} />}
             </SearchContext.Consumer>
           </header>
-          <div className="pa3">
+          <div className="pa3 pt5 bg-white">
             <Switch>
               <Route exact path="/" render={() => <DataNav store={store} />} />
               <Route
                 exact
                 path="/case-studies"
-                render={() => <CaseStudies />}
+                render={() => (
+                  <SearchContext.Consumer>
+                    {({store: searchStore}) => (
+                      <CaseStudies searchStore={searchStore} />
+                    )}
+                  </SearchContext.Consumer>
+                )}
               />
-              <Route
-                exact
-                path="/:docId"
-                render={() => <DataNav store={store} />}
-              />
+              <Route path="/:docId" render={() => <DataNav store={store} />} />
             </Switch>
           </div>
         </DocumentContext.Provider>

@@ -157,6 +157,10 @@ module.exports = {
         loader: "file-loader?name=[name].[ext]",
         test: /\.json$|\.ico$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
       },
+      {
+        test: /\.md$/,
+        use: "raw-loader",
+      },
     ],
   },
   plugins: [
