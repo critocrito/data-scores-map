@@ -10,6 +10,13 @@ type Props = {
 };
 
 const DataDetails = observer(({store}: Props) => {
+  const details =
+    store.document && store.document.hrefText ? (
+      <pre className="bg-light-gray pa3">{store.document.hrefText}</pre>
+    ) : (
+      <pre />
+    );
+
   const view = store.document ? (
     <div className="flex pt5">
       <Link to="/" onClick={() => store.reset()}>
@@ -44,7 +51,7 @@ const DataDetails = observer(({store}: Props) => {
           </dd>
         </dl>
         <h4 className="f5 lh-copy ttc tracked">Extracted Contents</h4>
-        <pre>{store.document.hrefText}</pre>
+        {details}
       </div>
     </div>
   ) : (

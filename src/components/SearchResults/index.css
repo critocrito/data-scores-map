@@ -1,5 +1,5 @@
 .search-result {
-  z-index: 1000;
+  z-index: 9000;
   display: block;
   right: 0 !important;
   left: inherit !important;

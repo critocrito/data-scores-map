@@ -20,7 +20,7 @@ export const unitToDocument = (unit: Unit): Document => ({
   description: unit.description,
   searchCategory: unit.search_category,
   href: unit.href,
-  hrefText: unit.href_text,
+  hrefText: unit.href_text ? unit.href_text.trim() : "",
   keywords: unit._sc_keywords,
   highlights: unit._sc_elastic_highlights,
   score: unit._sc_elastic_score,
