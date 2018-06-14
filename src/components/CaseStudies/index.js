@@ -43,6 +43,7 @@ class CaseStudies extends React.Component<Props, State> {
       .multicast();
     const results = searchText
       .filter(term => term.length > 1)
+      .debounce(500)
       .map(search)
       .map(fromPromise)
       .thru(switchLatest)

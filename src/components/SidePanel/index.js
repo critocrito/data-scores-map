@@ -166,6 +166,11 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
+  toggleView = (tab: string) => {
+    const {store} = this.props;
+    if (store.activeView !== tab) store.toggleView();
+  };
+
   render() {
     const {store} = this.props;
 
@@ -183,8 +188,8 @@ class SidePanel extends React.Component<Props> {
             className={
               store.activeView === "councils" ? className : activeClassName
             }
-            onClick={() => store.toggleView()}
-            onKeyPress={() => store.toggleView()}
+            onClick={() => this.toggleView("keywords")}
+            onKeyPress={() => this.toggleView("keywords")}
           >
             Categories
           </button>
@@ -192,8 +197,8 @@ class SidePanel extends React.Component<Props> {
             className={
               store.activeView === "councils" ? activeClassName : className
             }
-            onClick={() => store.toggleView()}
-            onKeyPress={() => store.toggleView()}
+            onClick={() => this.toggleView("councils")}
+            onKeyPress={() => this.toggleView("councils")}
           >
             Councils
           </button>
