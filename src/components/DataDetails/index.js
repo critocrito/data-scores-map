@@ -11,14 +11,14 @@ type Props = {
 
 const DataDetails = observer(({store}: Props) => {
   const view = store.document ? (
-    <div className="flex">
+    <div className="flex pt5">
       <Link to="/" onClick={() => store.reset()}>
         <i className="f1 lh-title pa2 ma2 fas fa-angle-left" />
       </Link>
       <div className="tl flex flex-column">
-        <h3 className="f1 lh-title pt0 mt0 pb0 mb0">
+        <h3 className="f3 lh-title pt0 mt0 pb0 mb0">
           {store.document.title}{" "}
-          <a className="f4 lh-copy no-underline" href={store.document.href}>
+          <a className="f6 lh-copy no-underline" href={store.document.href}>
             (Source)
           </a>
         </h3>
@@ -43,6 +43,8 @@ const DataDetails = observer(({store}: Props) => {
             </ul>
           </dd>
         </dl>
+        <h4 className="f5 lh-copy ttc tracked">Extracted Contents</h4>
+        <pre>{store.document.hrefText}</pre>
       </div>
     </div>
   ) : (

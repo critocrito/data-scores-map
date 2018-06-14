@@ -40,7 +40,7 @@ export const showUnitQuery = (id: string): ElasticQuery => ({
     },
   },
   _source: {
-    includes: unitIncludes,
+    includes: unitIncludes.concat("href_text"),
   },
 });
 
