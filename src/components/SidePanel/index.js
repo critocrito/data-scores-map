@@ -45,11 +45,13 @@ const rowItem = (
   key: string,
   classNames: string,
   clickHandler: () => void,
+  // flowlint unclear-type:off
   chartData: {[string]: any},
   content: React.Node,
 ) => (
   <li key={key} className={classNames}>
     <button
+      type="button"
       className="link pa0 ma0 w-100"
       onClick={clickHandler}
       onKeyPress={clickHandler}
@@ -66,12 +68,17 @@ const rowItem = (
 
 @observer
 class SidePanel extends React.Component<Props> {
+  toggleView = (tab: string) => {
+    const {store} = this.props;
+    if (store.activeView !== tab) store.toggleView();
+  };
+
   keywordsList(councils: Council[]) {
     const {store} = this.props;
 
     const keywordStats = councils.reduce(
       (memo, {keywords, unitsByKeywords}) => {
-        keywords.forEach(key => {
+        keywords.forEach((key) => {
           const unitsCount = key in memo ? memo[key].unitsCount : 0;
           const councilsCount = key in memo ? memo[key].councilsCount : 0;
           const newUnitsCount =
@@ -91,7 +98,7 @@ class SidePanel extends React.Component<Props> {
     );
     return Object.keys(keywordStats)
       .sort((a, b) => a.localeCompare(b))
-      .map(k => {
+      .map((k) => {
         const {unitsCount, councilsCount} = keywordStats[k];
 
         const chartData = {
@@ -137,7 +144,7 @@ class SidePanel extends React.Component<Props> {
 
     return Object.keys(councilStats)
       .sort((a, b) => a.localeCompare(b))
-      .map(id => {
+      .map((id) => {
         const {council, unitsCount, keywordsCount} = councilStats[id];
 
         const chartData = {
@@ -166,11 +173,6 @@ class SidePanel extends React.Component<Props> {
       });
   }
 
-  toggleView = (tab: string) => {
-    const {store} = this.props;
-    if (store.activeView !== tab) store.toggleView();
-  };
-
   render() {
     const {store} = this.props;
 
@@ -185,6 +187,7 @@ class SidePanel extends React.Component<Props> {
       <article className="bg-white ma0 br2">
         <section className="f6 bb bw1 b--black-10 flex">
           <button
+            type="button"
             className={
               store.activeView === "councils" ? className : activeClassName
             }
@@ -194,6 +197,7 @@ class SidePanel extends React.Component<Props> {
             Categories
           </button>
           <button
+            type="button"
             className={
               store.activeView === "councils" ? activeClassName : className
             }
@@ -204,6 +208,7 @@ class SidePanel extends React.Component<Props> {
           </button>
           <span className="flex">
             <button
+              type="button"
               className="ttu dib link light-blue pa3 bg-white bn"
               onClick={() => store.reset()}
               onKeyPress={() => store.reset()}

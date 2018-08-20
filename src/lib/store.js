@@ -7,11 +7,20 @@ import type {Council, Document} from "./types";
 configure({enforceActions: true});
 
 export default class Store {
-  @observable activeView: "keywords" | "councils" = "keywords";
-  @observable councils: Council[] = [];
-  @observable documents: Array<Document> = [];
-  @observable selectedCouncils: Array<string> = [];
-  @observable selectedKeywords: Array<string> = [];
+  @observable
+  activeView: "keywords" | "councils" = "keywords";
+
+  @observable
+  councils: Council[] = [];
+
+  @observable
+  documents: Array<Document> = [];
+
+  @observable
+  selectedCouncils: Array<string> = [];
+
+  @observable
+  selectedKeywords: Array<string> = [];
 
   isSelectedCouncil(id: string) {
     return this.selectedCouncils.includes(id);
@@ -21,6 +30,7 @@ export default class Store {
     return this.selectedKeywords.includes(keyword);
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get keywords() {
     return Array.from(
@@ -31,6 +41,7 @@ export default class Store {
     );
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get councilsForSelectedKeywords() {
     return this.selectedKeywords.length > 0
@@ -43,6 +54,7 @@ export default class Store {
       : this.councils;
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get councilsForSelectedCouncils() {
     return this.selectedCouncils.length > 0
@@ -50,6 +62,7 @@ export default class Store {
       : this.councils;
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get activeCouncils() {
     return this.activeView === "keywords"
@@ -57,11 +70,13 @@ export default class Store {
       : this.councilsForSelectedCouncils;
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get documentsCount(): number {
     return this.documents.length;
   }
 
+  // flowlint-next-line unsafe-getters-setters:off
   @computed
   get councilsCount(): number {
     return this.activeCouncils.length;

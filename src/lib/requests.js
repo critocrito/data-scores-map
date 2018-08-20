@@ -2,7 +2,9 @@
 import type {HttpDocResp, HttpCouncilResp, HttpSearchResp} from "./types";
 
 const baseUrl: string =
-  process.env.REACT_APP_API || "http://localhost:4000/api";
+  process.env.REACT_APP_API != null
+    ? process.env.REACT_APP_API
+    : "http://localhost:4000/api";
 
 export const fetchDocuments = (ids?: Array<string>): Promise<HttpDocResp> => {
   const body = ids ? {ids} : {};

@@ -20,7 +20,13 @@ class SearchResults extends React.Component<Props> {
         <div className="dataset">
           <span>
             {store.results.map(r => (
-              <SearchResultsItem key={r.id} {...r} store={store} />
+              <SearchResultsItem
+                key={r.id}
+                id={r.id}
+                title={r.title}
+                highlights={r.highlights}
+                store={store}
+              />
             ))}
           </span>
         </div>

@@ -5,7 +5,8 @@ import {fetchDocument} from "../lib/requests";
 import type {Document} from "../lib/types";
 
 export default class DocumentStore {
-  @observable document: Document | null;
+  @observable
+  document: Document | null;
 
   @action
   setDocument(document: Document) {

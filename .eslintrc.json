@@ -16,19 +16,31 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard",
+    "plugin:promise/recommended",
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
-  "plugins": ["import", "prettier", "flowtype", "react", "jsx-a11y"],
+  "plugins": [
+    "import",
+    "promise",
+    "prettier",
+    "flowtype",
+    "react",
+    "jsx-a11y",
+    "flowtype-errors"
+  ],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true
     },
     "react": {
       "pragma": "React",
-      "version": "16.3",
-      "flowVersion": "0.69"
+      "version": "16.4",
+      "flowVersion": "0.79"
     },
     "propWrapperFunctions": ["forbidExtraProps"]
   },
@@ -47,18 +59,11 @@
         "functions": "always-multiline"
       }
     ],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
         "specialLink": ["to"]
-      }
-    ],
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "all",
-        "bracketSpacing": false
       }
     ],
     "import/prefer-default-export": "off",
@@ -66,11 +71,15 @@
       "error",
       {
         "devDependencies": [
+          "./test-setup.js",
           "**/test/**/*.js",
           "stories/**/*.js",
-          "{webpack,postcss}.config.js"
+          "webpack.config.js",
+          "postcss.config.js"
         ]
       }
-    ]
+    ],
+    "flowtype-errors/show-errors": 2,
+    "flowtype-errors/show-warnings": 1
   }
 }

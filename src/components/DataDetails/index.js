@@ -11,7 +11,7 @@ type Props = {
 
 const DataDetails = observer(({store}: Props) => {
   const details =
-    store.document && store.document.hrefText ? (
+    store.document && store.document.hrefText != null ? (
       <pre className="bg-light-gray pa3">{store.document.hrefText}</pre>
     ) : (
       <pre />
@@ -38,7 +38,9 @@ const DataDetails = observer(({store}: Props) => {
           <dt className="b">Keywords</dt>
           <dd>
             <ul className="list ma0 pa0">
-              {(store.document.keywords || []).map(k => <li key={k}>{k}</li>)}
+              {(store.document.keywords || []).map(k => (
+                <li key={k}>{k}</li>
+              ))}
             </ul>
           </dd>
           <dt className="b">Council Areas</dt>

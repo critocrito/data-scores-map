@@ -2,10 +2,14 @@
 .*/dist/.*
 .*/test/.*
 .*../sugarcube/packages/plugin-elasticsearch/.*
+.*node_modules/prettier-package-json/tests/__fixtures__.*
 
 [options]
 esproposal.decorators=ignore
 esproposal.export_star_as=enable
+include_warnings=true
+module.ignore_non_literal_requires=true
+module.name_mapper='.*\(.css\)' -> 'empty/object'
 
 [lints]
 all=warn

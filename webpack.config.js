@@ -17,12 +17,12 @@ class InterpolateHtmlPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.compilation.tap("InterpolateHtmlPlugin", compilation => {
+    compiler.hooks.compilation.tap("InterpolateHtmlPlugin", (compilation) => {
       compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap(
         "InterpolateHtmlPlugin",
-        data => {
+        (data) => {
           // Run HTML through a series of user-specified string replacements.
-          Object.keys(this.replacements).forEach(key => {
+          Object.keys(this.replacements).forEach((key) => {
             const value = this.replacements[key];
             // eslint-disable-next-line no-param-reassign
             data.html = data.html.replace(
@@ -36,7 +36,7 @@ class InterpolateHtmlPlugin {
   }
 }
 
-const ensureSlash = path => {
+const ensureSlash = (path) => {
   const hasSlash = path.endsWith("/");
   if (hasSlash) return path;
   return `${path}/`;
@@ -56,7 +56,7 @@ const dotenvFiles = [
   ".env",
 ].filter(Boolean);
 
-dotenvFiles.forEach(dotenvFile => {
+dotenvFiles.forEach((dotenvFile) => {
   if (fs.existsSync(dotenvFile)) {
     dotenvExpand(
       dotenv.config({
@@ -70,10 +70,10 @@ const servedUrl = ensureSlash(
   process.env.PUBLIC_URL || (homepage ? url.parse(homepage).pathname : "/"),
 );
 
-const getClientEnvironment = publicUrl => {
+const getClientEnvironment = (publicUrl) => {
   const REACT_APP = /^REACT_APP_/i;
   const raw = Object.keys(process.env)
-    .filter(key => REACT_APP.test(key))
+    .filter((key) => REACT_APP.test(key))
     .reduce((env, key) => Object.assign({}, env, {[key]: process.env[key]}), {
       // Useful for determining whether we’re running in production mode.
       // Most importantly, it switches React into the correct mode.
@@ -98,7 +98,7 @@ const appEnv = getClientEnvironment(servedUrl);
 
 module.exports = {
   bail: true,
-  entry: ["babel-regenerator-runtime", "./src/client.js"],
+  entry: ["@babel/plugin-transform-runtime", "./src/client.js"],
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx"],
@@ -155,7 +155,7 @@ module.exports = {
       },
       {
         loader: "file-loader?name=[name].[ext]",
-        test: /\.json$|\.ico$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+        test: /\.ico$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
       },
       {
         test: /\.md$/,
@@ -193,5 +193,7 @@ module.exports = {
     leaflet: "L",
     "chart.js": "Chart",
   },
-  node: false,
+  node: {
+    fs: "empty",
+  },
 };

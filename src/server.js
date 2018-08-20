@@ -13,7 +13,7 @@ import router from "./routes";
 dotenv.config();
 
 const dev = process.env.NODE_ENV === "development";
-const port = process.env.DS_HTTP_PORT || 4000;
+const port = process.env.DS_HTTP_PORT != null ? process.env.DS_HTTP_PORT : 4000;
 
 // When true, do a graceful shutdown by refusing new incoming requests.
 let gracefullyClosing = false;

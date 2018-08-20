@@ -29,10 +29,12 @@ const DataNav = withRouter(
       </article>
       <article>
         <span>
-          <b>Councils:</b> {store.councilsCount}
+          <b>Councils:</b>
+          {store.councilsCount}
         </span>{" "}
         <span>
-          <b>Documents:</b> {store.documentsCount}
+          <b>Documents:</b>
+          {store.documentsCount}
         </span>
       </article>
       <article>
