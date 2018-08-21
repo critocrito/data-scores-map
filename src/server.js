@@ -14,17 +14,35 @@ dotenv.config();
 
 const dev = process.env.NODE_ENV === "development";
 const port = process.env.DS_HTTP_PORT != null ? process.env.DS_HTTP_PORT : 4000;
+const {
+  DS_ELASTIC_HOST: elasticHost,
+  DS_ELASTIC_PORT: elasticPort,
+  DS_ELASTIC_INDEX: elasticIndex,
+} = Object.assign(
+  {
+    DS_ELASTIC_HOST: "localhost",
+    DS_ELASTIC_PORT: 9200,
+    DS_ELASTIC_INDEX: "data-scores",
+  },
+  process.env,
+);
 
 // When true, do a graceful shutdown by refusing new incoming requests.
 let gracefullyClosing = false;
 
 const app = new Koa();
 
+app.context.elastic = {
+  host: elasticHost,
+  port: elasticPort,
+  index: elasticIndex,
+};
+
 app.use(koaLogger());
 app.use(
   koaRespond({
     methods: {
-      closed: ctx => {
+      closed: (ctx) => {
         ctx.set("Connection", "close");
         ctx.send(502);
       },
@@ -86,4 +104,6 @@ process.on("SIGTERM", () => {
   }, 30 * 1000);
 });
 
-process.on("uncaughtException", err => log.error("uncaught exception", {err}));
+process.on("uncaughtException", (err) =>
+  log.error("uncaught exception", {err}),
+);

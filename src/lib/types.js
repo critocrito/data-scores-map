@@ -3,6 +3,14 @@ export type Position = [number, number];
 
 export type UnitIds = Array<string>;
 
+export type Insight = {
+  id: string,
+  name: string,
+  count: number,
+};
+
+export type KeywordInsight = Insight;
+
 export type Location = {
   _sc_id_hash: string,
   council: string,

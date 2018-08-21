@@ -4,6 +4,11 @@ export type ElasticQuery = {
   _source: {},
 };
 
+export type ElasticAggregation = {
+  aggs: {},
+  size?: number,
+};
+
 const unitIncludes = [
   "$sc_id_hash",
   "title",
@@ -84,5 +89,17 @@ export const searchUnitsQuery = (term: string): ElasticQuery => ({
   },
   _source: {
     includes: unitIncludes,
+  },
+});
+
+export const keywordInsightsQuery = (): ElasticAggregation => ({
+  size: 0,
+  aggs: {
+    keywords: {
+      terms: {
+        size: 100,
+        field: "search_category.keyword",
+      },
+    },
   },
 });

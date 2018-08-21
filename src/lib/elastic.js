@@ -1,6 +1,7 @@
 // @flow
 /* eslint func-names: off */
 import {Elastic} from "@sugarcube/plugin-elasticsearch";
+import {Client as ElasticClient} from "elasticsearch";
 import dotenv from "dotenv";
 
 import type {Unit} from "./types";
@@ -9,9 +10,36 @@ import {
   showUnitQuery,
   listCouncilsQuery,
   searchUnitsQuery,
+  keywordInsightsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
 import log from "./logging";
+
+export type ElasticResp = {
+  took: number,
+  timed_out: boolean,
+  _shards: {
+    total: number,
+    successful: number,
+    skipped: number,
+    failed: number,
+  },
+  hits: {
+    total: number,
+    max_score: number,
+    hits: Array<{}>,
+  },
+};
+
+export type ElasticAggsBucketTermsResp = ElasticResp & {
+  aggregations: {
+    keywords: {
+      doc_count_error_upper_bound: number,
+      sum_other_doc_count: number,
+      buckets: Array<{key: string, doc_count: number}>,
+    },
+  },
+};
 
 dotenv.config();
 
@@ -28,8 +56,18 @@ const {
   process.env,
 );
 
+export const client = (() => {
+  let cache;
+  const fn = async (host: string, port: number): ElasticClient => {
+    if (cache != null) return cache;
+    cache = new ElasticClient({host: `${host}:${port}`, log: "trace"});
+    return cache;
+  };
+  return fn;
+})();
+
 const cleanUnits = (units: Array<Unit>): Array<Unit> =>
-  units.map(unit => {
+  units.map((unit) => {
     const title = unit.title ? unit.title.replace(/^PDF/, "").trim() : "";
     return Object.assign(
       {},
@@ -89,3 +127,14 @@ export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
   }) {
     yield query(elasticIndex, searchUnitsQuery(term), size);
   }).then(cleanUnits);
+
+export const keywordInsights = async (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticAggsBucketTermsResp> => {
+  const result = elastic.search({
+    index,
+    body: keywordInsightsQuery(),
+  });
+  return result;
+};
