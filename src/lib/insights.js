@@ -1,12 +1,12 @@
 // @flow
 import {
   client,
-  keywordInsights,
+  categoryInsights,
   companyInsights,
   systemInsights,
 } from "./elastic";
 import {toId} from "./utils";
-import type {KeywordInsight, CompanySystemInsight} from "./types";
+import type {CategoryInsight, CompanySystemInsight} from "./types";
 
 type ElasticCfg = {
   host: string,
@@ -14,14 +14,14 @@ type ElasticCfg = {
   index: string,
 };
 
-export const keywords = async (
-  categories: string[],
+export const categories = async (
+  categoryList: string[],
   {host, port, index}: ElasticCfg,
-): Promise<Array<KeywordInsight>> => {
+): Promise<Array<CategoryInsight>> => {
   const elastic = await client(host, port);
-  const result = await keywordInsights(elastic, index);
+  const result = await categoryInsights(elastic, index);
 
-  return categories.map((category) => {
+  return categoryList.map((category) => {
     const insight = result.aggregations.keywords.buckets.find(
       ({key}) => key === category,
     ) || {key: category, doc_count: 0};

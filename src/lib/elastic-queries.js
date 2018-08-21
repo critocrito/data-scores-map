@@ -92,7 +92,7 @@ export const searchUnitsQuery = (term: string): ElasticQuery => ({
   },
 });
 
-export const keywordInsightsQuery = (): ElasticAggregation => ({
+export const categoryInsightsQuery = (): ElasticAggregation => ({
   size: 0,
   aggs: {
     keywords: {

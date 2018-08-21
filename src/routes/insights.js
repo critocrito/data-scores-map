@@ -1,11 +1,11 @@
 // @flow
 import Router from "koa-router";
-import {keywords, companiesAndSystems} from "../lib/insights";
+import {categories, companiesAndSystems} from "../lib/insights";
 
 const router = new Router()
-  .get("keywords", "/keywords", async (ctx) => {
-    const {elastic, categories} = ctx;
-    const result = await keywords(categories, elastic);
+  .get("categories", "/categories", async (ctx) => {
+    const {elastic, categories: categoryList} = ctx;
+    const result = await categories(categoryList, elastic);
     return ctx.ok(result);
   })
   .get("companiesSystems", "/companies-systems", async (ctx) => {

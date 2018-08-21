@@ -10,7 +10,7 @@ import {
   showUnitQuery,
   listCouncilsQuery,
   searchUnitsQuery,
-  keywordInsightsQuery,
+  categoryInsightsQuery,
   companyInsightsQuery,
   systemInsightsQuery,
 } from "./elastic-queries";
@@ -130,13 +130,13 @@ export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
     yield query(elasticIndex, searchUnitsQuery(term), size);
   }).then(cleanUnits);
 
-export const keywordInsights = async (
+export const categoryInsights = async (
   elastic: ElasticClient,
   index: string,
 ): Promise<ElasticAggsBucketTermsResp> => {
   const result = elastic.search({
     index,
-    body: keywordInsightsQuery(),
+    body: categoryInsightsQuery(),
   });
   return result;
 };

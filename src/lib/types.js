@@ -9,7 +9,7 @@ export type Insight = {
   count: number,
 };
 
-export type KeywordInsight = Insight;
+export type CategoryInsight = Insight;
 
 export type CompanySystemInsight = Insight & {
   systems: Array<Insight>,
