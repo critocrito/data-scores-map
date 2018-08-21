@@ -4,8 +4,8 @@ import {keywords, companiesAndSystems} from "../lib/insights";
 
 const router = new Router()
   .get("keywords", "/keywords", async (ctx) => {
-    const {elastic} = ctx;
-    const result = await keywords(elastic);
+    const {elastic, categories} = ctx;
+    const result = await keywords(categories, elastic);
     return ctx.ok(result);
   })
   .get("companiesSystems", "/companies-systems", async (ctx) => {

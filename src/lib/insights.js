@@ -14,19 +14,24 @@ type ElasticCfg = {
   index: string,
 };
 
-export const keywords = async ({
-  host,
-  port,
-  index,
-}: ElasticCfg): Promise<Array<KeywordInsight>> => {
+export const keywords = async (
+  categories: string[],
+  {host, port, index}: ElasticCfg,
+): Promise<Array<KeywordInsight>> => {
   const elastic = await client(host, port);
   const result = await keywordInsights(elastic, index);
 
-  return result.aggregations.keywords.buckets.map((bucket) => ({
-    name: bucket.key,
-    count: bucket.doc_count,
-    id: toId(bucket.key),
-  }));
+  return categories.map((category) => {
+    const insight = result.aggregations.keywords.buckets.find(
+      ({key}) => key === category,
+    ) || {key: category, doc_count: 0};
+
+    return {
+      name: insight.key,
+      count: insight.doc_count,
+      id: toId(insight.key),
+    };
+  });
 };
 
 export const companiesAndSystems = async (
