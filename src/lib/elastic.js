@@ -11,6 +11,8 @@ import {
   listCouncilsQuery,
   searchUnitsQuery,
   keywordInsightsQuery,
+  companyInsightsQuery,
+  systemInsightsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
 import log from "./logging";
@@ -33,7 +35,7 @@ export type ElasticResp = {
 
 export type ElasticAggsBucketTermsResp = ElasticResp & {
   aggregations: {
-    keywords: {
+    [string]: {
       doc_count_error_upper_bound: number,
       sum_other_doc_count: number,
       buckets: Array<{key: string, doc_count: number}>,
@@ -135,6 +137,28 @@ export const keywordInsights = async (
   const result = elastic.search({
     index,
     body: keywordInsightsQuery(),
+  });
+  return result;
+};
+
+export const companyInsights = async (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticAggsBucketTermsResp> => {
+  const result = elastic.search({
+    index,
+    body: companyInsightsQuery(),
+  });
+  return result;
+};
+
+export const systemInsights = async (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticAggsBucketTermsResp> => {
+  const result = elastic.search({
+    index,
+    body: systemInsightsQuery(),
   });
   return result;
 };

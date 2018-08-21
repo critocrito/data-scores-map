@@ -11,6 +11,10 @@ export type Insight = {
 
 export type KeywordInsight = Insight;
 
+export type CompanySystemInsight = Insight & {
+  systems: Array<Insight>,
+};
+
 export type Location = {
   _sc_id_hash: string,
   council: string,

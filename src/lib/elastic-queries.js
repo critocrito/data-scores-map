@@ -103,3 +103,27 @@ export const keywordInsightsQuery = (): ElasticAggregation => ({
     },
   },
 });
+
+export const companyInsightsQuery = (): ElasticAggregation => ({
+  size: 0,
+  aggs: {
+    companies: {
+      terms: {
+        size: 100,
+        field: "companies.keyword",
+      },
+    },
+  },
+});
+
+export const systemInsightsQuery = (): ElasticAggregation => ({
+  size: 0,
+  aggs: {
+    systems: {
+      terms: {
+        size: 100,
+        field: "systems.keyword",
+      },
+    },
+  },
+});

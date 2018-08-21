@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 
 import log from "./lib/logging";
 import router from "./routes";
+import {companies, systems} from "./company-systems-mapping";
 
 dotenv.config();
 
@@ -37,6 +38,8 @@ app.context.elastic = {
   port: elasticPort,
   index: elasticIndex,
 };
+app.context.companies = companies;
+app.context.systems = systems;
 
 app.use(koaLogger());
 app.use(
