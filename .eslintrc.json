@@ -72,10 +72,11 @@
       {
         "devDependencies": [
           "./test-setup.js",
-          "**/test/**/*.js",
+          "test/**/*.js",
           "stories/**/*.js",
           "webpack.config.js",
-          "postcss.config.js"
+          "postcss.config.js",
+          "commitlint.config.js"
         ]
       }
     ],
