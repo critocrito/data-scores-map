@@ -10,7 +10,7 @@
     "build": "yarn lint && flow && yarn lint-css && yarn test && yarn compile",
     "build-storybook": "build-storybook",
     "clean": "rimraf dist",
-    "precommit": "! git rev-parse --abbrev-ref HEAD | grep -q master || lint-staged",
+    "precommit": "! git rev-parse --abbrev-ref HEAD | grep -q master || (lint-staged && yarn lint)",
     "commitmsg": "! git rev-parse --abbrev-ref HEAD | grep -q master || commitlint -E GIT_PARAMS",
     "precompile": "yarn clean",
     "compile": "cross-env NODE_ENV=production webpack --mode production -r @babel/register",
