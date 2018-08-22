@@ -127,3 +127,43 @@ export const systemInsightsQuery = (): ElasticAggregation => ({
     },
   },
 });
+
+export const authorityInsightsQuery = (): ElasticAggregation => ({
+  _source: ["authorities"],
+  size: 1000,
+  query: {
+    bool: {
+      must: {
+        nested: {
+          path: "authorities",
+          query: {
+            bool: {
+              must: [
+                {
+                  exists: {
+                    field: "authorities",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  },
+  aggs: {
+    authorities: {
+      nested: {
+        path: "authorities",
+      },
+      aggs: {
+        name: {
+          terms: {
+            size: 1000,
+            field: "authorities.name.keyword",
+          },
+        },
+      },
+    },
+  },
+});

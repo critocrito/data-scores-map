@@ -15,6 +15,12 @@ export type CompanySystemInsight = Insight & {
   systems: Array<Insight>,
 };
 
+export type AuthorityInsight = Insight & {
+  companies: Array<{[string]: number}>,
+  systems: Array<{[string]: number}>,
+  location: Position,
+};
+
 export type Location = {
   _sc_id_hash: string,
   council: string,

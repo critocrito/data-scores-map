@@ -13,6 +13,7 @@ import {
   categoryInsightsQuery,
   companyInsightsQuery,
   systemInsightsQuery,
+  authorityInsightsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
 import log from "./logging";
@@ -26,11 +27,6 @@ export type ElasticResp = {
     skipped: number,
     failed: number,
   },
-  hits: {
-    total: number,
-    max_score: number,
-    hits: Array<{}>,
-  },
 };
 
 export type ElasticAggsBucketTermsResp = ElasticResp & {
@@ -39,6 +35,31 @@ export type ElasticAggsBucketTermsResp = ElasticResp & {
       doc_count_error_upper_bound: number,
       sum_other_doc_count: number,
       buckets: Array<{key: string, doc_count: number}>,
+    },
+  },
+};
+
+export type ElasticAggsBucketNestedTermsResp = ElasticResp & {
+  hits: {
+    hits: Array<{
+      _source: {
+        authorities: Array<{
+          name: string,
+          location: [number, number],
+          companies: string[],
+          systems: string[],
+        }>,
+      },
+    }>,
+  },
+  aggregations: {
+    [string]: {
+      doc_count: number,
+      [string]: {
+        doc_count_error_upper_bound: number,
+        sum_other_doc_count: number,
+        buckets: Array<{key: string, doc_count: number}>,
+      },
     },
   },
 };
@@ -130,35 +151,38 @@ export const searchUnits = (term: string, size: number): Promise<Array<Unit>> =>
     yield query(elasticIndex, searchUnitsQuery(term), size);
   }).then(cleanUnits);
 
-export const categoryInsights = async (
+export const categoryInsights = (
   elastic: ElasticClient,
   index: string,
-): Promise<ElasticAggsBucketTermsResp> => {
-  const result = elastic.search({
+): Promise<ElasticAggsBucketTermsResp> =>
+  elastic.search({
     index,
     body: categoryInsightsQuery(),
   });
-  return result;
-};
 
-export const companyInsights = async (
+export const companyInsights = (
   elastic: ElasticClient,
   index: string,
-): Promise<ElasticAggsBucketTermsResp> => {
-  const result = elastic.search({
+): Promise<ElasticAggsBucketTermsResp> =>
+  elastic.search({
     index,
     body: companyInsightsQuery(),
   });
-  return result;
-};
 
-export const systemInsights = async (
+export const systemInsights = (
   elastic: ElasticClient,
   index: string,
-): Promise<ElasticAggsBucketTermsResp> => {
-  const result = elastic.search({
+): Promise<ElasticAggsBucketTermsResp> =>
+  elastic.search({
     index,
     body: systemInsightsQuery(),
   });
-  return result;
-};
+
+export const authorityInsights = (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticAggsBucketNestedTermsResp> =>
+  elastic.search({
+    index,
+    body: authorityInsightsQuery(),
+  });
