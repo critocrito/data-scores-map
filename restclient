@@ -1,5 +1,12 @@
 # -*- restclient -*-
 
+:api = localhost:4000
+:elasticsearch = localhost:9200/data-scores
+:headers = <<
+Content-Type: application/json
+#
+
+
 # Get the root path.
 GET http://localhost:4000/api
 
@@ -34,3 +41,188 @@ GET http://localhost:4000/api/search?q=computer&limit=5
 
 # Show document details
 GET http://localhost:4000/api/documents/bf9d309bede8d44850cd4498c892cb59a28da20f5b3c6d11585caad9851a2858
+
+
+### Data Insights
+
+# category insights
+GET http://:api/insights/categories
+:headers
+
+# company insights
+GET http://:api/insights/companies-systems
+:headers
+
+# authority insights
+GET http://:api/insights/authorities
+:headers
+
+### Stats
+
+# overview stats
+GET http://:api/stats/documents
+:headers
+
+### Data insights ElasticSearch
+
+# keyword query search
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "aggs": {
+    "keywords": {
+      "terms": {
+        "size": 100,
+        "field": "search_category.keyword"
+      }
+    }
+  }
+}
+
+# keywords aggregation (using composite term buckets with pagination)
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "aggs": {
+    "keywords": {
+      "composite": {
+        "size": 100,
+        "sources": [
+          {"categories": {"terms": {"field": "search_category.keyword"}}}
+        ],
+        "after": {"categories": "Rating equation"}
+      }
+    }
+  }
+}
+
+# companies aggregation
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "aggs": {
+    "companies": {
+      "terms": {
+        "size": 100,
+        "field": "companies.keyword"
+      }
+    }
+  }
+}
+
+# systems aggregation
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "aggs": {
+    "systems": {
+      "terms": {
+        "size": 100,
+        "field": "systems.keyword"
+      }
+    }
+  }
+}
+
+
+# authorities aggregation
+GET http://:elasticsearch/_search
+:headers
+{
+  "_source": ["authorities"],
+  "size": 1000,
+  "query": {
+    "bool": {
+      "must": {
+        "nested": {
+          "path": "authorities",
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "exists": {
+                    "field": "authorities"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "aggs": {
+    "authorities": {
+      "nested": {
+        "path": "authorities"
+      },
+      "aggs": {
+        "name": {
+          "terms": {
+            "size": 1000,
+            "field": "authorities.name.keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+### Elasticsearch stats
+# show document count
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "query": {
+    "match_all": {}
+  }
+}
+
+# show companies count
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "exists": {
+            "field": "companies"
+          }
+        },
+        {
+          "exists": {
+            "field": "systems"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# show authorities stats
+GET http://:elasticsearch/_search
+:headers
+{
+  "size": 0,
+  "query": {
+    "nested": {
+      "path": "authorities",
+      "query": {
+        "bool": {
+          "must": [{
+            "exists": {
+              "field": "authorities"
+            }
+          }]
+        }
+      }
+    }
+  }
+}
