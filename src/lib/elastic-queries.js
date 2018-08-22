@@ -1,7 +1,7 @@
 // @flow
 export type ElasticQuery = {
   query: {},
-  _source: {},
+  _source?: {},
 };
 
 export type ElasticAggregation = {
@@ -162,6 +162,53 @@ export const authorityInsightsQuery = (): ElasticAggregation => ({
             size: 1000,
             field: "authorities.name.keyword",
           },
+        },
+      },
+    },
+  },
+});
+
+export const documentCountsQuery = (): ElasticQuery => ({
+  size: 0,
+  query: {
+    match_all: {},
+  },
+});
+
+export const companyCountsQuery = (): ElasticQuery => ({
+  size: 0,
+  query: {
+    bool: {
+      should: [
+        {
+          exists: {
+            field: "companies",
+          },
+        },
+        {
+          exists: {
+            field: "systems",
+          },
+        },
+      ],
+    },
+  },
+});
+
+export const authorityCountsQuery = (): ElasticQuery => ({
+  size: 0,
+  query: {
+    nested: {
+      path: "authorities",
+      query: {
+        bool: {
+          must: [
+            {
+              exists: {
+                field: "authorities",
+              },
+            },
+          ],
         },
       },
     },

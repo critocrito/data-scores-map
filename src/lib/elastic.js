@@ -14,9 +14,18 @@ import {
   companyInsightsQuery,
   systemInsightsQuery,
   authorityInsightsQuery,
+  documentCountsQuery,
+  companyCountsQuery,
+  authorityCountsQuery,
 } from "./elastic-queries";
 import type {ElasticQuery} from "./elastic-queries";
 import log from "./logging";
+
+export type ElasticCfg = {
+  host: string,
+  port: number,
+  index: string,
+};
 
 export type ElasticResp = {
   took: number,
@@ -26,6 +35,14 @@ export type ElasticResp = {
     successful: number,
     skipped: number,
     failed: number,
+  },
+};
+
+export type ElasticSearchResp = ElasticResp & {
+  hits: {
+    total: number,
+    max_score: number,
+    hits: Array<{}>,
   },
 };
 
@@ -185,4 +202,31 @@ export const authorityInsights = (
   elastic.search({
     index,
     body: authorityInsightsQuery(),
+  });
+
+export const documentCounts = (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticSearchResp> =>
+  elastic.search({
+    index,
+    body: documentCountsQuery(),
+  });
+
+export const companyCounts = (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticSearchResp> =>
+  elastic.search({
+    index,
+    body: companyCountsQuery(),
+  });
+
+export const authorityCounts = (
+  elastic: ElasticClient,
+  index: string,
+): Promise<ElasticSearchResp> =>
+  elastic.search({
+    index,
+    body: authorityCountsQuery(),
   });

@@ -7,17 +7,12 @@ import {
   authorityInsights,
 } from "./elastic";
 import {toId} from "./utils";
+import type {ElasticCfg} from "./elastic";
 import type {
   CategoryInsight,
   CompanySystemInsight,
   AuthorityInsight,
 } from "./types";
-
-type ElasticCfg = {
-  host: string,
-  port: number,
-  index: string,
-};
 
 export const categories = async (
   categoryList: string[],

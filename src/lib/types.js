@@ -21,6 +21,11 @@ export type AuthorityInsight = Insight & {
   location: Position,
 };
 
+export type Stat = {
+  name: string,
+  count: number,
+};
+
 export type Location = {
   _sc_id_hash: string,
   council: string,
