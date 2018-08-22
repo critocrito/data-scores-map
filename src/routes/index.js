@@ -9,10 +9,10 @@ import stats from "./stats";
 
 const router = new Router();
 
-router.use("/api", document.routes());
-router.use("/api", council.routes());
-router.use("/api", search.routes());
-router.use("/api/insights", insights.routes());
-router.use("/api/stats", stats.routes());
+router.use("/", document.routes());
+router.use("/", council.routes());
+router.use("/", search.routes());
+router.use("/insights", insights.routes());
+router.use("/stats", stats.routes());
 
 export default router;
