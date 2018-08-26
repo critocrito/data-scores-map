@@ -36,12 +36,107 @@ Content-Type: application/json
   ]
 }
 
-# Search for units
-GET http://localhost:4000/api/search?q=computer&limit=5
-
 # Show document details
 GET http://localhost:4000/api/documents/bf9d309bede8d44850cd4498c892cb59a28da20f5b3c6d11585caad9851a2858
 
+### Documents
+# Fetch documents for all categories
+GET http://:api/documents
+:headers
+
+# Fetch documents for companies and systems
+GET http://:api/documents?exists=companies&exists=systems
+:headers
+
+# Fetch documents for authorities
+GET http://:api/documents?exists=authorities
+:headers
+
+# Search for documents with either companies, systems or authorities
+GET http://:elasticsearch/_search
+:headers
+{
+  "_source": ["title", "search_batch", "systems", "companies", "authorities"],
+  "size": 30,
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "exists": {
+            "field": "companies"
+          }
+        },
+        {
+          "exists": {
+            "field": "systems"
+          }
+        },
+        {
+          "nested": {
+            "path": "authorities",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "exists": {
+                      "field": "authorities"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+### Free Document Search
+# Search for Documents
+GET http://:api/search?q=computer&limit=5
+:headers
+
+# Search Elasticsearch for Documents
+GET http://:elasticsearch/_search
+:headers
+
+{
+  "_source": {
+    "includes": ["title", "search_batch", "systems", "companies", "authorities"]
+  },
+  "query": {
+    "multi_match": {
+      "query": "computer",
+      "fields": ["title^3", "description^2", "href_text^2"]
+    }
+  },
+  "highlight": {
+    "number_of_fragments": 3,
+    "fragment_size": 150,
+    "order": "score",
+    "fields": {
+      "href_text": {},
+      "title": {"number_of_fragments": 0},
+      "description": {"number_of_fragments": 0}
+    }
+  }
+}
+
+# Fetch a single document
+GET http://:api/documents/2fe01fea39858f3dc6421c25de4b774c280c420143639e10ce
+:headers
+
+# Search Elasticsearch for a single document
+GET http://:elasticsearch/_search
+:headers
+{
+  "query": {
+    "ids" : {
+      "values" : ["2fe01fea39858f3dc6421c25de4b774c280c420143639e10ce"]
+    }
+  }
+}
 
 ### Data Insights
 

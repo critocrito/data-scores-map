@@ -1,11 +1,29 @@
 // @flow
 export type Position = [number, number];
 
-export type UnitIds = Array<string>;
+export type DocumentSource = {
+  title: string,
+  search_batch: string,
+  search_category: string | string[],
+  description?: string,
+  href?: string,
+  href_text?: string,
+  companies?: string[],
+  systems?: string[],
+  authorities?: Array<{
+    name: string,
+    location: [number, number],
+    companies: string[],
+    systems: string[],
+  }>,
+};
 
-export type Insight = {
+export type Item = {
   id: string,
   name: string,
+};
+
+export type Insight = Item & {
   count: number,
 };
 
@@ -16,8 +34,8 @@ export type CompanySystemInsight = Insight & {
 };
 
 export type AuthorityInsight = Insight & {
-  companies: Array<{[string]: number}>,
-  systems: Array<{[string]: number}>,
+  companies: {[string]: number},
+  systems: {[string]: number},
   location: Position,
 };
 
@@ -26,57 +44,46 @@ export type Stat = {
   count: number,
 };
 
-export type Location = {
-  _sc_id_hash: string,
-  council: string,
-  lat: number,
-  lng: number,
-  keywords: Array<string>,
-};
-
-export type Unit = {
-  _sc_id_hash: string,
-  _sc_keywords: Array<string>,
-  _sc_council_areas: Array<Location>,
-  _sc_elastic_highlights: {[string]: Array<string>},
-  _sc_elastic_score: number,
-  title: string,
-  description: string,
-  search_category: string,
-  href: string,
-  href_text?: string,
-};
-
-export type Council = {
-  id: string,
-  name: string,
-  position: Position,
-  count: number,
-  keywords: Array<string>,
-  unitsByKeywords: {[keyword: string]: UnitIds},
-};
-
 export type Document = {
   id: string,
   title: string,
-  description: string,
-  href: string,
-  hrefText?: string,
-  searchCategory: string,
-  keywords: Array<string>,
-  councils: Array<Council>,
-  highlights: {[string]: Array<string>},
-  score?: number,
+  source: string,
+  categories: string[],
+  companies: string[],
+  systems: string[],
+  authorities: string[],
+  // highlights: {[string]: Array<string>},
+  // score?: number,
 };
 
-type CommonHttpResp = {
+export type FullDocument = Document & {
+  description: string,
+  href: string,
+  href_text: string,
+};
+
+type HttpInsightResp = {
   length: number,
 };
 
-export type HttpDocResp = {data: Array<Document>} & CommonHttpResp;
-export type HttpCouncilResp = {data: Array<Council>} & CommonHttpResp;
-export type HttpSearchResp = {data: Array<Document>} & CommonHttpResp;
-export type HttpResp = HttpDocResp | HttpCouncilResp | HttpSearchResp;
+type HttpDocumentResp = {
+  total: number,
+};
+
+export type HttpDocResp = {data: Document[]} & HttpDocumentResp;
+export type HttpFullDocResp = {data: FullDocument[]} & HttpDocumentResp;
+export type HttpCategoryInsightResp = {
+  data: CategoryInsight[],
+} & HttpInsightResp;
+export type HttpCompSysInsightResp = {
+  data: CompanySystemInsight[],
+} & HttpInsightResp;
+export type HttpAuthorityInsightResp = {
+  data: AuthorityInsight[],
+} & HttpInsightResp;
+export type HttpStatResp = {
+  data: Stat[],
+} & HttpInsightResp;
 
 export type HttpError = {
   message: string,

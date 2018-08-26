@@ -1,0 +1,24 @@
+.documents-filters-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.filter-select {
+    width: 30px;
+    background: transparent;
+    background-image: url(./angle-down.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+}
+.filter-select-active {
+    width: 30px;
+    background: transparent;
+    background-image: url(./angle-up.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+}

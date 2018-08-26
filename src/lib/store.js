@@ -1,138 +1,230 @@
 // @flow
-import {configure, observable, computed, action, flow} from "mobx";
-import {fetchDocuments} from "./requests";
+import {configure, observable, action, flow, toJS} from "mobx";
+import {
+  document,
+  documents,
+  search,
+  categoryInsights,
+  companySystemInsights,
+  authorityInsights,
+  documentStats,
+} from "./requests";
 
-import type {Council, Document} from "./types";
+import type {
+  Document,
+  FullDocument,
+  Item,
+  CategoryInsight,
+  CompanySystemInsight,
+  AuthorityInsight,
+  Stat,
+} from "./types";
 
 configure({enforceActions: true});
 
 export default class Store {
-  @observable
-  activeView: "keywords" | "councils" = "keywords";
+  pageSize = 30;
 
   @observable
-  councils: Council[] = [];
+  loadingState: "done" | "pending" | "error" = "done";
 
   @observable
-  documents: Array<Document> = [];
+  categories: Item[] = [];
 
   @observable
-  selectedCouncils: Array<string> = [];
+  companies: Item[] = [];
 
   @observable
-  selectedKeywords: Array<string> = [];
+  systems: Item[] = [];
 
-  isSelectedCouncil(id: string) {
-    return this.selectedCouncils.includes(id);
-  }
+  @observable
+  authorities: Item[] = [];
 
-  isSelectedKeyword(keyword: string) {
-    return this.selectedKeywords.includes(keyword);
-  }
+  @observable
+  document: FullDocument;
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get keywords() {
-    return Array.from(
-      this.councils.reduce((memo, council) => {
-        council.keywords.forEach(k => memo.add(k));
-        return memo;
-      }, new Set()),
-    );
-  }
+  @observable
+  documents: Document[] = [];
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get councilsForSelectedKeywords() {
-    return this.selectedKeywords.length > 0
-      ? this.councils.filter(council =>
-          council.keywords.reduce((memo, key) => {
-            if (memo) return memo;
-            return this.isSelectedKeyword(key);
-          }, false),
-        )
-      : this.councils;
-  }
+  @observable
+  documentsTotal: number = 0;
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get councilsForSelectedCouncils() {
-    return this.selectedCouncils.length > 0
-      ? this.councils.filter(({id}) => this.isSelectedCouncil(id))
-      : this.councils;
-  }
+  @observable
+  categoryInsights: CategoryInsight[] = [];
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get activeCouncils() {
-    return this.activeView === "keywords"
-      ? this.councilsForSelectedKeywords
-      : this.councilsForSelectedCouncils;
-  }
+  @observable
+  companySystemInsights: CompanySystemInsight[] = [];
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get documentsCount(): number {
-    return this.documents.length;
-  }
+  @observable
+  authorityInsights: AuthorityInsight[] = [];
 
-  // flowlint-next-line unsafe-getters-setters:off
-  @computed
-  get councilsCount(): number {
-    return this.activeCouncils.length;
-  }
+  @observable
+  documentStats: Stat[] = [];
 
-  @action
-  setCouncils(councils: Council[]) {
-    this.councils = councils;
-    this.reset();
-  }
+  @observable
+  searchTerm: string = "";
 
-  @action
-  toggleView() {
-    this.activeView = this.activeView === "keywords" ? "councils" : "keywords";
-    this.reset();
-  }
+  @observable
+  documentsFilters: Map<string, string[]> = new Map();
 
-  @action
-  toggleKeyword(keyword: string) {
-    this.selectedKeywords = this.isSelectedKeyword(keyword)
-      ? this.selectedKeywords.filter(k => k !== keyword)
-      : this.selectedKeywords.concat(keyword);
-    this.fetchDocuments();
-  }
-
-  @action
-  toggleCouncil(id: string) {
-    this.selectedCouncils = this.isSelectedCouncil(id)
-      ? this.selectedCouncils.filter(i => i !== id)
-      : this.selectedCouncils.concat(id);
-    this.fetchDocuments();
-  }
-
-  @action
-  reset() {
-    this.selectedCouncils = [];
-    this.selectedKeywords = [];
-    this.fetchDocuments();
-  }
-
-  // eslint-disable-next-line func-names
-  fetchDocuments = flow(function*() {
-    const unitIds = Array.from(
-      this.activeCouncils.reduce((memo, council) => {
-        Object.keys(council.unitsByKeywords).forEach(k =>
-          council.unitsByKeywords[k].forEach(i => memo.add(i)),
-        );
-        return memo;
-      }, new Set()),
-    );
+  fetchDocument = flow(function* fetchDocument(id: string) {
     try {
-      const {data: documents} = yield fetchDocuments(unitIds);
-      this.documents = documents;
+      const {data} = yield document(id);
+      if (data.length > 0) {
+        const [doc] = data;
+        this.document = doc;
+      }
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+      console.log(e);
     }
   });
+
+  fetchDocuments = flow(function* fetchDocuments(
+    exists: string[],
+    from: number,
+  ) {
+    try {
+      const {data, total} = yield documents(exists, from, this.pageSize);
+      this.documents = data;
+      this.documentsTotal = total;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  searchDocuments = flow(function* searchDocuments(from: number) {
+    const filters = toJS(this.documentsFilters, {exportMapsAsObjects: true});
+    const term = this.searchTerm;
+    if (term !== "")
+      try {
+        const {data, total} = yield search(term, filters, from, this.pageSize);
+        this.documents = data;
+        this.documentsTotal = total;
+      } catch (e) {
+        console.log(e);
+      }
+  });
+
+  fetchCategories = flow(function* fetchCategories() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield categoryInsights();
+      this.loadingState = "done";
+      this.categories = data.map(({id, name}) => ({
+        id,
+        name,
+      }));
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchCompaniesSystems = flow(function* fetchCompanies() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield companySystemInsights();
+      this.loadingState = "done";
+      this.companies = data.map(({id, name}) => ({
+        id,
+        name,
+      }));
+      const systemsObj = data.reduce((memo, {systems}) => {
+        systems.forEach(({id, name}) => {
+          if (memo[name]) return;
+          // eslint-disable-next-line no-param-reassign
+          memo[name] = {id, name};
+        });
+        return memo;
+      }, {});
+      this.systems = Object.keys(systemsObj)
+        .map((key) => systemsObj[key])
+        .sort((a, b) => a.name.localeCompare(b.name));
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchAuthorities = flow(function* fetchAuthorities() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield authorityInsights();
+      this.loadingState = "done";
+      this.authorities = data.map(({id, name}) => ({
+        id,
+        name,
+      }));
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchCategoryInsights = flow(function* fetchCategoryInsights() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield categoryInsights();
+      this.loadingState = "done";
+      this.categoryInsights = data;
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchCompanySystemInsights = flow(function* fetchCompanySystemInsights() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield companySystemInsights();
+      this.loadingState = "done";
+      this.companySystemInsights = data;
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchAuthorityInsights = flow(function* fetchAuthorityInsights() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield authorityInsights();
+      this.loadingState = "done";
+      this.authorityInsights = data;
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchDocumentStats = flow(function* fetchDocumentStats() {
+    try {
+      const {data} = yield documentStats();
+      this.documentStats = data;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  @action
+  updateSearchTerm(term: string) {
+    this.searchTerm = term;
+  }
+
+  @action
+  updateFilters(type: string, filters: string[]) {
+    this.documentsFilters.set(type, filters);
+    this.searchDocuments(0);
+  }
+
+  @action
+  clearFilters(type: string) {
+    this.documentsFilters.set(type, []);
+    this.searchDocuments(0);
+  }
+
+  @action
+  clearDocuments() {
+    this.documents = [];
+    this.documentsTotal = 0;
+  }
+
+  @action
+  clearSearchTerm() {
+    this.searchTerm = "";
+  }
 }

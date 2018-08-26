@@ -1,44 +1,74 @@
 // @flow
-import {allUnits, showUnit} from "./elastic";
-import type {Unit, Document, Location, Council} from "./types";
-
-export const locationToCouncil = (id: string, location: Location): Council => ({
-  id: location._sc_id_hash,
-  name: location.council,
-  position: [parseFloat(location.lat), parseFloat(location.lng)],
-  count: 1,
-  keywords: location.keywords,
-  unitsByKeywords: location.keywords.reduce(
-    (memo, k) => Object.assign(memo, {[k]: [id]}),
-    {},
-  ),
-});
-
-export const unitToDocument = (unit: Unit): Document => ({
-  id: unit._sc_id_hash,
-  title: unit.title,
-  description: unit.description,
-  searchCategory: unit.search_category,
-  href: unit.href,
-  hrefText: unit.href_text != null ? unit.href_text.trim() : "",
-  keywords: unit._sc_keywords,
-  highlights: unit._sc_elastic_highlights,
-  score: unit._sc_elastic_score,
-  councils: unit._sc_council_areas.map(location =>
-    locationToCouncil(unit._sc_id_hash, location),
-  ),
-});
+import {client, documents, document} from "./elastic";
+import type {HttpDocResp} from "./types";
+import type {ElasticCfg} from "./elastic";
 
 export const list = async (
-  ids: Array<string> = [],
-): Promise<Array<Document>> => {
-  const data = await allUnits(ids);
+  exists: string[],
+  from: number,
+  size: number,
+  {host, port, index}: ElasticCfg,
+): Promise<HttpDocResp> => {
+  const elastic = await client(host, port);
+  const result = await documents(elastic, index, exists, from, size);
 
-  return data.map(unitToDocument);
+  const {total, hits} = result.hits;
+  const data = hits.map((hit) => {
+    const {_id, _source} = hit;
+    const description =
+      _source.description != null ? {description: _source.description} : {};
+    const href = _source.href != null ? {href: _source.href} : {};
+    const hrefText =
+      _source.href_text != null ? {href_text: _source.href_text} : {};
+    return {
+      id: _id,
+      title: _source.title ? _source.title.replace(/^PDF/, "").trim() : "",
+      source: _source.search_batch,
+      categories: Array.isArray(_source.search_category)
+        ? _source.search_category
+        : [_source.search_category],
+      companies: _source.companies || [],
+      systems: _source.systems || [],
+      authorities: (_source.authorities || []).map(({name}) => name),
+      ...description,
+      ...href,
+      ...hrefText,
+    };
+  });
+
+  return {total, data};
 };
 
-export const show = async (id: string): Promise<Document> => {
-  const [unit] = await showUnit(id);
+export const show = async (
+  id: string,
+  {host, port, index}: ElasticCfg,
+): Promise<HttpDocResp> => {
+  const elastic = await client(host, port);
+  const result = await document(elastic, index, id);
 
-  return unitToDocument(unit);
+  const {total, hits} = result.hits;
+  const data = hits.map((hit) => {
+    const {_id, _source} = hit;
+    const description =
+      _source.description != null ? {description: _source.description} : {};
+    const href = _source.href != null ? {href: _source.href} : {};
+    const hrefText =
+      _source.href_text != null ? {href_text: _source.href_text} : {};
+    return {
+      id: _id,
+      title: _source.title ? _source.title.replace(/^PDF/, "").trim() : "",
+      source: _source.search_batch,
+      categories: Array.isArray(_source.search_category)
+        ? _source.search_category
+        : [_source.search_category],
+      companies: _source.companies || [],
+      systems: _source.systems || [],
+      authorities: (_source.authorities || []).map(({name}) => name),
+      ...description,
+      ...href,
+      ...hrefText,
+    };
+  });
+
+  return {total, data};
 };

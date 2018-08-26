@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+    <style>
+      .primary-color { color: #9a1a1a; }
+      .bg-primary-color { background-color: #9a1a1a; }
+      .b--primary-color { border-color: #9a1a1a; }
+      button, input {
+          border: none !important;
+      }
+      input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+      input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+      input[type="search"]::-webkit-search-decoration,
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-results-button,
+      input[type="search"]::-webkit-search-results-decoration { display: none; }
+      input[type="checkbox"] {
+          opacity: 0;
+          position: absolute;
+          cursor: pointer;
+          visibility: hidden;
+      }
+
+      .checkbox label::before{
+          content: "";
+          display: inline-block;
+
+          height: 18px;
+          width: 18px;
+
+          border: 1px solid;
+      }
+      .checkbox label::after {
+          content: "";
+          display: inline-block;
+          height: 18px;
+          width: 18px;
+      }
+      .checkbox label {
+          position: relative;
+          left: 25px;
+      }
+      .checkbox label::before,
+      .checkbox label::after {
+          position: absolute;
+      }
+
+      /*Outer-box*/
+      .checkbox label::before {
+          left: -25px;
+          top: -2px;
+      }
+      /*Checkmark*/
+      .checkbox label::after {
+          left: -24px;
+          top: -1px;
+      }
+      /*Hide the checkmark by default*/
+      input[type="checkbox"] + label::after {
+          content: none;
+      }
+      /*Unhide the checkmark on the checked state*/
+      input[type="checkbox"]:checked + label::after {
+          content: "";
+          background-color: #9a1a1a;
+      }
+      /*Adding focus styles on the outer-box of the fake checkbox*/
+      input[type="checkbox"]:focus + label::before {
+          outline: rgb(59, 153, 252) auto 5px;
+      }
+
+      input:focus{
+          outline: none;
+      }
+      button:focus {
+          outline: none;
+      }
+      input.search-bar {
+          background: transparent;
+          background-image: url(./search.svg);
+          background-size: 16px 16px;
+          background-repeat: no-repeat;
+          background-position-y: center;
+          background-position-x: right;
+      }
+      .filter-close {
+          background: transparent;
+          background-image: url(./angle-double-down.svg);
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position-y: 10px;
+          background-position-x: center;
+      }
+      .filter-open {
+          background: transparent;
+          background-image: url(./angle-double-up.svg);
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position-y: 10px;
+          background-position-x: center;
+      }
+      .filter-select {
+          width: 30px;
+          background: transparent;
+          background-image: url(./angle-down.svg);
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position-y: center;
+          background-position-x: center;
+      }
+      .filter-select-active {
+          width: 30px;
+          background: transparent;
+          background-image: url(./angle-up.svg);
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position-y: center;
+          background-position-x: center;
+      }
+      .clear-selection {
+          width: 30px;
+          background: transparent;
+          background-image: url(./times.svg);
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position-y: center;
+          background-position-x: center;
+      }
+      .filter-box {
+          top: 7.2rem;
+          left: 0;
+      }
+
+      .filters-button {
+          left: 0;
+      }
+    </style>
+    <title>Data Scores in the UK</title>
+  </head>
+  <body class="helvetica bg-white mw9-ns center ph3-ns">
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <header class="cf ph2-ns flex-ns items-center">
+      <h1 class="f1 w-100 w-60-ns pa2 ttu white bg-primary-color">Data Scores in the UK</h1>
+      <nav class="w-100 w-40-ns pa2">
+        <ul class="list">
+          <li class="pa2 dib bb bw3 b--primary-color"><a href="#" class="link primary-color">Documents Index</a></li>
+          <li class="pa2 dib"><a href="#" class="link primary-color">Case Studies</a></li>
+          <li class="pa2 dib"><a href="#" class="link primary-color">Methodology</a></li>
+        </ul>
+      </nav>
+    </header>
+    <article class="cf ph2-ns flex flex-column">
+      <!-- SEARCH -->
+      <div class="mt3 pt5-ns mt5-ns tc">
+        <form role="search">
+          <span class="bb bw3 b--primary-color pb3">
+            <input
+              name="q"
+              class="search-bar input-reset pl4 bb bw3 b--primary-color"
+              type="search"
+              placeholder="Documents Index"
+              autoComplete="off"
+              spellCheck="false"
+              aria-label="Search for documents."
+              />
+          </span>
+        </form>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="relative ml2 mr2">
+
+        <!-- FILTERS NAV -->
+        <div class="flex-ns justify-around-ns mt4 pt4">
+          <div class="w-100 w-25-ns ba pa3">Keywords <i class="filter-select fr">&nbsp;</i></div>
+          <!-- FILTERS NAV ACTIVE -->
+          <div class="w-100 w-25-ns ba">
+            <div class="pa3 white bg-primary-color">
+              Companies <i class="filter-select-active fr">&nbsp;</i>
+            </div>
+
+            <!-- FILTERS SELECTION -->
+            <div class="filter-box absolute-ns w-100-ns z-999-ns">
+
+              <!-- FILTERS DROPDOWN -->
+              <div class="ba bg-light-gray">
+
+                <div class="center flex flex-column">
+
+                  <!-- FILTERS CHECK BOXES -->
+                  <div class="flex flex-wrap justify-between center mt3-ns">
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithm" name="algorithm" value="scales" />
+                      <label for="algorithm">Algorithm</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method" name="statistical-method" value="scales" />
+                      <label for="statistical-method">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method2" name="statistical-method2" value="scales" />
+                      <label for="statistical-method2">Statistical-Method 2</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method3" name="statistical-method3" value="scales" />
+                      <label for="statistical-method3">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method4" name="statistical-method2" value="scales" />
+                      <label for="statistical-method4">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-method" name="algorithmic-method" value="scales" />
+                      <label for="algorithmic-method">Algorithmic-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-decision" name="algorithmic-decision" value="scales" />
+                      <label for="algorithmic-decision">Algorithmic-Decision</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="Error-bound" name="Error-bound" value="scales" />
+                      <label for="Error-bound">Error-Bound</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithm" name="algorithm" value="scales" />
+                      <label for="algorithm">Algorithm</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method" name="statistical-method" value="scales" />
+                      <label for="statistical-method">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method2" name="statistical-method2" value="scales" />
+                      <label for="statistical-method2">Statistical-Method 2</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method3" name="statistical-method3" value="scales" />
+                      <label for="statistical-method3">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method4" name="statistical-method2" value="scales" />
+                      <label for="statistical-method4">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-method" name="algorithmic-method" value="scales" />
+                      <label for="algorithmic-method">Algorithmic-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-decision" name="algorithmic-decision" value="scales" />
+                      <label for="algorithmic-decision">Algorithmic-Decision</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="Error-bound" name="Error-bound" value="scales" />
+                      <label for="Error-bound">Error-Bound</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithm" name="algorithm" value="scales" />
+                      <label for="algorithm">Algorithm</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method" name="statistical-method" value="scales" />
+                      <label for="statistical-method">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method2" name="statistical-method2" value="scales" />
+                      <label for="statistical-method2">Statistical-Method 2</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method3" name="statistical-method3" value="scales" />
+                      <label for="statistical-method3">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="statistical-method4" name="statistical-method2" value="scales" />
+                      <label for="statistical-method4">Statistical-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-method" name="algorithmic-method" value="scales" />
+                      <label for="algorithmic-method">Algorithmic-Method</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="algorithmic-decision" name="algorithmic-decision" value="scales" />
+                      <label for="algorithmic-decision">Algorithmic-Decision</label>
+                    </div>
+                    <div class="checkbox ma2 w-100 w-20-ns">
+                      <input type="checkbox" id="Error-bound" name="Error-bound" value="scales" />
+                      <label for="Error-bound">Error-Bound</label>
+                    </div>
+                  </div>
+                  <!-- FILTERS CHECK BOXES END -->
+
+                  <!-- FILTERS CHECK BOXES TASKS -->
+                  <div class="fr-ns w-100 flex-ns w-100-ns pa2">
+                    <button class="w-100 w-25-ns pa2 ml-auto-ns primary-color bg-transparent ba b--primary-color ttu pointer">Clear Selection</button>
+                    <button class="finish-selection w-100 w-25-ns pa2 bg-primary-color white br4 ttu pointer">Finish</button>
+                  </div>
+                </div>
+                <!-- FILTERS DROPWDOWN END -->
+              </div>
+              <!-- FILTERS SELECTION END -->
+
+              <!-- FILTERS BUTTON -->
+              <div class="w-100 dn db-ns">
+                <p class="tr ma4 dn db-ns">Remove all filters</p>
+                <div class="flex flex-column tc">
+                  <i class="pb4 filter-open">&nbsp;</i>
+                  <button class="bg-primary-color br4 bn pa3 w5 pointer center">Filters</button>
+                </div>
+              </div>
+              <!-- FILTERS BUTTON -->
+            </div>
+          </div>
+          <!-- FILTERS NAV ACTIVE END -->
+
+          <div class="w-100 w-25-ns ba pa3">Systems <i class="filter-select fr">&nbsp;</i></div>
+          <div class="w-100 w-25-ns ba pa3">Authorities <i class="filter-select fr">&nbsp;</i></div>
+        </div>
+        <!-- FILTERS NAV END -->
+
+      </div>
+      <!-- FILTERS END -->
+
+      <!-- FILTERS BUTTON FOR MOBILE -->
+      <div class="dn-ns db">
+        <div class="flex flex-column tc">
+          <i class="pb4 filter-open">&nbsp;</i>
+          <button class="bg-primary-color br4 bn pa3 w5 pointer center">Filters</button>
+        </div>
+      </div>
+      <!-- FILTERS BUTTON FOR MOBILE END -->
+    </article>
+
+    <div class="w-100 w-75-ns">
+        <table>
+
+        </table>
+    </div>
+</body>
+</html>

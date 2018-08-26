@@ -1,0 +1,9 @@
+.clear-selection {
+    width: 30px;
+    background: transparent;
+    background-image: url(./times.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+}

@@ -45,30 +45,32 @@ export const companiesAndSystems = async (
     systemInsights(elastic, index),
   ]);
 
-  return Object.keys(companyMap).reduce((memo, company) => {
-    const companyInsight = companiesResult.aggregations.companies.buckets.find(
-      ({key}) => key === company,
-    ) || {key: company, doc_count: 0};
+  return Object.keys(companyMap)
+    .reduce((memo, company) => {
+      const companyInsight = companiesResult.aggregations.companies.buckets.find(
+        ({key}) => key === company,
+      ) || {key: company, doc_count: 0};
 
-    const systems = companyMap[companyInsight.key].reduce((acc, system) => {
-      const systemInsight = systemsResult.aggregations.systems.buckets.find(
-        ({key}) => key === system,
-      ) || {key: system, doc_count: 0};
+      const systems = companyMap[companyInsight.key].reduce((acc, system) => {
+        const systemInsight = systemsResult.aggregations.systems.buckets.find(
+          ({key}) => key === system,
+        ) || {key: system, doc_count: 0};
 
-      return acc.concat({
-        name: systemInsight.key,
-        count: systemInsight.doc_count,
-        id: toId(systemInsight.key),
+        return acc.concat({
+          name: systemInsight.key,
+          count: systemInsight.doc_count,
+          id: toId(systemInsight.key),
+        });
+      }, []);
+
+      return memo.concat({
+        name: companyInsight.key,
+        count: companyInsight.doc_count,
+        id: toId(companyInsight.key),
+        systems,
       });
-    }, []);
-
-    return memo.concat({
-      name: companyInsight.key,
-      count: companyInsight.doc_count,
-      id: toId(companyInsight.key),
-      systems,
-    });
-  }, []);
+    }, [])
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const authorities = async ({
@@ -123,5 +125,7 @@ export const authorities = async ({
   );
   // FIXME: Using Object.keys() over Object.values() because of
   //        https://github.com/facebook/flow/issues/2221
-  return Object.keys(transformed).map((key) => transformed[key]);
+  return Object.keys(transformed)
+    .map((key) => transformed[key])
+    .sort((a, b) => a.name.localeCompare(b.name));
 };

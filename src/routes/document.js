@@ -3,15 +3,24 @@ import Router from "koa-router";
 import {list, show} from "../lib/documents";
 
 const router = new Router()
-  .post("list documents", "/documents", async ctx => {
-    const ids = ctx.request.body.ids || [];
-    const result = await list(ids);
+  .get("list documents", "/", async (ctx) => {
+    const {elastic} = ctx;
+    const exists = ctx.query.exists || [];
+    const from = ctx.query.from || 0;
+    const size = ctx.query.size || 0;
+    const result = await list(
+      Array.isArray(exists) ? exists : [exists],
+      parseInt(from, 10),
+      parseInt(size, 10),
+      elastic,
+    );
     return ctx.ok(result);
   })
-  .get("show document", "/documents/:docId", async ctx => {
+  .get("show document", "/:docId", async (ctx) => {
+    const {elastic} = ctx;
     const {docId} = ctx.params;
-    const result = await show(docId);
-    return ctx.ok([result]);
+    const result = await show(docId, elastic);
+    return ctx.ok(result);
   });
 
 export default router;

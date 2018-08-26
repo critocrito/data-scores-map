@@ -67,9 +67,11 @@ app.use(
 // Wrap all results in an envelope.
 app.use(async (ctx, next) => {
   await next();
-  const dataLength = Array.isArray(ctx.body) ? ctx.body.length : 0;
-  const newBody = {data: ctx.body, length: dataLength};
-  ctx.body = newBody;
+  if (Array.isArray(ctx.body))
+    ctx.body = {
+      length: ctx.body.length,
+      data: ctx.body,
+    };
 });
 
 // Configure our node app for development.

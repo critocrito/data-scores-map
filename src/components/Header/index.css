@@ -1,0 +1,6 @@
+.hover-nav-link:focus,
+.hover-nav-link:hover {
+    border-color: #9a1a1a;
+    border-width: 0.5rem;
+    border-bottom-style: solid;
+}

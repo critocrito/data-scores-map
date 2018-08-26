@@ -9,89 +9,6 @@ export type ElasticAggregation = {
   size?: number,
 };
 
-const unitIncludes = [
-  "$sc_id_hash",
-  "title",
-  "description",
-  "href",
-  "search_category",
-  "$sc_keywords",
-  "$sc_council_areas",
-];
-
-export const listUnitsQuery = (ids: Array<string>): ElasticQuery => {
-  const qs = ids.length === 0 ? {match_all: {}} : {ids: {values: ids}};
-  return {
-    query: {
-      nested: {
-        path: "$sc_council_areas",
-        query: {
-          bool: {
-            must: [{exists: {field: "$sc_council_areas"}}, qs],
-          },
-        },
-      },
-    },
-    _source: {
-      includes: unitIncludes,
-    },
-  };
-};
-
-export const showUnitQuery = (id: string): ElasticQuery => ({
-  query: {
-    match: {
-      $sc_id_hash: id,
-    },
-  },
-  _source: {
-    includes: unitIncludes.concat("href_text"),
-  },
-});
-
-export const listCouncilsQuery = (): ElasticQuery => ({
-  query: {
-    nested: {
-      path: "$sc_council_areas",
-      query: {
-        exists: {field: "$sc_council_areas"},
-      },
-    },
-  },
-  _source: {
-    includes: ["$sc_id_hash", "$sc_council_areas", "$sc_keywords"],
-    excludes: ["href_text"],
-  },
-});
-
-export const searchUnitsQuery = (term: string): ElasticQuery => ({
-  query: {
-    multi_match: {
-      query: term,
-      fields: [
-        "title^3",
-        "description^2",
-        "href_text^2",
-        "$sc_keywords^2",
-        "search_category",
-      ],
-    },
-  },
-  highlight: {
-    number_of_fragments: 3,
-    fragment_size: 150,
-    order: "score",
-    fields: {
-      href_text: {},
-      title: {number_of_fragments: 0},
-      description: {number_of_fragments: 0},
-    },
-  },
-  _source: {
-    includes: unitIncludes,
-  },
-});
-
 export const categoryInsightsQuery = (): ElasticAggregation => ({
   size: 0,
   aggs: {
@@ -175,7 +92,7 @@ export const documentCountsQuery = (): ElasticQuery => ({
   },
 });
 
-export const companyCountsQuery = (): ElasticQuery => ({
+export const companySystemCountsQuery = (): ElasticQuery => ({
   size: 0,
   query: {
     bool: {
@@ -211,6 +128,118 @@ export const authorityCountsQuery = (): ElasticQuery => ({
           ],
         },
       },
+    },
+  },
+});
+
+export const listDocumentsQuery = (exists: string[]): ElasticQuery => {
+  const queries = exists.map((field) => {
+    if (field === "authorities")
+      return {
+        nested: {
+          path: field,
+          query: {
+            bool: {
+              must: {
+                exists: {
+                  field,
+                },
+              },
+            },
+          },
+        },
+      };
+    return {
+      exists: {
+        field,
+      },
+    };
+  });
+  return {
+    _source: {
+      includes: [
+        "title",
+        "search_batch",
+        "systems",
+        "companies",
+        "authorities",
+      ],
+    },
+    size: 30,
+    query: {
+      bool: {
+        should: queries,
+      },
+    },
+  };
+};
+
+export const searchDocumentsQuery = (
+  term: string,
+  filters: {[string]: string[]},
+): ElasticQuery => {
+  const queries = Object.keys(filters).map((field) => {
+    if (field === "authorities")
+      return {
+        nested: {
+          path: field,
+          query: {
+            terms: {"authorities.name.keyword": filters[field]},
+          },
+        },
+      };
+    if (field === "categories")
+      return {
+        terms: {
+          search_category: filters[field],
+        },
+      };
+    return {
+      terms: {
+        [field]: filters[field],
+      },
+    };
+  });
+  return {
+    _source: {
+      includes: [
+        "title",
+        "search_batch",
+        "systems",
+        "companies",
+        "authorities",
+      ],
+    },
+    query: {
+      bool: {
+        must: [
+          {
+            multi_match: {
+              query: term,
+              fields: ["title^3", "description^2", "href_text^2"],
+            },
+          },
+          ...queries,
+        ],
+      },
+    },
+    highlight: {
+      number_of_fragments: 3,
+      fragment_size: 150,
+      order: "score",
+      fields: {
+        href_text: {},
+        title: {number_of_fragments: 0},
+        description: {number_of_fragments: 0},
+      },
+    },
+  };
+};
+
+export const showDocumentQuery = (id: string): ElasticQuery => ({
+  query: {
+    ids: {
+      values: [id],
     },
   },
 });

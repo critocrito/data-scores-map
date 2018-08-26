@@ -1,0 +1,8 @@
+input.search-bar {
+    background: transparent;
+    background-image: url(./search.svg);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: right;
+}

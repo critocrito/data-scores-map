@@ -19,7 +19,7 @@
     "fix": "yarn lint -- --fix",
     "fix-css": "yarn lint-css -- --fix",
     "flow-coverage": "flow-coverage-report --config ./.flowcoverage",
-    "lint": "eslint src stories test",
+    "lint": "eslint src test",
     "lint-css": "stylelint src/**/*.css",
     "prepublishOnly": "yarn build",
     "prerelease": "yarn build",
@@ -27,20 +27,11 @@
     "release-candidate": "yarn release -- --prerelease \"rc\"",
     "security-scan": "retire -p",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open -r @babel/register",
-    "storybook": "start-storybook -p 6006",
     "test": "cross-env NODE_ENV=test ava",
     "test:watch": "yarn test -- -w"
   },
-  "config": {
-    "configFiles": "{webpack,postccs}.config.js",
-    "distDir": "dist",
-    "srcDir": "src",
-    "storiesDir": "stories",
-    "testDir": "test"
-  },
   "dependencies": {
     "@koa/cors": "2.2.2",
-    "@sugarcube/plugin-elasticsearch": "^0.9.0",
     "bunyan": "^1.8.12",
     "chart.js": "^2.7.2",
     "classnames": "^2.2.6",
@@ -64,8 +55,6 @@
     "react-dom": "^16.4.2",
     "react-leaflet": "1",
     "react-router-dom": "^4.3.1",
-    "react-spinkit": "^3.0.0",
-    "react-table": "^6.8.6",
     "tachyons": "^4.11.1"
   },
   "devDependencies": {
@@ -86,11 +75,6 @@
     "@babel/runtime": "^7.0.0-rc.1",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
-    "@storybook/addon-actions": "4.0.0-alpha.8",
-    "@storybook/addon-links": "4.0.0-alpha.8",
-    "@storybook/addons": "4.0.0-alpha.8",
-    "@storybook/cli": "4.0.0-alpha.8",
-    "@storybook/react": "4.0.0-alpha.8",
     "autoprefixer": "^9.1.2",
     "ava": "^1.0.0-beta.6",
     "babel-core": "^7.0.0-0",

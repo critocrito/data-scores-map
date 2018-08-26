@@ -1,8 +1,0 @@
-.suggestion-highlight > em {
-  background-color: rgba(255, 229, 100, 0.5);
-}
-
-.suggestion-row:hover {
-  background: #f1f1f1;
-  box-shadow: inset -2px 0 0 #61dafb;
-}
