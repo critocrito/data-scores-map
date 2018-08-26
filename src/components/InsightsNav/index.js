@@ -20,7 +20,7 @@ const InsightsNav = ({activeInsight, handler}: Props) => {
         role="button"
         tabIndex={0}
       >
-        <div className="f3 h3 pa3 center ba b--silver">Keywords</div>
+        <div className="f3 h3 pa3 center ba b--silver">Categories</div>
         <div
           className={`bl h1 b--silver ${
             isCategories ? "bg-primary-color" : "bg-light-silver"
