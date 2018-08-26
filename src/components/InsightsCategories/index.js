@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 
 import DocumentsTable from "../DocumentsTable";
 import InsightsSideRow from "../InsightsSideRow";
+import InsightsVizBarChart from "../InsightsVizBarChart";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -31,22 +32,27 @@ class InsightsCategories extends React.Component<Props> {
   render() {
     const {store} = this.props;
     return (
-      <div className="cf mt3 ph1-ns flex">
-        <aside className="w-100 pl1 w-third-ns dn di-ns">
-          <ul className="list pl0">
-            {store.categoryInsights.map(({id, name, count}) => (
-              <InsightsSideRow key={id} name={name} count={count} />
-            ))}
-          </ul>
-        </aside>
-        <section className="w-100 w-two-thirds-ns">
-          <DocumentsTable
-            documents={store.documents}
-            documentsTotal={store.documentsTotal}
-            paginateDocuments={this.fetchDocuments}
-            pageSize={store.pageSize}
-          />
-        </section>
+      <div className="flex flex-column">
+        <div className="w-100 pt3 dn di-ns">
+          <InsightsVizBarChart categories={store.categoryInsights} />
+        </div>
+        <div className="w-100 cf mt3 ph1-ns flex">
+          <aside className="w-100 pl1 w-third-ns dn di-ns">
+            <ul className="list pl0">
+              {store.categoryInsights.map(({id, name, count}) => (
+                <InsightsSideRow key={id} name={name} count={count} />
+              ))}
+            </ul>
+          </aside>
+          <section className="w-100 w-two-thirds-ns">
+            <DocumentsTable
+              documents={store.documents}
+              documentsTotal={store.documentsTotal}
+              paginateDocuments={this.fetchDocuments}
+              pageSize={store.pageSize}
+            />
+          </section>
+        </div>
       </div>
     );
   }
