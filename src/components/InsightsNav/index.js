@@ -3,10 +3,10 @@ import * as React from "react";
 
 type Props = {
   activeInsight: string,
-  handler: (string) => void,
+  selectInsight: (string) => void,
 };
 
-const InsightsNav = ({activeInsight, handler}: Props) => {
+const InsightsNav = ({activeInsight, selectInsight}: Props) => {
   const isCategories = activeInsight === "categories";
   const isCompaniesSystems = activeInsight === "companies-systems";
   const isAuthorities = activeInsight === "authorities";
@@ -15,8 +15,8 @@ const InsightsNav = ({activeInsight, handler}: Props) => {
     <div className="cf ph2-ns flex-ns justify-around-ns">
       <div
         className={`w-100 w-third-ns ${isCategories ? "" : "pointer"}`}
-        onClick={() => handler("categories")}
-        onKeyPress={() => handler("categories")}
+        onClick={() => selectInsight("categories")}
+        onKeyPress={() => selectInsight("categories")}
         role="button"
         tabIndex={0}
       >
@@ -29,8 +29,8 @@ const InsightsNav = ({activeInsight, handler}: Props) => {
       </div>
       <div
         className={`w-100 w-third-ns ${isCompaniesSystems ? "" : "pointer"}`}
-        onClick={() => handler("companies-systems")}
-        onKeyPress={() => handler("companies-systems")}
+        onClick={() => selectInsight("companies-systems")}
+        onKeyPress={() => selectInsight("companies-systems")}
         role="button"
         tabIndex={0}
       >
@@ -45,8 +45,8 @@ const InsightsNav = ({activeInsight, handler}: Props) => {
       </div>
       <div
         className={`w-100 w-third-ns ${isAuthorities ? "" : "pointer"}`}
-        onClick={() => handler("authorities")}
-        onKeyPress={() => handler("authorities")}
+        onClick={() => selectInsight("authorities")}
+        onKeyPress={() => selectInsight("authorities")}
         role="button"
         tabIndex={0}
       >

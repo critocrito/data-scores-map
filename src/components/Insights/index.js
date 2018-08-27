@@ -52,7 +52,7 @@ class Insights extends React.Component<{}, State> {
         </div>
         <InsightsNav
           activeInsight={activeInsight}
-          handler={this.switchInsights}
+          selectInsight={this.switchInsights}
         />
         <Context.Consumer>
           {({store}) => <InsightComponent store={store} />}
