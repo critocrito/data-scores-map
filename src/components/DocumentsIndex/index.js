@@ -98,7 +98,7 @@ class DocumentsIndex extends React.Component<Props, State> {
               <div className="dn db-ns pt2">
                 <DocumentsFiltersButton
                   isOpen
-                  handler={this.toggleFiltersNav}
+                  clickHandler={this.toggleFiltersNav}
                 />
               </div>
             </div>
@@ -106,7 +106,7 @@ class DocumentsIndex extends React.Component<Props, State> {
             <div className="pt5">
               <DocumentsFiltersButton
                 isOpen={false}
-                handler={this.toggleFiltersNav}
+                clickHandler={this.toggleFiltersNav}
               />
             </div>
           )}

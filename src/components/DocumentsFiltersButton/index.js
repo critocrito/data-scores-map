@@ -5,22 +5,22 @@ import "./index.css";
 
 type Props = {
   isOpen: boolean,
-  handler: () => void,
+  clickHandler: () => void,
 };
 
-const DocumentsFiltersButton = ({isOpen, handler}: Props) => {
+const DocumentsFiltersButton = ({isOpen, clickHandler}: Props) => {
   const isClosed = !isOpen;
   return (
     <div>
       {/* <p className="tr ma4 dn db-ns">Remove all filters</p> */}
       <div
         className="flex flex-column tc"
-        onClick={handler}
-        onKeyPress={handler}
+        onClick={clickHandler}
+        onKeyPress={clickHandler}
         role="button"
         tabIndex={0}
       >
-        {isOpen ? <i className="pb4 filter-open">&nbsp;</i> : ""}
+        {isOpen ? <i className="pb4 filter-open pointer">&nbsp;</i> : ""}
         <button
           className={`br4 bn pa3 w5 pointer center ${
             isOpen ? "bg-primary-color" : "bg-light-gray"
@@ -29,7 +29,7 @@ const DocumentsFiltersButton = ({isOpen, handler}: Props) => {
         >
           Filters
         </button>
-        {isClosed ? <i className="pb4 filter-closed">&nbsp;</i> : ""}
+        {isClosed ? <i className="pb4 filter-closed pointer">&nbsp;</i> : ""}
       </div>
     </div>
   );

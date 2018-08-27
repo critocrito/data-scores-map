@@ -149,7 +149,7 @@ class DocumentsFilters extends React.Component<Props, State> {
         <div className="dn-ns db pt2">
           <DocumentsFiltersButton
             isOpen={isOpen}
-            handler={() => this.toggleFilterNav()}
+            clickHandler={this.toggleFilterNav}
           />
         </div>
       </div>
