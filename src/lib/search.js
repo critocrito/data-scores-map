@@ -1,5 +1,6 @@
 // @flow
-import {client, searchDocuments} from "./elastic";
+import {client, search as searchDocuments} from "./elastic";
+import {searchDocumentsQuery} from "./elastic-queries";
 import type {ElasticCfg, HttpFullDocResp} from "./types";
 
 export const search = async (
@@ -10,14 +11,14 @@ export const search = async (
   {host, port, index}: ElasticCfg,
 ): Promise<HttpFullDocResp> => {
   const elastic = await client(host, port);
-  const result = await searchDocuments(
-    elastic,
-    index,
+  const query = searchDocumentsQuery(
     term,
-    from,
-    size,
-    filters,
+    Object.keys(filters || {}).reduce((memo, key) => {
+      if (filters[key].length === 0) return memo;
+      return Object.assign({}, memo, {[key]: filters[key]});
+    }, {}),
   );
+  const result = await searchDocuments(elastic, index, query, {from, size});
 
   const {total, hits} = result.hits;
   const data = hits.map((hit) => {

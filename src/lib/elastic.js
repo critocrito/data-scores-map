@@ -4,7 +4,6 @@ import {Client as ElasticClient} from "elasticsearch";
 import {
   listDocumentsQuery,
   showDocumentQuery,
-  searchDocumentsQuery,
   categoryInsightsQuery,
   companyInsightsQuery,
   systemInsightsQuery,
@@ -14,6 +13,7 @@ import {
   authorityCountsQuery,
 } from "./elastic-queries";
 import type {
+  ElasticQuery,
   ElasticSearchResp,
   ElasticAggsBucketTermsResp,
   ElasticAggsBucketNestedTermsResp,
@@ -113,17 +113,14 @@ export const document = (
 ): Promise<ElasticSearchResp> =>
   elastic.search({index, body: showDocumentQuery(id)});
 
-export const searchDocuments = (
+export const search = (
   elastic: ElasticClient,
   index: string,
-  term: string,
-  from: number,
-  size: number,
-  filters: {[string]: string[]},
+  body: ElasticQuery,
+  opts: {|from: number, size: number|} = {from: 0, size: 30},
 ): Promise<ElasticSearchResp> =>
   elastic.search({
     index,
-    from,
-    size,
-    body: searchDocumentsQuery(term, filters),
+    body,
+    ...opts,
   });
