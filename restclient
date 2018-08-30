@@ -71,7 +71,9 @@ GET http://:elasticsearch/_search
 POST http://:api/search
 :headers
 {
-  "q": "computer"
+  "q": "computer",
+  "size": 5,
+  "from": 100
 }
 
 # Search Elasticsearch for Documents

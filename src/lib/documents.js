@@ -1,5 +1,6 @@
 // @flow
-import {client, documents, document} from "./elastic";
+import {client, search} from "./elastic";
+import {listDocumentsQuery, showDocumentQuery} from "./elastic-queries";
 import type {ElasticCfg, HttpDocResp} from "./types";
 
 export const list = async (
@@ -9,7 +10,8 @@ export const list = async (
   {host, port, index}: ElasticCfg,
 ): Promise<HttpDocResp> => {
   const elastic = await client(host, port);
-  const result = await documents(elastic, index, exists, from, size);
+  const query = listDocumentsQuery(exists);
+  const result = await search(elastic, index, query, {from, size});
 
   const {total, hits} = result.hits;
   const data = hits.map((hit) => {
@@ -43,7 +45,8 @@ export const show = async (
   {host, port, index}: ElasticCfg,
 ): Promise<HttpDocResp> => {
   const elastic = await client(host, port);
-  const result = await document(elastic, index, id);
+  const query = showDocumentQuery(id);
+  const result = await search(elastic, index, query);
 
   const {total, hits} = result.hits;
   const data = hits.map((hit) => {

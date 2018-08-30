@@ -2,8 +2,6 @@
 import {Client as ElasticClient} from "elasticsearch";
 
 import {
-  listDocumentsQuery,
-  showDocumentQuery,
   categoryInsightsQuery,
   companyInsightsQuery,
   systemInsightsQuery,
@@ -91,27 +89,6 @@ export const authorityCounts = (
     index,
     body: authorityCountsQuery(),
   });
-
-export const documents = (
-  elastic: ElasticClient,
-  index: string,
-  exists: string[],
-  from: number,
-  size: number,
-): Promise<ElasticSearchResp> =>
-  elastic.search({
-    index,
-    from,
-    size,
-    body: listDocumentsQuery(exists),
-  });
-
-export const document = (
-  elastic: ElasticClient,
-  index: string,
-  id: string,
-): Promise<ElasticSearchResp> =>
-  elastic.search({index, body: showDocumentQuery(id)});
 
 export const search = (
   elastic: ElasticClient,
