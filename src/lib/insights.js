@@ -1,14 +1,15 @@
 // @flow
+import {client, aggregateTerms, aggregateNestedTerms} from "./elastic";
 import {
-  client,
-  categoryInsights,
-  companyInsights,
-  systemInsights,
-  authorityInsights,
-} from "./elastic";
+  categoryInsightsQuery,
+  companyInsightsQuery,
+  systemInsightsQuery,
+  authorityInsightsQuery,
+} from "./elastic-queries";
 import {toId} from "./utils";
 import type {
   ElasticCfg,
+  ElasticAggsBucketTermsResp,
   CategoryInsight,
   CompanySystemInsight,
   AuthorityInsight,
@@ -19,7 +20,11 @@ export const categories = async (
   {host, port, index}: ElasticCfg,
 ): Promise<Array<CategoryInsight>> => {
   const elastic = await client(host, port);
-  const result = await categoryInsights(elastic, index);
+  const result: ElasticAggsBucketTermsResp = await aggregateTerms(
+    elastic,
+    index,
+    categoryInsightsQuery(),
+  );
 
   return categoryList.map((category) => {
     const insight = result.aggregations.categories.buckets.find(
@@ -41,8 +46,8 @@ export const companiesAndSystems = async (
 ): Promise<Array<CompanySystemInsight>> => {
   const elastic = await client(host, port);
   const [companiesResult, systemsResult] = await Promise.all([
-    companyInsights(elastic, index),
-    systemInsights(elastic, index),
+    aggregateTerms(elastic, index, companyInsightsQuery()),
+    aggregateTerms(elastic, index, systemInsightsQuery()),
   ]);
 
   return Object.keys(companyMap)
@@ -80,7 +85,11 @@ export const authorities = async ({
 }: ElasticCfg): Promise<AuthorityInsight[]> => {
   const elastic = await client(host, port);
   // $FlowFixMe
-  const {hits, aggregations} = await authorityInsights(elastic, index);
+  const {hits, aggregations} = await aggregateNestedTerms(
+    elastic,
+    index,
+    authorityInsightsQuery(),
+  );
 
   const transformed = hits.hits.reduce((memo, {_source}) => {
     if (_source.authorities)

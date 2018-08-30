@@ -98,12 +98,6 @@ export type ElasticCfg = {
 export type ElasticSearchResp = {
   took: number,
   timed_out: boolean,
-  _shards: {
-    total: number,
-    successful: number,
-    skipped: number,
-    failed: number,
-  },
   hits: {
     total: number,
     max_score: number,
@@ -123,11 +117,7 @@ export type ElasticAggregation = {
 
 export type ElasticAggsBucketTermsResp = ElasticSearchResp & {
   aggregations: {
-    [
-      | "categories"
-      | "companies"
-      | "systems"
-      | "authorities"]: ElasticAggregation,
+    ["categories" | "companies" | "systems"]: ElasticAggregation,
   },
 };
 
@@ -139,10 +129,6 @@ export type ElasticAggsBucketNestedTermsResp = ElasticSearchResp & {
     },
   },
 };
-
-export type ElasticAggregationResp =
-  | ElasticAggsBucketTermsResp
-  | ElasticAggsBucketNestedTermsResp;
 
 export type ElasticQuery = {
   query: {},

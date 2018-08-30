@@ -1,14 +1,9 @@
 // @flow
 import {Client as ElasticClient} from "elasticsearch";
 
-import {
-  categoryInsightsQuery,
-  companyInsightsQuery,
-  systemInsightsQuery,
-  authorityInsightsQuery,
-} from "./elastic-queries";
 import type {
   ElasticQuery,
+  ElasticAggsQuery,
   ElasticSearchResp,
   ElasticAggsBucketTermsResp,
   ElasticAggsBucketNestedTermsResp,
@@ -24,50 +19,21 @@ export const client = (() => {
   return fn;
 })();
 
-export const categoryInsights = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticAggsBucketTermsResp> =>
-  elastic.search({
-    index,
-    body: categoryInsightsQuery(),
-  });
-
-export const companyInsights = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticAggsBucketTermsResp> =>
-  elastic.search({
-    index,
-    body: companyInsightsQuery(),
-  });
-
-export const systemInsights = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticAggsBucketTermsResp> =>
-  elastic.search({
-    index,
-    body: systemInsightsQuery(),
-  });
-
-export const authorityInsights = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticAggsBucketNestedTermsResp> =>
-  elastic.search({
-    index,
-    body: authorityInsightsQuery(),
-  });
-
 export const search = (
   elastic: ElasticClient,
   index: string,
   body: ElasticQuery,
   opts: {|from: number, size: number|} = {from: 0, size: 30},
-): Promise<ElasticSearchResp> =>
-  elastic.search({
-    index,
-    body,
-    ...opts,
-  });
+): Promise<ElasticSearchResp> => elastic.search({index, body, ...opts});
+
+export const aggregateTerms = (
+  elastic: ElasticClient,
+  index: string,
+  body: ElasticAggsQuery,
+): Promise<ElasticAggsBucketTermsResp> => elastic.search({index, body});
+
+export const aggregateNestedTerms = (
+  elastic: ElasticClient,
+  index: string,
+  body: ElasticAggsQuery,
+): Promise<ElasticAggsBucketNestedTermsResp> => elastic.search({index, body});
