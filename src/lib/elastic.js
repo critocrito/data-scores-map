@@ -6,9 +6,6 @@ import {
   companyInsightsQuery,
   systemInsightsQuery,
   authorityInsightsQuery,
-  documentCountsQuery,
-  companySystemCountsQuery,
-  authorityCountsQuery,
 } from "./elastic-queries";
 import type {
   ElasticQuery,
@@ -61,33 +58,6 @@ export const authorityInsights = (
   elastic.search({
     index,
     body: authorityInsightsQuery(),
-  });
-
-export const documentCounts = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticSearchResp> =>
-  elastic.search({
-    index,
-    body: documentCountsQuery(),
-  });
-
-export const companySystemCounts = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticSearchResp> =>
-  elastic.search({
-    index,
-    body: companySystemCountsQuery(),
-  });
-
-export const authorityCounts = (
-  elastic: ElasticClient,
-  index: string,
-): Promise<ElasticSearchResp> =>
-  elastic.search({
-    index,
-    body: authorityCountsQuery(),
   });
 
 export const search = (
