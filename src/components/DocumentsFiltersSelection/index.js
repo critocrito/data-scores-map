@@ -40,8 +40,7 @@ class DocumentsFiltersSelection extends React.Component<Props, State> {
     this.setState({checkedItems});
   };
 
-  selectedFilters = (checkedItems: Map<string, boolean>) =>
-    // $FlowFixMe
+  selectedFilters = (checkedItems: Map<string, boolean>): string[] =>
     Array.from(checkedItems.entries())
       .filter(([, isChecked]) => isChecked)
       .map(([name]) => name);
