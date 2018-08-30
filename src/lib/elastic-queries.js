@@ -1,15 +1,22 @@
 // @flow
-export type ElasticQuery = {
-  query: {},
-  _source?: {},
-};
+import type {ElasticAggsQuery, ElasticQuery} from "./types";
 
-export type ElasticAggregation = {
-  aggs: {},
-  size?: number,
-};
+const documentFields = [
+  "title",
+  "search_category",
+  "search_batch",
+  "systems",
+  "companies",
+  "authorities",
+];
 
-export const categoryInsightsQuery = (): ElasticAggregation => ({
+const fullDocumentFields = documentFields.concat([
+  "description",
+  "href",
+  "href_text",
+]);
+
+export const categoryInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
   aggs: {
     categories: {
@@ -21,7 +28,7 @@ export const categoryInsightsQuery = (): ElasticAggregation => ({
   },
 });
 
-export const companyInsightsQuery = (): ElasticAggregation => ({
+export const companyInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
   aggs: {
     companies: {
@@ -33,7 +40,7 @@ export const companyInsightsQuery = (): ElasticAggregation => ({
   },
 });
 
-export const systemInsightsQuery = (): ElasticAggregation => ({
+export const systemInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
   aggs: {
     systems: {
@@ -45,7 +52,7 @@ export const systemInsightsQuery = (): ElasticAggregation => ({
   },
 });
 
-export const authorityInsightsQuery = (): ElasticAggregation => ({
+export const authorityInsightsQuery = (): ElasticAggsQuery => ({
   _source: ["authorities"],
   size: 1000,
   query: {
@@ -157,13 +164,7 @@ export const listDocumentsQuery = (exists: string[]): ElasticQuery => {
   });
   return {
     _source: {
-      includes: [
-        "title",
-        "search_batch",
-        "systems",
-        "companies",
-        "authorities",
-      ],
+      includes: documentFields,
     },
     size: 30,
     query: {
@@ -202,13 +203,7 @@ export const searchDocumentsQuery = (
   });
   return {
     _source: {
-      includes: [
-        "title",
-        "search_batch",
-        "systems",
-        "companies",
-        "authorities",
-      ],
+      includes: documentFields,
     },
     query: {
       bool: {
@@ -237,6 +232,7 @@ export const searchDocumentsQuery = (
 };
 
 export const showDocumentQuery = (id: string): ElasticQuery => ({
+  _source: {includes: fullDocumentFields},
   query: {
     ids: {
       values: [id],

@@ -143,3 +143,13 @@ export type ElasticAggsBucketNestedTermsResp = ElasticSearchResp & {
 export type ElasticAggregationResp =
   | ElasticAggsBucketTermsResp
   | ElasticAggsBucketNestedTermsResp;
+
+export type ElasticQuery = {
+  query: {},
+  _source?: {},
+};
+
+export type ElasticAggsQuery = {
+  aggs: {},
+  size?: number,
+};
