@@ -12,7 +12,7 @@ export type ElasticAggregation = {
 export const categoryInsightsQuery = (): ElasticAggregation => ({
   size: 0,
   aggs: {
-    keywords: {
+    categories: {
       terms: {
         size: 100,
         field: "search_category.keyword",
@@ -74,7 +74,7 @@ export const authorityInsightsQuery = (): ElasticAggregation => ({
         path: "authorities",
       },
       aggs: {
-        name: {
+        authority: {
           terms: {
             size: 1000,
             field: "authorities.name.keyword",

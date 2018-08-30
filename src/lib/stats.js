@@ -5,8 +5,7 @@ import {
   companySystemCounts,
   authorityCounts,
 } from "./elastic";
-import type {Stat} from "./types";
-import type {ElasticCfg} from "./elastic";
+import type {ElasticCfg, Stat} from "./types";
 
 export const documents = async ({
   host,

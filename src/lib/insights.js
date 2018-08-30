@@ -7,8 +7,8 @@ import {
   authorityInsights,
 } from "./elastic";
 import {toId} from "./utils";
-import type {ElasticCfg} from "./elastic";
 import type {
+  ElasticCfg,
   CategoryInsight,
   CompanySystemInsight,
   AuthorityInsight,
@@ -22,7 +22,7 @@ export const categories = async (
   const result = await categoryInsights(elastic, index);
 
   return categoryList.map((category) => {
-    const insight = result.aggregations.keywords.buckets.find(
+    const insight = result.aggregations.categories.buckets.find(
       ({key}) => key === category,
     ) || {key: category, doc_count: 0};
 
@@ -77,14 +77,14 @@ export const authorities = async ({
   host,
   port,
   index,
-}: ElasticCfg): Promise<Array<AuthorityInsight>> => {
+}: ElasticCfg): Promise<AuthorityInsight[]> => {
   const elastic = await client(host, port);
   // $FlowFixMe
   const {hits, aggregations} = await authorityInsights(elastic, index);
 
-  const transformed = hits.hits.reduce(
-    (memo, {_source}) =>
-      _source.authorities.reduce(
+  const transformed = hits.hits.reduce((memo, {_source}) => {
+    if (_source.authorities)
+      return _source.authorities.reduce(
         (acc, {name, location, systems, companies}) => {
           const elem = acc[name]
             ? acc[name]
@@ -99,7 +99,7 @@ export const authorities = async ({
 
           const insight = acc[name]
             ? {doc_count: acc[name].count}
-            : aggregations.authorities.name.buckets.find(
+            : aggregations.authorities.authority.buckets.find(
                 ({key}) => key === name,
               );
 
@@ -120,9 +120,9 @@ export const authorities = async ({
           });
         },
         memo,
-      ),
-    {},
-  );
+      );
+    return memo;
+  }, {});
   // FIXME: Using Object.keys() over Object.values() because of
   //        https://github.com/facebook/flow/issues/2221
   return Object.keys(transformed)

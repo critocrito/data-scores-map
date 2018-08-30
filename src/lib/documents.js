@@ -1,7 +1,6 @@
 // @flow
 import {client, documents, document} from "./elastic";
-import type {HttpDocResp} from "./types";
-import type {ElasticCfg} from "./elastic";
+import type {ElasticCfg, HttpDocResp} from "./types";
 
 export const list = async (
   exists: string[],

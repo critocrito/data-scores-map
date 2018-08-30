@@ -1,7 +1,6 @@
 // @flow
 import {client, searchDocuments} from "./elastic";
-import type {HttpFullDocResp} from "./types";
-import type {ElasticCfg} from "./elastic";
+import type {ElasticCfg, HttpFullDocResp} from "./types";
 
 export const search = async (
   term: string,

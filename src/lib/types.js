@@ -12,7 +12,7 @@ export type DocumentSource = {
   systems?: string[],
   authorities?: Array<{
     name: string,
-    location: [number, number],
+    location: Position,
     companies: string[],
     systems: string[],
   }>,
@@ -88,3 +88,58 @@ export type HttpStatResp = {
 export type HttpError = {
   message: string,
 };
+
+export type ElasticCfg = {
+  host: string,
+  port: number,
+  index: string,
+};
+
+export type ElasticSearchResp = {
+  took: number,
+  timed_out: boolean,
+  _shards: {
+    total: number,
+    successful: number,
+    skipped: number,
+    failed: number,
+  },
+  hits: {
+    total: number,
+    max_score: number,
+    hits: Array<{
+      _id: string,
+      _score: number,
+      _source: DocumentSource,
+    }>,
+  },
+};
+
+export type ElasticAggregation = {
+  doc_count_error_upper_bound: number,
+  sum_other_doc_count: number,
+  buckets: Array<{key: string, doc_count: number}>,
+};
+
+export type ElasticAggsBucketTermsResp = ElasticSearchResp & {
+  aggregations: {
+    [
+      | "categories"
+      | "companies"
+      | "systems"
+      | "authorities"]: ElasticAggregation,
+  },
+};
+
+export type ElasticAggsBucketNestedTermsResp = ElasticSearchResp & {
+  aggregations: {
+    authorities: {
+      doc_count: number,
+      authority: ElasticAggregation,
+    },
+  },
+};
+
+export type ElasticAggregationResp =
+  | ElasticAggsBucketTermsResp
+  | ElasticAggsBucketNestedTermsResp;

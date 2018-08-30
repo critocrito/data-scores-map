@@ -13,68 +13,11 @@ import {
   companySystemCountsQuery,
   authorityCountsQuery,
 } from "./elastic-queries";
-import type {DocumentSource} from "./types";
-
-export type ElasticCfg = {
-  host: string,
-  port: number,
-  index: string,
-};
-
-export type ElasticResp = {
-  took: number,
-  timed_out: boolean,
-  _shards: {
-    total: number,
-    successful: number,
-    skipped: number,
-    failed: number,
-  },
-};
-
-export type ElasticSearchResp = ElasticResp & {
-  hits: {
-    total: number,
-    max_score: number,
-    hits: Array<{
-      _id: string,
-      _score: number,
-      _source: DocumentSource,
-    }>,
-  },
-};
-
-export type ElasticAggsBucketTermsResp = ElasticResp & {
-  hits: {
-    total: number,
-  },
-  aggregations: {
-    [string]: {
-      doc_count_error_upper_bound: number,
-      sum_other_doc_count: number,
-      buckets: Array<{key: string, doc_count: number}>,
-    },
-  },
-};
-
-export type ElasticAggsBucketNestedTermsResp = ElasticResp & {
-  hits: {
-    total: number,
-    hits: Array<{
-      _source: DocumentSource,
-    }>,
-  },
-  aggregations: {
-    [string]: {
-      doc_count: number,
-      [string]: {
-        doc_count_error_upper_bound: number,
-        sum_other_doc_count: number,
-        buckets: Array<{key: string, doc_count: number}>,
-      },
-    },
-  },
-};
+import type {
+  ElasticSearchResp,
+  ElasticAggsBucketTermsResp,
+  ElasticAggsBucketNestedTermsResp,
+} from "./types";
 
 export const client = (() => {
   let cache;
