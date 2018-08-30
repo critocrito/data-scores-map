@@ -15,15 +15,15 @@ OPTIONS http://:api
 
 ### Documents
 # Fetch documents for all categories
-GET http://:api/documents
+GET http://:api/documents?size=10
 :headers
 
 # Fetch documents for companies and systems
-GET http://:api/documents?exists=companies&exists=systems
+GET http://:api/documents?exists=companies&exists=systems&size=10
 :headers
 
 # Fetch documents for authorities
-GET http://:api/documents?exists=authorities
+GET http://:api/documents?exists=authorities&size=10
 :headers
 
 # Search for documents with either companies, systems or authorities
@@ -68,8 +68,11 @@ GET http://:elasticsearch/_search
 
 ### Free Document Search
 # Search for Documents
-GET http://:api/search?q=computer&limit=5
+POST http://:api/search
 :headers
+{
+  "q": "computer"
+}
 
 # Search Elasticsearch for Documents
 GET http://:elasticsearch/_search
