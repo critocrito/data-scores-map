@@ -1,6 +1,10 @@
-.primary-color { color: #9a1a1a; }
-.bg-primary-color { background-color: #9a1a1a; }
-.b--primary-color { border-color: #9a1a1a; }
+:root {
+    --primary-color: rgba(154, 26, 26, 1); /* #9a1a1a */
+}
+
+.primary-color { color: var(--primary-color); }
+.bg-primary-color { background-color: var(--primary-color); }
+.b--primary-color { border-color: var(--primary-color); }
 
 button, input {
     border: none !important;

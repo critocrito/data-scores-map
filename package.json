@@ -110,6 +110,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "mobx-react-devtools": "^6.0.3",
     "nyc": "^12.0.2",
+    "postcss-css-variables": "^0.9.0",
     "postcss-import": "^12.0.0",
     "postcss-load-plugins": "^2.3.0",
     "postcss-loader": "^3.0.0",
