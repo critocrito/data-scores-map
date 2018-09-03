@@ -4,7 +4,6 @@ import {observer} from "mobx-react";
 
 import DocumentsTable from "../DocumentsTable";
 import InsightsVizMap from "../InsightsVizMap";
-import InsightsSideRow from "../InsightsSideRow";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -32,27 +31,18 @@ class InsightsAuthorities extends React.Component<Props> {
   render() {
     const {store} = this.props;
     return (
-      <div className="cf mt3 ph1-ns">
-        <div className="pa1 dn di-ns">
+      <div className="cf mt3 ph1-ns flex flex-column">
+        <div className="w-100 pt3 dn di-ns">
           <InsightsVizMap authorities={store.authorityInsights} />
         </div>
-        <div className="flex">
-          <aside className="w-100 pl1 w-third-ns dn di-ns">
-            <ul className="list pl0">
-              {store.authorityInsights.map(({id, name, count}) => (
-                <InsightsSideRow key={id} name={name} count={count} />
-              ))}
-            </ul>
-          </aside>
-          <section className="w-100 w-two-thirds-ns">
-            <DocumentsTable
-              documents={store.documents}
-              documentsTotal={store.documentsTotal}
-              paginateDocuments={this.fetchDocuments}
-              pageSize={store.pageSize}
-            />
-          </section>
-        </div>
+        <section className="w-100 ph1-ns mt3">
+          <DocumentsTable
+            documents={store.documents}
+            documentsTotal={store.documentsTotal}
+            paginateDocuments={this.fetchDocuments}
+            pageSize={store.pageSize}
+          />
+        </section>
       </div>
     );
   }

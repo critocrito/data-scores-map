@@ -89,7 +89,7 @@ class DocumentsTable extends React.Component<Props, State> {
   render() {
     const {documents} = this.props;
     return documents.length > 0 ? (
-      <table className="collapse">
+      <table className="collapse w-100">
         <thead>
           <tr>
             <td className="pv2 ph3 tc fw6 ttu ba">Document</td>
