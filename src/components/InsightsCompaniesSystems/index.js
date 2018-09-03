@@ -3,6 +3,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 
 import DocumentsTable from "../DocumentsTable";
+import InsightsVizStackedGroups from "../InsightsVizStackedGroups";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -32,6 +33,11 @@ class InsightsCompaniesSystems extends React.Component<Props> {
     const {store} = this.props;
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
+        <div className="w-100 pt3 dn di-ns">
+          <InsightsVizStackedGroups
+            companiesSystems={store.companySystemInsights}
+          />
+        </div>
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable
             documents={store.documents}
