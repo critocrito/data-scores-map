@@ -1,6 +1,7 @@
 // @flow
 import * as React from "react";
 import {Map, ZoomControl, TileLayer} from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "./index.css";
 import InsightsVizMapMarker from "../InsightsVizMapMarker";
@@ -21,18 +22,14 @@ class InsightsVizMap extends React.Component<Props> {
   mapMarkers() {
     const {authorities} = this.props;
 
-    return authorities.map(
-      ({id, name, count, companies, systems, location}) => (
-        <InsightsVizMapMarker
-          key={id}
-          name={name}
-          position={location}
-          count={count}
-          companies={companies}
-          systems={systems}
-        />
-      ),
-    );
+    return authorities.map(({id, name, count, location}) => (
+      <InsightsVizMapMarker
+        key={id}
+        name={name}
+        position={location}
+        count={count}
+      />
+    ));
   }
 
   render() {
@@ -51,7 +48,7 @@ class InsightsVizMap extends React.Component<Props> {
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
         />
-        <div>{markers}</div>
+        <MarkerClusterGroup>{markers}</MarkerClusterGroup>
         <ZoomControl position="bottomright" />
       </Map>
     );
