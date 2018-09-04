@@ -26,7 +26,7 @@ class InsightsCompaniesSystems extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(["companies", "systems"], page);
+    store.fetchDocuments(["companies", "systems"], [], page);
   };
 
   render() {

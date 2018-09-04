@@ -25,7 +25,11 @@ class InsightsCategories extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(["companies", "systems", "authorities"], page);
+    store.fetchDocuments(
+      ["companies", "systems", "authorities"],
+      store.categoryFilters,
+      page,
+    );
   };
 
   render() {
@@ -35,6 +39,7 @@ class InsightsCategories extends React.Component<Props> {
         <div className="w-100 pt3 dn di-ns">
           <InsightsVizBarChart
             categories={store.categoryInsights}
+            fetchDocuments={() => this.fetchDocuments(0)}
             store={store}
           />
         </div>

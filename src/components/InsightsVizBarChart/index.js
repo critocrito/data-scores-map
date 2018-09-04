@@ -17,6 +17,7 @@ type ChartData = {
 
 type Props = {
   categories: CategoryInsight[],
+  fetchDocuments: () => void,
   store: Store,
 };
 
@@ -64,7 +65,7 @@ const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
 @observer
 class InsightsVizBarChart extends React.Component<Props> {
   clickBar = (elements: Array<{_model: {label: string}}>) => {
-    const {store} = this.props;
+    const {store, fetchDocuments} = this.props;
     const [element] = elements;
     if (!element) return;
     const {_model: model} = element;
@@ -75,6 +76,7 @@ class InsightsVizBarChart extends React.Component<Props> {
         ? categories.filter((elem) => elem !== model.label)
         : Array.from(new Set(categories).add(model.label)),
     );
+    fetchDocuments();
   };
 
   render() {

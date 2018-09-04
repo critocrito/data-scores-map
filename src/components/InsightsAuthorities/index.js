@@ -25,7 +25,7 @@ class InsightsAuthorities extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(["authorities"], page);
+    store.fetchDocuments(["authorities"], [], page);
   };
 
   render() {

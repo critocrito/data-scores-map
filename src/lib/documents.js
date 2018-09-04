@@ -5,12 +5,13 @@ import type {ElasticCfg, HttpDocResp} from "./types";
 
 export const list = async (
   exists: string[],
+  categories: string[],
   from: number,
   size: number,
   {host, port, index}: ElasticCfg,
 ): Promise<HttpDocResp> => {
   const elastic = await client(host, port);
-  const query = listDocumentsQuery(exists);
+  const query = listDocumentsQuery(exists, categories);
   const result = await search(elastic, index, query, {from, size});
 
   const {total, hits} = result.hits;

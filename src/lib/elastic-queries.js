@@ -16,8 +16,40 @@ const fullDocumentFields = documentFields.concat([
   "href_text",
 ]);
 
+const mentionsQuery = () => ({
+  bool: {
+    should: [
+      {
+        exists: {
+          field: "companies",
+        },
+      },
+      {
+        exists: {
+          field: "systems",
+        },
+      },
+      {
+        nested: {
+          path: "authorities",
+          query: {
+            bool: {
+              must: {
+                exists: {
+                  field: "authorities",
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+});
+
 export const categoryInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
+  query: mentionsQuery(),
   aggs: {
     categories: {
       terms: {
@@ -30,6 +62,7 @@ export const categoryInsightsQuery = (): ElasticAggsQuery => ({
 
 export const companyInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
+  query: mentionsQuery(),
   aggs: {
     companies: {
       terms: {
@@ -42,6 +75,7 @@ export const companyInsightsQuery = (): ElasticAggsQuery => ({
 
 export const systemInsightsQuery = (): ElasticAggsQuery => ({
   size: 0,
+  query: mentionsQuery(),
   aggs: {
     systems: {
       terms: {
@@ -55,26 +89,7 @@ export const systemInsightsQuery = (): ElasticAggsQuery => ({
 export const authorityInsightsQuery = (): ElasticAggsQuery => ({
   _source: ["authorities"],
   size: 1000,
-  query: {
-    bool: {
-      must: {
-        nested: {
-          path: "authorities",
-          query: {
-            bool: {
-              must: [
-                {
-                  exists: {
-                    field: "authorities",
-                  },
-                },
-              ],
-            },
-          },
-        },
-      },
-    },
-  },
+  query: mentionsQuery(),
   aggs: {
     authorities: {
       nested: {
@@ -139,8 +154,11 @@ export const authorityCountsQuery = (): ElasticQuery => ({
   },
 });
 
-export const listDocumentsQuery = (exists: string[]): ElasticQuery => {
-  const queries = exists.map((field) => {
+export const listDocumentsQuery = (
+  exists: string[],
+  categories: string[],
+): ElasticQuery => {
+  const fieldsFilter = exists.map((field) => {
     if (field === "authorities")
       return {
         nested: {
@@ -162,16 +180,22 @@ export const listDocumentsQuery = (exists: string[]): ElasticQuery => {
       },
     };
   });
+  const categoriesFilter =
+    categories.length > 0
+      ? [
+          {
+            terms: {"search_category.keyword": categories},
+          },
+        ]
+      : [];
+  const filter = categoriesFilter.concat({bool: {should: fieldsFilter}});
+
   return {
     _source: {
       includes: documentFields,
     },
     size: 30,
-    query: {
-      bool: {
-        should: queries,
-      },
-    },
+    query: Object.assign({}, mentionsQuery(), {bool: {filter}}),
   };
 };
 

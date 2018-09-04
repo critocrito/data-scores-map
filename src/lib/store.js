@@ -87,10 +87,16 @@ export default class Store {
 
   fetchDocuments = flow(function* fetchDocuments(
     exists: string[],
+    categories: string[],
     from: number,
   ) {
     try {
-      const {data, total} = yield documents(exists, from, this.pageSize);
+      const {data, total} = yield documents(
+        exists,
+        categories,
+        from,
+        this.pageSize,
+      );
       this.documents = data;
       this.documentsTotal = total;
     } catch (e) {

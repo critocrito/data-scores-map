@@ -18,6 +18,14 @@ OPTIONS http://:api
 GET http://:api/documents?size=10
 :headers
 
+# Fetch documents for all categories
+GET http://:api/documents?exists=companies&exists=systems&exists=authorities&from=0&size=30
+:headers
+
+# Fetch documents for all categories filtered by categories
+GET http://:api/documents?size=10&categories=Computation&categories=Integrated%20dataset
+:headers
+
 # Fetch documents for companies and systems
 GET http://:api/documents?exists=companies&exists=systems&size=10
 :headers
@@ -154,23 +162,6 @@ GET http://:elasticsearch/_search
   }
 }
 
-# keywords aggregation (using composite term buckets with pagination)
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "aggs": {
-    "keywords": {
-      "composite": {
-        "size": 100,
-        "sources": [
-          {"categories": {"terms": {"field": "search_category.keyword"}}}
-        ],
-        "after": {"categories": "Rating equation"}
-      }
-    }
-  }
-}
 
 # companies aggregation
 GET http://:elasticsearch/_search
