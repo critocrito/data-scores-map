@@ -33,7 +33,10 @@ class InsightsCategories extends React.Component<Props> {
     return (
       <div className="flex flex-column">
         <div className="w-100 pt3 dn di-ns">
-          <InsightsVizBarChart categories={store.categoryInsights} />
+          <InsightsVizBarChart
+            categories={store.categoryInsights}
+            store={store}
+          />
         </div>
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable

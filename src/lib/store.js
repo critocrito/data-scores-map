@@ -1,5 +1,5 @@
 // @flow
-import {configure, observable, action, flow, toJS} from "mobx";
+import {configure, observable, computed, action, flow, toJS} from "mobx";
 import {
   document,
   documents,
@@ -66,6 +66,12 @@ export default class Store {
 
   @observable
   documentsFilters: Map<string, string[]> = new Map();
+
+  @computed
+  get categoryFilters() {
+    if (!this.documentsFilters.has("categories")) return [];
+    return toJS(this.documentsFilters.get("categories"));
+  }
 
   fetchDocument = flow(function* fetchDocument(id: string) {
     try {
