@@ -95,25 +95,29 @@ class DocumentsTable extends React.Component<Props, State> {
             <td className="pv2 ph3 tc fw6 ttu ba">Document</td>
             <td className="pv2 ph3 tc fw6 ttu ba">Companies</td>
             <td className="pv2 ph3 tc fw6 ttu ba">Systems</td>
+            <td className="pv2 ph3 tc fw6 ttu ba">Categories</td>
             <td className="pv2 ph3 tc fw6 ttu ba">Source</td>
           </tr>
         </thead>
         <tbody>
-          {documents.map(({id, title, source, companies, systems}) => (
-            <DocumentsTableRow
-              key={id}
-              id={id}
-              title={title}
-              source={source}
-              companies={companies}
-              systems={systems}
-            />
-          ))}
+          {documents.map(
+            ({id, title, categories, source, companies, systems}) => (
+              <DocumentsTableRow
+                key={id}
+                id={id}
+                title={title}
+                categories={categories}
+                source={source}
+                companies={companies}
+                systems={systems}
+              />
+            ),
+          )}
         </tbody>
 
         <tfoot>
           <tr>
-            <td className="pv2 ph3 tc ba" colSpan={4}>
+            <td className="pv2 ph3 tc ba" colSpan={5}>
               {this.pagination()}
             </td>
           </tr>
