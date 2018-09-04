@@ -73,6 +73,12 @@ export default class Store {
     return toJS(this.documentsFilters.get("categories"));
   }
 
+  @computed
+  get authorityFilters() {
+    if (!this.documentsFilters.has("authorities")) return [];
+    return toJS(this.documentsFilters.get("authorities"));
+  }
+
   fetchDocument = flow(function* fetchDocument(id: string) {
     try {
       const {data} = yield document(id);
@@ -87,13 +93,15 @@ export default class Store {
 
   fetchDocuments = flow(function* fetchDocuments(
     exists: string[],
-    categories: string[],
+    // categories: string[],
+    // authorities: string[],
     from: number,
   ) {
     try {
       const {data, total} = yield documents(
         exists,
-        categories,
+        this.categoryFilters,
+        this.authorityFilters,
         from,
         this.pageSize,
       );
@@ -227,6 +235,11 @@ export default class Store {
   clearFilters(type: string) {
     this.documentsFilters.set(type, []);
     this.searchDocuments(0);
+  }
+
+  @action
+  clearAllFilters() {
+    this.documentsFilters = new Map();
   }
 
   @action

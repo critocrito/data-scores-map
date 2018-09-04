@@ -157,6 +157,7 @@ export const authorityCountsQuery = (): ElasticQuery => ({
 export const listDocumentsQuery = (
   exists: string[],
   categories: string[],
+  authorities: string[],
 ): ElasticQuery => {
   const fieldsFilter = exists.map((field) => {
     if (field === "authorities")
@@ -188,7 +189,22 @@ export const listDocumentsQuery = (
           },
         ]
       : [];
-  const filter = categoriesFilter.concat({bool: {should: fieldsFilter}});
+  const authoritiesFilter =
+    authorities.length > 0
+      ? [
+          {
+            nested: {
+              path: "authorities",
+              query: {
+                terms: {"authorities.name.keyword": authorities},
+              },
+            },
+          },
+        ]
+      : [];
+  const filter = categoriesFilter
+    .concat(authoritiesFilter)
+    .concat({bool: {should: fieldsFilter}});
 
   return {
     _source: {

@@ -14,6 +14,7 @@ type Props = {
 class InsightsCategories extends React.Component<Props> {
   componentDidMount() {
     const {store} = this.props;
+    store.clearAllFilters();
     if (store.categoryInsights.length === 0) store.fetchCategoryInsights();
     this.fetchDocuments(0);
   }
@@ -25,11 +26,7 @@ class InsightsCategories extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(
-      ["companies", "systems", "authorities"],
-      store.categoryFilters,
-      page,
-    );
+    store.fetchDocuments(["companies", "systems", "authorities"], page);
   };
 
   render() {

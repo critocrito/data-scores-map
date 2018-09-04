@@ -10,17 +10,25 @@ type Props = {
   name: string,
   count: number,
   position: Position,
+  isActive: boolean,
+  clickHandler: (string) => void,
 };
 
-const InsightsVizMapMarker = ({name, count, position}: Props) => {
+const InsightsVizMapMarker = ({
+  name,
+  count,
+  position,
+  isActive,
+  clickHandler,
+}: Props) => {
   const icon = L.divIcon({
     html: `<span class='marker-content'>${count}</span>`,
-    className: "marker",
+    className: isActive ? "marker-active" : "marker",
     iconSize: L.point(20, 20),
     popupAnchor: L.point(0, 0),
   });
   return (
-    <Marker position={position} icon={icon}>
+    <Marker position={position} icon={icon} onClick={() => clickHandler(name)}>
       <Tooltip>
         <div>
           {name}, Documents: {count}

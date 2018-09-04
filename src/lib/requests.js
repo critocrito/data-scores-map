@@ -38,12 +38,14 @@ export const search = (
 export const documents = (
   exists: string[],
   categories: string[],
+  authorities: string[],
   from: number,
   size: number,
 ): Promise<HttpDocResp> => {
   const url = new URL(`${baseUrl}/documents`);
   exists.forEach((field) => url.searchParams.append("exists", field));
   categories.forEach((field) => url.searchParams.append("categories", field));
+  authorities.forEach((field) => url.searchParams.append("authorities", field));
   url.searchParams.append("from", from.toString());
   url.searchParams.append("size", size.toString());
   return fetch(url).then((resp) => resp.json());

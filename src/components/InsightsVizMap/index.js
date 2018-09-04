@@ -6,11 +6,14 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import "./index.css";
 import InsightsVizMapMarker from "../InsightsVizMapMarker";
 import type {Position, AuthorityInsight} from "../../lib/types";
+import type Store from "../../lib/store";
 
 type Props = {
   authorities: AuthorityInsight[],
   position?: Position,
   zoom?: number,
+  fetchDocuments: () => void,
+  store: Store,
 };
 
 class InsightsVizMap extends React.Component<Props> {
@@ -19,17 +22,36 @@ class InsightsVizMap extends React.Component<Props> {
     zoom: 6,
   };
 
-  mapMarkers() {
-    const {authorities} = this.props;
+  clickMarker = (authority: string) => {
+    const {store, fetchDocuments} = this.props;
+    const authorities = store.authorityFilters || [];
+    store.updateFilters(
+      "authorities",
+      authorities.find((elem) => elem === authority)
+        ? authorities.filter((elem) => elem !== authority)
+        : Array.from(new Set(authorities).add(authority)),
+    );
+    fetchDocuments();
+  };
 
-    return authorities.map(({id, name, count, location}) => (
-      <InsightsVizMapMarker
-        key={id}
-        name={name}
-        position={location}
-        count={count}
-      />
-    ));
+  mapMarkers() {
+    const {authorities, store} = this.props;
+
+    return authorities.map(({id, name, count, location}) => {
+      const isActive = (store.authorityFilters || []).find(
+        (filter) => filter === name,
+      );
+      return (
+        <InsightsVizMapMarker
+          key={id}
+          name={name}
+          position={location}
+          count={count}
+          isActive={isActive != null}
+          clickHandler={this.clickMarker}
+        />
+      );
+    });
   }
 
   render() {

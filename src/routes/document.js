@@ -7,11 +7,13 @@ const router = new Router()
     const {elastic} = ctx;
     const exists = ctx.query.exists || [];
     const categories = ctx.query.categories || [];
+    const authorities = ctx.query.authorities || [];
     const from = ctx.query.from || 0;
     const size = ctx.query.size || 0;
     const result = await list(
       Array.isArray(exists) ? exists : [exists],
       Array.isArray(categories) ? categories : [categories],
+      Array.isArray(authorities) ? authorities : [authorities],
       parseInt(from, 10),
       parseInt(size, 10),
       elastic,

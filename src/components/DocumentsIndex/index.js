@@ -25,6 +25,8 @@ class DocumentsIndex extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    const {store} = this.props;
+    store.clearAllFilters();
     fromEvent("input", this.inputElement)
       .map((ev) => ev.target.value.trim())
       .skipRepeats()

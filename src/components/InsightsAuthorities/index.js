@@ -14,6 +14,7 @@ type Props = {
 class InsightsAuthorities extends React.Component<Props> {
   componentDidMount() {
     const {store} = this.props;
+    store.clearAllFilters();
     if (store.authorityInsights.length === 0) store.fetchAuthorityInsights();
     this.fetchDocuments(0);
   }
@@ -25,7 +26,7 @@ class InsightsAuthorities extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(["authorities"], [], page);
+    store.fetchDocuments(["authorities"], page);
   };
 
   render() {
@@ -33,7 +34,11 @@ class InsightsAuthorities extends React.Component<Props> {
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
         <div className="w-100 pt3 dn di-ns">
-          <InsightsVizMap authorities={store.authorityInsights} />
+          <InsightsVizMap
+            authorities={store.authorityInsights}
+            fetchDocuments={() => this.fetchDocuments(0)}
+            store={store}
+          />
         </div>
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable
