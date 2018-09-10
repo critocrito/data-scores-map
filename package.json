@@ -26,7 +26,7 @@
     "release": "standard-version -i CHANGELOG.md -m \"chore(release): Bumped to version %s.\" --sign",
     "release-candidate": "yarn release -- --prerelease \"rc\"",
     "security-scan": "retire -p",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open -r @babel/register",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open chromium -r @babel/register",
     "test": "cross-env NODE_ENV=test ava",
     "test:watch": "yarn test -- -w"
   },
