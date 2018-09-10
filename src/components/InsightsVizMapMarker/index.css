@@ -26,7 +26,6 @@
 .marker-active {
     display: table;
     background-color: var(--primary-color);
-    /* background-color: rgba(0, 108, 183, 0.7); */
     border: 1px solid black;
     border-radius: 100%;
     text-align: center;
