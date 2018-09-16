@@ -1,7 +1,9 @@
 // @flow
 import * as React from "react";
-import {fromEvent} from "most";
+import {withRouter} from "react-router-dom";
 import {observer} from "mobx-react";
+import {parse as parseQueryString} from "query-string";
+import type {Location} from "react-router-dom";
 
 import "./index.css";
 import Header from "../Header";
@@ -12,45 +14,43 @@ import type Store from "../../lib/store";
 
 type Props = {
   store: Store,
+  location: Location,
 };
 
 type State = {
+  searchTerm: string,
   filtersOpen: boolean,
 };
 
 @observer
 class DocumentsIndex extends React.Component<Props, State> {
   state = {
+    searchTerm: "",
     filtersOpen: false,
   };
 
-  componentDidMount() {
-    const {store} = this.props;
-    store.clearAllFilters();
-    fromEvent("input", this.inputElement)
-      .map((ev) => ev.target.value.trim())
-      .skipRepeats()
-      .debounce(500)
-      // .filter((term) => term.length > 1)
-      .observe((term) => {
-        if (term.length > 1) {
-          this.searchTerm(term);
-          this.fetchDocuments(0);
-        } else {
-          this.clear();
-        }
-      });
+  constructor(props) {
+    super(props);
+    const {q} = parseQueryString(props.location.search);
+    if (q != null) {
+      const searchTerm = Array.isArray(q) ? q[0] : q;
+      this.state.searchTerm = searchTerm;
+      this.fetchDocuments(0);
+    }
   }
+
+  handleChange = (ev) => {
+    this.setState({searchTerm: ev.target.value});
+  };
+
+  handleClear = (ev) => {
+    if (ev.keyCode === 27) this.clear();
+  };
 
   clear = () => {
     const {store} = this.props;
     store.clearDocuments();
-    store.clearSearchTerm();
-  };
-
-  searchTerm = (term: string) => {
-    const {store} = this.props;
-    store.updateSearchTerm(term);
+    this.setState({searchTerm: ""});
   };
 
   toggleFiltersNav = () => {
@@ -60,14 +60,13 @@ class DocumentsIndex extends React.Component<Props, State> {
 
   fetchDocuments = (from: number) => {
     const {store} = this.props;
-    store.searchDocuments(from);
+    const {searchTerm} = this.state;
+    store.searchDocuments(searchTerm.trim(), from);
   };
-
-  inputElement: ?HTMLInputElement;
 
   render() {
     const {store} = this.props;
-    const {filtersOpen} = this.state;
+    const {filtersOpen, searchTerm} = this.state;
 
     return (
       <div>
@@ -78,10 +77,11 @@ class DocumentsIndex extends React.Component<Props, State> {
               <span className="bb bw3 b--primary-color pb3">
                 <input
                   name="q"
-                  // eslint-disable-next-line no-return-assign
-                  ref={(element) => (this.inputElement = element)}
                   className="search-bar input-reset pl4 bb bw3 b--primary-color"
                   type="search"
+                  value={searchTerm}
+                  onChange={this.handleChange}
+                  onKeyDown={this.handleClear}
                   placeholder="Documents Index"
                   autoComplete="off"
                   spellCheck="false"
@@ -124,4 +124,4 @@ class DocumentsIndex extends React.Component<Props, State> {
   }
 }
 
-export default DocumentsIndex;
+export default withRouter(DocumentsIndex);

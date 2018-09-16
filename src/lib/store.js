@@ -62,9 +62,6 @@ export default class Store {
   documentStats: Stat[] = [];
 
   @observable
-  searchTerm: string = "";
-
-  @observable
   documentsFilters: Map<string, string[]> = new Map();
 
   @computed
@@ -112,10 +109,9 @@ export default class Store {
     }
   });
 
-  searchDocuments = flow(function* searchDocuments(from: number) {
+  searchDocuments = flow(function* searchDocuments(term: string, from: number) {
     const filters = toJS(this.documentsFilters, {exportMapsAsObjects: true});
-    const term = this.searchTerm;
-    if (term !== "")
+    if (term !== "") {
       try {
         const {data, total} = yield search(term, filters, from, this.pageSize);
         this.documents = data;
@@ -123,6 +119,9 @@ export default class Store {
       } catch (e) {
         console.log(e);
       }
+    } else {
+      this.clearDocuments();
+    }
   });
 
   fetchCategories = flow(function* fetchCategories() {
@@ -221,11 +220,6 @@ export default class Store {
   });
 
   @action
-  updateSearchTerm(term: string) {
-    this.searchTerm = term;
-  }
-
-  @action
   updateFilters(type: string, filters: string[]) {
     this.documentsFilters.set(type, filters);
     this.searchDocuments(0);
@@ -246,10 +240,5 @@ export default class Store {
   clearDocuments() {
     this.documents = [];
     this.documentsTotal = 0;
-  }
-
-  @action
-  clearSearchTerm() {
-    this.searchTerm = "";
   }
 }
