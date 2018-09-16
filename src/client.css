@@ -1,5 +1,6 @@
 :root {
     --primary-color: rgba(35, 87, 137, 1.0); /* #235789 */
+    --primary-color-hover: rgba(35, 87, 137, 0.4); /* #235789 */
     --accentuated-color: rgba(255, 237, 0, 1); /* #FFED00 */
 }
 

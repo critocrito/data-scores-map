@@ -70,7 +70,9 @@ class InsightsVizMap extends React.Component<Props> {
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
         />
-        <MarkerClusterGroup>{markers}</MarkerClusterGroup>
+        <MarkerClusterGroup showCoverageOnHover={false}>
+          {markers}
+        </MarkerClusterGroup>
         <ZoomControl position="bottomright" />
       </Map>
     );
