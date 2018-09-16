@@ -23,10 +23,10 @@ class DocumentsFilters extends React.Component<Props, State> {
 
   componentDidMount() {
     const {store} = this.props;
-    if (store.categories.length === 0) store.fetchCategories();
     if (store.companies.length === 0 || store.systems.length === 0)
       store.fetchCompaniesSystems();
     if (store.authorities.length === 0) store.fetchAuthorities();
+    if (store.departments.length === 0) store.fetchDepartments();
   }
 
   toggleFilterItem = (filter: string) => {
@@ -56,14 +56,14 @@ class DocumentsFilters extends React.Component<Props, State> {
       clearFilters: () => this.clearFilters(active),
     };
     switch (active) {
-      case "categories":
-        return Object.assign({}, props, {filters: store.categories});
       case "companies":
         return Object.assign({}, props, {filters: store.companies});
       case "systems":
         return Object.assign({}, props, {filters: store.systems});
       case "authorities":
         return Object.assign({}, props, {filters: store.authorities});
+      case "departments":
+        return Object.assign({}, props, {filters: store.departments});
       default:
         return {};
     }
@@ -74,22 +74,6 @@ class DocumentsFilters extends React.Component<Props, State> {
 
     return (
       <div className="flex-ns justify-around-ns pt4 mt2">
-        <div className="w-100 w-25-ns">
-          <DocumentsFiltersItem
-            name="Categories"
-            isActive={activeFilter === "categories"}
-            handler={() => this.toggleFilterItem("categories")}
-          />
-          {activeFilter === "categories" ? (
-            <div className="filter-box absolute-ns z-999-ns">
-              <DocumentsFiltersSelection
-                {...this.filterSelectionProps(activeFilter)}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
         <div className="w-100 w-25-ns">
           <DocumentsFiltersItem
             name="Companies"
@@ -129,6 +113,22 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("authorities")}
           />
           {activeFilter === "authorities" ? (
+            <div className="filter-box absolute-ns z-999-ns">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-100 w-25-ns">
+          <DocumentsFiltersItem
+            name="Departments"
+            isActive={activeFilter === "departments"}
+            handler={() => this.toggleFilterItem("departments")}
+          />
+          {activeFilter === "departments" ? (
             <div className="filter-box absolute-ns z-999-ns">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}

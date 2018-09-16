@@ -3,9 +3,9 @@ import * as React from "react";
 
 import Header from "../Header";
 import InsightsNav from "../InsightsNav";
-import InsightsCategories from "../InsightsCategories";
 import InsightsCompaniesSystems from "../InsightsCompaniesSystems";
 import InsightsAuthorities from "../InsightsAuthorities";
+import InsightsDepartments from "../InsightsDepartments";
 import Context from "../../lib/context";
 
 type Props = {
@@ -16,14 +16,14 @@ const Insights = ({activeInsight}: Props) => {
   let InsightComponent;
 
   switch (activeInsight) {
-    case "companies-systems":
-      InsightComponent = InsightsCompaniesSystems;
-      break;
     case "authorities":
       InsightComponent = InsightsAuthorities;
       break;
+    case "departments":
+      InsightComponent = InsightsDepartments;
+      break;
     default:
-      InsightComponent = InsightsCategories;
+      InsightComponent = InsightsCompaniesSystems;
   }
 
   return (

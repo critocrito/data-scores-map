@@ -27,17 +27,15 @@ export const search = async (
       _source.description != null ? {description: _source.description} : {};
     const href = _source.href != null ? {href: _source.href} : {};
     const hrefText =
-      _source.href_text != null ? {href_text: _source.href_text} : {};
+      _source.href_text != null ? {href_text: _source.href_text.trim()} : {};
     return {
       id: _id,
       title: _source.title ? _source.title.replace(/^PDF/, "").trim() : "",
       source: _source.search_batch,
-      categories: Array.isArray(_source.search_category)
-        ? _source.search_category
-        : [_source.search_category],
       companies: _source.companies || [],
       systems: _source.systems || [],
       authorities: (_source.authorities || []).map(({name}) => name),
+      departments: (_source.departments || []).map(({name}) => name),
       ...description,
       ...href,
       ...hrefText,

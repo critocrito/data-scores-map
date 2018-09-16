@@ -4,9 +4,9 @@ import {
   document,
   documents,
   search,
-  categoryInsights,
   companySystemInsights,
   authorityInsights,
+  departmentInsights,
   documentStats,
 } from "./requests";
 
@@ -14,9 +14,9 @@ import type {
   Document,
   FullDocument,
   Item,
-  CategoryInsight,
   CompanySystemInsight,
   AuthorityInsight,
+  DepartmentInsight,
   Stat,
 } from "./types";
 
@@ -29,9 +29,6 @@ export default class Store {
   loadingState: "done" | "pending" | "error" = "done";
 
   @observable
-  categories: Item[] = [];
-
-  @observable
   companies: Item[] = [];
 
   @observable
@@ -39,6 +36,9 @@ export default class Store {
 
   @observable
   authorities: Item[] = [];
+
+  @observable
+  departments: Item[] = [];
 
   @observable
   document: FullDocument;
@@ -50,25 +50,19 @@ export default class Store {
   documentsTotal: number = 0;
 
   @observable
-  categoryInsights: CategoryInsight[] = [];
-
-  @observable
   companySystemInsights: CompanySystemInsight[] = [];
 
   @observable
   authorityInsights: AuthorityInsight[] = [];
 
   @observable
+  departmentInsights: DepartmentInsight[] = [];
+
+  @observable
   documentStats: Stat[] = [];
 
   @observable
   documentsFilters: Map<string, string[]> = new Map();
-
-  @computed
-  get categoryFilters() {
-    if (!this.documentsFilters.has("categories")) return [];
-    return toJS(this.documentsFilters.get("categories"));
-  }
 
   @computed
   get companyFilters() {
@@ -88,6 +82,12 @@ export default class Store {
     return toJS(this.documentsFilters.get("authorities"));
   }
 
+  @computed
+  get departmentFilters() {
+    if (!this.documentsFilters.has("departments")) return [];
+    return toJS(this.documentsFilters.get("departments"));
+  }
+
   fetchDocument = flow(function* fetchDocument(id: string) {
     try {
       const {data} = yield document(id);
@@ -102,14 +102,11 @@ export default class Store {
 
   fetchDocuments = flow(function* fetchDocuments(
     exists: string[],
-    // categories: string[],
-    // authorities: string[],
     from: number,
   ) {
     try {
       const {data, total} = yield documents(
         exists,
-        this.categoryFilters,
         this.authorityFilters,
         from,
         this.pageSize,
@@ -133,20 +130,6 @@ export default class Store {
       }
     } else {
       this.clearDocuments();
-    }
-  });
-
-  fetchCategories = flow(function* fetchCategories() {
-    this.loadingState = "pending";
-    try {
-      const {data} = yield categoryInsights();
-      this.loadingState = "done";
-      this.categories = data.map(({id, name}) => ({
-        id,
-        name,
-      }));
-    } catch (e) {
-      this.loadingState = "error";
     }
   });
 
@@ -189,12 +172,15 @@ export default class Store {
     }
   });
 
-  fetchCategoryInsights = flow(function* fetchCategoryInsights() {
+  fetchDepartments = flow(function* fetchDepartments() {
     this.loadingState = "pending";
     try {
-      const {data} = yield categoryInsights();
+      const {data} = yield departmentInsights();
       this.loadingState = "done";
-      this.categoryInsights = data;
+      this.departments = data.map(({id, name}) => ({
+        id,
+        name,
+      }));
     } catch (e) {
       this.loadingState = "error";
     }
@@ -217,6 +203,17 @@ export default class Store {
       const {data} = yield authorityInsights();
       this.loadingState = "done";
       this.authorityInsights = data;
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchDepartmentInsights = flow(function* fetchDepartmentInsights() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield departmentInsights();
+      this.loadingState = "done";
+      this.departmentInsights = data;
     } catch (e) {
       this.loadingState = "error";
     }

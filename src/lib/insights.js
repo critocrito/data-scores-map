@@ -1,43 +1,18 @@
 // @flow
 import {client, aggregateTerms, aggregateNestedTerms} from "./elastic";
 import {
-  categoryInsightsQuery,
   companyInsightsQuery,
   systemInsightsQuery,
   authorityInsightsQuery,
+  departmentInsightsQuery,
 } from "./elastic-queries";
 import {toId} from "./utils";
 import type {
   ElasticCfg,
-  ElasticAggsBucketTermsResp,
-  CategoryInsight,
   CompanySystemInsight,
   AuthorityInsight,
+  DepartmentInsight,
 } from "./types";
-
-export const categories = async (
-  categoryList: string[],
-  {host, port, index}: ElasticCfg,
-): Promise<Array<CategoryInsight>> => {
-  const elastic = await client(host, port);
-  const result: ElasticAggsBucketTermsResp = await aggregateTerms(
-    elastic,
-    index,
-    categoryInsightsQuery(),
-  );
-
-  return categoryList.map((category) => {
-    const insight = result.aggregations.categories.buckets.find(
-      ({key}) => key === category,
-    ) || {key: category, doc_count: 0};
-
-    return {
-      name: insight.key,
-      count: insight.doc_count,
-      id: toId(insight.key),
-    };
-  });
-};
 
 export const companiesAndSystems = async (
   companyMap: {[string]: string[]},
@@ -130,6 +105,63 @@ export const authorities = async ({
         },
         memo,
       );
+    return memo;
+  }, {});
+  // FIXME: Using Object.keys() over Object.values() because of
+  //        https://github.com/facebook/flow/issues/2221
+  return Object.keys(transformed)
+    .map((key) => transformed[key])
+    .sort((a, b) => a.name.localeCompare(b.name));
+};
+
+export const departments = async ({
+  host,
+  port,
+  index,
+}: ElasticCfg): Promise<DepartmentInsight[]> => {
+  const elastic = await client(host, port);
+  // $FlowFixMe
+  const {hits, aggregations} = await aggregateNestedTerms(
+    elastic,
+    index,
+    departmentInsightsQuery(),
+  );
+
+  const transformed = hits.hits.reduce((memo, {_source}) => {
+    if (_source.departments)
+      return _source.departments.reduce((acc, {name, systems, companies}) => {
+        const elem = acc[name]
+          ? acc[name]
+          : {
+              name,
+              id: toId(name),
+              count: 0,
+              systems: {},
+              companies: {},
+            };
+
+        const insight = acc[name]
+          ? {doc_count: acc[name].count}
+          : aggregations.departments.department.buckets.find(
+              ({key}) => key === name,
+            );
+
+        return Object.assign(acc, {
+          [name]: Object.assign(elem, {
+            count: insight.doc_count,
+            companies: (companies || []).reduce(
+              (akk, company) =>
+                Object.assign(akk, {[company]: (akk[company] || 0) + 1}),
+              elem.companies,
+            ),
+            systems: (systems || []).reduce(
+              (akk, system) =>
+                Object.assign(akk, {[system]: (akk[system] || 0) + 1}),
+              elem.systems,
+            ),
+          }),
+        });
+      }, memo);
     return memo;
   }, {});
   // FIXME: Using Object.keys() over Object.values() because of

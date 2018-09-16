@@ -93,22 +93,6 @@ class DocumentsDetails extends React.Component<Props, State> {
           </dl>
           <dl className="dn db-ns w-third-ns pa2">
             <dt>
-              <span className="bb bw2 b--primary-color">Categories:</span>
-            </dt>
-            <dd>
-              <ul className="list pl0">
-                {document.categories.length === 0 ? (
-                  <li className="silver">—</li>
-                ) : (
-                  document.categories.map((category) => (
-                    <li key={category} className="silver">
-                      {category}
-                    </li>
-                  ))
-                )}
-              </ul>
-            </dd>
-            <dt>
               <span className="bb bw2 b--primary-color">
                 Companies Mentioned:
               </span>
@@ -157,6 +141,24 @@ class DocumentsDetails extends React.Component<Props, State> {
                   document.authorities.map((authority) => (
                     <li key={authority} className="silver">
                       {authority}
+                    </li>
+                  ))
+                )}
+              </ul>
+            </dd>
+            <dt>
+              <span className="bb bw2 b--primary-color">
+                Departments Mentioned:
+              </span>
+            </dt>
+            <dd>
+              <ul className="list pl0">
+                {document.departments.length === 0 ? (
+                  <li className="silver">—</li>
+                ) : (
+                  document.departments.map((department) => (
+                    <li key={department} className="silver">
+                      {department}
                     </li>
                   ))
                 )}

@@ -3,7 +3,6 @@ import * as React from "react";
 import {observer} from "mobx-react";
 
 import DocumentsTable from "../DocumentsTable";
-import InsightsVizBarChart from "../InsightsVizBarChart";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -11,11 +10,11 @@ type Props = {
 };
 
 @observer
-class InsightsCategories extends React.Component<Props> {
+class InsightsDepartments extends React.Component<Props> {
   componentDidMount() {
     const {store} = this.props;
     store.clearAllFilters();
-    if (store.categoryInsights.length === 0) store.fetchCategoryInsights();
+    if (store.departmentInsights.length === 0) store.fetchDepartmentInsights();
     this.fetchDocuments(0);
   }
 
@@ -26,20 +25,14 @@ class InsightsCategories extends React.Component<Props> {
 
   fetchDocuments = (page: number) => {
     const {store} = this.props;
-    store.fetchDocuments(["companies", "systems", "authorities"], page);
+    store.fetchDocuments(["departments"], page);
   };
 
   render() {
     const {store} = this.props;
     return (
-      <div className="flex flex-column">
-        <div className="w-100 pt3 dn di-ns">
-          <InsightsVizBarChart
-            categories={store.categoryInsights}
-            fetchDocuments={() => this.fetchDocuments(0)}
-            store={store}
-          />
-        </div>
+      <div className="cf mt3 ph1-ns flex flex-column">
+        <div className="w-100 pt3 dn di-ns">Visualization</div>
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable
             documents={store.documents}
@@ -53,4 +46,4 @@ class InsightsCategories extends React.Component<Props> {
   }
 }
 
-export default InsightsCategories;
+export default InsightsDepartments;

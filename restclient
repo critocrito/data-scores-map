@@ -14,24 +14,16 @@ GET http://:api
 OPTIONS http://:api
 
 ### Documents
-# Fetch documents for all categories
-GET http://:api/documents?size=10
-:headers
-
-# Fetch documents for all categories
-GET http://:api/documents?exists=companies&exists=systems&exists=authorities&from=0&size=30
-:headers
-
-# Fetch documents for all categories filtered by categories
-GET http://:api/documents?size=10&categories=Computation&categories=Integrated%20dataset
-:headers
-
 # Fetch documents for companies and systems
 GET http://:api/documents?exists=companies&exists=systems&size=10
 :headers
 
 # Fetch documents for authorities
 GET http://:api/documents?exists=authorities&size=10
+:headers
+
+# Fetch documents for departments
+GET http://:api/documents?exists=departments&size=10
 :headers
 
 # Search for documents with either companies, systems or authorities
@@ -126,17 +118,16 @@ GET http://:elasticsearch/_search
 }
 
 ### Data Insights
-
-# category insights
-GET http://:api/insights/categories
-:headers
-
 # company insights
 GET http://:api/insights/companies-systems
 :headers
 
 # authority insights
 GET http://:api/insights/authorities
+:headers
+
+# authority insights
+GET http://:api/insights/departments
 :headers
 
 ### Stats

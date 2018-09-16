@@ -8,6 +8,7 @@ const documentFields = [
   "systems",
   "companies",
   "authorities",
+  "departments",
 ];
 
 const fullDocumentFields = documentFields.concat([
@@ -43,20 +44,21 @@ const mentionsQuery = () => ({
           },
         },
       },
-    ],
-  },
-});
-
-export const categoryInsightsQuery = (): ElasticAggsQuery => ({
-  size: 0,
-  query: mentionsQuery(),
-  aggs: {
-    categories: {
-      terms: {
-        size: 100,
-        field: "search_category.keyword",
+      {
+        nested: {
+          path: "departments",
+          query: {
+            bool: {
+              must: {
+                exists: {
+                  field: "departments",
+                },
+              },
+            },
+          },
+        },
       },
-    },
+    ],
   },
 });
 
@@ -100,6 +102,27 @@ export const authorityInsightsQuery = (): ElasticAggsQuery => ({
           terms: {
             size: 1000,
             field: "authorities.name.keyword",
+          },
+        },
+      },
+    },
+  },
+});
+
+export const departmentInsightsQuery = (): ElasticAggsQuery => ({
+  _source: ["departments"],
+  size: 1000,
+  query: mentionsQuery(),
+  aggs: {
+    departments: {
+      nested: {
+        path: "departments",
+      },
+      aggs: {
+        department: {
+          terms: {
+            size: 1000,
+            field: "departments.name.keyword",
           },
         },
       },
@@ -156,7 +179,6 @@ export const authorityCountsQuery = (): ElasticQuery => ({
 
 export const listDocumentsQuery = (
   exists: string[],
-  categories: string[],
   authorities: string[],
 ): ElasticQuery => {
   const fieldsFilter = exists.map((field) => {
@@ -181,14 +203,6 @@ export const listDocumentsQuery = (
       },
     };
   });
-  const categoriesFilter =
-    categories.length > 0
-      ? [
-          {
-            terms: {"search_category.keyword": categories},
-          },
-        ]
-      : [];
   const authoritiesFilter =
     authorities.length > 0
       ? [
@@ -202,9 +216,7 @@ export const listDocumentsQuery = (
           },
         ]
       : [];
-  const filter = categoriesFilter
-    .concat(authoritiesFilter)
-    .concat({bool: {should: fieldsFilter}});
+  const filter = authoritiesFilter.concat({bool: {should: fieldsFilter}});
 
   return {
     _source: {
@@ -220,21 +232,16 @@ export const searchDocumentsQuery = (
   filters: {[string]: string[]},
 ): ElasticQuery => {
   const queries = Object.keys(filters).map((field) => {
-    if (field === "authorities")
+    if (field === "authorities" || field === "departments")
       return {
         nested: {
           path: field,
           query: {
-            terms: {"authorities.name.keyword": filters[field]},
+            terms: {[`${field}.name.keyword`]: filters[field]},
           },
         },
       };
-    if (field === "categories")
-      return {
-        terms: {
-          search_category: filters[field],
-        },
-      };
+
     return {
       terms: {
         [field]: filters[field],

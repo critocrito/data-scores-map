@@ -16,6 +16,12 @@ export type DocumentSource = {
     companies: string[],
     systems: string[],
   }>,
+  departments?: Array<{
+    name: string,
+    location: Position,
+    companies: string[],
+    systems: string[],
+  }>,
 };
 
 export type Item = {
@@ -27,8 +33,6 @@ export type Insight = Item & {
   count: number,
 };
 
-export type CategoryInsight = Insight;
-
 export type CompanySystemInsight = Insight & {
   systems: Array<Insight>,
 };
@@ -37,6 +41,11 @@ export type AuthorityInsight = Insight & {
   companies: {[string]: number},
   systems: {[string]: number},
   location: Position,
+};
+
+export type DepartmentInsight = Insight & {
+  companies: {[string]: number},
+  systems: {[string]: number},
 };
 
 export type Stat = {
@@ -48,10 +57,10 @@ export type Document = {
   id: string,
   title: string,
   source: string,
-  categories: string[],
   companies: string[],
   systems: string[],
   authorities: string[],
+  departments: string[],
   // highlights: {[string]: Array<string>},
   // score?: number,
 };
@@ -72,9 +81,6 @@ type HttpDocumentResp = {
 
 export type HttpDocResp = {data: Document[]} & HttpDocumentResp;
 export type HttpFullDocResp = {data: FullDocument[]} & HttpDocumentResp;
-export type HttpCategoryInsightResp = {
-  data: CategoryInsight[],
-} & HttpInsightResp;
 export type HttpCompSysInsightResp = {
   data: CompanySystemInsight[],
 } & HttpInsightResp;
@@ -117,7 +123,7 @@ export type ElasticAggregation = {
 
 export type ElasticAggsBucketTermsResp = ElasticSearchResp & {
   aggregations: {
-    ["categories" | "companies" | "systems"]: ElasticAggregation,
+    ["companies" | "systems"]: ElasticAggregation,
   },
 };
 

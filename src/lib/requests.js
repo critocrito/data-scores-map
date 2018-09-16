@@ -1,6 +1,5 @@
 // @flow
 import type {
-  HttpCategoryInsightResp,
   HttpCompSysInsightResp,
   HttpAuthorityInsightResp,
   HttpStatResp,
@@ -37,14 +36,12 @@ export const search = (
 
 export const documents = (
   exists: string[],
-  categories: string[],
   authorities: string[],
   from: number,
   size: number,
 ): Promise<HttpDocResp> => {
   const url = new URL(`${baseUrl}/documents`);
   exists.forEach((field) => url.searchParams.append("exists", field));
-  categories.forEach((field) => url.searchParams.append("categories", field));
   authorities.forEach((field) => url.searchParams.append("authorities", field));
   url.searchParams.append("from", from.toString());
   url.searchParams.append("size", size.toString());
@@ -54,11 +51,6 @@ export const documents = (
 export const document = (id: string): Promise<HttpFullDocResp> =>
   fetch(`${baseUrl}/documents/${id}`).then((resp) => resp.json());
 
-export const categoryInsights = (): Promise<HttpCategoryInsightResp> => {
-  const url = `${baseUrl}/insights/categories`;
-  return fetch(url).then((resp) => resp.json());
-};
-
 export const companySystemInsights = (): Promise<HttpCompSysInsightResp> => {
   const url = `${baseUrl}/insights/companies-systems`;
   return fetch(url).then((resp) => resp.json());
@@ -66,6 +58,11 @@ export const companySystemInsights = (): Promise<HttpCompSysInsightResp> => {
 
 export const authorityInsights = (): Promise<HttpAuthorityInsightResp> => {
   const url = `${baseUrl}/insights/authorities`;
+  return fetch(url).then((resp) => resp.json());
+};
+
+export const departmentInsights = (): Promise<HttpAuthorityInsightResp> => {
+  const url = `${baseUrl}/insights/departments`;
   return fetch(url).then((resp) => resp.json());
 };
 

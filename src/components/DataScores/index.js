@@ -18,17 +18,12 @@ const DataScores = () => (
       <Route
         exact
         path="/"
-        render={() => <Redirect to="/insights/categories" />}
+        render={() => <Redirect to="/insights/companies-systems" />}
       />
       <Route
         exact
         path="/insights"
-        render={() => <Redirect to="/insights/categories" />}
-      />
-      <Route
-        exact
-        path="/insights/categories"
-        render={() => <Insights activeInsight="categories" />}
+        render={() => <Redirect to="/insights/companies-systems" />}
       />
       <Route
         exact
@@ -39,6 +34,11 @@ const DataScores = () => (
         exact
         path="/insights/authorities"
         render={() => <Insights activeInsight="authorities" />}
+      />
+      <Route
+        exact
+        path="/insights/departments"
+        render={() => <Insights activeInsight="departments" />}
       />
       <Route
         exact
