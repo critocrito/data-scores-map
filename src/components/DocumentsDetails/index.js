@@ -68,7 +68,7 @@ class DocumentsDetails extends React.Component<Props, State> {
               <h1>{document.title}</h1>
             </dd>
             <dt>
-              <span className="bb bw2 b--primary-color">Description:</span>
+              <span className="bb bw2 b--primary-color">Excerpt:</span>
             </dt>
             <dd>
               <p>{document.description}</p>

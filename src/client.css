@@ -1,10 +1,18 @@
 :root {
-    --primary-color: rgba(154, 26, 26, 1); /* #9a1a1a */
+    --primary-color: rgba(35, 87, 137, 1.0); /* #235789 */
+    --accentuated-color: rgba(255, 237, 0, 1); /* #FFED00 */
 }
 
 .primary-color { color: var(--primary-color); }
 .bg-primary-color { background-color: var(--primary-color); }
 .b--primary-color { border-color: var(--primary-color); }
+.accentuated-color { color: var(--accentuated-color); }
+.bg-accentuated-color { border-color: var(--accentuated-color); }
+.b--accentuated-color { border-color: var(--accentuated-color); }
+.bg-gradient {
+    background-color: #c4c4c4; /* For browsers that do not support gradients */
+    background-image: linear-gradient(#fff, #fff, #eaeef0);
+}
 
 button, input {
     border: none !important;

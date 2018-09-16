@@ -42,7 +42,7 @@ class DocumentsTable extends React.Component<Props, State> {
           role="button"
           tabIndex={0}
         >
-          &#60;{" "}
+          &#60; Previous&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
       );
     const right =
@@ -55,58 +55,37 @@ class DocumentsTable extends React.Component<Props, State> {
           role="button"
           tabIndex={0}
         >
-          {" "}
-          &#62;
+          &nbsp;&nbsp;&nbsp;&nbsp;Next &#62;
         </span>
       ) : (
         <span key="right" />
       );
-    return [left]
-      .concat(
-        [...Array(pages).keys()].map(
-          (x) =>
-            x === page ? (
-              <span key={x} className="b">
-                {x + 1}{" "}
-              </span>
-            ) : (
-              <span
-                className="pointer"
-                key={x}
-                onClick={() => this.paginate(x)}
-                onKeyPress={() => this.paginate(x)}
-                role="button"
-                tabIndex={0}
-              >
-                {x + 1}{" "}
-              </span>
-            ),
-        ),
-      )
-      .concat(right);
+    return [left, right];
   }
 
   render() {
-    const {documents} = this.props;
+    const {documents, documentsTotal} = this.props;
     return documents.length > 0 ? (
       <table className="collapse w-100">
         <thead>
           <tr>
-            <td className="pv2 ph3 tc fw6 ttu ba">Document</td>
-            <td className="pv2 ph3 tc fw6 ttu ba">Companies</td>
-            <td className="pv2 ph3 tc fw6 ttu ba">Systems</td>
-            <td className="pv2 ph3 tc fw6 ttu ba">Categories</td>
-            <td className="pv2 ph3 tc fw6 ttu ba">Source</td>
+            <td className="pv2 ph3 tc fw6 ttu bb">
+              Document ({documentsTotal})
+            </td>
+            <td className="pv2 ph3 tc fw6 ttu bb">Authorities</td>
+            <td className="pv2 ph3 tc fw6 ttu bb">Companies</td>
+            <td className="pv2 ph3 tc fw6 ttu bb">Systems</td>
+            <td className="pv2 ph3 tc fw6 ttu bb">Source</td>
           </tr>
         </thead>
         <tbody>
           {documents.map(
-            ({id, title, categories, source, companies, systems}) => (
+            ({id, title, authorities, source, companies, systems}) => (
               <DocumentsTableRow
                 key={id}
                 id={id}
                 title={title}
-                categories={categories}
+                authorities={authorities}
                 source={source}
                 companies={companies}
                 systems={systems}
@@ -117,7 +96,7 @@ class DocumentsTable extends React.Component<Props, State> {
 
         <tfoot>
           <tr>
-            <td className="pv2 ph3 tc ba" colSpan={5}>
+            <td className="pv2 ph3 tc" colSpan={5}>
               {this.pagination()}
             </td>
           </tr>

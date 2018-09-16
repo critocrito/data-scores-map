@@ -1,6 +1,8 @@
+@import "../../client.css";
+
 .hover-nav-link:focus,
 .hover-nav-link:hover {
-    border-color: #9a1a1a;
-    border-width: 0.5rem;
-    border-bottom-style: solid;
+    border-color: var(--primary-color);
+    border-width: 0.2rem;
+    border-bottom-style: dotted;
 }

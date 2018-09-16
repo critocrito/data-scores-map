@@ -8,7 +8,7 @@ export const toId = (key: string): string =>
 export const sourcify = (source: string): string => {
   switch (source) {
     default:
-      return "Government Website";
+      return ".gov.uk";
   }
 };
 

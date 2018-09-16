@@ -14,48 +14,39 @@ const InsightsNav = ({activeInsight, selectInsight}: Props) => {
   return (
     <div className="cf ph2-ns flex-ns justify-around-ns">
       <div
-        className={`w-100 w-third-ns ${isCategories ? "" : "pointer"}`}
+        className={`w-100 w-third-ns f4 mt4 mb4 pa3 tc b primary-color ${
+          isCategories ? "" : "pointer"
+        }`}
         onClick={() => selectInsight("categories")}
         onKeyPress={() => selectInsight("categories")}
         role="button"
         tabIndex={0}
       >
-        <div className="f3 h3 pa3 center ba b--silver">Categories</div>
-        <div
-          className={`bl h1 b--silver ${
-            isCategories ? "bg-primary-color" : "bg-light-silver"
-          }`}
-        />
+        By: <span className="ttu">Categories</span>{" "}
       </div>
+
       <div
-        className={`w-100 w-third-ns ${isCompaniesSystems ? "" : "pointer"}`}
+        className={`w-100 w-third-ns f4 mt4 mb4 pa3 tc b primary-color ${
+          isCompaniesSystems ? "" : "pointer"
+        }`}
         onClick={() => selectInsight("companies-systems")}
         onKeyPress={() => selectInsight("companies-systems")}
         role="button"
         tabIndex={0}
       >
-        <div className="f3 h3 pa3 center ba b--light-silver">
-          Companies & Systems
-        </div>
-        <div
-          className={`bl h1 b--silver ${
-            isCompaniesSystems ? "bg-primary-color" : "bg-light-silver"
-          }`}
-        />
+        By: <span className="ttu">Companies & Systems</span>{" "}
       </div>
+
       <div
-        className={`w-100 w-third-ns ${isAuthorities ? "" : "pointer"}`}
+        className={`w-100 w-third-ns f4 mt4 mb4 pa3 tc b primary-color ttu ${
+          isAuthorities ? "" : "pointer"
+        }`}
         onClick={() => selectInsight("authorities")}
         onKeyPress={() => selectInsight("authorities")}
         role="button"
         tabIndex={0}
       >
-        <div className="f3 h3 pa3 center ba b--light-silver">Locations</div>
-        <div
-          className={`bl h1 b--silver ${
-            isAuthorities ? "bg-primary-color" : "bg-light-silver"
-          }`}
-        />
+        By: <span className="ttu">Locations</span>{" "}
       </div>
     </div>
   );

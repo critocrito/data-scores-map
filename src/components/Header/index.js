@@ -11,12 +11,12 @@ type Props = {
 
 const Header = ({location}: Props) => {
   const activeClass = "bb bw3 b--primary-color";
-  const isDocumentsLocations = /^\/documents/.test(location.pathname);
+  const isDocumentsLocation = /^\/documents/.test(location.pathname);
 
   return (
     <header className="cf ph2-ns flex-ns items-center">
-      <h1 className="f1 w-100 w-60-ns pa2">
-        <Link className="link pa2 ttu white bg-primary-color" to="/">
+      <h1 className="f3 w-100 w-60-ns pa2">
+        <Link className="link pa2 ttu white primary-color" to="/">
           Data Scores in the UK
         </Link>
       </h1>
@@ -25,8 +25,8 @@ const Header = ({location}: Props) => {
           <li className="pa2 dib">
             <Link
               to="/documents"
-              className={`link nowrap pa2 primary-color ${
-                isDocumentsLocations ? activeClass : "hover-nav-link"
+              className={`link nowrap pa2 black ${
+                isDocumentsLocation ? activeClass : "hover-nav-link"
               }`}
             >
               Documents Index
