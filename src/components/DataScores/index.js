@@ -1,6 +1,11 @@
 // @flow
 import * as React from "react";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import Insights from "../Insights";
 import DocumentsIndex from "../DocumentsIndex";
@@ -10,7 +15,31 @@ import Context from "../../lib/context";
 const DataScores = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={Insights} />
+      <Route
+        exact
+        path="/"
+        render={() => <Redirect to="/insights/categories" />}
+      />
+      <Route
+        exact
+        path="/insights"
+        render={() => <Redirect to="/insights/categories" />}
+      />
+      <Route
+        exact
+        path="/insights/categories"
+        render={() => <Insights activeInsight="categories" />}
+      />
+      <Route
+        exact
+        path="/insights/companies-systems"
+        render={() => <Insights activeInsight="companies-systems" />}
+      />
+      <Route
+        exact
+        path="/insights/authorities"
+        render={() => <Insights activeInsight="authorities" />}
+      />
       <Route
         exact
         path="/documents"

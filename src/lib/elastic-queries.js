@@ -160,7 +160,7 @@ export const listDocumentsQuery = (
   authorities: string[],
 ): ElasticQuery => {
   const fieldsFilter = exists.map((field) => {
-    if (field === "authorities")
+    if (field === "authorities" || field === "departments")
       return {
         nested: {
           path: field,

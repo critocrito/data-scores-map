@@ -104,6 +104,7 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   output: {
+    publicPath: "/",
     filename: "static/js/[name].[hash:8].js",
     chunkFilename: "static/js/[name].[chunkhash:8].chunk.js",
   },
@@ -174,6 +175,7 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       inject: true,
+      cache: true,
       template: "./public/index.html",
       filename: "./index.html",
     }),
