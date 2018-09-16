@@ -5,13 +5,10 @@ import {observer} from "mobx-react";
 import "./index.css";
 import DocumentsFiltersSelection from "../DocumentsFiltersSelection";
 import DocumentsFiltersItem from "../DocumentsFiltersItem";
-import DocumentsFiltersButton from "../DocumentsFiltersButton";
 import type Store from "../../lib/store";
 
 type Props = {
   store: Store,
-  isOpen: boolean,
-  toggleFilters: () => void,
 };
 
 type State = {
@@ -38,11 +35,7 @@ class DocumentsFilters extends React.Component<Props, State> {
   };
 
   toggleFilterNav = () => {
-    const {toggleFilters} = this.props;
-    toggleFilters();
-    this.setState({
-      activeFilter: "",
-    });
+    this.setState({activeFilter: ""});
   };
 
   updateFilters = (type: string, filters: string[]) => {
@@ -55,102 +48,95 @@ class DocumentsFilters extends React.Component<Props, State> {
     store.clearFilters(type);
   };
 
+  filterSelectionProps = (active: string) => {
+    const {store} = this.props;
+    const props = {
+      selections: store.documentsFilters.get(active) || [],
+      updateFilters: (filters: string[]) => this.updateFilters(active, filters),
+      clearFilters: () => this.clearFilters(active),
+    };
+    switch (active) {
+      case "categories":
+        return Object.assign({}, props, {filters: store.categories});
+      case "companies":
+        return Object.assign({}, props, {filters: store.companies});
+      case "systems":
+        return Object.assign({}, props, {filters: store.systems});
+      case "authorities":
+        return Object.assign({}, props, {filters: store.authorities});
+      default:
+        return {};
+    }
+  };
+
   render() {
-    const {store, isOpen} = this.props;
     const {activeFilter} = this.state;
 
     return (
-      <div>
-        <div className="relative ml2 mr2">
-          <div className="flex-ns justify-around-ns mt4 pt4">
-            <div className="w-100 w-25-ns ba">
-              <DocumentsFiltersItem
-                name="Categories"
-                isActive={activeFilter === "categories"}
-                handler={() => this.toggleFilterItem("categories")}
-              />
-              {activeFilter === "categories" ? (
-                <DocumentsFiltersSelection
-                  filters={store.categories}
-                  selections={store.documentsFilters.get("categories") || []}
-                  toggleNav={() => this.toggleFilterNav()}
-                  updateFilters={(filters) =>
-                    this.updateFilters("categories", filters)
-                  }
-                  clearFilters={() => this.clearFilters("categories")}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="w-100 w-25-ns ba">
-              <DocumentsFiltersItem
-                name="Companies"
-                isActive={activeFilter === "companies"}
-                handler={() => this.toggleFilterItem("companies")}
-              />
-              {activeFilter === "companies" ? (
-                <DocumentsFiltersSelection
-                  filters={store.companies}
-                  selections={store.documentsFilters.get("companies") || []}
-                  toggleNav={() => this.toggleFilterNav()}
-                  updateFilters={(filters) =>
-                    this.updateFilters("companies", filters)
-                  }
-                  clearFilters={() => this.clearFilters("companies")}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="w-100 w-25-ns ba">
-              <DocumentsFiltersItem
-                name="Systems"
-                isActive={activeFilter === "systems"}
-                handler={() => this.toggleFilterItem("systems")}
-              />
-              {activeFilter === "systems" ? (
-                <DocumentsFiltersSelection
-                  filters={store.systems}
-                  selections={store.documentsFilters.get("systems") || []}
-                  toggleNav={() => this.toggleFilterNav()}
-                  updateFilters={(filters) =>
-                    this.updateFilters("systems", filters)
-                  }
-                  clearFilters={() => this.clearFilters("systems")}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="w-100 w-25-ns ba">
-              <DocumentsFiltersItem
-                name="Authorities"
-                isActive={activeFilter === "authorities"}
-                handler={() => this.toggleFilterItem("authorities")}
-              />
-              {activeFilter === "authorities" ? (
-                <DocumentsFiltersSelection
-                  filters={store.authorities}
-                  selections={store.documentsFilters.get("authorities") || []}
-                  toggleNav={() => this.toggleFilterNav()}
-                  updateFilters={(filters) =>
-                    this.updateFilters("authorities", filters)
-                  }
-                  clearFilters={() => this.clearFilters("authorities")}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="dn-ns db pt2">
-          <DocumentsFiltersButton
-            isOpen={isOpen}
-            clickHandler={this.toggleFilterNav}
+      <div className="flex-ns justify-around-ns pt4 mt2">
+        <div className="w-100 w-25-ns">
+          <DocumentsFiltersItem
+            name="Categories"
+            isActive={activeFilter === "categories"}
+            handler={() => this.toggleFilterItem("categories")}
           />
+          {activeFilter === "categories" ? (
+            <div className="filter-box absolute-ns z-999-ns">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-100 w-25-ns">
+          <DocumentsFiltersItem
+            name="Companies"
+            isActive={activeFilter === "companies"}
+            handler={() => this.toggleFilterItem("companies")}
+          />
+          {activeFilter === "companies" ? (
+            <div className="filter-box absolute-ns z-999-ns">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-100 w-25-ns">
+          <DocumentsFiltersItem
+            name="Systems"
+            isActive={activeFilter === "systems"}
+            handler={() => this.toggleFilterItem("systems")}
+          />
+          {activeFilter === "systems" ? (
+            <div className="filter-box absolute-ns z-999-ns">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-100 w-25-ns">
+          <DocumentsFiltersItem
+            name="Authorities"
+            isActive={activeFilter === "authorities"}
+            handler={() => this.toggleFilterItem("authorities")}
+          />
+          {activeFilter === "authorities" ? (
+            <div className="filter-box absolute-ns z-999-ns">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Header = ({location}: Props) => {
-  const activeClass = "bb bw3 b--primary-color";
+  const activeClass = "bb nav-link-active";
   const isDocumentsLocation = /^\/documents/.test(location.pathname);
 
   return (

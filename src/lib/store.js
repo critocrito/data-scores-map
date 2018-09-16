@@ -71,6 +71,18 @@ export default class Store {
   }
 
   @computed
+  get companyFilters() {
+    if (!this.documentsFilters.has("companies")) return [];
+    return toJS(this.documentsFilters.get("companies"));
+  }
+
+  @computed
+  get systemFilters() {
+    if (!this.documentsFilters.has("systems")) return [];
+    return toJS(this.documentsFilters.get("systems"));
+  }
+
+  @computed
   get authorityFilters() {
     if (!this.documentsFilters.has("authorities")) return [];
     return toJS(this.documentsFilters.get("authorities"));
@@ -222,13 +234,11 @@ export default class Store {
   @action
   updateFilters(type: string, filters: string[]) {
     this.documentsFilters.set(type, filters);
-    this.searchDocuments(0);
   }
 
   @action
   clearFilters(type: string) {
     this.documentsFilters.set(type, []);
-    this.searchDocuments(0);
   }
 
   @action
