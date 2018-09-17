@@ -51,18 +51,22 @@ class DocumentsSearchResults extends React.Component<Props, State> {
             Found <span className="b">{store.documentsTotal} documents</span>{" "}
             for the term: <em>{searchTerm}</em>
           </div>
-          <div className="ma2 w-25 tr">
-            <button
-              type="button"
-              className="grid-button h2 w2"
-              onClick={() => this.switchResultsView("card")}
-            />
-            <button
-              type="button"
-              className="bars-button h2 w2"
-              onClick={() => this.switchResultsView("list")}
-            />
-          </div>
+          {store.documents.length > 0 ? (
+            <div className="ma2 w-25 tr">
+              <button
+                type="button"
+                className="grid-button h2 w2"
+                onClick={() => this.switchResultsView("card")}
+              />
+              <button
+                type="button"
+                className="bars-button h2 w2"
+                onClick={() => this.switchResultsView("list")}
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         {resultsView === "card" ? (
           <DocumentsCards {...viewProps} />

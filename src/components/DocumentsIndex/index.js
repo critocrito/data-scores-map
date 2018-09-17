@@ -15,6 +15,7 @@ type Props = {
 
 type State = {
   searchTerm: string,
+  lastSearchTerm: null | string,
   filtersOpen: boolean,
 };
 
@@ -22,6 +23,7 @@ type State = {
 class DocumentsIndex extends React.Component<Props, State> {
   state = {
     searchTerm: "",
+    lastSearchTerm: null,
     filtersOpen: false,
   };
 
@@ -36,8 +38,9 @@ class DocumentsIndex extends React.Component<Props, State> {
   handleSubmit = (ev) => {
     const {store} = this.props;
     const {searchTerm} = this.state;
+    if (searchTerm.length === 0) return;
     ev.preventDefault();
-    this.setState({filtersOpen: false});
+    this.setState({filtersOpen: false, lastSearchTerm: searchTerm.trim()});
     store.searchDocuments(searchTerm.trim(), 0);
   };
 
@@ -54,7 +57,7 @@ class DocumentsIndex extends React.Component<Props, State> {
 
   render() {
     const {store} = this.props;
-    const {filtersOpen, searchTerm} = this.state;
+    const {filtersOpen, searchTerm, lastSearchTerm} = this.state;
 
     return (
       <div>
@@ -102,9 +105,9 @@ class DocumentsIndex extends React.Component<Props, State> {
           </div>
           {filtersOpen ? <DocumentsFilters store={store} /> : <div />}
           <div className="pt5">
-            {store.documentsTotal > 0 ? (
+            {lastSearchTerm != null ? (
               <DocumentsSearchResults
-                searchTerm={searchTerm.trim()}
+                searchTerm={lastSearchTerm}
                 store={store}
               />
             ) : (
