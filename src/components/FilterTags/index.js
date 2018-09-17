@@ -44,9 +44,9 @@ const FilterTags = ({
               companyFilters.filter((f) => f !== filter),
             )
           }
-          className="nowrap primary-color bg-transparent"
+          className="ma2 bg-transparent"
         >
-          <span className="f6 br-pill ba bw1 b--primary-color pa1 ma1 dim dib">
+          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim dib">
             {filter}
           </span>
         </button>
@@ -58,9 +58,9 @@ const FilterTags = ({
           onClick={() =>
             updateFilters("systems", systemFilters.filter((f) => f !== filter))
           }
-          className="nowrap primary-color bg-transparent"
+          className="ma2 bg-transparent"
         >
-          <span className="f6 br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>
@@ -75,9 +75,9 @@ const FilterTags = ({
               authorityFilters.filter((f) => f !== filter),
             )
           }
-          className="primary-color bg-transparent"
+          className="ma2 bg-transparent"
         >
-          <span className="f6 br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>
@@ -92,9 +92,9 @@ const FilterTags = ({
               departmentFilters.filter((f) => f !== filter),
             )
           }
-          className="primary-color bg-transparent"
+          className="ma2 bg-transparent"
         >
-          <span className="f6 br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>
