@@ -1,7 +1,7 @@
 // @flow
 import {client, search as searchDocuments} from "./elastic";
 import {searchDocumentsQuery} from "./elastic-queries";
-import type {ElasticCfg, HttpFullDocResp} from "./types";
+import type {ElasticCfg, HttpDocResp} from "./types";
 
 export const search = async (
   term: string,
@@ -9,7 +9,7 @@ export const search = async (
   size: number,
   filters: {[string]: string[]},
   {host, port, index}: ElasticCfg,
-): Promise<HttpFullDocResp> => {
+): Promise<HttpDocResp> => {
   const elastic = await client(host, port);
   const query = searchDocumentsQuery(
     term,
@@ -25,9 +25,6 @@ export const search = async (
     const {_id, _source, highlight} = hit;
     const description =
       _source.description != null ? {description: _source.description} : {};
-    const href = _source.href != null ? {href: _source.href} : {};
-    const hrefText =
-      _source.href_text != null ? {href_text: _source.href_text.trim()} : {};
     const highlights = ["href_text", "title", "description"].reduce(
       (memo, key) => {
         if (highlight[key])
@@ -52,11 +49,9 @@ export const search = async (
       authorities: (_source.authorities || []).map(({name}) => name),
       departments: (_source.departments || []).map(({name}) => name),
       ...description,
-      ...href,
-      ...hrefText,
       highlights,
     };
   });
 
-  return {total, data};
+  return {page: from / size, total, data};
 };

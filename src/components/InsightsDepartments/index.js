@@ -37,6 +37,7 @@ class InsightsDepartments extends React.Component<Props> {
           <DocumentsTable
             documents={store.documents}
             documentsTotal={store.documentsTotal}
+            documentsPage={store.documentsPage}
             paginateDocuments={this.fetchDocuments}
             pageSize={store.pageSize}
           />

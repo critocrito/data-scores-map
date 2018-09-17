@@ -6,6 +6,7 @@ import type {Document} from "../../lib/types";
 type Props = {
   documents: Document[],
   documentsTotal: number,
+  documentsPage: number,
   paginateDocuments: (page: number) => void,
   pageSize: number,
 };
@@ -22,11 +23,12 @@ const pageableList = (
   }>,
 ) =>
   class extends React.Component<Props, State> {
-    static displayName = "Hahaha";
+    static displayName = "PageableList";
 
-    state = {
-      page: 0,
-    };
+    constructor(props: Props) {
+      super(props);
+      this.state = {page: props.documentsPage};
+    }
 
     paginate = async (page: number) => {
       const {paginateDocuments, pageSize} = this.props;

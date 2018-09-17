@@ -62,18 +62,18 @@ export type Stat = {
 export type Document = {
   id: string,
   title: string,
+  description: string,
   source: string,
   companies: string[],
   systems: string[],
   authorities: string[],
   departments: string[],
+  highlights?: Highlights,
 };
 
 export type FullDocument = Document & {
-  description: string,
   href: string,
   href_text: string,
-  highlights: Highlights,
 };
 
 type HttpInsightResp = {
@@ -82,6 +82,7 @@ type HttpInsightResp = {
 
 type HttpDocumentResp = {
   total: number,
+  page: number,
 };
 
 export type HttpDocResp = {data: Document[]} & HttpDocumentResp;

@@ -50,6 +50,9 @@ export default class Store {
   documentsTotal: number = 0;
 
   @observable
+  documentsPage: number = 0;
+
+  @observable
   companySystemInsights: CompanySystemInsight[] = [];
 
   @observable
@@ -105,7 +108,7 @@ export default class Store {
     from: number,
   ) {
     try {
-      const {data, total} = yield documents(
+      const {data, total, page} = yield documents(
         exists,
         this.authorityFilters,
         from,
@@ -113,6 +116,7 @@ export default class Store {
       );
       this.documents = data;
       this.documentsTotal = total;
+      this.documentsPage = page;
     } catch (e) {
       console.log(e);
     }
@@ -122,9 +126,15 @@ export default class Store {
     const filters = toJS(this.documentsFilters, {exportMapsAsObjects: true});
     if (term !== "") {
       try {
-        const {data, total} = yield search(term, filters, from, this.pageSize);
+        const {data, total, page} = yield search(
+          term,
+          filters,
+          from,
+          this.pageSize,
+        );
         this.documents = data;
         this.documentsTotal = total;
+        this.documentsPage = page;
       } catch (e) {
         console.log(e);
       }
@@ -247,5 +257,6 @@ export default class Store {
   clearDocuments() {
     this.documents = [];
     this.documentsTotal = 0;
+    this.documentsPage = 0;
   }
 }

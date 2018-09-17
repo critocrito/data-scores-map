@@ -6,7 +6,7 @@ import {observer} from "mobx-react";
 import "./index.css";
 import Header from "../Header";
 import DocumentsFilters from "../DocumentsFilters";
-import DocumentsTable from "../DocumentsTable";
+import DocumentsSearchResults from "../DocumentsSearchResults";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -34,9 +34,11 @@ class DocumentsIndex extends React.Component<Props, State> {
   };
 
   handleSubmit = (ev) => {
+    const {store} = this.props;
+    const {searchTerm} = this.state;
     ev.preventDefault();
     this.setState({filtersOpen: false});
-    this.fetchDocuments(0);
+    store.searchDocuments(searchTerm.trim(), 0);
   };
 
   clear = () => {
@@ -48,12 +50,6 @@ class DocumentsIndex extends React.Component<Props, State> {
   toggleFiltersNav = () => {
     const {filtersOpen} = this.state;
     this.setState({filtersOpen: !filtersOpen});
-  };
-
-  fetchDocuments = (from: number) => {
-    const {store} = this.props;
-    const {searchTerm} = this.state;
-    store.searchDocuments(searchTerm.trim(), from);
   };
 
   render() {
@@ -106,12 +102,14 @@ class DocumentsIndex extends React.Component<Props, State> {
           </div>
           {filtersOpen ? <DocumentsFilters store={store} /> : <div />}
           <div className="pt5">
-            <DocumentsTable
-              documents={store.documents}
-              documentsTotal={store.documentsTotal}
-              paginateDocuments={this.fetchDocuments}
-              pageSize={store.pageSize}
-            />
+            {store.documentsTotal > 0 ? (
+              <DocumentsSearchResults
+                searchTerm={searchTerm.trim()}
+                store={store}
+              />
+            ) : (
+              <div />
+            )}
           </div>
         </article>
       </div>

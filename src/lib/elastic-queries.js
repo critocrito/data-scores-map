@@ -3,6 +3,7 @@ import type {ElasticAggsQuery, ElasticQuery} from "./types";
 
 const documentFields = [
   "title",
+  "description",
   "search_category",
   "search_batch",
   "systems",
@@ -11,11 +12,7 @@ const documentFields = [
   "departments",
 ];
 
-const fullDocumentFields = documentFields.concat([
-  "description",
-  "href",
-  "href_text",
-]);
+const fullDocumentFields = documentFields.concat(["href", "href_text"]);
 
 const mentionsQuery = () => ({
   bool: {
