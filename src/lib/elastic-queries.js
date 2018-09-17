@@ -266,7 +266,7 @@ export const searchDocumentsQuery = (
               fields: ["title^3", "description^2", "href_text"],
               type: "best_fields",
               tie_breaker: 0.3,
-              fuzziness: "AUTO",
+              // fuzziness: "AUTO",
             },
           },
         ]
