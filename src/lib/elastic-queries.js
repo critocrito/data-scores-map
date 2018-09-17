@@ -258,7 +258,7 @@ export const searchDocumentsQuery = (
           {
             multi_match: {
               query: term,
-              fields: ["title^3", "description^2", "href_text^2"],
+              fields: ["title^3", "description^2", "href_text"],
             },
           },
           ...queries,
@@ -266,8 +266,8 @@ export const searchDocumentsQuery = (
       },
     },
     highlight: {
-      number_of_fragments: 3,
-      fragment_size: 150,
+      number_of_fragments: 50,
+      fragment_size: 250,
       order: "score",
       fields: {
         href_text: {},

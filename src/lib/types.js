@@ -24,6 +24,12 @@ export type DocumentSource = {
   }>,
 };
 
+export type Highlights = {|
+  href_text?: string[],
+  title?: string[],
+  description?: string[],
+|};
+
 export type Item = {
   id: string,
   name: string,
@@ -61,14 +67,13 @@ export type Document = {
   systems: string[],
   authorities: string[],
   departments: string[],
-  // highlights: {[string]: Array<string>},
-  // score?: number,
 };
 
 export type FullDocument = Document & {
   description: string,
   href: string,
   href_text: string,
+  highlights: Highlights,
 };
 
 type HttpInsightResp = {
@@ -111,6 +116,7 @@ export type ElasticSearchResp = {
       _id: string,
       _score: number,
       _source: DocumentSource,
+      highlight: Highlights,
     }>,
   },
 };

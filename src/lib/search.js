@@ -22,12 +22,27 @@ export const search = async (
 
   const {total, hits} = result.hits;
   const data = hits.map((hit) => {
-    const {_id, _source} = hit;
+    const {_id, _source, highlight} = hit;
     const description =
       _source.description != null ? {description: _source.description} : {};
     const href = _source.href != null ? {href: _source.href} : {};
     const hrefText =
       _source.href_text != null ? {href_text: _source.href_text.trim()} : {};
+    const highlights = ["href_text", "title", "description"].reduce(
+      (memo, key) => {
+        if (highlight[key])
+          return Object.assign(memo, {
+            [key]: Array.from(
+              new Set(
+                highlight[key].map((row) => row.replace(/\s\s*/g, " ").trim()),
+              ),
+            ),
+          });
+        return memo;
+      },
+      {},
+    );
+
     return {
       id: _id,
       title: _source.title ? _source.title.replace(/^PDF/, "").trim() : "",
@@ -39,21 +54,9 @@ export const search = async (
       ...description,
       ...href,
       ...hrefText,
+      highlights,
     };
   });
 
   return {total, data};
-  // .map((unit) => {
-  // // Tighten the highlighted snippet and remove excessive whitespace.
-  // const highlights = Object.keys(unit._sc_elastic_highlights).reduce(
-  //   (memo, key) =>
-  //     Object.assign(memo, {
-  //       [key]: unit._sc_elastic_highlights[key].map((s) =>
-  //         s.replace(/\s\s*/g, " ").trim(),
-  //       ),
-  //     }),
-  //   {},
-  // );
-  // return Object.assign({}, unitToDocument(unit), {highlights});
-  // });
 };
