@@ -14,6 +14,25 @@ const documentFields = [
 
 const fullDocumentFields = documentFields.concat(["href", "href_text"]);
 
+const parseTerms = (term: string) => {
+  const terms = term.split('"');
+  const phrases =
+    terms.length > 1
+      ? terms
+          .filter((t) => t !== "")
+          .map((t) => t.trim())
+          .filter((t) => /\s/g.test(t))
+      : [];
+  const matches =
+    terms.length > 1
+      ? terms
+          .filter((t) => t !== "")
+          .map((t) => t.trim())
+          .filter((t) => !/\s/g.test(t))
+      : term.split(" ");
+  return {phrases, matches};
+};
+
 const mentionsQuery = () => ({
   bool: {
     should: [
@@ -228,6 +247,31 @@ export const searchDocumentsQuery = (
   term: string,
   filters: {[string]: string[]},
 ): ElasticQuery => {
+  const {phrases, matches} = parseTerms(term);
+
+  const phraseQueries = phrases.map((t) => ({
+    multi_match: {
+      query: t,
+      fields: ["title^3", "description^2", "href_text"],
+      type: "phrase",
+    },
+  }));
+
+  const matchQueries =
+    matches.length > 0
+      ? [
+          {
+            multi_match: {
+              query: matches.join(" "),
+              fields: ["title^3", "description^2", "href_text"],
+              type: "best_fields",
+              tie_breaker: 0.3,
+              fuzziness: "AUTO",
+            },
+          },
+        ]
+      : [];
+
   const queries = Object.keys(filters).map((field) => {
     if (field === "authorities" || field === "departments")
       return {
@@ -245,6 +289,7 @@ export const searchDocumentsQuery = (
       },
     };
   });
+
   return {
     _source: {
       includes: documentFields,
@@ -253,13 +298,11 @@ export const searchDocumentsQuery = (
       bool: {
         must: [
           {
-            multi_match: {
-              query: term,
-              fields: ["title^3", "description^2", "href_text"],
+            bool: {
+              should: [...phraseQueries, ...matchQueries],
             },
           },
-          ...queries,
-        ],
+        ].concat(queries),
       },
     },
     highlight: {
