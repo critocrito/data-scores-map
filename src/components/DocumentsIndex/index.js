@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 
 import "./index.css";
 import Header from "../Header";
+import FilterTags from "../FilterTags";
 import DocumentsFilters from "../DocumentsFilters";
 import DocumentsSearchResults from "../DocumentsSearchResults";
 import type Store from "../../lib/store";
@@ -58,6 +59,11 @@ class DocumentsIndex extends React.Component<Props, State> {
   render() {
     const {store} = this.props;
     const {filtersOpen, searchTerm, lastSearchTerm} = this.state;
+    const hasFilters =
+      (store.companyFilters || [])
+        .concat(store.systemFilters)
+        .concat(store.authorityFilters)
+        .concat(store.departmentFilters).length > 0;
 
     return (
       <div>
@@ -104,6 +110,20 @@ class DocumentsIndex extends React.Component<Props, State> {
             </button>
           </div>
           {filtersOpen ? <DocumentsFilters store={store} /> : <div />}
+          {hasFilters ? (
+            <FilterTags
+              companyFilters={store.companyFilters || []}
+              systemFilters={store.systemFilters || []}
+              authorityFilters={store.authorityFilters || []}
+              departmentFilters={store.departmentFilters || []}
+              clearFilters={() => store.clearAllFilters()}
+              updateFilters={(type, filters) =>
+                store.updateFilters(type, filters)
+              }
+            />
+          ) : (
+            ""
+          )}
           <div className="pt5">
             {lastSearchTerm != null ? (
               <DocumentsSearchResults

@@ -2,6 +2,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 
+import FilterTags from "../FilterTags";
 import DocumentsTable from "../DocumentsTable";
 import type Store from "../../lib/store";
 
@@ -33,6 +34,24 @@ class InsightsDepartments extends React.Component<Props> {
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
         <div className="w-100 pt3 dn di-ns">Visualization</div>
+        {(store.departmentFilters || []).length > 0 ? (
+          <FilterTags
+            companyFilters={[]}
+            systemFilters={[]}
+            authorityFilters={[]}
+            departmentFilters={store.departmentFilters || []}
+            clearFilters={() => {
+              store.clearAllFilters();
+              this.fetchDocuments(0);
+            }}
+            updateFilters={(type, filters) => {
+              store.updateFilters(type, filters);
+              this.fetchDocuments(0);
+            }}
+          />
+        ) : (
+          ""
+        )}
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable
             documents={store.documents}
