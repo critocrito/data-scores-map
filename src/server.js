@@ -10,6 +10,7 @@ import dotenv from "dotenv";
 import log from "./lib/logging";
 import router from "./routes";
 import {companies, systems} from "./company-systems-mapping";
+import {departmentTags} from "./department-tags";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.context.elastic = {
 };
 app.context.companies = companies;
 app.context.systems = systems;
+app.context.departmentTags = departmentTags;
 
 app.use(koaLogger());
 app.use(

@@ -52,6 +52,7 @@ export type AuthorityInsight = Insight & {
 export type DepartmentInsight = Insight & {
   companies: {[string]: number},
   systems: {[string]: number},
+  tag: null | string,
 };
 
 export type Stat = {

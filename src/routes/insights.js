@@ -14,8 +14,8 @@ const router = new Router()
     return ctx.ok(result);
   })
   .get("departments", "/departments", async (ctx) => {
-    const {elastic} = ctx;
-    const result = await departments(elastic);
+    const {elastic, departmentTags} = ctx;
+    const result = await departments(departmentTags, elastic);
     return ctx.ok(result);
   });
 

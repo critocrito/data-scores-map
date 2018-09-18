@@ -114,11 +114,10 @@ export const authorities = async ({
     .sort((a, b) => a.name.localeCompare(b.name));
 };
 
-export const departments = async ({
-  host,
-  port,
-  index,
-}: ElasticCfg): Promise<DepartmentInsight[]> => {
+export const departments = async (
+  departmentMap: {[string]: string},
+  {host, port, index}: ElasticCfg,
+): Promise<DepartmentInsight[]> => {
   const elastic = await client(host, port);
   // $FlowFixMe
   const {hits, aggregations} = await aggregateNestedTerms(
@@ -130,10 +129,12 @@ export const departments = async ({
   const transformed = hits.hits.reduce((memo, {_source}) => {
     if (_source.departments)
       return _source.departments.reduce((acc, {name, systems, companies}) => {
+        const tag = departmentMap[name];
         const elem = acc[name]
           ? acc[name]
           : {
               name,
+              tag: tag || null,
               id: toId(name),
               count: 0,
               systems: {},
