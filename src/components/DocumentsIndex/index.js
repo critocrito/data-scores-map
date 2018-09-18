@@ -75,8 +75,8 @@ class DocumentsIndex extends React.Component<Props, State> {
             </h2>
             <p className="f3 pl4-ns">Exploratory overview.</p>
             <p className="pl4-ns">
-              The data selected here is partial to the selected filters, it
-              gives a visual hint so it is easy to navigate.
+              Here you can search within the whole database. You can find search
+              terms or phrases in context and categories.
             </p>
           </div>
           <div className="w-40-ns dn dn-m dt-ns pa2">
@@ -93,7 +93,7 @@ class DocumentsIndex extends React.Component<Props, State> {
                 value={searchTerm}
                 onChange={this.handleChange}
                 onKeyDown={this.handleClear}
-                placeholder="Search for a keyword or phrase"
+                placeholder="Search for a keyword or phrase enclosed by “ “"
                 autoComplete="off"
                 spellCheck="false"
                 aria-label="Search for documents."

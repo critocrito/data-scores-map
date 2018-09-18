@@ -49,7 +49,7 @@ class DocumentsSearchResults extends React.Component<Props, State> {
         <div className="mv2 bb bw1 b--light-silver flex justify-between">
           <div className="ma2 w-50">
             Found <span className="b">{store.documentsTotal} documents</span>{" "}
-            for the term: <em>{searchTerm}</em>
+            that contains: <em>{searchTerm}</em>
           </div>
           {store.documents.length > 0 ? (
             <div className="ma2 w-25 tr">

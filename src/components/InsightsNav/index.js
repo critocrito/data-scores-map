@@ -13,37 +13,49 @@ const InsightsNav = ({activeInsight}: Props) => {
 
   return (
     <div className="cf ph2-ns flex-ns justify-around-ns">
-      <div className="w-100 w-third-ns mt4 mb4 tc">
+      <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/companies-systems"
-          className={`f4 pa3 b primary-color no-underline ${
+          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
             isCompaniesSystems ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
           By: <span className="ttu">Companies & Systems</span>
         </Link>
+        <span className="w-50 i primary-color f7 tc center mt2">
+          This provides an overview of how names of companies appear in the
+          database.
+        </span>
       </div>
 
-      <div className="w-100 w-third-ns mt4 mb4 tc">
+      <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/authorities"
-          className={`f4 pa3 b primary-color no-underline ${
+          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
             isAuthorities ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
           By: <span className="ttu">Locations</span>
         </Link>
+        <span className="w-50 i primary-color f7 tc center mt2">
+          This provides a geolocation map over mentions of local authorities in
+          the database.
+        </span>
       </div>
 
-      <div className="w-100 w-third-ns mt4 mb4 tc">
+      <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/departments"
-          className={`f4 pa3 b primary-color no-underline ${
+          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
             isDepartments ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
           By: <span className="ttu">Departments</span>
         </Link>
+        <span className="w-50 i primary-color f7 tc center mt2">
+          This provides an overview of government departments mentioned in the
+          database.
+        </span>
       </div>
     </div>
   );
