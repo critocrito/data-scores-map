@@ -89,8 +89,12 @@ class InsightsVizBarChart extends React.Component<Props> {
         },
       },
       scales: {
+        scaleShowValues: true,
         xAxes: [
           {
+            ticks: {
+              autoSkip: false,
+            },
             stacked: true,
           },
         ],

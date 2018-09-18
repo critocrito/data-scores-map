@@ -81,15 +81,18 @@ const chartData = (data, systemNames): ChartData =>
 const InsightsVizStackedGroups = ({companiesSystems}: Props) => {
   const chartOptions = {
     legend: {
-      // position: "bottom",
       display: false,
       labels: {
         boxWidth: 5,
       },
     },
     scales: {
+      scaleShowValues: true,
       xAxes: [
         {
+          ticks: {
+            autoSkip: false,
+          },
           stacked: true,
         },
       ],
