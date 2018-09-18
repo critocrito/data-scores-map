@@ -1,8 +1,10 @@
 // @flow
 import * as React from "react";
+import {toJS} from "mobx";
 import {observer} from "mobx-react";
 
 import FilterTags from "../FilterTags";
+import InsightsVizTreeMap from "../InsightsVizTreeMap";
 import DocumentsTable from "../DocumentsTable";
 import type Store from "../../lib/store";
 
@@ -33,7 +35,9 @@ class InsightsDepartments extends React.Component<Props> {
     const {store} = this.props;
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
-        <div className="w-100 pt3 dn di-ns">Visualization</div>
+        <div className="w-100 pt3 dn di-ns">
+          <InsightsVizTreeMap departments={toJS(store.departmentInsights)} />
+        </div>
         {(store.departmentFilters || []).length > 0 ? (
           <FilterTags
             companyFilters={[]}
