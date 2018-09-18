@@ -11,7 +11,7 @@ export const companies: {[string]: string[]} = {
   "london ventures": [],
   liquidlogic: ["early years and education system", "eyes"],
   statacorp: ["stata"],
-  "mastadon c": ["witan", "kixi"],
+  "mastodon c": ["witan", "kixi"],
   microsoft: ["microsoft dynamics crm"],
   taurusops: ["taurus"],
   atos: [],
