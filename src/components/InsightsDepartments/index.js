@@ -1,10 +1,9 @@
 // @flow
 import * as React from "react";
-import {toJS} from "mobx";
 import {observer} from "mobx-react";
 
 import FilterTags from "../FilterTags";
-import InsightsVizTreeMap from "../InsightsVizTreeMap";
+import InsightsVizBarChart from "../InsightsVizBarChart";
 import DocumentsTable from "../DocumentsTable";
 import type Store from "../../lib/store";
 
@@ -36,7 +35,11 @@ class InsightsDepartments extends React.Component<Props> {
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
         <div className="w-100 pt3 dn di-ns">
-          <InsightsVizTreeMap departments={toJS(store.departmentInsights)} />
+          <InsightsVizBarChart
+            departments={store.departmentInsights}
+            fetchDocuments={() => this.fetchDocuments(0)}
+            store={store}
+          />
         </div>
         {(store.departmentFilters || []).length > 0 ? (
           <FilterTags
