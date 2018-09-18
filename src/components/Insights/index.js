@@ -36,7 +36,7 @@ const Insights = ({activeInsight}: Props) => {
           </h2>
           <p className="f3 pl4-ns">
             As part of our project{" "}
-            <span className="primary-color">‘Data Scores as Governance’</span>
+            <span className="primary-color">‘Data Scores as Governance’</span>{" "}
             we have developed a tool to map and investigate the uses of data
             analytics and algorithms in public services in the UK. Little is
             still known about the implementation of data-driven systems and
