@@ -43,7 +43,9 @@ export const search = async (
     return {
       id: _id,
       title: _source.title ? _source.title.replace(/^PDF/, "").trim() : "",
-      source: _source.search_batch,
+      source: Array.isArray(_source.search_batch)
+        ? _source.search_batch[0]
+        : _source.search_batch,
       companies: _source.companies || [],
       systems: _source.systems || [],
       authorities: (_source.authorities || []).map(({name}) => name),
