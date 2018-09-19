@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 
 import FilterTags from "../FilterTags";
 import DocumentsTable from "../DocumentsTable";
-import InsightsVizStackedGroups from "../InsightsVizStackedGroups";
+import InsightsVizDoubleBarChart from "../InsightsVizDoubleBarChart";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -36,8 +36,10 @@ class InsightsCompaniesSystems extends React.Component<Props> {
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
         <div className="w-100 pt3 dn di-ns">
-          <InsightsVizStackedGroups
+          <InsightsVizDoubleBarChart
             companiesSystems={store.companySystemInsights}
+            fetchDocuments={() => this.fetchDocuments(0)}
+            store={store}
           />
         </div>
         {(store.companyFilters || []).length > 0 ||
