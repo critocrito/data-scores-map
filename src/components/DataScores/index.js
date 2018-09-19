@@ -50,8 +50,9 @@ const DataScores = () => (
           </Context.Consumer>
         )}
       />
-      <Route path="/:documentId" component={DocumentsDetails} />
       <Route path="/case-studies" component={CaseStudies} />
+      {/* Make sure this is last, otherwise follow up routes are not matched. */}
+      <Route path="/:documentId" component={DocumentsDetails} />
     </Switch>
   </Router>
 );
