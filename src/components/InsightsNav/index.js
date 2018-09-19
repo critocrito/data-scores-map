@@ -12,11 +12,11 @@ const InsightsNav = ({activeInsight}: Props) => {
   const isDepartments = activeInsight === "departments";
 
   return (
-    <div className="cf ph2-ns flex-ns justify-around-ns">
+    <div className="cf ph6-ns flex-ns justify-around-ns mt4">
       <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/companies-systems"
-          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
+          className={`f4 mb2 b primary-color no-underline  center bb bw2 b--white ${
             isCompaniesSystems ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
@@ -31,7 +31,7 @@ const InsightsNav = ({activeInsight}: Props) => {
       <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/authorities"
-          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
+          className={`f4 mb2 b primary-color no-underline  center bb bw2 b--white ${
             isAuthorities ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
@@ -46,7 +46,7 @@ const InsightsNav = ({activeInsight}: Props) => {
       <div className="w-100 w-third-ns mt4 mb4 tc flex flex-column justify-around">
         <Link
           to="/insights/departments"
-          className={`f4 mb2 b primary-color no-underline w-70 center bb bw2 b--white ${
+          className={`f4 mb2 b primary-color no-underline  center bb bw2 b--white ${
             isDepartments ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >

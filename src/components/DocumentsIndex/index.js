@@ -70,26 +70,31 @@ class DocumentsIndex extends React.Component<Props, State> {
       <div>
         <Header />
         <article className="cf ph2-ns flex items-center bg-gradient">
-          <div className="w-100 w-100-m w-60-ns pa2">
-            <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ml5-ns">
+          <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
+            <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ">
               Document Index
             </h2>
-            <p className="f3 pl4-ns">Exploratory overview.</p>
-            <p className="pl4-ns">
-              Here you can search within the whole database. You can find search
-              terms or phrases in context and categories.
+            <p className="f4 i mid-gray">
+            Specific word or phrase
             </p>
+            <p className="f4 near-black">
+          Here you can search within the whole database. You can find search terms or phrases in context categories.
+            </p>
+
+
           </div>
-          <div className="w-40-ns dn dn-m dt-ns pa2">
-            <img alt="" src="./images/search.png" />
+          <div className="w-50-ns dn dn-m dt-ns">
+            <img className="w-50 pl7" alt="" src="/images/search.png" />
           </div>
         </article>
-        <article className="cf ph2-ns flex flex-column">
-          <div className="mt3 pt5-ns mt5-ns center w-100 w-80-ns flex items-center justify-center">
-            <form className="w-80" role="search" onSubmit={this.handleSubmit}>
+
+
+        <article className="cf ph2-ns flex flex-column vh" >
+          <div className=" pt5-ns center w-100  pb3 w-90-ns flex items-center justify-center">
+            <form className="w-70" role="search" onSubmit={this.handleSubmit}>
               <input
                 name="q"
-                className="search-bar input-reset f3-ns f6 h3 w-100 pa3 primary-color bb bw3 b--primary-color shadow-3"
+                className="search-bar input-reset f3-ns f4  w-100 pa3  primary-color bb b--primary-color shadow-3"
                 type="search"
                 value={searchTerm}
                 onChange={this.handleChange}
@@ -101,7 +106,7 @@ class DocumentsIndex extends React.Component<Props, State> {
               />
             </form>
             <button
-              className={`w-10 f3-ns f6 bg-white pa3 pointer center ${
+              className={`w-10 f3-ns f5 bg-white primary-color pa3 pointer center ${
                 filtersOpen ? "primary-color" : "black"
               }`}
               type="button"

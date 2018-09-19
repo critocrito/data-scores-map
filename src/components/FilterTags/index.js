@@ -18,14 +18,14 @@ const FilterTags = ({
   clearFilters,
   updateFilters,
 }: Props) => (
-  <section id="filters" className="ph2-ns mt3">
+  <section id="filters" className="ph2-ns  w-90 center mt4">
     <div className="bb flex justify-between">
       <div className="w-75">
         <p>Selected filters:</p>
       </div>
       <div className="w-25 tr">
         <button
-          className="light-silver f3-ns f5 ttu b bg-transparent"
+          className="black f7 pt3 ttu b bg-transparent"
           type="button"
           onClick={clearFilters}
         >
@@ -44,9 +44,9 @@ const FilterTags = ({
               companyFilters.filter((f) => f !== filter),
             )
           }
-          className="ma2 bg-transparent"
+          className=" bg-transparent"
         >
-          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim dib">
+          <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim dib">
             {filter}
           </span>
         </button>
@@ -58,9 +58,9 @@ const FilterTags = ({
           onClick={() =>
             updateFilters("systems", systemFilters.filter((f) => f !== filter))
           }
-          className="ma2 bg-transparent"
+          className="mt3 bg-transparent"
         >
-          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>
@@ -75,9 +75,9 @@ const FilterTags = ({
               authorityFilters.filter((f) => f !== filter),
             )
           }
-          className="ma2 bg-transparent"
+          className="mt3 bg-transparent"
         >
-          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>
@@ -92,9 +92,9 @@ const FilterTags = ({
               departmentFilters.filter((f) => f !== filter),
             )
           }
-          className="ma2 bg-transparent"
+          className="mt3 bg-transparent"
         >
-          <span className="f6 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
+          <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
           </span>
         </button>

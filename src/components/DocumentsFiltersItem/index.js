@@ -15,7 +15,7 @@ const DocumentsFiltersItem = ({name, isActive, handler}: Props) => (
       <div
         className={
           isActive
-            ? "documents-filters-item pa3 white bg-primary-color"
+            ? "documents-filters-item pa3 black bg-light-gray"
             : "documents-filters-item pa3"
         }
         onClick={handler}

@@ -73,7 +73,7 @@ class DocumentsFilters extends React.Component<Props, State> {
     const {activeFilter} = this.state;
 
     return (
-      <div className="flex-ns justify-around-ns pt4 mt2">
+      <div className="flex-ns justify-around-ns pt3 mt2 w-90 center ">
         <div className="w-100 w-25-ns">
           <DocumentsFiltersItem
             name="Companies"
@@ -81,7 +81,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("companies")}
           />
           {activeFilter === "companies" ? (
-            <div className="filter-box absolute-ns z-999-ns">
+            <div className="filter-box absolute-ns mh5 fn-m ">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -97,7 +97,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("systems")}
           />
           {activeFilter === "systems" ? (
-            <div className="filter-box absolute-ns z-999-ns">
+            <div className="filter-box absolute-ns mh5 fn-m ">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -113,7 +113,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("authorities")}
           />
           {activeFilter === "authorities" ? (
-            <div className="filter-box absolute-ns z-999-ns">
+            <div className="filter-box absolute-ns mh5 fn-m ">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -129,7 +129,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("departments")}
           />
           {activeFilter === "departments" ? (
-            <div className="filter-box absolute-ns z-999-ns">
+            <div className="filter-box absolute-ns mh5 fn-m ">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />

@@ -17,7 +17,7 @@ const DocumentsFiltersCheckbox = ({
   <div className="checkbox w-100 w-50-m w-third-ns pl1 pt1 pb1">
     <label className="pa1" htmlFor={id}>
       <input
-        className="pa1"
+        className="pa1 mr2"
         type="checkbox"
         name={name}
         checked={checked}
