@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 
 import "./index.css";
 import Header from "../Header";
+import Footer from "../Footer";
 import FilterTags from "../FilterTags";
 import DocumentsFilters from "../DocumentsFilters";
 import DocumentsSearchResults from "../DocumentsSearchResults";
@@ -135,6 +136,7 @@ class DocumentsIndex extends React.Component<Props, State> {
             )}
           </div>
         </article>
+        <Footer />
       </div>
     );
   }

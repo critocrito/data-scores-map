@@ -5,6 +5,7 @@ import type {Match} from "react-router-dom";
 
 import "./index.css";
 import Header from "../Header";
+import Footer from "../Footer";
 import {document as fetchDocument} from "../../lib/requests";
 import {sourcify} from "../../lib/utils";
 import type {FullDocument} from "../../lib/types";
@@ -166,6 +167,7 @@ class DocumentsDetails extends React.Component<Props, State> {
             </dd>
           </dl>
         </div>
+        <Footer />
       </div>
     );
   }

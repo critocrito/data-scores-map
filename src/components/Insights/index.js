@@ -2,6 +2,7 @@
 import * as React from "react";
 
 import Header from "../Header";
+import Footer from "../Footer";
 import InsightsNav from "../InsightsNav";
 import InsightsCompaniesSystems from "../InsightsCompaniesSystems";
 import InsightsAuthorities from "../InsightsAuthorities";
@@ -63,6 +64,7 @@ const Insights = ({activeInsight}: Props) => {
       <Context.Consumer>
         {({store}) => <InsightComponent store={store} />}
       </Context.Consumer>
+      <Footer />
     </div>
   );
 };
