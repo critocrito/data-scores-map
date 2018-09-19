@@ -12,6 +12,8 @@ type Props = {
 const Header = ({location}: Props) => {
   const activeClass = "bb nav-link-active";
   const isDocumentsLocation = /^\/documents/.test(location.pathname);
+  const isInsightsLocation = /^\/insights/.test(location.pathname);
+  const isCaseStudiesLocation = /^\/case-studies/.test(location.pathname);
 
   return (
     <header className="cf ph2-ns flex-ns items-center">
@@ -24,12 +26,32 @@ const Header = ({location}: Props) => {
         <ul className="list">
           <li className="pa2 dib">
             <Link
+              to="/insights"
+              className={`link nowrap pa2 black ${
+                isInsightsLocation ? activeClass : "hover-nav-link"
+              }`}
+            >
+              Insights
+            </Link>
+          </li>
+          <li className="pa2 dib">
+            <Link
               to="/documents"
               className={`link nowrap pa2 black ${
                 isDocumentsLocation ? activeClass : "hover-nav-link"
               }`}
             >
               Documents Index
+            </Link>
+          </li>
+          <li className="pa2 dib">
+            <Link
+              to="/case-studies"
+              className={`link nowrap pa2 black ${
+                isCaseStudiesLocation ? activeClass : "hover-nav-link"
+              }`}
+            >
+              Case Studies
             </Link>
           </li>
         </ul>

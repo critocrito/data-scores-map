@@ -10,6 +10,7 @@ import {
 import Insights from "../Insights";
 import DocumentsIndex from "../DocumentsIndex";
 import DocumentsDetails from "../DocumentsDetails";
+import CaseStudies from "../CaseStudies";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -50,6 +51,7 @@ const DataScores = () => (
         )}
       />
       <Route path="/:documentId" component={DocumentsDetails} />
+      <Route path="/case-studies" component={CaseStudies} />
     </Switch>
   </Router>
 );
