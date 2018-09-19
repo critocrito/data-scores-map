@@ -6,3 +6,9 @@ input.search-bar {
     background-position-y: center;
     background-position-x: 98%;
 }
+
+.vh {height: 100vh}
+
+.primary-color {
+    color: rgba(35, 87, 137, 1.0);
+}

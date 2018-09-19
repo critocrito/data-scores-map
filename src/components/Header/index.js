@@ -16,38 +16,39 @@ const Header = ({location}: Props) => {
   const isCaseStudiesLocation = /^\/case-studies/.test(location.pathname);
 
   return (
-    <header className="cf ph2-ns flex-ns items-center">
+    <header className="cf ttu f6 ph2-ns flex-ns items-center">
       <h1 className="f3 w-100 w-60-ns pa2">
-        <Link className="link pa2 ttu white primary-color" to="/">
-          Data Scores in the UK
+        <Link className="link ma2 ttu white primary-color" to="/">
+          <div className="logo"><img alt="Data Scores in the UK" class=" ml5 pa3" src="/images/Ico@2x.png"></img>
+          </div>
         </Link>
       </h1>
       <nav className="w-100 w-40-ns pa2">
         <ul className="list">
-          <li className="pa2 dib">
+          <li className="ma2 dib">
             <Link
               to="/insights"
-              className={`link nowrap pa2 black ${
+              className={`link nowrap ma2 pb1 b black ${
                 isInsightsLocation ? activeClass : "hover-nav-link"
               }`}
             >
               Insights
             </Link>
           </li>
-          <li className="pa2 dib">
+          <li className="ma2 dib">
             <Link
               to="/documents"
-              className={`link nowrap pa2 black ${
+              className={`link nowrap ma2 pb1 b black ${
                 isDocumentsLocation ? activeClass : "hover-nav-link"
               }`}
             >
               Documents Index
             </Link>
           </li>
-          <li className="pa2 dib">
+          <li className="ma2 dib">
             <Link
               to="/case-studies"
-              className={`link nowrap pa2 black ${
+              className={`link nowrap ma2 pb1 b black ${
                 isCaseStudiesLocation ? activeClass : "hover-nav-link"
               }`}
             >

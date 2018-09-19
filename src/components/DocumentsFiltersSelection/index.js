@@ -53,8 +53,8 @@ class DocumentsFiltersSelection extends React.Component<Props, State> {
     const {filters} = this.props;
     const {checkedItems} = this.state;
     return (
-      <div className="ba bg-light-gray">
-        <div className="center flex flex-column">
+      <div className="ba b--moon-gray bg-white shadow-3">
+        <div className="center flex flex-column pa3">
           <div className="flex flex-wrap mt3-ns">
             {filters.map(({id, name}) => (
               <DocumentsFiltersCheckbox
@@ -69,7 +69,7 @@ class DocumentsFiltersSelection extends React.Component<Props, State> {
 
           <div className="w-100 flex-ns pa2">
             <button
-              className="w-100 w-25-ns pa2 ml-auto-ns primary-color bg-transparent ba b--primary-color ttu pointer"
+              className=" pa2 center primary-color f6 b mt4 bg-transparent ba b--primary-color ttu pointer"
               type="button"
               onClick={this.clearFilters}
             >

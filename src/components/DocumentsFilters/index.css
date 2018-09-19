@@ -11,3 +11,7 @@
 .filter-box {
     left: 0;
 }
+
+i {display: inline-block;}
+
+.pointer:hover {background-color:#f8f8f8}

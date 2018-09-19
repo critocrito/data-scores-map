@@ -4,6 +4,7 @@ import * as React from "react";
 import DocumentsTableRow from "../DocumentsTableRow";
 import pageableList from "../pageableList";
 import type {Document} from "../../lib/types";
+import "./index.css";
 
 type Props = {
   documents: Document[],
@@ -13,7 +14,7 @@ type Props = {
 
 const DocumentsTable = ({documents, total, pagination}: Props) =>
   documents.length > 0 ? (
-    <table className="collapse w-100">
+    <table className="collapse w-90 center mt5 f5">
       <thead>
         <tr>
           <td className="pv2 ph3 tc fw6 ttu bb">Document ({total})</td>

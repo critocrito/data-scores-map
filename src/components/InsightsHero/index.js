@@ -6,7 +6,7 @@ import "./index.css";
 const InsightsHero = () => (
   <article className="cf ph2-ns flex bg-gradient">
     <div className="w-100 w-60-ns pa2">
-      <h2 className="f-subheadline-ns f2 lh-solid bl5 primary-color ttu bl b--accentuated-color bw4 pl2 ml5-ns">
+      <h2 className="f-subheadline-ns  lh-solid bl5 primary-color ttu bl b--accentuated-color bw4 pl2 ml5-ns">
         Data Insights
       </h2>
       <p className="f3 pl4-ns">
