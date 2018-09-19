@@ -195,7 +195,12 @@ export const authorityCountsQuery = (): ElasticQuery => ({
 
 export const listDocumentsQuery = (
   exists: string[],
-  authorities: string[],
+  filters: {
+    companies: string[],
+    systems: string[],
+    authorities: string[],
+    departments: string[],
+  },
 ): ElasticQuery => {
   const fieldsFilter = exists.map((field) => {
     if (field === "authorities" || field === "departments")
@@ -219,27 +224,33 @@ export const listDocumentsQuery = (
       },
     };
   });
-  const authoritiesFilter =
-    authorities.length > 0
-      ? [
-          {
-            nested: {
-              path: "authorities",
-              query: {
-                terms: {"authorities.name.keyword": authorities},
-              },
-            },
+  const tagFilters = [
+    "companies",
+    "systems",
+    "authorities",
+    "departments",
+  ].reduce((memo, key) => {
+    if (filters[key] == null || filters[key].length === 0) return memo;
+    if (key === "authorities" || key === "departments")
+      return memo.concat({
+        nested: {
+          path: key,
+          query: {
+            terms: {[`${key}.name.keyword`]: filters[key]},
           },
-        ]
-      : [];
-  const filter = authoritiesFilter.concat({bool: {should: fieldsFilter}});
+        },
+      });
+    return memo.concat({terms: {[`${key}.keyword`]: filters[key]}});
+  }, []);
 
   return {
     _source: {
       includes: documentFields,
     },
     size: 30,
-    query: Object.assign({}, mentionsQuery(), {bool: {filter}}),
+    query: Object.assign({}, mentionsQuery(), {
+      bool: {must: tagFilters.concat(fieldsFilter)},
+    }),
   };
 };
 

@@ -110,7 +110,10 @@ export default class Store {
     try {
       const {data, total, page} = yield documents(
         exists,
+        this.companyFilters,
+        this.systemFilters,
         this.authorityFilters,
+        this.departmentFilters,
         from,
         this.pageSize,
       );

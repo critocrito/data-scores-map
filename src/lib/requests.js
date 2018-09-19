@@ -36,13 +36,19 @@ export const search = (
 
 export const documents = (
   exists: string[],
+  companies: string[],
+  systems: string[],
   authorities: string[],
+  departments: string[],
   from: number,
   size: number,
 ): Promise<HttpDocResp> => {
   const url = new URL(`${baseUrl}/documents`);
   exists.forEach((field) => url.searchParams.append("exists", field));
+  companies.forEach((field) => url.searchParams.append("companies", field));
+  systems.forEach((field) => url.searchParams.append("systems", field));
   authorities.forEach((field) => url.searchParams.append("authorities", field));
+  departments.forEach((field) => url.searchParams.append("departments", field));
   url.searchParams.append("from", from.toString());
   url.searchParams.append("size", size.toString());
   return fetch(url).then((resp) => resp.json());
