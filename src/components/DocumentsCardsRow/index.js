@@ -70,7 +70,11 @@ const DocumentsCardsRow = ({
           </ul>
         </div>
         <div className="ma2 pt1 tr">
-          <Link className="i no-underline primary-color" to={`/${id}`}>
+          <Link
+            className="i no-underline primary-color"
+            to={`/${id}`}
+            target="_blank"
+          >
             See full document
           </Link>
         </div>
