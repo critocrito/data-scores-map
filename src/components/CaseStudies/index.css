@@ -1,18 +1,1 @@
-#cal1 {
-  position: absolute;
-  height: 0;
-  width: 0;
-  top: 100px;
-  left: 100px;
-  overflow: none;
-  z-index: -100;
-}
-#cal2 {
-  position: absolute;
-  height: 0;
-  width: 0;
-  top: 0;
-  left: 0;
-  overflow: none;
-  z-index: -100;
-}
+.vh {height: 100vh}

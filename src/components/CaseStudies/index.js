@@ -23,6 +23,7 @@ const CaseStudies = () => (
         <img className="w-50 pl7" alt="" src="/images/case-studies.png" />
       </div>
     </article>
+    <div className="vh">
     <div className="w-80-ns mv4 pa2 ba b--light-silver shadow-4 center">
       <h2 className="pa3 f3 primary-color">
         Integrated Analytical Hub – Bristol
@@ -43,7 +44,7 @@ const CaseStudies = () => (
         assessment. This includes a score between 0 and 100 for every young
         person in the database that is provided to the relevant case worker.
       </p>
-    </div>
+    </div></div>
     <Footer />
   </div>
 );

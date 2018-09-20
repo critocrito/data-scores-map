@@ -8,8 +8,8 @@ import Footer from "../Footer";
 const Home = () => (
   <div>
     <Header />
-    <article className="cf ph2-ns flex items-center bg-gradient">
-      <div className="w-80 center pa4 ml5-ns">
+    <article className="cf ph2-ns w-100 flex items-center bg-gradient">
+      <div className="w-80-ns center pa4 ml5-ns">
         <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu pl2 bl b--accentuated-color bw3">
           Data Scores Investigation Tool
         </h2>
