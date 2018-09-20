@@ -42,8 +42,8 @@ const Home = () => (
       <p className="f5 i b tc mid-gray">
         There are 3 main sections for exploring the data.
       </p>
-      <ul className="w-70-ns list flex justify-between">
-        <li className="w-third tc ma4">
+      <ul className="w-80-ns list flex flex-wrap">
+        <li className="w-100 w-third-ns tc pa4">
           <Link className="link black nounderline" to="/insights">
             <img
               alt="Insights Logo"
@@ -59,7 +59,7 @@ const Home = () => (
           </Link>
         </li>
 
-        <li className="w-third tc ma4">
+        <li className="w-100 w-third-ns tc pa4">
           <Link className="link black nounderline" to="/documents">
             <img
               alt="Documents Index Logo"
@@ -75,7 +75,7 @@ const Home = () => (
           </Link>
         </li>
 
-        <li className="w-third tc ma4">
+        <li className="w-100 w-third-ns tc pa4">
           <Link className="link black nounderline" to="/case-studies">
             <img
               alt="Case Studies Logo"
