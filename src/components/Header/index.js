@@ -19,7 +19,12 @@ const Header = ({location}: Props) => {
     <header className="cf ttu f6 ph2-ns flex-ns items-center">
       <h1 className="f3 w-100 w-60-ns pa2">
         <Link className="link ma2 ttu white primary-color" to="/">
-          <div className="logo"><img alt="Data Scores in the UK" className=" ml5 pa3" src="/images/Ico@2x.png" />
+          <div className="logo">
+            <img
+              alt="Data Scores in the UK"
+              className=" ml5 pa3"
+              src="/images/Ico@2x.png"
+            />
           </div>
         </Link>
       </h1>

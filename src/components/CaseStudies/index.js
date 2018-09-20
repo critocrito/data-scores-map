@@ -22,7 +22,7 @@ const CaseStudies = () => (
         <img alt="" src="/images/case-studies.png" />
       </div>
     </article>
-    <div className="w-100 mv4 pa2 ba b--light-silver shadow-4">
+    <div className="w-80-ns mv4 pa2 ba b--light-silver shadow-4 center">
       <h2 className="pa3 f3 primary-color">
         Integrated Analytical Hub – Bristol
       </h2>

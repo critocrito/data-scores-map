@@ -61,7 +61,7 @@ class DocumentsDetails extends React.Component<Props, State> {
       <div>
         <Header />
         <div className="flex mt4">
-          <dl className="w-100 w-two-thirds-ns pa2">
+          <dl className="w-100 w-two-thirds-ns pa2 ml6">
             <dt>
               <span className="bb bw2 b--primary-color">Document title:</span>
             </dt>

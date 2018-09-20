@@ -34,16 +34,13 @@ const Insights = ({activeInsight}: Props) => {
       <article className="cf ph2-ns flex items-center bg-gradient">
         <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
           <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ">
-            Data Insightss
+            Data Insights
           </h2>
-          <p className="f4 i mid-gray">
-          Exploratory overview
-          </p>
+          <p className="f4 i mid-gray">Exploratory overview</p>
           <p className="f4 near-black">
-          The data presented here is partial to the category selected, it gives a visual hint so it is easy to navigate.
+            The data presented here is partial to the category selected, it
+            gives a visual hint so it is easy to navigate.
           </p>
-
-
         </div>
         <div className="w-50-ns dn dn-m dt-ns">
           <img className="w-50 pl7" alt="" src="/images/insight.png" />
