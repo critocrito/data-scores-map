@@ -283,23 +283,27 @@ export const searchDocumentsQuery = (
         ]
       : [];
 
-  const queries = Object.keys(filters).map((field) => {
+  const queries = Object.keys(filters).reduce((memo, field) => {
     if (field === "authorities" || field === "departments")
-      return {
-        nested: {
-          path: field,
-          query: {
-            terms: {[`${field}.name.keyword`]: filters[field]},
+      return memo.concat(
+        filters[field].map((f) => ({
+          nested: {
+            path: field,
+            query: {
+              match_phrase: {[`${field}.name.keyword`]: f},
+            },
           },
-        },
-      };
+        })),
+      );
 
-    return {
-      terms: {
-        [field]: filters[field],
-      },
-    };
-  });
+    return memo.concat(
+      filters[field].map((f) => ({
+        match_phrase: {
+          [field]: f,
+        },
+      })),
+    );
+  }, []);
 
   return {
     _source: {
@@ -313,7 +317,7 @@ export const searchDocumentsQuery = (
               should: [...phraseQueries, ...matchQueries],
             },
           },
-        ].concat(queries),
+        ].concat({bool: {must: queries}}),
       },
     },
     highlight: {
