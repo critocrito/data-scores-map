@@ -9,17 +9,18 @@ const CaseStudies = () => (
   <div>
     <Header />
     <article className="cf ph2-ns flex items-center bg-gradient">
-      <div className="w-100 w-100-m w-60-ns pa2">
-        <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ml5-ns">
+      <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
+        <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2">
           Case Studies
         </h2>
-        <p className="f3 pl4-ns">
+        <p className="f4 i mid-gray">Research</p>
+        <p className="f4 near-black">
           Read about some examples of how data-driven systems are implemented
           for public services in different local authorities in the UK.
         </p>
       </div>
-      <div className="w-40-ns dn dn-m dt-ns pa2">
-        <img alt="" src="/images/case-studies.png" />
+      <div className="w-50-ns dn dn-m dt-ns">
+        <img className="w-50 pl7" alt="" src="/images/case-studies.png" />
       </div>
     </article>
     <div className="w-80-ns mv4 pa2 ba b--light-silver shadow-4 center">

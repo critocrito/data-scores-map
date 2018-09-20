@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import Home from "../Home";
 import Insights from "../Insights";
 import DocumentsIndex from "../DocumentsIndex";
 import DocumentsDetails from "../DocumentsDetails";
@@ -16,11 +17,7 @@ import Context from "../../lib/context";
 const DataScores = () => (
   <Router>
     <Switch>
-      <Route
-        exact
-        path="/"
-        render={() => <Redirect to="/insights/companies-systems" />}
-      />
+      <Route exact path="/" component={Home} />
       <Route
         exact
         path="/insights"
