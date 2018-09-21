@@ -276,6 +276,7 @@ export const searchDocumentsQuery = (
               query: matches.join(" "),
               fields: ["title^3", "description^2", "href_text"],
               type: "best_fields",
+              operator: "and",
               tie_breaker: 0.3,
               // fuzziness: "AUTO",
             },
