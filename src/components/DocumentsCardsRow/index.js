@@ -38,7 +38,10 @@ const DocumentsCardsRow = ({
   return (
     <div className="card w-100 mv4 mh2 pa2 ba br3 b--light-silver shadow-4 flex">
       <div className="w-100 w-50-ns ma2">
-        <h2 className="f3 primary-color">{title}</h2>
+        <Link className="link no-underline" to={`/${id}`} target="_blank">
+          <h2 className="f3 primary-color">{title}</h2>
+        </Link>
+
         <p>{description}</p>
         <p>
           <span className="b">Source: </span>
