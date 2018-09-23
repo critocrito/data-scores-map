@@ -1,26 +1,26 @@
 // @flow
 export const companies: {[string]: string[]} = {
-  experian: ["mosaic"],
-  caci: ["acorn"],
-  ibm: ["i2", "ibase", "spss"],
-  qlik: ["qlikview", "qlikview v12 desktop", "qlikview publisher"],
-  predpol: [],
-  graphnet: ["care centric"],
-  canatics: [],
-  xantura: ["early help profiling system", "ehps"],
-  "london ventures": [],
-  liquidlogic: ["early years and education system", "eyes"],
-  statacorp: ["stata"],
-  "mastodon c": ["witan", "kixi"],
-  microsoft: ["microsoft dynamics crm"],
-  taurusops: ["taurus"],
-  atos: [],
-  fujitsu: [],
-  "cambridge university": ["hart", "harm and assessment risk tool"],
-  "care first": ["care first 6"],
-  algoworks: [
-    "sequel server reporting solutions",
-    "sql server reporting solutions",
+  Experian: ["Mosaic"],
+  CACI: ["Acorn"],
+  IBM: ["i2", "iBase", "SPSS"],
+  Qlik: ["Qlikview", "Qlikview V12 Desktop", "Qlikview Publisher"],
+  Predpol: [],
+  Graphnet: ["CareCentric"],
+  Canatics: [],
+  Xantura: ["Early Help Profiling System", "EHPS"],
+  "London Ventures": [],
+  LiquidLogic: ["Early Years and Education System", "EYES"],
+  StataCorp: ["STATA"],
+  "Mastodon C": ["Witan", "Kixi"],
+  Microsoft: ["Microsoft Dynamics CRM"],
+  TaurusOps: ["Taurus"],
+  ATOS: [],
+  Fujitsu: [],
+  "Cambridge University": ["HART", "Harm and Assessment Risk Tool"],
+  "Care First": ["Care First 6"],
+  Algoworks: [
+    "Sequel Server Reporting Solutions",
+    "SQL Server Reporting Solutions",
   ],
 };
 
@@ -32,5 +32,5 @@ export const systems: {[string]: string} = Object.keys(companies).reduce(
     );
     return Object.assign(memo, mapping);
   },
-  {},
+  {"Red Sigma": ""},
 );

@@ -4,6 +4,10 @@ import {observer} from "mobx-react";
 import {Bar} from "react-chartjs-2";
 
 import colors from "../../lib/colors";
+import {
+  companies as companiesList,
+  systems as systemMappings,
+} from "../../company-systems-mapping";
 import type {CompanySystemInsight} from "../../lib/types";
 import type Store from "../../lib/store";
 
@@ -22,55 +26,7 @@ type Props = {
   store: Store,
 };
 
-const companiesList = [
-  "experian",
-  "caci",
-  "ibm",
-  "qlik",
-  "predpol",
-  "graphnet",
-  "canatics",
-  "xantura",
-  "london ventures",
-  "liquidlogic",
-  "statacorp",
-  "mastodon c",
-  "microsoft",
-  "taurusops",
-  "atos",
-  "fujitsu",
-  "cambridge university",
-  "care first",
-  "algoworks",
-];
-
-const systemMappings = {
-  mosaic: "experian",
-  acorn: "caci",
-  i2: "ibm",
-  ibase: "ibm",
-  spss: "ibm",
-  qlikview: "qlik",
-  "qlikview v12 desktop": "qlik",
-  "qlikview publisher": "qlik",
-  "care centric": "graphnet",
-  "early help profiling system": "xantura",
-  ehps: "xantura",
-  "early years and education system": "liquidlogic",
-  eyes: "liquidlogic",
-  stata: "statacorp",
-  witan: "mastodon c",
-  kixi: "mastodon c",
-  "microsoft dynamics crm": "microsoft",
-  taurus: "taurusops",
-  hart: "cambridge university",
-  "harm and assessment risk tool": "cambridge university",
-  "care first 6": "care first",
-  "sequel server reporting solutions": "algoworks",
-  "sql server reporting solutions": "algoworks",
-};
-
-const companyColors = companiesList.reduce(
+const companyColors = Object.keys(companiesList).reduce(
   (memo, name) => Object.assign(memo, {[name]: colors(name)}),
   {},
 );
