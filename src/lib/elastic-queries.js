@@ -35,6 +35,9 @@ const parseTerms = (term: string) => {
 
 const mentionsQuery = () => ({
   bool: {
+    must_not: {
+      term: {blacklisted: true},
+    },
     should: [
       {
         exists: {
@@ -249,7 +252,12 @@ export const listDocumentsQuery = (
     },
     size: 30,
     query: Object.assign({}, mentionsQuery(), {
-      bool: {must: tagFilters.concat(fieldsFilter)},
+      bool: {
+        must_not: {
+          term: {blacklisted: true},
+        },
+        must: tagFilters.concat(fieldsFilter),
+      },
     }),
   };
 };
@@ -284,7 +292,16 @@ export const searchDocumentsQuery = (
         ]
       : [];
 
-  const queries = Object.keys(filters).reduce((memo, field) => {
+  const matchAll =
+    matchQueries.length > 0 || phraseQueries.length > 0
+      ? []
+      : [
+          {
+            match_all: {},
+          },
+        ];
+
+  const filterQueries = Object.keys(filters).reduce((memo, field) => {
     if (field === "authorities" || field === "departments")
       return memo.concat(
         filters[field].map((f) => ({
@@ -312,13 +329,16 @@ export const searchDocumentsQuery = (
     },
     query: {
       bool: {
+        must_not: {
+          term: {blacklisted: true},
+        },
         must: [
           {
             bool: {
-              should: [...phraseQueries, ...matchQueries],
+              should: [...phraseQueries, ...matchQueries, ...matchAll],
             },
           },
-        ].concat({bool: {must: queries}}),
+        ].concat({bool: {must: filterQueries}}),
       },
     },
     highlight: {
