@@ -34,3 +34,27 @@ export const systems: {[string]: string} = Object.keys(companies).reduce(
   },
   {"Red Sigma": ""},
 );
+
+// Other colors still available: #162F64, #10154C
+export const colors = {
+  Microsoft: "#DEE5B6",
+  "Cambridge University": "#E1D691",
+  IBM: "#E5C76D",
+  Experian: "#E8B849",
+  ATOS: "#ECA824",
+  CACI: "#EF9900",
+  StataCorp: "#CCE6C9",
+  Fujitsu: "#ADD9CB",
+  "Care First": "#8ECCCD",
+  Qlik: "#6FBFCE",
+  "Mastodon C": "#4FB1D0",
+  Xantura: "#30A4D2",
+  Graphnet: "#2D97C6",
+  Predpol: "#277DAD",
+  "London Ventures": "#216395",
+  LiquidLogic: "#1C497D",
+  // Those have 0 documents
+  Algoworks: "#10154C",
+  Canatics: "#10154C",
+  TaurusOps: "#10154C",
+};

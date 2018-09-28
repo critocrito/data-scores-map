@@ -11,7 +11,6 @@ type ChartData = {
   datasets: Array<{
     data: Array<{x: string, y: number}>,
     backgroundColor: Array<string>,
-    hoverBackgroundColor: Array<string>,
   }>,
 };
 
@@ -34,20 +33,15 @@ const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
       (memo, key) => {
         const count = obj[key];
         const isActiveFilter = filters.find((elem) => elem === key);
-        const [color, hoverColor] =
-          isActiveFilter != null
-            ? ["#9a1a1a", "#9a1aaa"]
-            : ["#13517A", "#297BB1"];
+        const color = isActiveFilter != null ? "#FFED00" : "#13517A";
         const [entry] = memo.datasets;
         const labels = Array.from(new Set(memo.labels).add(key));
         const data = entry.data.concat({x: key, y: count});
         const backgroundColor = entry.backgroundColor.concat(color);
-        const hoverBackgroundColor = entry.hoverBackgroundColor.concat(
-          hoverColor,
-        );
+
         return {
           labels,
-          datasets: [{data, backgroundColor, hoverBackgroundColor}],
+          datasets: [{data, backgroundColor}],
         };
       },
       {
@@ -56,7 +50,6 @@ const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
           {
             data: [],
             backgroundColor: [],
-            hoverBackgroundColor: [],
           },
         ],
       },

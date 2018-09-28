@@ -3,10 +3,9 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {Bar} from "react-chartjs-2";
 
-import colors from "../../lib/colors";
 import {
-  companies as companiesList,
   systems as systemMappings,
+  colors as colorMappings,
 } from "../../company-systems-mapping";
 import type {CompanySystemInsight} from "../../lib/types";
 import type Store from "../../lib/store";
@@ -16,7 +15,6 @@ type ChartData = {
   datasets: Array<{
     data: Array<{x: string, y: number}>,
     backgroundColor: Array<string>,
-    hoverBackgroundColor: Array<string>,
   }>,
 };
 
@@ -26,13 +24,7 @@ type Props = {
   store: Store,
 };
 
-const companyColors = Object.keys(companiesList).reduce(
-  (memo, name) => Object.assign(memo, {[name]: colors(name)}),
-  {},
-);
-
-const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
-  Object.keys(obj)
+const chartData = (obj: {[string]: number}, filters: string[]): ChartData => Object.keys(obj)
     .filter((key) => obj[key] > 0)
     .sort((a, b) => {
       // ensure this order to render the bars with the highest one to the left
@@ -45,26 +37,21 @@ const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
         const count = obj[key];
         const isActiveFilter = filters.find((elem) => elem === key);
         const baseLabel =
-          companyColors[key] != null ? "" : `${systemMappings[key]}: `;
-        const [baseColor, baseHoverColor] = companyColors[key]
-          ? companyColors[key]
-          : companyColors[systemMappings[key]];
-        const [color, hoverColor] =
-          isActiveFilter != null
-            ? ["#9a1a1a", "#9a1aaa"]
-            : [baseColor, baseHoverColor];
+          colorMappings[key] != null ? "" : `${systemMappings[key]}: `;
+        const baseColor = colorMappings[key]
+          ? colorMappings[key]
+          : colorMappings[systemMappings[key]];
+        const color = isActiveFilter != null ? "#FFED00" : baseColor;
         const [entry] = memo.datasets;
         const labels = Array.from(
           new Set(memo.labels).add(`${baseLabel}${key}`),
         );
         const data = entry.data.concat({x: key, y: count});
         const backgroundColor = entry.backgroundColor.concat(color);
-        const hoverBackgroundColor = entry.hoverBackgroundColor.concat(
-          hoverColor,
-        );
+
         return {
           labels,
-          datasets: [{data, backgroundColor, hoverBackgroundColor}],
+          datasets: [{data, backgroundColor}],
         };
       },
       {
@@ -73,7 +60,6 @@ const chartData = (obj: {[string]: number}, filters: string[]): ChartData =>
           {
             data: [],
             backgroundColor: [],
-            hoverBackgroundColor: [],
           },
         ],
       },
