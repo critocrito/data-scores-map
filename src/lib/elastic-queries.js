@@ -335,7 +335,7 @@ export const searchDocumentsQuery = (
         must: [
           {
             bool: {
-              should: [...phraseQueries, ...matchQueries, ...matchAll],
+              must: [...phraseQueries, ...matchQueries, ...matchAll],
             },
           },
         ].concat({bool: {must: filterQueries}}),
