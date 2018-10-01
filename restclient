@@ -6,7 +6,6 @@
 Content-Type: application/json
 #
 
-
 # Get the root path.
 GET http://:api
 
@@ -26,96 +25,31 @@ GET http://:api/documents?exists=authorities&size=10
 GET http://:api/documents?exists=departments&size=10
 :headers
 
-# Search for documents with either companies, systems or authorities
-GET http://:elasticsearch/_search
-:headers
-{
-  "_source": ["title", "search_batch", "systems", "companies", "authorities"],
-  "size": 30,
-  "query": {
-    "bool": {
-      "should": [
-        {
-          "exists": {
-            "field": "companies"
-          }
-        },
-        {
-          "exists": {
-            "field": "systems"
-          }
-        },
-        {
-          "nested": {
-            "path": "authorities",
-            "query": {
-              "bool": {
-                "must": [
-                  {
-                    "exists": {
-                      "field": "authorities"
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-
 ### Free Document Search
 # Search for Documents
 POST http://:api/search
 :headers
 {
-  "q": "computer",
-  "size": 5,
-  "from": 100
+  "q": "gwent police",
+  "size": 30,
+  "from": 0
 }
 
-# Search Elasticsearch for Documents
-GET http://:elasticsearch/_search
+# Match for all Documents
+POST http://:api/search
 :headers
-
 {
-  "_source": {
-    "includes": ["title", "search_batch", "systems", "companies", "authorities"]
-  },
-  "query": {
-    "multi_match": {
-      "query": "computer",
-      "fields": ["title^3", "description^2", "href_text^2"]
-    }
-  },
-  "highlight": {
-    "number_of_fragments": 3,
-    "fragment_size": 150,
-    "order": "score",
-    "fields": {
-      "href_text": {},
-      "title": {"number_of_fragments": 0},
-      "description": {"number_of_fragments": 0}
-    }
+  "q": "",
+  "size": 30,
+  "from": 0,
+  "filters": {
+    "companies": ["microsoft"]
   }
 }
 
 # Fetch a single document
 GET http://:api/documents/2fe01fea39858f3dc6421c25de4b774c280c420143639e10ce
 :headers
-
-# Search Elasticsearch for a single document
-GET http://:elasticsearch/_search
-:headers
-{
-  "query": {
-    "ids" : {
-      "values" : ["2fe01fea39858f3dc6421c25de4b774c280c420143639e10ce"]
-    }
-  }
-}
 
 ### Data Insights
 # company insights
@@ -135,150 +69,3 @@ GET http://:api/insights/departments
 # overview stats
 GET http://:api/stats/documents
 :headers
-
-### Data insights ElasticSearch
-
-# keyword query search
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "aggs": {
-    "keywords": {
-      "terms": {
-        "size": 100,
-        "field": "search_category.keyword"
-      }
-    }
-  }
-}
-
-
-# companies aggregation
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "aggs": {
-    "companies": {
-      "terms": {
-        "size": 100,
-        "field": "companies.keyword"
-      }
-    }
-  }
-}
-
-# systems aggregation
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "aggs": {
-    "systems": {
-      "terms": {
-        "size": 100,
-        "field": "systems.keyword"
-      }
-    }
-  }
-}
-
-
-# authorities aggregation
-GET http://:elasticsearch/_search
-:headers
-{
-  "_source": ["authorities"],
-  "size": 1000,
-  "query": {
-    "bool": {
-      "must": {
-        "nested": {
-          "path": "authorities",
-          "query": {
-            "bool": {
-              "must": [
-                {
-                  "exists": {
-                    "field": "authorities"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  },
-  "aggs": {
-    "authorities": {
-      "nested": {
-        "path": "authorities"
-      },
-      "aggs": {
-        "name": {
-          "terms": {
-            "size": 1000,
-            "field": "authorities.name.keyword"
-          }
-        }
-      }
-    }
-  }
-}
-
-### Elasticsearch stats
-# show document count
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "query": {
-    "match_all": {}
-  }
-}
-
-# show companies count
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "query": {
-    "bool": {
-      "should": [
-        {
-          "exists": {
-            "field": "companies"
-          }
-        },
-        {
-          "exists": {
-            "field": "systems"
-          }
-        }
-      ]
-    }
-  }
-}
-
-# show authorities stats
-GET http://:elasticsearch/_search
-:headers
-{
-  "size": 0,
-  "query": {
-    "nested": {
-      "path": "authorities",
-      "query": {
-        "bool": {
-          "must": [{
-            "exists": {
-              "field": "authorities"
-            }
-          }]
-        }
-      }
-    }
-  }
-}
