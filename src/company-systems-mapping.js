@@ -22,6 +22,8 @@ export const companies: {[string]: string[]} = {
     "Sequel Server Reporting Solutions",
     "SQL Server Reporting Solutions",
   ],
+  Optum: ["OptumIQ"],
+  OpenText: ["Axcelerate"],
 };
 
 export const systems: {[string]: string} = Object.keys(companies).reduce(
@@ -53,6 +55,8 @@ export const colors = {
   Predpol: "#277DAD",
   "London Ventures": "#216395",
   LiquidLogic: "#1C497D",
+  Optum: "#162F64",
+  OpenText: "#10154C",
   // Those have 0 documents
   Algoworks: "#10154C",
   Canatics: "#10154C",
