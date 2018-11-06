@@ -37,7 +37,6 @@ export const systems: {[string]: string} = Object.keys(companies).reduce(
   {"Red Sigma": ""},
 );
 
-// Other colors still available: #162F64, #10154C
 export const colors = {
   Microsoft: "#DEE5B6",
   "Cambridge University": "#E1D691",
