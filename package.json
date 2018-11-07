@@ -20,6 +20,7 @@
     "fix:css": "yarn lint:css -- --fix",
     "fix:js": "yarn lint:js -- --fix",
     "flow-coverage": "flow-coverage-report --config ./.flowcoverage",
+    "install": "yarn compile",
     "lint": "yarn lint:js && yarn lint:css",
     "lint:css": "stylelint src/**/*.css",
     "lint:js": "eslint src test",
@@ -28,9 +29,10 @@
     "release": "standard-version -i CHANGELOG.md -m \"chore(release): Bumped to version %s.\" --sign",
     "release-candidate": "yarn release -- --prerelease \"rc\"",
     "security-scan": "retire -p",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open chromium -r @babel/register",
+    "start": "cross-env NODE_ENV=production nodemon --exec babel-node src/server.js | bunyan -o short",
     "test": "cross-env NODE_ENV=test ava",
-    "test:watch": "yarn test -- -w"
+    "test:watch": "yarn test -- -w",
+    "webdev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open chromium -r @babel/register"
   },
   "dependencies": {
     "@koa/cors": "2.2.2",
