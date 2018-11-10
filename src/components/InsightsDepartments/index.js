@@ -3,7 +3,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 
 import FilterTags from "../FilterTags";
-import InsightsVizBarChart from "../InsightsVizBarChart";
+import InsightsVizTreeMap from "../InsightsVizTreeMap";
 import DocumentsTable from "../DocumentsTable";
 import type Store from "../../lib/store";
 
@@ -35,11 +35,7 @@ class InsightsDepartments extends React.Component<Props> {
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
         <div className="w-100 pt3 dn di-ns">
-          <InsightsVizBarChart
-            departments={store.departmentInsights}
-            fetchDocuments={() => this.fetchDocuments(0)}
-            store={store}
-          />
+          <InsightsVizTreeMap departments={store.departmentInsights} />
         </div>
         {(store.departmentFilters || []).length > 0 ? (
           <FilterTags
