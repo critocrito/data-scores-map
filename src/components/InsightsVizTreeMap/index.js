@@ -109,7 +109,7 @@ const spec = () => ({
           fill: {value: "transparent"},
         },
         hover: {
-          fill: {value: "red"},
+          fill: {value: "#ffed00"},
         },
       },
     },
