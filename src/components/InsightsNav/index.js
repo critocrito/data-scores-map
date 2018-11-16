@@ -57,7 +57,12 @@ const InsightsNav = ({activeInsight}: Props) => {
           database.
         </span>
       </div>
+
     </div>
+
+
+
+
   );
 };
 

@@ -57,7 +57,7 @@ export const colors = {
   Optum: "#162F64",
   OpenText: "#10154C",
   // Those have 0 documents
-  Algoworks: "#10154C",
-  Canatics: "#10154C",
-  TaurusOps: "#10154C",
+  Algoworks: "#311158",
+  Canatics: "#491584",
+  TaurusOps: "#5215AC",
 };

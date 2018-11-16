@@ -70,7 +70,7 @@ class DocumentsIndex extends React.Component<Props, State> {
         <Header />
         <article className="cf ph2-ns flex items-center bg-gradient">
           <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
-            <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ">
+            <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
               Document Index
             </h2>
             <p className="f4 i mid-gray">
@@ -83,7 +83,7 @@ class DocumentsIndex extends React.Component<Props, State> {
 
           </div>
           <div className="w-50-ns dn dn-m dt-ns">
-            <img className="w-50 pl7" alt="" src="/images/search.png" />
+            <img className="w-40 pl7 pb2" alt="" src="/images/search.png" />
           </div>
         </article>
 
