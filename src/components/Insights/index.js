@@ -33,7 +33,7 @@ const Insights = ({activeInsight}: Props) => {
       <Header />
       <article className="cf ph2-ns flex items-center bg-gradient">
         <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
-          <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bl b--accentuated-color bw3 pl2 ">
+          <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
             Data Insights
           </h2>
           <p className="f4 i mid-gray">Exploratory overview</p>
@@ -43,7 +43,7 @@ const Insights = ({activeInsight}: Props) => {
           </p>
         </div>
         <div className="w-50-ns dn dn-m dt-ns">
-          <img className="w-50 pl7" alt="" src="/images/insight.png" />
+          <img className="w-40 pl7 pb2" alt="" src="/images/insight.png" />
         </div>
       </article>
       <InsightsNav activeInsight={activeInsight} />
