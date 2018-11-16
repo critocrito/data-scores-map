@@ -95,7 +95,7 @@ class DocumentsDetails extends React.Component<Props, State> {
           <dl className="dn db-ns w-third-ns pa2">
             <dt>
               <span className="bb bw2 b--primary-color">
-                Companies Mentioned:
+                Organisations Mentioned:
               </span>
             </dt>
             <dd>

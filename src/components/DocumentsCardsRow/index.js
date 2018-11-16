@@ -50,7 +50,9 @@ const DocumentsCardsRow = ({
         <div className="h-50 overflow-y-auto">
           {["companies", "systems", "authorities", "departments"].map((key) => (
             <p key={key}>
-              <span className="b ttc">{`Mentions of ${key}: `}</span>
+              <span className="b ttc">{`Mentions of ${
+                key === "companies" ? "organisations" : key
+              }: `}</span>
               <span className="i">
                 {document[key].length > 0 ? document[key].join(", ") : "—"}
               </span>

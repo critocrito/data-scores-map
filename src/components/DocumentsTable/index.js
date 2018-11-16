@@ -20,7 +20,7 @@ const DocumentsTable = ({documents, total, pagination}: Props) =>
           <td className="pv2 ph3 tc fw6 ttu bb">Document ({total})</td>
           <td className="pv2 ph3 tc fw6 ttu bb">Authorities</td>
           <td className="pv2 ph3 tc fw6 ttu bb">Departments</td>
-          <td className="pv2 ph3 tc fw6 ttu bb">Companies</td>
+          <td className="pv2 ph3 tc fw6 ttu bb">Organisations</td>
           <td className="pv2 ph3 tc fw6 ttu bb">Systems</td>
           <td className="pv2 ph3 tc fw6 ttu bb">Source</td>
         </tr>

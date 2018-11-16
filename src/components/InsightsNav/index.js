@@ -20,11 +20,11 @@ const InsightsNav = ({activeInsight}: Props) => {
             isCompaniesSystems ? "bb bw2 b--accentuated-color" : "pointer"
           }`}
         >
-          By: <span className="ttu">Companies & Systems</span>
+          By: <span className="ttu">Organisations & Systems</span>
         </Link>
         <span className="w-50 i primary-color f7 tc center mt2">
-          This provides an overview of how names of companies appear in the
-          database.
+          This provides an overview of how names of organisations and software
+          systems appear in the database.
         </span>
       </div>
 
@@ -57,12 +57,7 @@ const InsightsNav = ({activeInsight}: Props) => {
           database.
         </span>
       </div>
-
     </div>
-
-
-
-
   );
 };
 
