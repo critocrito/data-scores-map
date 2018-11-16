@@ -12,6 +12,7 @@ import Insights from "../Insights";
 import DocumentsIndex from "../DocumentsIndex";
 import DocumentsDetails from "../DocumentsDetails";
 import CaseStudies from "../CaseStudies";
+import Methodology from "../Methodology";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -48,6 +49,7 @@ const DataScores = () => (
         )}
       />
       <Route path="/case-studies" component={CaseStudies} />
+      <Route path="/methodology" component={Methodology} />
       {/* Make sure this is last, otherwise follow up routes are not matched. */}
       <Route path="/:documentId" component={DocumentsDetails} />
     </Switch>

@@ -14,6 +14,7 @@ const Header = ({location}: Props) => {
   const isDocumentsLocation = /^\/documents/.test(location.pathname);
   const isInsightsLocation = /^\/insights/.test(location.pathname);
   const isCaseStudiesLocation = /^\/case-studies/.test(location.pathname);
+  const isMethodologyLocation = /^\/methodology/.test(location.pathname);
 
   return (
     <header className="cf ttu f6 ph2-ns flex-ns items-center">
@@ -58,6 +59,16 @@ const Header = ({location}: Props) => {
               }`}
             >
               Case Studies
+            </Link>
+          </li>
+          <li className="ma2 dib">
+            <Link
+              to="/methodology"
+              className={`link nowrap ma2 pb1 b black ${
+                isMethodologyLocation ? activeClass : "hover-nav-link"
+              }`}
+            >
+              Methodology
             </Link>
           </li>
         </ul>
