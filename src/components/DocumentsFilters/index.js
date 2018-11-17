@@ -152,7 +152,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("sources")}
           />
           {activeFilter === "sources" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ">
+            <div className="filter-box absolute-ns mh5 fn-m ml-5">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />

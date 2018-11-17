@@ -215,9 +215,10 @@ export default class Store {
     try {
       const {data} = yield sourceInsights();
       this.loadingState = "done";
-      this.sources = data.map(({id, name}) => ({
+      this.sources = data.map(({id, name, prettyName}) => ({
         id,
         name,
+        prettyName,
       }));
     } catch (e) {
       this.loadingState = "error";

@@ -77,7 +77,8 @@ class DocumentsIndex extends React.Component<Props, State> {
       (store.companyFilters || [])
         .concat(store.systemFilters)
         .concat(store.authorityFilters)
-        .concat(store.departmentFilters).length > 0;
+        .concat(store.departmentFilters)
+        .concat(store.sourceFilters).length > 0;
 
     return (
       <div>
@@ -138,6 +139,7 @@ class DocumentsIndex extends React.Component<Props, State> {
               systemFilters={store.systemFilters || []}
               authorityFilters={store.authorityFilters || []}
               departmentFilters={store.departmentFilters || []}
+              sourceFilters={store.sourceFilters || []}
               clearFilters={() => {
                 store.clearAllFilters();
                 store.searchDocuments(searchTerm, 0);

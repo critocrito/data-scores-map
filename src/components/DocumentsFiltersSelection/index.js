@@ -56,11 +56,12 @@ class DocumentsFiltersSelection extends React.Component<Props, State> {
       <div className="ba b--moon-gray bg-white shadow-3">
         <div className="center flex flex-column pa3">
           <div className="flex flex-wrap mt3-ns">
-            {filters.map(({id, name}) => (
+            {filters.map(({id, name, prettyName}) => (
               <DocumentsFiltersCheckbox
                 key={id}
                 id={id}
                 name={name}
+                prettyName={prettyName}
                 checked={checkedItems.get(name) || false}
                 onChange={this.handleCheckItem}
               />

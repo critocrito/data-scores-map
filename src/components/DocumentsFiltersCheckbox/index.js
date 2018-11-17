@@ -4,6 +4,7 @@ import * as React from "react";
 type Props = {
   id: string,
   name: string,
+  prettyName: string | void,
   checked: boolean,
   onChange: (SyntheticInputEvent<HTMLInputElement>) => mixed,
 };
@@ -11,6 +12,7 @@ type Props = {
 const DocumentsFiltersCheckbox = ({
   id,
   name,
+  prettyName,
   checked = false,
   onChange,
 }: Props) => (
@@ -23,7 +25,7 @@ const DocumentsFiltersCheckbox = ({
         checked={checked}
         onChange={onChange}
       />
-      {name}
+      {prettyName == null ? name : prettyName}
     </label>
   </div>
 );

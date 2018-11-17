@@ -1,11 +1,14 @@
 // @flow
 import * as React from "react";
 
+import {sourcify} from "../../lib/utils";
+
 type Props = {
   companyFilters: string[],
   systemFilters: string[],
   authorityFilters: string[],
   departmentFilters: string[],
+  sourceFilters: string[],
   clearFilters: () => void,
   updateFilters: (string, string[]) => void,
 };
@@ -15,6 +18,7 @@ const FilterTags = ({
   systemFilters,
   authorityFilters,
   departmentFilters,
+  sourceFilters,
   clearFilters,
   updateFilters,
 }: Props) => (
@@ -96,6 +100,20 @@ const FilterTags = ({
         >
           <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
             {filter}
+          </span>
+        </button>
+      ))}
+      {sourceFilters.map((filter) => (
+        <button
+          key={filter}
+          type="button"
+          onClick={() =>
+            updateFilters("sources", sourceFilters.filter((f) => f !== filter))
+          }
+          className="mt3 bg-transparent"
+        >
+          <span className="f6 ph3 pv2 primary-color br-pill ba bw1 b--primary-color pa1 ma1 dim">
+            {sourcify(filter)}
           </span>
         </button>
       ))}

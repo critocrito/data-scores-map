@@ -33,6 +33,7 @@ export type Highlights = {|
 export type Item = {
   id: string,
   name: string,
+  prettyName?: string,
 };
 
 export type Insight = Item & {
@@ -55,9 +56,7 @@ export type DepartmentInsight = Insight & {
   tag: null | string,
 };
 
-export type SourceInsight = Insight & {
-  prettyName: string,
-};
+export type SourceInsight = Insight;
 
 export type Stat = {
   name: string,
