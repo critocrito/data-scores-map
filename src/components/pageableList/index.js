@@ -13,7 +13,11 @@ type Props = {
 
 type State = {
   page: number,
+  intervalId: IntervalID,
 };
+
+const scrollStepInPx = 150;
+const delayInMs = 5;
 
 const pageableList = (
   WrappedComponent: React.ComponentType<{
@@ -27,13 +31,32 @@ const pageableList = (
 
     constructor(props: Props) {
       super(props);
-      this.state = {page: props.documentsPage};
+      this.state = {
+        page: props.documentsPage,
+        // $FlowFixMe
+        intervalId: null,
+      };
     }
+
+    scrollStep = () => {
+      const {intervalId} = this.state;
+      if (window.pageYOffset === 0) {
+        clearInterval(intervalId);
+      }
+      window.scroll(0, window.pageYOffset - scrollStepInPx);
+    };
+
+    scrollToTop = () => {
+      const intervalId = setInterval(this.scrollStep.bind(this), delayInMs);
+
+      this.setState({intervalId});
+    };
 
     paginate = async (page: number) => {
       const {paginateDocuments, pageSize} = this.props;
       paginateDocuments(page * pageSize);
       this.setState({page});
+      this.scrollToTop();
     };
 
     pagination(): Array<React.Node> {

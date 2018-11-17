@@ -127,7 +127,7 @@ export default class Store {
 
   searchDocuments = flow(function* searchDocuments(term: string, from: number) {
     const filters = toJS(this.documentsFilters, {exportMapsAsObjects: true});
-    if (term !== "") {
+    if (term != null && term !== "") {
       try {
         const {data, total, page} = yield search(
           term,
@@ -142,7 +142,6 @@ export default class Store {
         console.log(e);
       }
     } else {
-      console.log("haha");
       this.fetchDocuments([], from);
     }
   });

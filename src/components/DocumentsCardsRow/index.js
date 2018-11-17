@@ -60,7 +60,7 @@ const DocumentsCardsRow = ({
           ))}
         </div>
       </div>
-      <div className="w-100 w-50-ns ma2">
+      <div className="w-100 di-ns dn w-50-ns ma2">
         <p>Found {highlightsValues.length} occurences.</p>
         <div className="h-75 overflow-y-auto">
           <ul className="list pl0">

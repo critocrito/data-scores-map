@@ -18,7 +18,7 @@ const FilterTags = ({
   clearFilters,
   updateFilters,
 }: Props) => (
-  <section id="filters" className="ph2-ns  w-90 center mt4">
+  <section id="filters" className="ph2-ns w-90 center mt5">
     <div className="bb flex justify-between">
       <div className="w-75">
         <p>Selected filters:</p>
