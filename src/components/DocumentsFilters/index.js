@@ -88,7 +88,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("companies")}
           />
           {activeFilter === "companies" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ">
+            <div className="filter-box absolute-ns mh7 w-75 fn-m">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -104,7 +104,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("systems")}
           />
           {activeFilter === "systems" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ">
+            <div className="filter-box absolute-ns mh7 w-75 fn-m">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -120,7 +120,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("authorities")}
           />
           {activeFilter === "authorities" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ">
+            <div className="filter-box absolute-ns mh7 w-75 fn-m">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -136,7 +136,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("departments")}
           />
           {activeFilter === "departments" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ">
+            <div className="filter-box absolute-ns mh7 w-75 fn-m">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
@@ -152,7 +152,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             handler={() => this.toggleFilterItem("sources")}
           />
           {activeFilter === "sources" ? (
-            <div className="filter-box absolute-ns mh5 fn-m ml-5">
+            <div className="filter-box absolute-ns mh7 w-75 fn-m">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}
               />
