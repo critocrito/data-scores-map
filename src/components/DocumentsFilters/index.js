@@ -9,6 +9,8 @@ import type Store from "../../lib/store";
 
 type Props = {
   store: Store,
+  // $FlowFixMe
+  update: () => any,
 };
 
 type State = {
@@ -39,13 +41,15 @@ class DocumentsFilters extends React.Component<Props, State> {
   };
 
   updateFilters = (type: string, filters: string[]) => {
-    const {store} = this.props;
+    const {store, update} = this.props;
     store.updateFilters(type, filters);
+    update();
   };
 
   clearFilters = (type: string) => {
-    const {store} = this.props;
+    const {store, update} = this.props;
     store.clearFilters(type);
+    update();
   };
 
   filterSelectionProps = (active: string) => {

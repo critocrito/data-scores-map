@@ -8,7 +8,7 @@ import DocumentsTable from "../DocumentsTable";
 import type Store from "../../lib/store";
 
 type Props = {
-  searchTerm: string,
+  searchTerm: string | null,
   store: Store,
 };
 
@@ -44,29 +44,35 @@ class DocumentsSearchResults extends React.Component<Props, State> {
       pageSize: store.pageSize,
     };
 
+    const results =
+      searchTerm != null ? (
+        <span>
+          Found <span className="b">{store.documentsTotal} documents</span> that
+          contains: <em>{searchTerm}</em>
+        </span>
+      ) : (
+        <span>
+          Found <span className="b">{store.documentsTotal} documents</span>
+        </span>
+      );
+
     return (
       <div className="pt5">
         <div className="mv2 bb bw1 b--light-silver flex justify-between">
-          <div className="ma2 w-50">
-            Found <span className="b">{store.documentsTotal} documents</span>{" "}
-            that contains: <em>{searchTerm}</em>
+          {results}
+          <div className="ma2 w-50" />
+          <div className="ma2 w-25 tr">
+            <button
+              type="button"
+              className="grid-button h2 w2"
+              onClick={() => this.switchResultsView("card")}
+            />
+            <button
+              type="button"
+              className="bars-button h2 w2"
+              onClick={() => this.switchResultsView("list")}
+            />
           </div>
-          {store.documents.length > 0 ? (
-            <div className="ma2 w-25 tr">
-              <button
-                type="button"
-                className="grid-button h2 w2"
-                onClick={() => this.switchResultsView("card")}
-              />
-              <button
-                type="button"
-                className="bars-button h2 w2"
-                onClick={() => this.switchResultsView("list")}
-              />
-            </div>
-          ) : (
-            ""
-          )}
         </div>
         {resultsView === "card" ? (
           <DocumentsCards {...viewProps} />

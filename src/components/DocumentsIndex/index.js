@@ -28,6 +28,13 @@ class DocumentsIndex extends React.Component<Props, State> {
     filtersOpen: false,
   };
 
+  componentDidMount() {
+    const {store} = this.props;
+    const {searchTerm} = this.state;
+    store.clearAllFilters();
+    store.searchDocuments(searchTerm.trim(), 0);
+  }
+
   componentWillUnmount() {
     const {store} = this.props;
     store.clearAllFilters();
@@ -53,8 +60,17 @@ class DocumentsIndex extends React.Component<Props, State> {
 
   clear = () => {
     const {store} = this.props;
+    const {searchTerm} = this.state;
     store.clearDocuments();
+    store.searchDocuments(searchTerm, 0);
     this.setState({searchTerm: ""});
+  };
+
+  clearFilters2 = () => {
+    const {store} = this.props;
+    const {searchTerm} = this.state;
+    store.clearAllFilters();
+    store.searchDocuments(searchTerm.trim(), 0);
   };
 
   toggleFiltersNav = () => {
@@ -116,30 +132,34 @@ class DocumentsIndex extends React.Component<Props, State> {
               Filters
             </button>
           </div>
-          {filtersOpen ? <DocumentsFilters store={store} /> : <div />}
+          {filtersOpen ? (
+            <DocumentsFilters
+              store={store}
+              update={() => store.searchDocuments(searchTerm, 0)}
+            />
+          ) : (
+            <div />
+          )}
           {hasFilters ? (
             <FilterTags
               companyFilters={store.companyFilters || []}
               systemFilters={store.systemFilters || []}
               authorityFilters={store.authorityFilters || []}
               departmentFilters={store.departmentFilters || []}
-              clearFilters={() => store.clearAllFilters()}
-              updateFilters={(type, filters) =>
-                store.updateFilters(type, filters)
-              }
+              clearFilters={() => {
+                store.clearAllFilters();
+                store.searchDocuments(searchTerm, 0);
+              }}
+              updateFilters={(type, filters) => {
+                store.updateFilters(type, filters);
+                store.searchDocuments(searchTerm, 0);
+              }}
             />
           ) : (
             ""
           )}
           <div className="pt5">
-            {lastSearchTerm != null ? (
-              <DocumentsSearchResults
-                searchTerm={lastSearchTerm}
-                store={store}
-              />
-            ) : (
-              <div />
-            )}
+            <DocumentsSearchResults searchTerm={lastSearchTerm} store={store} />
           </div>
         </article>
       </div>

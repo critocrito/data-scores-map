@@ -142,7 +142,8 @@ export default class Store {
         console.log(e);
       }
     } else {
-      this.clearDocuments();
+      console.log("haha");
+      this.fetchDocuments([], from);
     }
   });
 

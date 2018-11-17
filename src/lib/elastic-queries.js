@@ -256,7 +256,10 @@ export const listDocumentsQuery = (
         must_not: {
           term: {blacklisted: true},
         },
-        must: [{bool: {should: [fieldsFilter]}}, ...tagFilters],
+        must: (fieldsFilter.length > 0
+          ? [{bool: {should: [fieldsFilter]}}]
+          : []
+        ).concat(tagFilters),
       },
     }),
   };
