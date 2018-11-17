@@ -1,5 +1,6 @@
 // @flow
 import type {
+  HttpInsightResp,
   HttpCompSysInsightResp,
   HttpAuthorityInsightResp,
   HttpStatResp,
@@ -40,6 +41,7 @@ export const documents = (
   systems: string[],
   authorities: string[],
   departments: string[],
+  sources: string[],
   from: number,
   size: number,
 ): Promise<HttpDocResp> => {
@@ -49,6 +51,7 @@ export const documents = (
   systems.forEach((field) => url.searchParams.append("systems", field));
   authorities.forEach((field) => url.searchParams.append("authorities", field));
   departments.forEach((field) => url.searchParams.append("departments", field));
+  sources.forEach((field) => url.searchParams.append("sources", field));
   url.searchParams.append("from", from.toString());
   url.searchParams.append("size", size.toString());
   return fetch(url).then((resp) => resp.json());
@@ -74,5 +77,10 @@ export const departmentInsights = (): Promise<HttpAuthorityInsightResp> => {
 
 export const documentStats = (): Promise<HttpStatResp> => {
   const url = `${baseUrl}/stats/documents`;
+  return fetch(url).then((resp) => resp.json());
+};
+
+export const sourceInsights = (): Promise<HttpInsightResp> => {
+  const url = `${baseUrl}/insights/sources`;
   return fetch(url).then((resp) => resp.json());
 };

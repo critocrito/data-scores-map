@@ -10,6 +10,7 @@ const router = new Router()
     const systems = ctx.query.systems || [];
     const authorities = ctx.query.authorities || [];
     const departments = ctx.query.departments || [];
+    const sources = ctx.query.sources || [];
     const from = ctx.query.from || 0;
     const size = ctx.query.size || 0;
     const result = await list(
@@ -21,6 +22,7 @@ const router = new Router()
         systems: Array.isArray(systems) ? systems : [systems],
         authorities: Array.isArray(authorities) ? authorities : [authorities],
         departments: Array.isArray(departments) ? departments : [departments],
+        sources: Array.isArray(sources) ? sources : [sources],
       },
       elastic,
     );

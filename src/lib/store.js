@@ -7,6 +7,7 @@ import {
   companySystemInsights,
   authorityInsights,
   departmentInsights,
+  sourceInsights,
   documentStats,
 } from "./requests";
 
@@ -39,6 +40,9 @@ export default class Store {
 
   @observable
   departments: Item[] = [];
+
+  @observable
+  sources: Item[] = [];
 
   @observable
   document: FullDocument;
@@ -91,6 +95,12 @@ export default class Store {
     return toJS(this.documentsFilters.get("departments"));
   }
 
+  @computed
+  get sourceFilters() {
+    if (!this.documentsFilters.has("sources")) return [];
+    return toJS(this.documentsFilters.get("sources"));
+  }
+
   fetchDocument = flow(function* fetchDocument(id: string) {
     try {
       const {data} = yield document(id);
@@ -114,6 +124,7 @@ export default class Store {
         this.systemFilters,
         this.authorityFilters,
         this.departmentFilters,
+        this.sourceFilters,
         from,
         this.pageSize,
       );
@@ -191,6 +202,20 @@ export default class Store {
       const {data} = yield departmentInsights();
       this.loadingState = "done";
       this.departments = data.map(({id, name}) => ({
+        id,
+        name,
+      }));
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchSources = flow(function* fetchSources() {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield sourceInsights();
+      this.loadingState = "done";
+      this.sources = data.map(({id, name}) => ({
         id,
         name,
       }));

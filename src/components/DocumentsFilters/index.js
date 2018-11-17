@@ -29,6 +29,7 @@ class DocumentsFilters extends React.Component<Props, State> {
       store.fetchCompaniesSystems();
     if (store.authorities.length === 0) store.fetchAuthorities();
     if (store.departments.length === 0) store.fetchDepartments();
+    if (store.sources.length === 0) store.fetchSources();
   }
 
   toggleFilterItem = (filter: string) => {
@@ -68,6 +69,8 @@ class DocumentsFilters extends React.Component<Props, State> {
         return Object.assign({}, props, {filters: store.authorities});
       case "departments":
         return Object.assign({}, props, {filters: store.departments});
+      case "sources":
+        return Object.assign({}, props, {filters: store.sources});
       default:
         return {};
     }
@@ -78,7 +81,7 @@ class DocumentsFilters extends React.Component<Props, State> {
 
     return (
       <div className="flex-ns justify-around-ns pt3 mt2 w-90 center ">
-        <div className="w-100 w-25-ns">
+        <div className="w-100 w-20-ns">
           <DocumentsFiltersItem
             name="Companies"
             isActive={activeFilter === "companies"}
@@ -94,7 +97,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             ""
           )}
         </div>
-        <div className="w-100 w-25-ns">
+        <div className="w-100 w-20-ns">
           <DocumentsFiltersItem
             name="Systems"
             isActive={activeFilter === "systems"}
@@ -110,7 +113,7 @@ class DocumentsFilters extends React.Component<Props, State> {
             ""
           )}
         </div>
-        <div className="w-100 w-25-ns">
+        <div className="w-100 w-20-ns">
           <DocumentsFiltersItem
             name="Authorities"
             isActive={activeFilter === "authorities"}
@@ -126,13 +129,29 @@ class DocumentsFilters extends React.Component<Props, State> {
             ""
           )}
         </div>
-        <div className="w-100 w-25-ns">
+        <div className="w-100 w-20-ns">
           <DocumentsFiltersItem
             name="Departments"
             isActive={activeFilter === "departments"}
             handler={() => this.toggleFilterItem("departments")}
           />
           {activeFilter === "departments" ? (
+            <div className="filter-box absolute-ns mh5 fn-m ">
+              <DocumentsFiltersSelection
+                {...this.filterSelectionProps(activeFilter)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-100 w-20-ns">
+          <DocumentsFiltersItem
+            name="Sources"
+            isActive={activeFilter === "sources"}
+            handler={() => this.toggleFilterItem("sources")}
+          />
+          {activeFilter === "sources" ? (
             <div className="filter-box absolute-ns mh5 fn-m ">
               <DocumentsFiltersSelection
                 {...this.filterSelectionProps(activeFilter)}

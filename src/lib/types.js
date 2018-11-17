@@ -55,6 +55,10 @@ export type DepartmentInsight = Insight & {
   tag: null | string,
 };
 
+export type SourceInsight = Insight & {
+  prettyName: string,
+};
+
 export type Stat = {
   name: string,
   count: number,
@@ -77,11 +81,11 @@ export type FullDocument = Document & {
   href_text: string,
 };
 
-type HttpInsightResp = {
+export type HttpInsightResp = {
   length: number,
 };
 
-type HttpDocumentResp = {
+export type HttpDocumentResp = {
   total: number,
   page: number,
 };

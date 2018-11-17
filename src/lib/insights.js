@@ -5,10 +5,12 @@ import {
   systemInsightsQuery,
   authorityInsightsQuery,
   departmentInsightsQuery,
+  sourceInsightsQuery,
 } from "./elastic-queries";
-import {toId} from "./utils";
+import {sourcify, toId} from "./utils";
 import type {
   ElasticCfg,
+  SourceInsight,
   CompanySystemInsight,
   AuthorityInsight,
   DepartmentInsight,
@@ -169,5 +171,28 @@ export const departments = async (
   //        https://github.com/facebook/flow/issues/2221
   return Object.keys(transformed)
     .map((key) => transformed[key])
+    .sort((a, b) => a.name.localeCompare(b.name));
+};
+
+export const sources = async ({
+  host,
+  port,
+  index,
+}: ElasticCfg): Promise<SourceInsight[]> => {
+  const elastic = await client(host, port);
+  // $FlowFixMe
+  const {aggregations} = await aggregateNestedTerms(
+    elastic,
+    index,
+    sourceInsightsQuery(),
+  );
+
+  return aggregations.sources.buckets
+    .map(({key, doc_count: count}) => ({
+      name: key,
+      prettyName: sourcify(key),
+      id: toId(sourcify(key)),
+      count,
+    }))
     .sort((a, b) => a.name.localeCompare(b.name));
 };

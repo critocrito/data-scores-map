@@ -60,17 +60,9 @@ class DocumentsIndex extends React.Component<Props, State> {
 
   clear = () => {
     const {store} = this.props;
-    const {searchTerm} = this.state;
+    this.setState({searchTerm: "", lastSearchTerm: null});
     store.clearDocuments();
-    store.searchDocuments(searchTerm, 0);
-    this.setState({searchTerm: ""});
-  };
-
-  clearFilters2 = () => {
-    const {store} = this.props;
-    const {searchTerm} = this.state;
-    store.clearAllFilters();
-    store.searchDocuments(searchTerm.trim(), 0);
+    store.searchDocuments("", 0);
   };
 
   toggleFiltersNav = () => {

@@ -12,6 +12,7 @@ export const list = async (
     systems: string[],
     authorities: string[],
     departments: string[],
+    sources: string[],
   },
   {host, port, index}: ElasticCfg,
 ): Promise<HttpDocResp> => {

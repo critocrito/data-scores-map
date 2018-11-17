@@ -149,6 +149,19 @@ export const departmentInsightsQuery = (): ElasticAggsQuery => ({
   },
 });
 
+export const sourceInsightsQuery = (): ElasticAggsQuery => ({
+  size: 0,
+  query: mentionsQuery(),
+  aggs: {
+    sources: {
+      terms: {
+        size: 100,
+        field: "search_batch.keyword",
+      },
+    },
+  },
+});
+
 export const documentCountsQuery = (): ElasticQuery => ({
   size: 0,
   query: {
@@ -203,6 +216,7 @@ export const listDocumentsQuery = (
     systems: string[],
     authorities: string[],
     departments: string[],
+    sources: string[],
   },
 ): ElasticQuery => {
   const fieldsFilter = exists.map((field) => {
@@ -232,6 +246,7 @@ export const listDocumentsQuery = (
     "systems",
     "authorities",
     "departments",
+    "sources",
   ].reduce((memo, key) => {
     if (filters[key] == null || filters[key].length === 0) return memo;
     if (key === "authorities" || key === "departments")
@@ -243,6 +258,8 @@ export const listDocumentsQuery = (
           },
         },
       });
+    if (key === "sources")
+      return memo.concat({terms: {"search_batch.keyword": filters[key]}});
     return memo.concat({terms: {[`${key}.keyword`]: filters[key]}});
   }, []);
 
@@ -316,7 +333,14 @@ export const searchDocumentsQuery = (
           },
         })),
       );
-
+    if (field === "sources")
+      return memo.concat(
+        filters[field].map((f) => ({
+          match_phrase: {
+            search_batch: f,
+          },
+        })),
+      );
     return memo.concat(
       filters[field].map((f) => ({
         match_phrase: {
@@ -341,7 +365,7 @@ export const searchDocumentsQuery = (
               must: [...phraseQueries, ...matchQueries, ...matchAll],
             },
           },
-        ].concat({bool: {must: filterQueries}}),
+        ].concat({bool: {should: filterQueries}}),
       },
     },
     highlight: {
