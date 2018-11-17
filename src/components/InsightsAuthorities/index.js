@@ -22,6 +22,7 @@ class InsightsAuthorities extends React.Component<Props> {
 
   componentWillUnmount() {
     const {store} = this.props;
+    store.clearAllFilters();
     store.clearDocuments();
   }
 

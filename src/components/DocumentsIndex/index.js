@@ -28,6 +28,12 @@ class DocumentsIndex extends React.Component<Props, State> {
     filtersOpen: false,
   };
 
+  componentWillUnmount() {
+    const {store} = this.props;
+    store.clearAllFilters();
+    store.clearDocuments();
+  }
+
   handleChange = (ev) => {
     this.setState({searchTerm: ev.target.value});
   };
@@ -73,22 +79,18 @@ class DocumentsIndex extends React.Component<Props, State> {
             <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
               Document Index
             </h2>
-            <p className="f4 i mid-gray">
-            Specific word or phrase
-            </p>
+            <p className="f4 i mid-gray">Specific word or phrase</p>
             <p className="f4 near-black">
-          Here you can search within the whole database. You can find search terms or phrases in context categories.
+              Here you can search within the whole database. You can find search
+              terms or phrases in context categories.
             </p>
-
-
           </div>
           <div className="w-50-ns dn dn-m dt-ns">
             <img className="w-40 pl7 pb2" alt="" src="/images/search.png" />
           </div>
         </article>
 
-
-        <article className="cf ph2-ns flex flex-column vh" >
+        <article className="cf ph2-ns flex flex-column vh">
           <div className=" pt5-ns center w-100  pb3 w-90-ns flex items-center justify-center">
             <form className="w-70" role="search" onSubmit={this.handleSubmit}>
               <input
