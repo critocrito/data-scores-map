@@ -12,7 +12,7 @@ const Methodology = () => (
         <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
           Methodology
         </h2>
-        <p className="f4 i mid-gray">Methodology</p>
+        <p className="f4 i mid-gray" />
         <p className="f4 near-black">
           The Data Scores Investigation tool draws inspiration from{" "}
           <a className="link primary-color" href="http://algorithmtips.org/">
@@ -46,11 +46,12 @@ const Methodology = () => (
           own terms that we thought may be more likely to return productive
           results in a UK context. We also included the names of software and
           companies encountered during initial desk research. The final list of
-          keywords includes XX terms. A different and shorter list of keywords
-          using more generic terminology was used to add scrapes from newspaper
-          websites, limited to the largest national and local newspapers, to the
-          database. Finally, we added data from a list of over 400 Freedom of
-          Information requests that we had sent out.
+          keywords includes 79 search terms and 45 names of organisations and
+          systems. A different and shorter list of keywords using more generic
+          terminology was used to add scrapes from newspaper websites, limited
+          to the largest national and local newspapers, to the database.
+          Finally, we added data from a list of over 100 Freedom of Information
+          requests that we had sent out.
         </p>
 
         <p>
@@ -79,6 +80,7 @@ const Methodology = () => (
           >
             https://github.com/critocrito/data-scores-in-the-uk
           </a>
+          .
         </p>
       </div>
     </div>
