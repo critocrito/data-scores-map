@@ -16,7 +16,15 @@ const CaseStudies = () => (
         <p className="f4 i mid-gray">Research</p>
         <p className="f4 near-black">
           Read about some examples of how data-driven systems are implemented
-          for public services in different local authorities in the UK.
+          for public services in different local authorities in the UK. The full
+          report can be found{" "}
+          <a
+            href="https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf"
+            className="link primary-color"
+          >
+            here
+          </a>
+          .
         </p>
       </div>
       <div className="w-50-ns dn dn-m dt-ns">

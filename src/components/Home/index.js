@@ -27,14 +27,19 @@ const Home = () => (
         </p>
         <p className=" near-black ">
           As part of our project{" "}
-          <span className="primary-color">‘Data Scores as Governance’</span> we
-          have developed a tool to map and investigate the uses of data
+          <a
+            className="link primary-color"
+            href="https://datajusticelab.org/data-scores-as-governance/"
+          >
+            ‘Data Scores as Governance’
+          </a>{" "}
+          we have developed a tool to map and investigate the uses of data
           analytics and algorithms in public services in the UK. This tool is
           designed to facilitate further research and investigation into this
           topic and to advance public knowledge and understanding.
         </p>
 
-        <p className=" near-black pb4 mb4">
+        <p className="near-black pb4 mb4">
           The tool is made up of a collection of documents from different
           sources that can be searched and mapped according to different
           categories. The database consists of more than 5300{" "}
