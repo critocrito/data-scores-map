@@ -11,6 +11,7 @@ import log from "./lib/logging";
 import router from "./routes";
 import {companies, systems} from "./company-systems-mapping";
 import {departmentTags} from "./department-tags";
+import locationsSkyNews from "./locations-sky-news.json";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.context.elastic = {
 app.context.companies = companies;
 app.context.systems = systems;
 app.context.departmentTags = departmentTags;
+app.context.locationsSkyNews = locationsSkyNews;
 
 app.use(koaLogger());
 app.use(

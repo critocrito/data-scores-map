@@ -1,0 +1,2194 @@
+[
+  {
+    "name": "Argyll and Bute Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_27 ",
+    "systems": "Sentiment Metrics social media sentiment analysis",
+    "notes": "It appears the social media sentiment analysis is a part of a system (ContactCentre 59R ACD) which groups together different streams individual may use to contact an organisation, including social media. The sentiment analysis portion is provided by Sentiment Metrics, who are now called Sentiment. - http://www.monitoring-social-media.com/sentiment-metrics-undergoes-rebrand-and-launches-sentiment",
+    "extract": "\"We use the Sentiment Metrics social media service which uses algorithms to determine user sentiment about the council based on customer social media postings. ... Both Sentiment metrics and the voice auto service form part of a wider customer engagement solution contract with Softcat PLC who subcontracted Oracle and Netcall for the relevant elements \" [More details within the FOI response]",
+    "location": [55.933, -5.349]
+  },
+  {
+    "name": "Birmingham City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_5 ",
+    "systems": "Business Objects",
+    "notes": "A popular business intelligence package, sold by SAP. Has a wide array of possible functions, including analytical capacities. Marketing copy extract: \"Enable all business users to understand trends and root causes with easy-to-use BI tools for ad hoc queries, reporting, and analysis in a Web environment. ... Build impactful BI visualization, dashboards, and analytics applications to assess risk, improve efficiencies, highlight unique insights, and identify opportunities.\" - https://www.sap.com/products/bi-platform.html",
+    "extract": "",
+    "location": [52.483056, -1.893611]
+  },
+  {
+    "name": "Birmingham City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_5 ",
+    "systems": "Tableau",
+    "notes": "A popular, versatile \"visual analytics\" platform. - https://www.tableau.com/",
+    "extract": "",
+    "location": [52.483056, -1.893611]
+  },
+  {
+    "name": "Blaby District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_45 ",
+    "systems": "Mosaic (Experian)",
+    "notes": "This popular piece of \"geodemographic segmentation\" software is used to gain insights into different populations of people, down to the level of neighbourhood (postcode) and household. See page 83 of the Data Justice Lab's report, \"Data Scores as Governance\", for a closer look at Mosaic: https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf",
+    "extract": "",
+    "location": [52.573, -1.2]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "AccsMap",
+    "notes": "Bournemouth Borough Council use AccsMap alongside a number of other applications to attempt to understand traffic flows. From AccsMap's marketing copy: \"AccsMap is a map-based road casualty analysis system developed  specifically for the UK. It is a comprehensive input, reporting,  analysis and validation system for road accidents, enabling data to be  viewed and interrogated on a map background.\" - http://www.buchanancomputing.net/accsmap.html",
+    "extract": "\"AccsMap is used to organise and analyse road casualty data.\"",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "Arcady",
+    "notes": "Arcady is used to model roundabouts. More information: https://trlsoftware.com/products/junction-signal-design/junctions/arcady/",
+    "extract": "",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "SiteImprove",
+    "notes": "Among other things relating to website UX, SiteImprove provides analytics tools to measure how users interact with a website.",
+    "extract": "",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "Mova",
+    "notes": "An urban traffic management and control system which uses \"data analysis and auto-adaptive management of traffic light networks\". - https://www.indracompany.com/en/control-systems",
+    "extract": "\"We use Urban Traffic Management and Control (UTMC) systems such as Scoot, Mova and Stratos to assess traffic flows and automatically adjust traffic signals to optimise traffic flow and help reduce congestion.\"",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "Scoot",
+    "notes": "A fairly old urban traffic control system, in use since at least the 90s, which utilises sensors to optimise traffic flows with traffic signals. - http://www.ukroads.org/webfiles/tal04-95.pdf",
+    "extract": "",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "SocialSignIn",
+    "notes": "A customer experience system, now called Orlo. Orlo carries out a degree of sentiment analysis, although it is unclear if Bournemouth Borough Council use this aspect of the system[1]. The system also has some social media monitoring capabilities[2]. - [1] https://orlo.tech/our-ecosystem/social-customer-care/  [2] https://orlo.tech/our-ecosystem/media-monitoring/",
+    "extract": "",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "Stratos",
+    "notes": "A Siemens produced system with a wide array of capabilities, including the processing of real-time sensor information. Processing is carried out on Siemens' servers. - https://www.siemens.co.uk/traffic/en/index/productssolutionsservices/systems/traffic-management-system-stratos.htm ",
+    "extract": "",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "Bournemouth Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_51 ",
+    "systems": "Tableau",
+    "notes": "A popular, versatile \"visual analytics\" platform. - https://www.tableau.com/",
+    "extract": "\"The Insight, Policy and Performance Team have just started to use Tableau for data visualisation. Our tableau dashboards can be seen here: https://public.tableau.com/profile/bcpinsight#!/ \"",
+    "location": [50.716667, -1.883333]
+  },
+  {
+    "name": "City of Bradford Metropolitan District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_53",
+    "systems": "CapitaONE",
+    "notes": "A system used for data linkage, with the aim of analytics being performed upon the linked data data. Bradford City Council use the system for schools allocation based on a number of factors. CapitaONE is produced by the public sector outsourcing giant, Capita. Capita market the system as allowing local authorities to see the \"full picture\" of their citizens and facilitating effective interventions[1]. See page 99 of the Data Justice Lab's report, \"Data Scores as Governance\", for more on Capita[2].  [1] https://www.capita-one.co.uk/about-us  [2] https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf",
+    "extract": "\"CapitaONE - schools allocation based on parents selection and other criteria such as distance etc\"",
+    "location": [53.792, -1.754]
+  },
+  {
+    "name": "City of Bradford Metropolitan District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_53",
+    "systems": "Liquidlogic Children's Social Care System (LCS)",
+    "notes": "The LCS is a system, provided by LiquidLogic, developed to support \"all aspects of social work with children\", including case management and record keeping. It attempts to unify record keeping and can assist the social worker user in making connections within a case. From LiquidLogic's marketing copy: \"Not simply an electronic social care record, the system can assist practitioners’ professional judgement by helping to make connections within a case, which may not otherwise be so apparent. ... the system reacts dynamically to information it is given.\"[1] The Early Help Module \"is a complete solution designed to act as a general case management tool for children outside of Social Care\", also provided by LiquidLogic [2] It is commonly used in conjunction with the LCS, including by Bradford City Council in this example.  [1] https://www.liquidlogic.co.uk/children/liquidlogic-childrens-system-lcs/  [2] https://www.liquidlogic.co.uk/children/early-help-module-ehm/",
+    "extract": "\"LCS (including Early Help) - child assessments and service levels determined by input of assessment info\"",
+    "location": [53.792, -1.754]
+  },
+  {
+    "name": "London Borough of Brent",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_17",
+    "systems": "Risk Based Verification",
+    "notes": "Risk Based Verification (RBV) systems attempt to predict the risk of a benefit claim and, in response, adapt how that claim is processed. See pages 96-100 of the Data Justice Lab's report, \"Data Scores as Governance\", for more information on three providers of RBV systems. - https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf",
+    "extract": "The Benefit Service uses Risk Based Verification (RBV) software in the processing of new claims (NC) and changes in circumstances (CIC) relating to Housing Benefit and Council Tax Support claims. Claimants make new claims and report changes via online electronic forms, and having provided the required information about their family circumstances, a RBV “score” is generated via referral to a third party web-based RBV product. The RBV software uses a propensity model based on national data relating to the relative likelihood, or “risk”, of the claimant’s claim being susceptible to fraud or error. The NC or CIC is thus risk-scored and differing levels of evidence are required, depending on the risk score, to support the claim; the higher the risk scoring, the greater the evidence requirement before the claim is processed.",
+    "location": [51.566111, -0.273889]
+  },
+  {
+    "name": "Brighton and Hove City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_58",
+    "systems": "\"delivering projects involving advanced analytics (e.g. prediction and modelling)\"",
+    "notes": "In a strategy paper attached to their Freedom of Information request response, Brighton and Hove City Council their intention to use use predictive analytics, either in the present or future.",
+    "extract": "From 'Data Insight Strategy Paper', attached to the FOI response: \"These are capabilities that allow us to extract insight from data in innovative ways, allowing us to use historical data to predict the future, model alternative scenarios, test out policies virtually. These can be supervised by an analyst or be unsupervised (using machine learning). The potential benefits are significant but it requires specialist tools and expertise to ensure the outputs are meaningful.\"",
+    "location": [50.827778, -0.152778]
+  },
+  {
+    "name": "Brighton and Hove City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_58",
+    "systems": "ArcGIS",
+    "notes": "In a presentation attached to the Freedom of Information request response, B&HCC name ArcGIS under \"mapping\" and \"network analysis\" on a slide detailing their \"Data Insight Strategy analytics toolkit\". Esri, who produce ArcGIS, claim, among other things, that the system can \"Analyze patters to make predictions and determine next steps\". - https://www.esri.com/en-us/arcgis/products/arcgis-online/capabilities/analyze-data",
+    "extract": "",
+    "location": [50.827778, -0.152778]
+  },
+  {
+    "name": "Brighton and Hove City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_58",
+    "systems": "Business Objects",
+    "notes": "A popular business intelligence package, sold by SAP. Has a wide array of possible functions, including analytical capacities. Marketing copy extract: \"Enable all business users to understand trends and root causes with easy-to-use BI tools for ad hoc queries, reporting, and analysis in a Web environment. ... Build impactful BI visualization, dashboards, and analytics applications to assess risk, improve efficiencies, highlight unique insights, and identify opportunities.\" - https://www.sap.com/products/bi-platform.html",
+    "extract": "\"Currently, our primary BI platform is Business Objects. We are piloting dashboard tools like Tableau and Power BI. We may also use Excel or infographic tools, depending on requirements.\"",
+    "location": [50.827778, -0.152778]
+  },
+  {
+    "name": "Brighton and Hove City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_58",
+    "systems": "Predictive Analytics (SAP)",
+    "notes": "This reference within the Freedom of Information response perhaps refers to an instance of SAP's Business Objects. A comment on the FOI response indicates this predictive analytics system is possibly being used for \"Access Point analytics\", although it is unclear what this refers to.",
+    "extract": "B&HCC wrote in the main body of their FOI response: \"BHCC is not using any data analytics, predictive analytics or algorithmic automated systems\" However, the Word document contained a perhaps mistakenly included comment on this line which reads: \"What about SAP Predictive Analytics? What tool is [an employee] going to be using for the Access Point analytics?\"",
+    "location": [50.827778, -0.152778]
+  },
+  {
+    "name": "Brighton and Hove City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_58",
+    "systems": "Tableau",
+    "notes": "A popular, versatile \"visual analytics\" platform. - https://www.tableau.com/",
+    "extract": "From the presentation attached to the FOI response: \"Using a flexible intuitive tool to explore data and discover new insights [Tableau, Lumira, Power BI, Excel]\"",
+    "location": [50.827778, -0.152778]
+  },
+  {
+    "name": "Bristol City Council",
+    "link": "[Not via WDTK]",
+    "systems": "Qlik Sense",
+    "notes": "Bristol City Council's Freedom of Information response suggests that Qlik Sense is a data analytics platform being used as part of Bristol City Council's Think Family system. In their report, \"Data Scores as Governance\", the Data Justice Lab include a case study on the use of Qlik Sense by Avon & Somerset Police (the police force responsible for Bristol), where \"it serves as both a performance assessment tool and a predictive policing tool\"[1]. This use of Qlik Sense may overlap with the use of Qlik Sense by Avon & Somerset Police. See page 75 of the Data Justice Lab's report for more on the use of Qlik Sense by Avon & Somerset Police, and see page 28 for more on Think Family[1]. Qlik boast that, thanks to \"the Associative engine at its core, and new augmented intelligence capabilities ... Qlik Sense helps ... discover insights\" and can \"[t]ake advantage of machine suggestions and automation powered by the Qlik cognitive engine\"[2]. - [1] https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf  [2] https://www.qlik.com/us/products/qlik-sense",
+    "extract": "\"The system [Think Family] is running on a combination of software.  It uses SSIS for ETL, SSRS for front line staff accessing the system, SPSS for predictive modelling and Qlik Sense for MI and analytical functions.\"",
+    "location": [51.45, -2.583333]
+  },
+  {
+    "name": "Bristol City Council",
+    "link": "[Not via WDTK]",
+    "systems": "Think Family",
+    "notes": "Think Family was established as Bristol City Council's approach to the Troubled Families programme, with the aim \"to encourage services to deal with families as a whole, rather than responding to each problem or person, separately\". Bristol CC developed a Think Family Database that consolidated information from 35 different social issue datasets, about 54,000 families in the local authority area, to understand the strategic and operational needs of the city. The database is up and running and is now able to provide information to predict future need as well as simply responding to presenting issues. Think Family is covered as part of the Data Justice Lab's case study on the Bristol Integrated Analytical Hub within their report, \"Data Scores as Governance\" (p.28). - https://datajustice.files.wordpress.com/2018/12/data-scores-as-governance-project-report2.pdf",
+    "extract": "",
+    "location": [51.45, -2.583333]
+  },
+  {
+    "name": "Carlisle City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_4",
+    "systems": "Housing Benefit System (Capita)",
+    "notes": "",
+    "extract": "",
+    "location": [54.890833, -2.943889]
+  },
+  {
+    "name": "Carlisle City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_4",
+    "systems": "Risk Based Verification (Xantura)",
+    "notes": "",
+    "extract": "",
+    "location": [54.890833, -2.943889]
+  },
+  {
+    "name": "Ceredigion County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_78",
+    "systems": "Daffodil",
+    "notes": "",
+    "extract": "",
+    "location": [52.252778, -4.000278]
+  },
+  {
+    "name": "Ceredigion County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_78",
+    "systems": "LDP",
+    "notes": "",
+    "extract": "",
+    "location": [52.252778, -4.000278]
+  },
+  {
+    "name": "Ceredigion County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_78",
+    "systems": "POPGROUP (Edge Analytics)",
+    "notes": "",
+    "extract": "",
+    "location": [52.252778, -4.000278]
+  },
+  {
+    "name": "Charnwood Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_79",
+    "systems": "Abritas Shortlisting",
+    "notes": "",
+    "extract": "",
+    "location": [52.769, -1.204]
+  },
+  {
+    "name": "Charnwood Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_79",
+    "systems": "QL Rent Arrears Progression",
+    "notes": "",
+    "extract": "",
+    "location": [52.769, -1.204]
+  },
+  {
+    "name": "Chesterfield Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_84",
+    "systems": "\"The 'Guage' system\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.235833, -1.4275]
+  },
+  {
+    "name": "Chiltern District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_86",
+    "systems": "Risk Based Verification",
+    "notes": "",
+    "extract": "",
+    "location": [51.6606, -0.6409]
+  },
+  {
+    "name": "City of York Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_91",
+    "systems": "\"a centralised performance management system (aggregated statistics on operational business areas / trends) which we use to provide an evidence base for decisions about resources, funding or service delivery\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.958333, -1.080278]
+  },
+  {
+    "name": "City of York Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_91",
+    "systems": "\"a master data management system to improve data quality throughout the organisation\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.958333, -1.080278]
+  },
+  {
+    "name": "Copeland Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_96",
+    "systems": "GIS (Geographical Information Systems)",
+    "notes": "",
+    "extract": "",
+    "location": [54.431, -3.389]
+  },
+  {
+    "name": "Crawley Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_103",
+    "systems": "Business Objects",
+    "notes": "",
+    "extract": "",
+    "location": [51.109167, -0.187222]
+  },
+  {
+    "name": "Crawley Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_103",
+    "systems": "IDEA",
+    "notes": "",
+    "extract": "",
+    "location": [51.109167, -0.187222]
+  },
+  {
+    "name": "London Borough of Croydon",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_15",
+    "systems": "Business Objects",
+    "notes": "",
+    "extract": "",
+    "location": [51.333333, -0.083333]
+  },
+  {
+    "name": "London Borough of Croydon",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_15",
+    "systems": "Croydon Observatory",
+    "notes": "",
+    "extract": "",
+    "location": [51.333333, -0.083333]
+  },
+  {
+    "name": "London Borough of Croydon",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_15",
+    "systems": "Excel (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [51.333333, -0.083333]
+  },
+  {
+    "name": "London Borough of Croydon",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_15",
+    "systems": "Power BI (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [51.333333, -0.083333]
+  },
+  {
+    "name": "Dacorum Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_105",
+    "systems": "Risk Based Verification CiC (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [51.752, -0.336]
+  },
+  {
+    "name": "Dacorum Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_105",
+    "systems": "Risk Based Verification Claims (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [51.752, -0.336]
+  },
+  {
+    "name": "Dartford Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_107",
+    "systems": "Taxi Driver English Test (Versant)",
+    "notes": "",
+    "extract": "",
+    "location": [51.464, 0.254]
+  },
+  {
+    "name": "Derbyshire Dales District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_112",
+    "systems": "HSE approved spreadsheet",
+    "notes": "",
+    "extract": "",
+    "location": [53.05, -1.7]
+  },
+  {
+    "name": "Derbyshire Dales District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_112",
+    "systems": "M3PP -- \"calculates risk scores ... for Food Safety, Health & Safety, Environmental Permitting and Private Sector Housing Environmental Health\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.05, -1.7]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"a core dashboard of measures that is updated on a monthly basis but adapted to theneedds of different groups\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Analysis of activity and potential future demand for Complex and Inclusion serice\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Analysis of methods for identifying people at risk of loneliness and isolation - to be presented at Public Health England annal conference\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Attainment data analysers\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Business modelling of processes to inform reporting requirements, including: Community reablement, Assessment and support plans, Delayed transfers of care, transition and communication passports, Reviews, Waiting list process\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Commissioning support through provision of data on Reablement\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Connextions data reporting and administration of client caseload information system\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Data analysis of outcomes for PVI and other early years settings\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Education and school effectiveness dashboards including information such as attendance, exclusions, elective home education, school Ofsted inspections and SEND\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Health protection and surveillance: The team analyses data relating to air quality, immunisations, winter surveillance and infection control, in order to guide these preventative programmes.\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Movelling impacts of SEN provision options, linked to School Place Planning process\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Performance reporting: Implemented more detailed analysis of complaints and recording of data\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Population Hub, as part of thhe Office for Data Analytics\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"Population profiling: The team conduct a range of analysis of the local population, monitoring trends in birth and death rates, as well as providing information on the diverse make-up of our communities.\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"School problem profiles, providing indications around vulnerability\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"The schools data package is a traded service, including advice and support to schools\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "\"The team conduct analysis to support a range of lifestyle support services that are delivered across the borough\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Adoption Leadership Board (ALB) quarterly dataset",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Adult Social Care Finance Return",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Business Objects (SAP)",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Children in Need (CIN) Census",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Children Looked After (903 return)",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Cost Savings Calculator (CSC) [Troubled Families]",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Deprivation of Liberty Safeguards (DoLS)",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Disability Service [dashboard]",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Family Progress Data (FPD) [Troubled Families]",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "National Fraud Initiative",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "National Impact Study (NIS) [Troubled Families]",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Ofsted Fostering Dataset",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Power BI (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "R",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Safeguarding Adults Collection",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Short and Long Term (SALT) Return",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Single Person DIscount Review (TransUnion/CallCredit) -- used by external service provider, Civica",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "SSRS",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "Dudley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_118",
+    "systems": "Vulnerable Young Person's Tool [Troubled Families]",
+    "notes": "",
+    "extract": "",
+    "location": [52.509, -2.087]
+  },
+  {
+    "name": "London Borough of Ealing",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_121",
+    "systems": "\"Experian provide Business solutions throughout the council services such as payment information/data matching\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.5, -0.333333]
+  },
+  {
+    "name": "London Borough of Ealing",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_121",
+    "systems": "London Counter Fraud Hub Initiative",
+    "notes": "",
+    "extract": "",
+    "location": [51.5, -0.333333]
+  },
+  {
+    "name": "London Borough of Ealing",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_121",
+    "systems": "Risk Based Verification (Coactiva)",
+    "notes": "",
+    "extract": "",
+    "location": [51.5, -0.333333]
+  },
+  {
+    "name": "East Hampshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_128",
+    "systems": "Dynamics (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [51.0055, -0.9082]
+  },
+  {
+    "name": "East Hampshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_128",
+    "systems": "Experian Public Sector profiler [possibly a reference to Experian's Mosaic]",
+    "notes": "",
+    "extract": "",
+    "location": [51.0055, -0.9082]
+  },
+  {
+    "name": "East Hampshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_128",
+    "systems": "GIS application",
+    "notes": "",
+    "extract": "",
+    "location": [51.0055, -0.9082]
+  },
+  {
+    "name": "East Riding of Yorkshire Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_135",
+    "systems": "Risk Based Verification (Xantura & Northgate PS Ltd)",
+    "notes": "",
+    "extract": "",
+    "location": [53.916667, -0.5]
+  },
+  {
+    "name": "Elmbridge Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_139",
+    "systems": "NFI [maybe referring to the National Fraud Initiative]",
+    "notes": "",
+    "extract": "",
+    "location": [51.37, -0.3618]
+  },
+  {
+    "name": "Erewash Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_143",
+    "systems": "Risk Based Verification",
+    "notes": "",
+    "extract": "",
+    "location": [52.916667, -1.316667]
+  },
+  {
+    "name": "Exeter City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_144",
+    "systems": "Exeter Data Mill",
+    "notes": "",
+    "extract": "",
+    "location": [50.716667, -3.533333]
+  },
+  {
+    "name": "Falkirk Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_145",
+    "systems": "Living Well Falkirk / Falkirk Health & Social Care Partnership (ADL Smartcare)",
+    "notes": "",
+    "extract": "",
+    "location": [56.0011, -3.7835]
+  },
+  {
+    "name": "Folkestone & Hythe District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_8",
+    "systems": "Risk Based Verification (Xantura)",
+    "notes": "",
+    "extract": "",
+    "location": [51.07885, 1.174614]
+  },
+  {
+    "name": "Fylde Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_153",
+    "systems": "Risk Based Verification (TransUnion/Callcredit)",
+    "notes": "",
+    "extract": "",
+    "location": [53.763, -2.934]
+  },
+  {
+    "name": "Glasgow City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_156",
+    "systems": "\"using data analytics in an exploratory capacity, on ad hoc projects\"",
+    "notes": "",
+    "extract": "",
+    "location": [55.858, -4.259]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "\"a number of CadCorp tools\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "\"a Workload Modelling tool\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "\"bespoke Risk SharePoint site\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "\"In-house Performance Portal and Data Warehouse\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "CAMMS Risk, integrated planning system",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "Child Passport",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Greater Manchester Combined Authority",
+    "link": "[Not via WDTK]",
+    "systems": "GIS",
+    "notes": "",
+    "extract": "",
+    "location": [53.5, -2.316667]
+  },
+  {
+    "name": "Halton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_165",
+    "systems": "Business Objects (SAP)",
+    "notes": "",
+    "extract": "",
+    "location": [53.345, -2.722]
+  },
+  {
+    "name": "Halton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_165",
+    "systems": "CareFirst",
+    "notes": "",
+    "extract": "",
+    "location": [53.345, -2.722]
+  },
+  {
+    "name": "Halton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_165",
+    "systems": "Excel (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [53.345, -2.722]
+  },
+  {
+    "name": "Halton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_165",
+    "systems": "WEBI",
+    "notes": "",
+    "extract": "",
+    "location": [53.345, -2.722]
+  },
+  {
+    "name": "Harrogate Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_172",
+    "systems": "Excel (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [53.990278, -1.541111]
+  },
+  {
+    "name": "Harrogate Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_172",
+    "systems": "Microsoft Access database",
+    "notes": "",
+    "extract": "",
+    "location": [53.990278, -1.541111]
+  },
+  {
+    "name": "Harrogate Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_172",
+    "systems": "REM (Regional Econometric Model)",
+    "notes": "",
+    "extract": "",
+    "location": [53.990278, -1.541111]
+  },
+  {
+    "name": "Havant Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_176",
+    "systems": "Dynamics (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [50.85088, -0.98284]
+  },
+  {
+    "name": "Havant Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_176",
+    "systems": "Experian Public Sector profiler [possibly a reference to Experian's Mosaic]",
+    "notes": "",
+    "extract": "",
+    "location": [50.85088, -0.98284]
+  },
+  {
+    "name": "Havant Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_176",
+    "systems": "GIS application",
+    "notes": "",
+    "extract": "",
+    "location": [50.85088, -0.98284]
+  },
+  {
+    "name": "Hertfordshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage",
+    "systems": "\"We also profile to identify people who might be interested in supporting our work in specialised areas (for example, as foster carers or adoptive parents).\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.9, -0.2]
+  },
+  {
+    "name": "Hertfordshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage",
+    "systems": "\"We analyse our existing service data to make sure we can provide the services needed in the future\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.9, -0.2]
+  },
+  {
+    "name": "Hertfordshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage",
+    "systems": "Mosaic (Experian)",
+    "notes": "",
+    "extract": "",
+    "location": [51.9, -0.2]
+  },
+  {
+    "name": "The Highland Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_180",
+    "systems": "Mendel (TotalMobile)",
+    "notes": "",
+    "extract": "",
+    "location": [57.5, -5]
+  },
+  {
+    "name": "Hull City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_186",
+    "systems": "Risk Based Verification",
+    "notes": "",
+    "extract": "",
+    "location": [53.744333, -0.3325]
+  },
+  {
+    "name": "Huntingdonshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_187",
+    "systems": "\"There are some examples of algorithm and/or automation including: form validation and data entry\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.416667, -0.25]
+  },
+  {
+    "name": "Huntingdonshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_187",
+    "systems": "Northgate case management system",
+    "notes": "",
+    "extract": "",
+    "location": [52.416667, -0.25]
+  },
+  {
+    "name": "Huntingdonshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_187",
+    "systems": "Risk Based Verification (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [52.416667, -0.25]
+  },
+  {
+    "name": "Inverclyde Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_189",
+    "systems": "Eligibility Criteria (EC) (Health & Social Care Partnership)",
+    "notes": "",
+    "extract": "",
+    "location": [55.9, -4.75]
+  },
+  {
+    "name": "Inverclyde Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_189",
+    "systems": "Indicator of Relative Need (IoRN) (Health & Social Care Partnership)",
+    "notes": "",
+    "extract": "",
+    "location": [55.9, -4.75]
+  },
+  {
+    "name": "Inverclyde Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_189",
+    "systems": "Scottish Patients at Risk of Readmission and Admission (SPARRA) (Health & Social Care Partnership)",
+    "notes": "",
+    "extract": "",
+    "location": [55.9, -4.75]
+  },
+  {
+    "name": "Ipswich Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_190",
+    "systems": "Risk Based Verification (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [52.059444, 1.155556]
+  },
+  {
+    "name": "London Borough of Islington",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_193",
+    "systems": "FACE toolset (Imosphere)",
+    "notes": "",
+    "extract": "",
+    "location": [51.533333, -0.133333]
+  },
+  {
+    "name": "London Borough of Islington",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_193",
+    "systems": "Holistix (Quality Education Systems (QES)) [data matching tool]",
+    "notes": "",
+    "extract": "",
+    "location": [51.533333, -0.133333]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "ACORN (CACI)",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Electronic Frailty Index",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Kent Integrated Dataset (KID)",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Kings Fund Combined Predictive Model",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Mosaic (Experian)",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "SPSS",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Kent County Council",
+    "link": "[Not via WDTK]",
+    "systems": "STATA",
+    "notes": "",
+    "extract": "",
+    "location": [51.19, 0.73]
+  },
+  {
+    "name": "Knowsley Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_198",
+    "systems": "\"The Council manually discovers, interprets and communicates meaningful patterns in the data it collects, processes and stores.\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.439, -2.851]
+  },
+  {
+    "name": "Lancashire County Council",
+    "link": "[Not via WDTK]",
+    "systems": "InstantAtlas (Geowise)",
+    "notes": "",
+    "extract": "",
+    "location": [53.8, -2.6]
+  },
+  {
+    "name": "Lancashire County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Lancashire Insight",
+    "notes": "",
+    "extract": "",
+    "location": [53.8, -2.6]
+  },
+  {
+    "name": "Lancashire County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Power BI (Microsoft) [for their \"Neighourbood Intelligence Tool\"]",
+    "notes": "",
+    "extract": "",
+    "location": [53.8, -2.6]
+  },
+  {
+    "name": "Lancashire County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Umbraco content management system",
+    "notes": "",
+    "extract": "",
+    "location": [53.8, -2.6]
+  },
+  {
+    "name": "Leeds City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_200",
+    "systems": "\"Schools Admission process for allocating pupil places\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.799722, -1.549167]
+  },
+  {
+    "name": "Leeds City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_200",
+    "systems": "\"Youth Justice system, Asset Plus, has a process for managing contacts\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.799722, -1.549167]
+  },
+  {
+    "name": "Leeds City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_200",
+    "systems": "FFT Aspire",
+    "notes": "",
+    "extract": "",
+    "location": [53.799722, -1.549167]
+  },
+  {
+    "name": "Liverpool City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_210",
+    "systems": "\"we share our data ... with the CCG in a psuedonymised format at client level to facilitate primary care risk stratification based on the \"Welsh model\" for large scale health risk identification\"",
+    "notes": "",
+    "extract": "",
+    "location": [53.407194, -2.991667]
+  },
+  {
+    "name": "London Borough of Hackney",
+    "link": "[Not via WDTK]",
+    "systems": "\"London Borough of Hackney carries out a range of data analytics projects and systems\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.55, -0.058333]
+  },
+  {
+    "name": "London Borough of Southwark",
+    "link": "[Not via WDTK]",
+    "systems": "Local Care Record health records system",
+    "notes": "",
+    "extract": "",
+    "location": [51.45, -0.083333]
+  },
+  {
+    "name": "London Borough of Southwark",
+    "link": "[Not via WDTK]",
+    "systems": "Student council tax discount review, with National Fraud Authority Initiative & Fujitsu",
+    "notes": "",
+    "extract": "",
+    "location": [51.45, -0.083333]
+  },
+  {
+    "name": "Luton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_211",
+    "systems": "Capita tool used \"in Revenues & Benefits\" [perhaps this is Risk Based Verification]",
+    "notes": "",
+    "extract": "",
+    "location": [51.879722, -0.4175]
+  },
+  {
+    "name": "Luton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_211",
+    "systems": "FACE tool ",
+    "notes": "",
+    "extract": "",
+    "location": [51.879722, -0.4175]
+  },
+  {
+    "name": "Maidstone Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_212",
+    "systems": "Power BI (Microsoft), used by Parking Services",
+    "notes": "",
+    "extract": "",
+    "location": [51.27596, 0.52192]
+  },
+  {
+    "name": "Manchester Clinical Commissioning Group",
+    "link": "[Not via WDTK]",
+    "systems": "CareCentric",
+    "notes": "",
+    "extract": "",
+    "location": [53.4, -2.31]
+  },
+  {
+    "name": "Manchester Clinical Commissioning Group",
+    "link": "[Not via WDTK]",
+    "systems": "Combined Predictive Model",
+    "notes": "",
+    "extract": "",
+    "location": [53.4, -2.31]
+  },
+  {
+    "name": "Manchester Clinical Commissioning Group",
+    "link": "[Not via WDTK]",
+    "systems": "EMIS/GP",
+    "notes": "",
+    "extract": "",
+    "location": [53.4, -2.31]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Academy, used by Housing",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Acolaid, used by Licensing",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Clarity, used by Leisure",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Corporate Service Desk (TopDesk)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Council Boards (ModernGov)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Customer Contact (Lagan)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Diabetes Prevention programme",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "EDRMS - IDOX",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Equitrac, used by Priting",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Eros, used by Democratic Services",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Frameworki, used by Social Care",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Health weight programmes",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Highways, Streetworks, Waste, Greenspaces - Confirm - Asset Register",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "ICAM, used by Library Public Access PCs",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "IKEN, used by Legal",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Integra, used by Finance",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "iworld, used by Revenues and Benefits",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "IYSS, used by Youth Offending Team",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Jadu",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "National Child Measurement Programme",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "NHS Health Checks programme \"which involves use of a nationally approved algorithm to calculate a person's risk of cardiovascular event in the next 10 years\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Qmatic",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "ResourceLink, used by Human Resources",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "RSS2000, used by Registrars",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "SAM",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Spektrix, used by Theatres",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Spudus, used by Libraries",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Tarranto, used by Parking",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Medway Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_216",
+    "systems": "Uniform, used by Planning",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, 0.54]
+  },
+  {
+    "name": "Melton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_2",
+    "systems": "Mosaic",
+    "notes": "",
+    "extract": "",
+    "location": [52.8, -0.8]
+  },
+  {
+    "name": "Milton Keynes Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_225",
+    "systems": "NHS Health Check software",
+    "notes": "",
+    "extract": "",
+    "location": [52.033333, -0.766667]
+  },
+  {
+    "name": "Neath Port Talbot County Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_229",
+    "systems": "IDEA Data Analysis (CaseWare)",
+    "notes": "",
+    "extract": "",
+    "location": [51.645556, -3.745]
+  },
+  {
+    "name": "New Forest District Council",
+    "link": "https://www.whatdotheyknow.com/request/data_analytics_usage_232",
+    "systems": "DRS Cyclical Servicing Module (Kirona)",
+    "notes": "",
+    "extract": "",
+    "location": [50.879, -1.633]
+  },
+  {
+    "name": "New Forest District Council",
+    "link": "https://www.whatdotheyknow.com/request/data_analytics_usage_232",
+    "systems": "DRS Scheduler (Kirona)",
+    "notes": "",
+    "extract": "",
+    "location": [50.879, -1.633]
+  },
+  {
+    "name": "Newcastle-under-Lyme District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_231",
+    "systems": "Geographic Information Systems",
+    "notes": "",
+    "extract": "",
+    "location": [53.011, -2.229]
+  },
+  {
+    "name": "North Hertfordshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_244",
+    "systems": "Pentana system",
+    "notes": "",
+    "extract": "",
+    "location": [51.976, -0.23]
+  },
+  {
+    "name": "North Somerset Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_249",
+    "systems": "\"In addition to Business Intelligence, we also have a small number of systems that 'profile' our service users.\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, -2.8]
+  },
+  {
+    "name": "North Somerset Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_249",
+    "systems": "Business Intelligence - Consultation mailings (Inovem Ltd)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, -2.8]
+  },
+  {
+    "name": "North Somerset Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_249",
+    "systems": "High Impact Families Access database",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, -2.8]
+  },
+  {
+    "name": "North Somerset Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_249",
+    "systems": "ICT and Transformation - Cookies (Agilisys Ltd)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, -2.8]
+  },
+  {
+    "name": "North Somerset Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_249",
+    "systems": "Revenues and Benefits - Benefits service (Liberata)",
+    "notes": "",
+    "extract": "",
+    "location": [51.39, -2.8]
+  },
+  {
+    "name": "North Tyneside Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_250",
+    "systems": "Alteryx",
+    "notes": "",
+    "extract": "",
+    "location": [54.974, -1.6132]
+  },
+  {
+    "name": "North Tyneside Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_250",
+    "systems": "Tableau",
+    "notes": "",
+    "extract": "",
+    "location": [54.974, -1.6132]
+  },
+  {
+    "name": "Northampton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_237",
+    "systems": "Azure Vision APIs",
+    "notes": "",
+    "extract": "",
+    "location": [52.230375, -0.893753]
+  },
+  {
+    "name": "Northampton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_237",
+    "systems": "Google Cloud Vision API",
+    "notes": "",
+    "extract": "",
+    "location": [52.230375, -0.893753]
+  },
+  {
+    "name": "Northampton Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_237",
+    "systems": "Rekognition (Amazon)",
+    "notes": "",
+    "extract": "",
+    "location": [52.230375, -0.893753]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "Abacus Social Care financial assessment system",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "AssetPlus",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "CapitaOne Admissions",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "CapitaOne Education",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "CareDirector",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "CareFirst Adults (FACERas)",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "Caspar case management system",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "Fischer Family Trust Aspire",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "Free school meals / early years eligibility checker (government hosted application)",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "Outcomes Star",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Northamptonshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_238",
+    "systems": "YOGRS [predicts reoffending]",
+    "notes": "",
+    "extract": "",
+    "location": [52.283333, -0.833333]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "\"hospital admissions for unintentional injuries\" [Public Health Analysis Team project]",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "\"modelling to understand patient flows for various service reconfigurations regarding obesity pathways\" [Public Health Analysis Team project]",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "\"population segmentation with MOSAIC data to understand spatial distribution of risk of alcohol harm\" [Public Health Analysis Team project]",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "\"spatial analysis combining populations and locations of maternity services\" [Public Health Analysis Team project]",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "\"use of routinely available indicator measures from PHE fingertips for monitoring and identifying work areas to focus on\" [Public Health Analysis Team project]",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "Microsoft Office",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "Microsoft SQL Server",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "Mosaic (Experian)",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "QGIS",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "Rstudio",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Nottinghamshire County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_256",
+    "systems": "Scenario Generator",
+    "notes": "",
+    "extract": "",
+    "location": [53.166667, -1]
+  },
+  {
+    "name": "Orkney Islands Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_260",
+    "systems": "Hazman online risk register",
+    "notes": "",
+    "extract": "",
+    "location": [59, -3]
+  },
+  {
+    "name": "Perth and Kinross Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_265",
+    "systems": "\"We can advise that although the Council uses systems that will act in a manner consistent with the terms detailed as above we have not recorded information in relation to those systems using the same terms as requested.\"",
+    "notes": "",
+    "extract": "",
+    "location": [56.397, -3.437]
+  },
+  {
+    "name": "Borough of Poole",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_267",
+    "systems": "\"we envisage services will use reporting tools which form part of their caseload software packages\"",
+    "notes": "",
+    "extract": "",
+    "location": [50.716667, -1.983333]
+  },
+  {
+    "name": "Borough of Poole",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_267",
+    "systems": "Google Analytics",
+    "notes": "",
+    "extract": "",
+    "location": [50.716667, -1.983333]
+  },
+  {
+    "name": "Purbeck District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_271",
+    "systems": "Capita Revenues and Benefits software",
+    "notes": "",
+    "extract": "",
+    "location": [50.686, -2.109919]
+  },
+  {
+    "name": "Purbeck District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_271",
+    "systems": "Risk Based Verification (Xantura)",
+    "notes": "",
+    "extract": "",
+    "location": [50.686, -2.109919]
+  },
+  {
+    "name": "Rochford District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_281",
+    "systems": "\"Some systems will use calculations to establish eligibility, benefits for example, based upon the information manually input/provided by the customer and for specific legitimate business purpose.\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.5817, 0.7082]
+  },
+  {
+    "name": "Rotherham Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_284",
+    "systems": "Rentsense (Mobysoft)",
+    "notes": "",
+    "extract": "",
+    "location": [53.430833, -1.354722]
+  },
+  {
+    "name": "Royal Borough of Windsor and Maidenhead",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_286",
+    "systems": "Risk Based Verification",
+    "notes": "",
+    "extract": "",
+    "location": [51.4667, -0.6667]
+  },
+  {
+    "name": "Sandwell Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_294",
+    "systems": "Healthy Sandwell Firmstep system",
+    "notes": "",
+    "extract": "",
+    "location": [52.505278, -2.017222]
+  },
+  {
+    "name": "Sandwell Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_294",
+    "systems": "NHS Health Check Service",
+    "notes": "",
+    "extract": "",
+    "location": [52.505278, -2.017222]
+  },
+  {
+    "name": "South Bucks District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_307",
+    "systems": "Risk Based Verification",
+    "notes": "",
+    "extract": "",
+    "location": [51.5764, -0.639]
+  },
+  {
+    "name": "South Cambridgeshire District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_308",
+    "systems": "\"There are some examples of algorithm and/or automation including: form validation and data entry\"",
+    "notes": "",
+    "extract": "",
+    "location": [52.132, 0.105]
+  },
+  {
+    "name": "St Helens Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_330",
+    "systems": "Cognos",
+    "notes": "",
+    "extract": "",
+    "location": [53.454, -2.746]
+  },
+  {
+    "name": "St Helens Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_330",
+    "systems": "Crystal Reports",
+    "notes": "",
+    "extract": "",
+    "location": [53.454, -2.746]
+  },
+  {
+    "name": "St Helens Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_330",
+    "systems": "Power BI (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [53.454, -2.746]
+  },
+  {
+    "name": "St Helens Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_330",
+    "systems": "PSI [children's social care reporting dashboard]",
+    "notes": "",
+    "extract": "",
+    "location": [53.454, -2.746]
+  },
+  {
+    "name": "St Helens Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_330",
+    "systems": "SSRS",
+    "notes": "",
+    "extract": "",
+    "location": [53.454, -2.746]
+  },
+  {
+    "name": "Suffolk County Council",
+    "link": "[Not via WDTK]",
+    "systems": "\"Sequel Server Reporting Solutions\" [presumably SQL]",
+    "notes": "",
+    "extract": "",
+    "location": [52.166667, 1]
+  },
+  {
+    "name": "Suffolk County Council",
+    "link": "[Not via WDTK]",
+    "systems": "BI tools",
+    "notes": "",
+    "extract": "",
+    "location": [52.166667, 1]
+  },
+  {
+    "name": "Suffolk County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Care First 6",
+    "notes": "",
+    "extract": "",
+    "location": [52.166667, 1]
+  },
+  {
+    "name": "Suffolk County Council",
+    "link": "[Not via WDTK]",
+    "systems": "Connect Measure",
+    "notes": "",
+    "extract": "",
+    "location": [52.166667, 1]
+  },
+  {
+    "name": "Sunderland City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_338",
+    "systems": "Risk Based Verification (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [54.91, -1.385]
+  },
+  {
+    "name": "Swale Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_342",
+    "systems": "Google Analytics",
+    "notes": "",
+    "extract": "",
+    "location": [51.340203, 0.730922]
+  },
+  {
+    "name": "Swale Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_342",
+    "systems": "Google Tag Manager",
+    "notes": "",
+    "extract": "",
+    "location": [51.340203, 0.730922]
+  },
+  {
+    "name": "Swale Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_342",
+    "systems": "Siteimprove",
+    "notes": "",
+    "extract": "",
+    "location": [51.340203, 0.730922]
+  },
+  {
+    "name": "Teignbridge District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_348",
+    "systems": "Strategic Asset Management (SAM) database (ELF Software)",
+    "notes": "",
+    "extract": "",
+    "location": [50.582, -3.628]
+  },
+  {
+    "name": "Torbay Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_357",
+    "systems": "\"software or hardware tools to assist in dealing with large and integrated datasets\"",
+    "notes": "",
+    "extract": "",
+    "location": [50.452222, -3.556944]
+  },
+  {
+    "name": "Torbay Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_357",
+    "systems": "Business intelligence tool/s",
+    "notes": "",
+    "extract": "",
+    "location": [50.452222, -3.556944]
+  },
+  {
+    "name": "Torbay Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_357",
+    "systems": "GIS tool/s",
+    "notes": "",
+    "extract": "",
+    "location": [50.452222, -3.556944]
+  },
+  {
+    "name": "Tunbridge Wells Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_361",
+    "systems": "\"I can confirm that our Digital Services Team use data analytics forassessing performance of the website and other online services, such as the use of google analytics for assessing website performance.\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.128889, 0.260833]
+  },
+  {
+    "name": "Tunbridge Wells Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_361",
+    "systems": "Google Analytics",
+    "notes": "",
+    "extract": "",
+    "location": [51.128889, 0.260833]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "\"A 'proof of concept' project is currentlyunderway to assess the feasibility and benefits of using the Amazon WebServices (AWS) cloud platform to manage some of the Council's data.\"",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "Athena (Amazon Web Services)",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "Cloud BI [possibly Amazon Web Services]",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "Comprehend (Amazon Web Services)",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "DMS (Amazon Web Services)",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "Looker",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "S3 (Amazon Web Services)",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "London Borough of Waltham Forest",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_367",
+    "systems": "Sagemaker (Amazon Web Services)",
+    "notes": "",
+    "extract": "",
+    "location": [51.566667, -0.033333]
+  },
+  {
+    "name": "West Lothian Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_383",
+    "systems": "Risk Based Verification (CallCredit)",
+    "notes": "",
+    "extract": "",
+    "location": [55.916667, -3.5]
+  },
+  {
+    "name": "West Sussex County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_387",
+    "systems": "Mosaic (Servlec)",
+    "notes": "",
+    "extract": "",
+    "location": [50.916667, -0.5]
+  },
+  {
+    "name": "West Sussex County Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_387",
+    "systems": "Power BI (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [50.916667, -0.5]
+  },
+  {
+    "name": "City of Westminster",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_384",
+    "systems": "Troubled Families [active programmes across England, with this authority believing it fit the definitions of our request]",
+    "notes": "",
+    "extract": "",
+    "location": [51.5, -0.133333]
+  },
+  {
+    "name": "Weymouth and Portland Borough Council",
+    "link": "https://www.whatdotheyknow.com/request/data_analytics_usage_388",
+    "systems": "Capita Revenues and Benefits software",
+    "notes": "",
+    "extract": "",
+    "location": [50.5666, -2.4541]
+  },
+  {
+    "name": "Weymouth and Portland Borough Council",
+    "link": "https://www.whatdotheyknow.com/request/data_analytics_usage_388",
+    "systems": "Risk Based Verification (Xantura)",
+    "notes": "",
+    "extract": "",
+    "location": [50.5666, -2.4541]
+  },
+  {
+    "name": "Wigan Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_389",
+    "systems": "\"risk stratification model\" [combined dataset with analysis performed upon it, doing stuff relating to school readiness, NEET, complex dependency, health (reminds me of Kent CC's Kent Integrated Dataset)]",
+    "notes": "",
+    "extract": "",
+    "location": [53.533333, -2.616667]
+  },
+  {
+    "name": "Wigan Metropolitan Borough Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_389",
+    "systems": "GM Connect",
+    "notes": "",
+    "extract": "",
+    "location": [53.533333, -2.616667]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Dennis Connect [vehicle telemetrics]",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Excel (Microsoft)",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Quartix vehicle tracking",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Risk Based Verification (Capita)",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Sunray System",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Worcester City Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_396",
+    "systems": "Worcestershire Internal Audit Shared Service (WIASS)",
+    "notes": "",
+    "extract": "",
+    "location": [52.192, -2.22]
+  },
+  {
+    "name": "Wycombe District Council",
+    "link": "https://www.whatdotheyknow.com/alaveteli_pro/info_requests/data_analytics_usage_401",
+    "systems": "National Fraud Initiative (NFI)",
+    "notes": "",
+    "extract": "",
+    "location": [51.6385, -0.8079]
+  }
+]

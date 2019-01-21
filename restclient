@@ -69,3 +69,9 @@ GET http://:api/insights/departments
 # overview stats
 GET http://:api/stats/documents
 :headers
+
+### Impacts
+
+# sky news map locations
+GET http://:api/impacts/sky-news
+:headers
