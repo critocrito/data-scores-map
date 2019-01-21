@@ -58,6 +58,16 @@ export type DepartmentInsight = Insight & {
 
 export type SourceInsight = Insight;
 
+export type Impact = Item & {
+  count: number,
+};
+
+export type SkyNewsImpact = Impact & {
+  link: string,
+  location: Position,
+  systems: Array<{name: string, notes: string, extract: string}>,
+};
+
 export type Stat = {
   name: string,
   count: number,
@@ -96,6 +106,9 @@ export type HttpCompSysInsightResp = {
 } & HttpInsightResp;
 export type HttpAuthorityInsightResp = {
   data: AuthorityInsight[],
+} & HttpInsightResp;
+export type HttpSkyNewsImpactResp = {
+  data: SkyNewsImpact[],
 } & HttpInsightResp;
 export type HttpStatResp = {
   data: Stat[],

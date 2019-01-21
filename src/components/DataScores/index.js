@@ -13,6 +13,7 @@ import DocumentsIndex from "../DocumentsIndex";
 import DocumentsDetails from "../DocumentsDetails";
 import CaseStudies from "../CaseStudies";
 import Methodology from "../Methodology";
+import SkyNews from "../SkyNews";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -50,6 +51,16 @@ const DataScores = () => (
       />
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/methodology" component={Methodology} />
+      <Route
+        exact
+        path="/impacts/sky-news"
+        render={() => (
+          <Context.Consumer>
+            {({store}) => <SkyNews store={store} />}
+          </Context.Consumer>
+        )}
+      />
+
       {/* Make sure this is last, otherwise follow up routes are not matched. */}
       <Route path="/:documentId" component={DocumentsDetails} />
     </Switch>

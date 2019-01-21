@@ -21,6 +21,7 @@
 .marker-content {
   display: table-cell;
   vertical-align: middle;
+  color: #999;
 }
 
 .marker-active {

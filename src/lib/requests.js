@@ -6,6 +6,7 @@ import type {
   HttpStatResp,
   HttpDocResp,
   HttpFullDocResp,
+  HttpSkyNewsImpactResp,
 } from "./types";
 
 const baseUrl: string =
@@ -82,5 +83,10 @@ export const documentStats = (): Promise<HttpStatResp> => {
 
 export const sourceInsights = (): Promise<HttpInsightResp> => {
   const url = `${baseUrl}/insights/sources`;
+  return fetch(url).then((resp) => resp.json());
+};
+
+export const skyNewsImpacts = (): Promise<HttpSkyNewsImpactResp> => {
+  const url = `${baseUrl}/impacts/sky-news`;
   return fetch(url).then((resp) => resp.json());
 };
