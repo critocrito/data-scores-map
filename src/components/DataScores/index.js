@@ -13,7 +13,7 @@ import DocumentsIndex from "../DocumentsIndex";
 import DocumentsDetails from "../DocumentsDetails";
 import CaseStudies from "../CaseStudies";
 import Methodology from "../Methodology";
-import SkyNews from "../SkyNews";
+import ImpactPredictiveAnalytics from "../ImpactPredictiveAnalytics";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -53,10 +53,10 @@ const DataScores = () => (
       <Route path="/methodology" component={Methodology} />
       <Route
         exact
-        path="/impacts/sky-news"
+        path="/impacts/predictive-analytics"
         render={() => (
           <Context.Consumer>
-            {({store}) => <SkyNews store={store} />}
+            {({store}) => <ImpactPredictiveAnalytics store={store} />}
           </Context.Consumer>
         )}
       />

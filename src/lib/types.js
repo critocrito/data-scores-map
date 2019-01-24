@@ -62,7 +62,7 @@ export type Impact = Item & {
   count: number,
 };
 
-export type SkyNewsImpact = Impact & {
+export type PredictiveAnalyticsImpact = Impact & {
   link: string,
   location: Position,
   systems: Array<{name: string, notes: string, extract: string}>,
@@ -107,8 +107,8 @@ export type HttpCompSysInsightResp = {
 export type HttpAuthorityInsightResp = {
   data: AuthorityInsight[],
 } & HttpInsightResp;
-export type HttpSkyNewsImpactResp = {
-  data: SkyNewsImpact[],
+export type HttpPredictiveAnalyticsImpactResp = {
+  data: PredictiveAnalyticsImpact[],
 } & HttpInsightResp;
 export type HttpStatResp = {
   data: Stat[],

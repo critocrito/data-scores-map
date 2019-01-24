@@ -2,15 +2,15 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {Map, ZoomControl, TileLayer, Marker, Tooltip} from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 import * as L from "leaflet";
 
+import "./index.css";
 import "../InsightsVizMap/index.css";
 import "../InsightsVizMapMarker/index.css";
 import Header from "../Header";
 import Footer from "../Footer";
-import {skyNewsImpacts} from "../../lib/requests";
-import type {SkyNewsImpact, Position} from "../../lib/types";
+import {predictiveAnalyticsImpacts} from "../../lib/requests";
+import type {PredictiveAnalyticsImpact, Position} from "../../lib/types";
 
 type Props = {
   position?: Position,
@@ -18,12 +18,12 @@ type Props = {
 };
 
 type State = {
-  impacts: SkyNewsImpact[],
+  impacts: PredictiveAnalyticsImpact[],
   activeMarker: null | string,
 };
 
 @observer
-class SkyNews extends React.Component<Props, State> {
+class ImpactPredictiveAnalytics extends React.Component<Props, State> {
   static defaultProps = {
     position: [54.559322587438636, -4.262695312500001],
     zoom: 6,
@@ -39,7 +39,7 @@ class SkyNews extends React.Component<Props, State> {
   async componentDidMount() {
     this._isMounted = true;
     try {
-      const {data} = await skyNewsImpacts();
+      const {data} = await predictiveAnalyticsImpacts();
       if (this._isMounted) this.setState({impacts: data});
     } catch (e) {
       console.log(e);
@@ -69,26 +69,31 @@ class SkyNews extends React.Component<Props, State> {
     const {name, link, systems} = entry;
     return (
       <div>
-        <p>
-          <b>{name}</b>
+        <h1 className="f4 lh-copy">
+          {name}
           <br />
           <a
-            className="link primary-color"
+            className="link primary-color f5"
             target="_blank"
             rel="noopener noreferrer"
             href={link}
           >
             {link}
           </a>
-        </p>
-        <ul className="list pl0">
+        </h1>
+        <p />
+        <ul className="list pl0 pb3 impact-list">
           {systems.map(({name: systemName, notes, extract}) => (
-            <li className="list pb3" key={systemName}>
-              <b>Description:</b> {systemName}
-              <br />
-              <b>Notes:</b> {notes === "" ? <i>None</i> : notes}
-              <br />
-              <b>Extracts:</b> {extract === "" ? <i>None</i> : extract}
+            <li className="list pa3" key={systemName}>
+              <h1 className="f5 lh-copy">{systemName}</h1>
+              {notes === "" ? "" : <div>{notes}</div>}
+              {extract === "" ? (
+                ""
+              ) : (
+                <div className="mt2">
+                  <b>FOI Extract:</b> {extract}
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -136,7 +141,9 @@ class SkyNews extends React.Component<Props, State> {
             <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
               Impacts
             </h2>
-            <p className="f4 i mid-gray">Sky News</p>
+            <p className="f4 i mid-gray">
+              Toward a Map of Predictive Analytics
+            </p>
           </div>
           <div className="w-50-ns dn dn-m dt-ns">
             <img
@@ -159,9 +166,7 @@ class SkyNews extends React.Component<Props, State> {
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
               />
-              <MarkerClusterGroup showCoverageOnHover={false}>
-                {markers}
-              </MarkerClusterGroup>
+              {markers}
               <ZoomControl position="bottomright" />
             </Map>
           </div>
@@ -173,4 +178,4 @@ class SkyNews extends React.Component<Props, State> {
   }
 }
 
-export default SkyNews;
+export default ImpactPredictiveAnalytics;
