@@ -120,12 +120,12 @@ const Home = () => (
         justice, highlighting the politics and impacts of data-driven processes
         and big data. The lab is hosted at Cardiff University’s School of
         Journalism, Media and Culture. Read more here:{" "}
-        <Link
+        <a
           className="tc center link primary-color"
-          to="https://datajusticelab.org/"
+          href="https://datajusticelab.org"
         >
-          datajusticelab.org{" "}
-        </Link>
+          datajusticelab.org
+        </a>
         .
       </p>
       <p className="w-60-ns tc center f5 flex flex-wrap pb5">
