@@ -139,7 +139,7 @@ class ImpactPredictiveAnalytics extends React.Component<Props, State> {
         <article className="cf ph2-ns flex items-center bg-gradient">
           <div className="w-100 w-100-m w-50-ns pa4 ml5-ns">
             <h2 className="f-subheadline-ns f2 lh-solid primary-color ttu bw3 ">
-              Impacts
+              Overviews
             </h2>
             <p className="f4 i mid-gray">
               Toward a Map of Predictive Analytics

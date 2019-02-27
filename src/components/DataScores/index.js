@@ -53,7 +53,12 @@ const DataScores = () => (
       <Route path="/methodology" component={Methodology} />
       <Route
         exact
-        path="/impacts/predictive-analytics"
+        path="/overviews"
+        render={() => <Redirect to="/overviews/predictive-analytics" />}
+      />
+      <Route
+        exact
+        path="/overviews/predictive-analytics"
         render={() => (
           <Context.Consumer>
             {({store}) => <ImpactPredictiveAnalytics store={store} />}
