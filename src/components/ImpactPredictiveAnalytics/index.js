@@ -144,6 +144,15 @@ class ImpactPredictiveAnalytics extends React.Component<Props, State> {
             <p className="f4 i mid-gray">
               Toward a Map of Predictive Analytics
             </p>
+            <p className="f4 near-black">
+              Here we have collected a list of all the predictive analytics
+              systems in public services that we know about and mapped them
+              according to location. The list is based on responses to 423
+              Freedom of Information requests and additional desk research. The
+              list only includes information we have been provided with or found
+              ourselves and is not a complete list of all instances of
+              predictive analytics in the UK.
+            </p>
           </div>
           <div className="w-50-ns dn dn-m dt-ns">
             <img
