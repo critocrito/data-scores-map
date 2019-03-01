@@ -38,7 +38,7 @@ class InsightsDepartments extends React.Component<Props> {
         <div className="w-100 pt3 dn di-ns">
           <InsightsVizTreeMap departments={store.departmentInsights} />
         </div>
-        <div className="w-100">
+        <div className="w-100 dn di-ns">
           <span
             className="one"
             tooltip="A legacy categorisation used to refer to older non-departmental public bodies with tribunal functions. Under the reform of public bodies initiated by the 2010 coalition government - namely, the government’s attempts to crack down on “quangos” - all new tribunal functions must be established within Her Majesty’s Courts and Tribunals Service."

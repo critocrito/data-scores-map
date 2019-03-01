@@ -154,7 +154,7 @@ class ImpactPredictiveAnalytics extends React.Component<Props, State> {
           </div>
         </article>
         <div className="cf mt3 ph1-ns flex flex-column">
-          <div className="w-75 center pt3 dn di-ns">
+          <div className="w-75-ns w-90 center pt3 di-ns">
             <Map
               id="map"
               center={position}

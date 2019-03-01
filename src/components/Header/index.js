@@ -23,15 +23,15 @@ const Header = ({location}: Props) => {
           <div className="logo">
             <img
               alt="Data Scores in the UK"
-              className=" ml5 pa3"
+              className="ml5-ns pa3-ns"
               src="/images/Ico@2x.png"
             />
           </div>
         </Link>
       </h1>
-      <nav className="w-100 w-40-ns pa2">
+      <nav className="w-100 w-40-ns pa2-ns">
         <ul className="list">
-          <li className="ma2 dib">
+          <li className="ma2-ns ma1 dib">
             <Link
               to="/insights"
               className={`link nowrap ma2 pb1 b black ${
@@ -41,7 +41,7 @@ const Header = ({location}: Props) => {
               Insights
             </Link>
           </li>
-          <li className="ma2 dib">
+          <li className="ma2-ns ma1 dib">
             <Link
               to="/documents"
               className={`link nowrap ma2 pb1 b black ${
@@ -51,7 +51,7 @@ const Header = ({location}: Props) => {
               Documents Index
             </Link>
           </li>
-          <li className="ma2 dib">
+          <li className="ma2-ns ma1 dib">
             <Link
               to="/case-studies"
               className={`link nowrap ma2 pb1 b black ${
@@ -61,7 +61,7 @@ const Header = ({location}: Props) => {
               Case Studies
             </Link>
           </li>
-          <li className="ma2 dib">
+          <li className="ma2-ns ma1 dib">
             <Link
               to="/methodology"
               className={`link nowrap ma2 pb1 b black ${

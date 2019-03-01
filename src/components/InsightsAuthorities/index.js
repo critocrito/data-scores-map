@@ -35,7 +35,7 @@ class InsightsAuthorities extends React.Component<Props> {
     const {store} = this.props;
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
-        <div className="w-75 center pt3 dn di-ns">
+        <div className="w-75-ns w-90 center pt3 di-ns">
           <InsightsVizMap
             authorities={store.authorityInsights}
             fetchDocuments={() => this.fetchDocuments(0)}
