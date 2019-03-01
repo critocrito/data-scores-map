@@ -179,7 +179,7 @@ class ImpactPredictiveAnalytics extends React.Component<Props, State> {
               <ZoomControl position="bottomright" />
             </Map>
           </div>
-          <div className="w-75 center pt3 dn di-ns">{details}</div>
+          <div className="w-75 center pt3 di-ns">{details}</div>
         </div>
         <Footer />
       </div>
