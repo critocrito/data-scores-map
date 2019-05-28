@@ -1,4 +1,26 @@
 {
+  "settings": {
+    "analysis": {
+      "filter": {
+        "trigrams_filter": {
+          "type": "ngram",
+          "min_gram": 3,
+          "max_gram": 3
+        }
+      },
+      "analyzer": {
+        "trigrams": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "trigrams_filter"]
+        },
+        "exact": {
+          "tokenizer": "standard",
+          "filter": ["lowercase"]
+        }
+      }
+    }
+  },
   "mappings": {
     "units": {
       "properties": {
@@ -196,7 +218,7 @@
               "type": "text",
               "index_options": "offsets",
               "term_vector": "with_positions_offsets",
-              "analyzer": "english_exact"
+              "analyzer": "exact"
             }
           },
           "analyzer": "english"
@@ -211,7 +233,7 @@
               "type": "text",
               "index_options": "offsets",
               "term_vector": "with_positions_offsets",
-              "analyzer": "english_exact"
+              "analyzer": "exact"
             }
           },
           "analyzer": "english"
@@ -226,7 +248,7 @@
               "type": "text",
               "index_options": "offsets",
               "term_vector": "with_positions_offsets",
-              "analyzer": "english_exact"
+              "analyzer": "exact"
             }
           },
           "analyzer": "english"
