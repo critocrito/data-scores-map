@@ -27,7 +27,7 @@ export const search = async (
       _source.description != null ? {description: _source.description} : {};
     const highlights = ["href_text", "title", "description"].reduce(
       (memo, key) => {
-        if (highlight[key])
+        if (highlight != null && highlight[key])
           return Object.assign(memo, {
             [key]: Array.from(
               new Set(
