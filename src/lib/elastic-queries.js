@@ -273,7 +273,6 @@ export const searchDocumentsQuery = (
           simple_query_string: {
             query: term,
             fields: ["title^3", "description^2", "href_text"],
-            quote_field_suffix: ".exact",
             default_operator: "AND",
           },
         }
