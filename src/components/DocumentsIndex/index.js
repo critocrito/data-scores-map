@@ -8,6 +8,7 @@ import Header from "../Header";
 import FilterTags from "../FilterTags";
 import DocumentsFilters from "../DocumentsFilters";
 import DocumentsSearchResults from "../DocumentsSearchResults";
+import DocumentsIndexHelp from "../DocumentsIndexHelp";
 import type Store from "../../lib/store";
 
 type Props = {
@@ -18,6 +19,7 @@ type State = {
   searchTerm: string,
   lastSearchTerm: null | string,
   filtersOpen: boolean,
+  helpOpen: boolean,
 };
 
 @observer
@@ -26,6 +28,7 @@ class DocumentsIndex extends React.Component<Props, State> {
     searchTerm: "",
     lastSearchTerm: null,
     filtersOpen: false,
+    helpOpen: false,
   };
 
   componentDidMount() {
@@ -54,7 +57,11 @@ class DocumentsIndex extends React.Component<Props, State> {
     const {searchTerm} = this.state;
     if (searchTerm.length === 0) return;
     ev.preventDefault();
-    this.setState({filtersOpen: false, lastSearchTerm: searchTerm.trim()});
+    this.setState({
+      helpOpen: false,
+      filtersOpen: false,
+      lastSearchTerm: searchTerm.trim(),
+    });
     store.searchDocuments(searchTerm.trim(), 0);
   };
 
@@ -67,18 +74,29 @@ class DocumentsIndex extends React.Component<Props, State> {
 
   toggleFiltersNav = () => {
     const {filtersOpen} = this.state;
-    this.setState({filtersOpen: !filtersOpen});
+    this.setState({filtersOpen: !filtersOpen, helpOpen: false});
+  };
+
+  toggleHelp = () => {
+    const {helpOpen} = this.state;
+    this.setState({helpOpen: !helpOpen, filtersOpen: false});
   };
 
   render() {
     const {store} = this.props;
-    const {filtersOpen, searchTerm, lastSearchTerm} = this.state;
+    const {filtersOpen, searchTerm, lastSearchTerm, helpOpen} = this.state;
     const hasFilters =
       (store.companyFilters || [])
         .concat(store.systemFilters)
         .concat(store.authorityFilters)
         .concat(store.departmentFilters)
         .concat(store.sourceFilters).length > 0;
+
+    const help = (
+      <div>
+        <DocumentsIndexHelp />
+      </div>
+    );
 
     return (
       <div>
@@ -116,7 +134,7 @@ class DocumentsIndex extends React.Component<Props, State> {
               />
             </form>
             <button
-              className={`w-10 f3-ns f5 bg-white primary-color pa3 pointer center ${
+              className={`w-10-ns f3-ns f5 bg-white primary-color pa3 pointer center ${
                 filtersOpen ? "primary-color" : "black"
               }`}
               type="button"
@@ -124,7 +142,15 @@ class DocumentsIndex extends React.Component<Props, State> {
             >
               Filters
             </button>
+            <button
+              className="w-10-ns f3-ns f5 bg-white primary-color pa3 pointer center"
+              type="button"
+              onClick={this.toggleHelp}
+            >
+              Help
+            </button>
           </div>
+          {helpOpen ? help : ""}
           {filtersOpen ? (
             <DocumentsFilters
               store={store}
