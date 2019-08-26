@@ -7,6 +7,7 @@ import type {
   HttpDocResp,
   HttpFullDocResp,
   HttpPredictiveAnalyticsImpactResp,
+  HttpCaseStudiesEntitiesResp,
 } from "./types";
 
 const baseUrl: string =
@@ -89,4 +90,33 @@ export const sourceInsights = (): Promise<HttpInsightResp> => {
 export const predictiveAnalyticsImpacts = (): Promise<HttpPredictiveAnalyticsImpactResp> => {
   const url = `${baseUrl}/impacts/predictive-analytics`;
   return fetch(url).then((resp) => resp.json());
+};
+
+export const caseStudiesEntities = (
+  caseStudy: string,
+): Promise<HttpCaseStudiesEntitiesResp> => {
+  const url = `${baseUrl}/impacts/case-studies-entities/${caseStudy}`;
+  return fetch(url).then((resp) => resp.json());
+};
+
+export const caseStudyDocuments = (
+  caseStudy: string,
+  entities: string[],
+  from: number,
+  size: number,
+): Promise<HttpDocResp> => {
+  const url = `${baseUrl}/documents/case-studies/${caseStudy}`;
+  const body = {
+    from,
+    size,
+    filters: entities || [],
+  };
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(body),
+  }).then((resp) => resp.json());
 };

@@ -8,7 +8,9 @@ import {
   authorityInsights,
   departmentInsights,
   sourceInsights,
+  caseStudiesEntities,
   documentStats,
+  caseStudyDocuments,
 } from "./requests";
 
 import type {
@@ -43,6 +45,9 @@ export default class Store {
 
   @observable
   sources: Item[] = [];
+
+  @observable
+  entities: {[key: string]: string[]} = {};
 
   @observable
   document: FullDocument;
@@ -101,6 +106,12 @@ export default class Store {
     return toJS(this.documentsFilters.get("sources"));
   }
 
+  @computed
+  get entityFilters() {
+    if (!this.documentsFilters.has("entities")) return [];
+    return toJS(this.documentsFilters.get("entities"));
+  }
+
   fetchDocument = flow(function* fetchDocument(id: string) {
     try {
       const {data} = yield document(id);
@@ -125,6 +136,25 @@ export default class Store {
         this.authorityFilters,
         this.departmentFilters,
         this.sourceFilters,
+        from,
+        this.pageSize,
+      );
+      this.documents = data;
+      this.documentsTotal = total;
+      this.documentsPage = page;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  fetchEntityDocuments = flow(function* fetchEntityDocuments(
+    caseStudy: string,
+    from: number,
+  ) {
+    try {
+      const {data, total, page} = yield caseStudyDocuments(
+        caseStudy,
+        this.entityFilters,
         from,
         this.pageSize,
       );
@@ -258,6 +288,22 @@ export default class Store {
     }
   });
 
+  fetchCaseStudiesEntities = flow(function* fetchCaseStudiesEntities(
+    caseStudy: string,
+  ) {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield caseStudiesEntities(caseStudy);
+      if (data.length > 0) {
+        const [entities] = data;
+        this.entities = entities;
+      }
+      this.loadingState = "done";
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
   fetchDocumentStats = flow(function* fetchDocumentStats() {
     try {
       const {data} = yield documentStats();
@@ -269,6 +315,7 @@ export default class Store {
 
   @action
   updateFilters(type: string, filters: string[]) {
+    console.log("update", type, filters);
     this.documentsFilters.set(type, filters);
   }
 

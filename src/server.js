@@ -12,6 +12,7 @@ import router from "./routes";
 import {companies, systems} from "./company-systems-mapping";
 import {departmentTags} from "./department-tags";
 import locationsSkyNews from "./locations-sky-news.json";
+import caseStudiesEntities from "./case-studies-entities.json";
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.context.companies = companies;
 app.context.systems = systems;
 app.context.departmentTags = departmentTags;
 app.context.locationsSkyNews = locationsSkyNews;
+app.context.caseStudiesEntities = caseStudiesEntities;
 
 app.use(koaLogger());
 app.use(

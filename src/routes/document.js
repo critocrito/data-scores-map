@@ -1,6 +1,7 @@
 // @flow
 import Router from "koa-router";
 import {list, show} from "../lib/documents";
+import {searchByIds} from "../lib/search";
 
 const router = new Router()
   .get("list documents", "/", async (ctx) => {
@@ -33,6 +34,24 @@ const router = new Router()
     const {docId} = ctx.params;
     const result = await show(docId, elastic);
     return ctx.ok(result);
+  })
+  .post("case-studies-entities", "/case-studies/:caseStudy", async (ctx) => {
+    const {caseStudiesEntities, elastic} = ctx;
+    const {caseStudy} = ctx.params;
+    const {from, size} = ctx.request.body;
+    const filters =
+      (ctx.request.body.filters || []).length === 0
+        ? Object.keys(caseStudiesEntities[caseStudy])
+        : ctx.request.body.filters;
+    if (caseStudiesEntities[caseStudy] == null) return ctx.notFound();
+    const ids = Array.from(
+      filters.reduce((memo, filter) => {
+        caseStudiesEntities[caseStudy][filter].forEach((id) => memo.add(id));
+        return memo;
+      }, new Set()),
+    );
+    const results = await searchByIds(ids, from, size, elastic);
+    return ctx.ok(results);
   });
 
 export default router;

@@ -2,10 +2,8 @@
 import Router from "koa-router";
 import {toId} from "../lib/utils";
 
-const router = new Router().get(
-  "predictive-analytics",
-  "/predictive-analytics",
-  async (ctx) => {
+const router = new Router()
+  .get("predictive-analytics", "/predictive-analytics", async (ctx) => {
     const {locationsSkyNews} = ctx;
     return ctx.ok(
       Object.values(
@@ -27,7 +25,16 @@ const router = new Router().get(
         ),
       ),
     );
-  },
-);
+  })
+  .get(
+    "case-studies-entities",
+    "/case-studies-entities/:caseStudy",
+    async (ctx) => {
+      const {caseStudiesEntities} = ctx;
+      const {caseStudy} = ctx.params;
+      if (caseStudiesEntities[caseStudy] == null) return ctx.notFound();
+      return ctx.ok([caseStudiesEntities[caseStudy]]);
+    },
+  );
 
 export default router;

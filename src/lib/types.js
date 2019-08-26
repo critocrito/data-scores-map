@@ -110,6 +110,9 @@ export type HttpAuthorityInsightResp = {
 export type HttpPredictiveAnalyticsImpactResp = {
   data: PredictiveAnalyticsImpact[],
 } & HttpInsightResp;
+export type HttpCaseStudiesEntitiesResp = {
+  data: {[key: string]: string[]}[],
+} & HttpInsightResp;
 export type HttpStatResp = {
   data: Stat[],
 } & HttpInsightResp;

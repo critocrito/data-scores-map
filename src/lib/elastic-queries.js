@@ -331,6 +331,27 @@ export const searchDocumentsQuery = (
   };
 };
 
+export const searchEntitiesDocumentsQuery = (ids: string[]): ElasticQuery => ({
+    _source: {
+      includes: documentFields,
+    },
+    query: {
+      terms: {
+        _id: ids,
+      },
+    },
+    highlight: {
+      number_of_fragments: 50,
+      fragment_size: 250,
+      order: "score",
+      fields: {
+        href_text: {},
+        title: {number_of_fragments: 0},
+        description: {number_of_fragments: 0},
+      },
+    },
+  });
+
 export const showDocumentQuery = (id: string): ElasticQuery => ({
   _source: {includes: fullDocumentFields},
   query: {

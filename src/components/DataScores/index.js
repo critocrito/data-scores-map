@@ -14,6 +14,7 @@ import DocumentsDetails from "../DocumentsDetails";
 import CaseStudies from "../CaseStudies";
 import Methodology from "../Methodology";
 import ImpactPredictiveAnalytics from "../ImpactPredictiveAnalytics";
+import CaseStudiesEntities from "../CaseStudiesEntities";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -49,7 +50,6 @@ const DataScores = () => (
           </Context.Consumer>
         )}
       />
-      <Route path="/case-studies" component={CaseStudies} />
       <Route path="/methodology" component={Methodology} />
       <Route
         exact
@@ -65,7 +65,12 @@ const DataScores = () => (
           </Context.Consumer>
         )}
       />
-
+      <Route
+        exact
+        path="/case-studies/:caseStudy"
+        component={CaseStudiesEntities}
+      />
+      <Route path="/case-studies" component={CaseStudies} />
       {/* Make sure this is last, otherwise follow up routes are not matched. */}
       <Route path="/:documentId" component={DocumentsDetails} />
     </Switch>

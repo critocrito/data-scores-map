@@ -1,23 +1,25 @@
 // @flow
 import * as React from "react";
 import {observer} from "mobx-react";
+import {withRouter} from "react-router-dom";
 
-import FilterTags from "../FilterTags";
+import InsightsVizBubbleChart from "../InsightsVizBubbleChart";
 import DocumentsTable from "../DocumentsTable";
-import InsightsVizDoubleBarChart from "../InsightsVizDoubleBarChart";
+import FilterTags from "../FilterTags";
 import type Store from "../../lib/store";
 
 type Props = {
+  caseStudy: string,
   store: Store,
 };
 
 @observer
-class InsightsCompaniesSystems extends React.Component<Props> {
+class CaseStudiesEntitiesDetails extends React.Component<Props> {
   componentDidMount() {
     const {store} = this.props;
+    const {caseStudy} = this.props;
     store.clearAllFilters();
-    if (store.companySystemInsights.length === 0)
-      store.fetchCompanySystemInsights();
+    store.fetchCaseStudiesEntities(caseStudy);
     this.fetchDocuments(0);
   }
 
@@ -28,30 +30,30 @@ class InsightsCompaniesSystems extends React.Component<Props> {
   }
 
   fetchDocuments = (page: number) => {
-    const {store} = this.props;
-    store.fetchDocuments(["companies", "systems"], page);
+    const {caseStudy, store} = this.props;
+    store.fetchEntityDocuments(caseStudy, page);
   };
 
   render() {
     const {store} = this.props;
+
     return (
       <div className="cf mt3 ph1-ns flex flex-column">
-        <div className="w-100 pt3 dn di-ns">
-          <InsightsVizDoubleBarChart
-            companiesSystems={store.companySystemInsights}
+        <div className="w-75-ns w-90 center pt3 di-ns">
+          <InsightsVizBubbleChart
+            entities={store.entities}
             fetchDocuments={() => this.fetchDocuments(0)}
             store={store}
           />
         </div>
-        {(store.companyFilters || []).length > 0 ||
-        (store.systemFilters || []).length > 0 ? (
+        {(store.entityFilters || []).length > 0 ? (
           <FilterTags
-            companyFilters={store.companyFilters || []}
-            systemFilters={store.systemFilters || []}
+            companyFilters={[]}
+            systemFilters={[]}
             authorityFilters={[]}
             departmentFilters={[]}
             sourceFilters={[]}
-            entityFilters={[]}
+            entityFilters={store.entityFilters || []}
             clearFilters={() => {
               store.clearAllFilters();
               this.fetchDocuments(0);
@@ -64,6 +66,7 @@ class InsightsCompaniesSystems extends React.Component<Props> {
         ) : (
           ""
         )}
+
         <section className="w-100 ph1-ns mt3">
           <DocumentsTable
             documents={store.documents}
@@ -78,4 +81,4 @@ class InsightsCompaniesSystems extends React.Component<Props> {
   }
 }
 
-export default InsightsCompaniesSystems;
+export default withRouter(CaseStudiesEntitiesDetails);

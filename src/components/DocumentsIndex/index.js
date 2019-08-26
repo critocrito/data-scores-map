@@ -166,6 +166,7 @@ class DocumentsIndex extends React.Component<Props, State> {
               authorityFilters={store.authorityFilters || []}
               departmentFilters={store.departmentFilters || []}
               sourceFilters={store.sourceFilters || []}
+              entityFilters={[]}
               clearFilters={() => {
                 store.clearAllFilters();
                 store.searchDocuments(searchTerm, 0);

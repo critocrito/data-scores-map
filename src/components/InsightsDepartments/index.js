@@ -108,6 +108,7 @@ class InsightsDepartments extends React.Component<Props> {
             authorityFilters={[]}
             departmentFilters={store.departmentFilters || []}
             sourceFilters={[]}
+            entityFilters={[]}
             clearFilters={() => {
               store.clearAllFilters();
               this.fetchDocuments(0);
