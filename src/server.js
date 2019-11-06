@@ -13,6 +13,7 @@ import {companies, systems} from "./company-systems-mapping";
 import {departmentTags} from "./department-tags";
 import locationsSkyNews from "./locations-sky-news.json";
 import caseStudiesEntities from "./case-studies-entities.json";
+import foiEntities from "./foi-entities.json";
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.context.systems = systems;
 app.context.departmentTags = departmentTags;
 app.context.locationsSkyNews = locationsSkyNews;
 app.context.caseStudiesEntities = caseStudiesEntities;
+app.context.foiEntities = foiEntities;
 
 app.use(koaLogger());
 app.use(

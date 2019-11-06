@@ -52,6 +52,24 @@ const router = new Router()
     );
     const results = await searchByIds(ids, from, size, elastic);
     return ctx.ok(results);
+  })
+  .post("foi-entities", "/foi-requests/:foiRequest", async (ctx) => {
+    const {foiEntities, elastic} = ctx;
+    const {foiRequest} = ctx.params;
+    const {from, size} = ctx.request.body;
+    const filters =
+      (ctx.request.body.filters || []).length === 0
+        ? Object.keys(foiEntities[foiRequest])
+        : ctx.request.body.filters;
+    if (foiEntities[foiRequest] == null) return ctx.notFound();
+    const ids = Array.from(
+      filters.reduce((memo, filter) => {
+        foiEntities[foiRequest][filter].forEach((id) => memo.add(id));
+        return memo;
+      }, new Set()),
+    );
+    const results = await searchByIds(ids, from, size, elastic);
+    return ctx.ok(results);
   });
 
 export default router;

@@ -35,6 +35,12 @@ const router = new Router()
       if (caseStudiesEntities[caseStudy] == null) return ctx.notFound();
       return ctx.ok([caseStudiesEntities[caseStudy]]);
     },
-  );
+  )
+  .get("foi-entities", "/foi-entities/:foiRequest", async (ctx) => {
+    const {foiEntities} = ctx;
+    const {foiRequest} = ctx.params;
+    if (foiEntities[foiRequest] == null) return ctx.notFound();
+    return ctx.ok([foiEntities[foiRequest]]);
+  });
 
 export default router;

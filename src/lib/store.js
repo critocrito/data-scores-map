@@ -9,8 +9,10 @@ import {
   departmentInsights,
   sourceInsights,
   caseStudiesEntities,
+  foiEntities,
   documentStats,
   caseStudyDocuments,
+  foiDocuments,
 } from "./requests";
 
 import type {
@@ -166,6 +168,25 @@ export default class Store {
     }
   });
 
+  fetchFoiEntityDocuments = flow(function* fetchFoiEntityDocuments(
+    foi: string,
+    from: number,
+  ) {
+    try {
+      const {data, total, page} = yield foiDocuments(
+        foi,
+        this.entityFilters,
+        from,
+        this.pageSize,
+      );
+      this.documents = data;
+      this.documentsTotal = total;
+      this.documentsPage = page;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
   searchDocuments = flow(function* searchDocuments(term: string, from: number) {
     const filters = toJS(this.documentsFilters, {exportMapsAsObjects: true});
     if (term != null && term !== "") {
@@ -294,6 +315,20 @@ export default class Store {
     this.loadingState = "pending";
     try {
       const {data} = yield caseStudiesEntities(caseStudy);
+      if (data.length > 0) {
+        const [entities] = data;
+        this.entities = entities;
+      }
+      this.loadingState = "done";
+    } catch (e) {
+      this.loadingState = "error";
+    }
+  });
+
+  fetchFoiEntities = flow(function* fetchFoiEntities(foi: string) {
+    this.loadingState = "pending";
+    try {
+      const {data} = yield foiEntities(foi);
       if (data.length > 0) {
         const [entities] = data;
         this.entities = entities;

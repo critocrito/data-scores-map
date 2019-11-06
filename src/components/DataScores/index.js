@@ -15,6 +15,7 @@ import CaseStudies from "../CaseStudies";
 import Methodology from "../Methodology";
 import ImpactPredictiveAnalytics from "../ImpactPredictiveAnalytics";
 import CaseStudiesEntities from "../CaseStudiesEntities";
+import FoiEntities from "../FoiEntities";
 import Context from "../../lib/context";
 
 const DataScores = () => (
@@ -70,6 +71,7 @@ const DataScores = () => (
         path="/case-studies/:caseStudy"
         component={CaseStudiesEntities}
       />
+      <Route exact path="/foi-requests/:foiRequest" component={FoiEntities} />
       <Route path="/case-studies" component={CaseStudies} />
       {/* Make sure this is last, otherwise follow up routes are not matched. */}
       <Route path="/:documentId" component={DocumentsDetails} />

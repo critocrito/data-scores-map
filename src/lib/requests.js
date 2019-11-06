@@ -99,6 +99,13 @@ export const caseStudiesEntities = (
   return fetch(url).then((resp) => resp.json());
 };
 
+export const foiEntities = (
+  foi: string,
+): Promise<HttpCaseStudiesEntitiesResp> => {
+  const url = `${baseUrl}/impacts/foi-entities/${foi}`;
+  return fetch(url).then((resp) => resp.json());
+};
+
 export const caseStudyDocuments = (
   caseStudy: string,
   entities: string[],
@@ -106,6 +113,28 @@ export const caseStudyDocuments = (
   size: number,
 ): Promise<HttpDocResp> => {
   const url = `${baseUrl}/documents/case-studies/${caseStudy}`;
+  const body = {
+    from,
+    size,
+    filters: entities || [],
+  };
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(body),
+  }).then((resp) => resp.json());
+};
+
+export const foiDocuments = (
+  foi: string,
+  entities: string[],
+  from: number,
+  size: number,
+): Promise<HttpDocResp> => {
+  const url = `${baseUrl}/documents/foi-requests/${foi}`;
   const body = {
     from,
     size,
